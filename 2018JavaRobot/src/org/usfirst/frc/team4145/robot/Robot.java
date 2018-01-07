@@ -35,6 +35,7 @@ public class Robot extends TimedRobot {
 		RobotMap.init();
 		oi = new OI();
 		
+		
 
 	}
 
@@ -69,17 +70,14 @@ public class Robot extends TimedRobot {
 
 		//pulls auto selector from labview DB
 		String autoSelected = SmartDashboard.getString("Auto Selector","Default"); 
-		switch(autoSelected) {
-			case "My Auto": autonomousCommand = new ExampleCommand();
-			break; 
-			case "Default Auto": 
-			default:autonomousCommand = new ExampleCommand(); 
-			break; 
-		}
+
 		// this block builds the game data when auto starts
-		RobotMap.GameData = DriverStation.getInstance().getGameSpecificMessage();
+		String GameData = DriverStation.getInstance().getGameSpecificMessage();
 		
-		// schedule the autonomous command
+		//choose auto command based on lists
+		autonomousCommand = AutoSelector.autoSelect(GameData, autoSelected);
+		
+		// schedule the autonomous command checking to make sure not null
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
 		}

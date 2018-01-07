@@ -9,6 +9,8 @@ package org.usfirst.frc.team4145.robot;
 
 import org.usfirst.frc.team4145.robot.subsystems.ExampleSubsystem;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -18,7 +20,7 @@ import org.usfirst.frc.team4145.robot.subsystems.ExampleSubsystem;
 public class RobotMap {
 	//public variables
 	public static String GameData = null; //field alliance data about switch / scale 
-	
+	public static final String AutoList[] = {"Station 1","Station 2 Left","Station 2 Right","Station 3","DO NOTHING"}; // three different auto positions
 	//actuators
 	
 	//sensors
@@ -28,10 +30,13 @@ public class RobotMap {
 	
 	public static void init() {
 		//all general objects instantated here
+		SmartDashboard.putStringArray("Auto Selector", AutoList); //publishes the auto list to the dashboard "Auto Selector"
 		
 		//all actuator objects here
 		
+		
 		//all sensor objects here
+		
 		
 		//create all subsystem objects
 		exampleSystem = new ExampleSubsystem();

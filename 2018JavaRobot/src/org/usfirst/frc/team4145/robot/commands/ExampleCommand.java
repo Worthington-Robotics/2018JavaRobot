@@ -9,6 +9,7 @@ package org.usfirst.frc.team4145.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team4145.robot.Robot;
+import org.usfirst.frc.team4145.robot.RobotMap;
 
 /**
  * An example command.  You can replace me with your own command.
@@ -16,7 +17,7 @@ import org.usfirst.frc.team4145.robot.Robot;
 public class ExampleCommand extends Command {
 	public ExampleCommand() {
 		// Use requires() here to declare subsystem dependencies
-		requires(Robot.kExampleSubsystem);
+		requires(RobotMap.exampleSystem);
 	}
 
 	// Called just before this Command runs the first time

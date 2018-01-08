@@ -20,7 +20,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class RobotMap {
 	//public variables
 	public static String GameData = null; //field alliance data about switch / scale 
-	public static final String AutoList[] = {"Station 1","Station 2 Left","Station 2 Right","Station 3","DO NOTHING"}; // three different auto positions
+	public static final String AutoList[] = {"Auto1","Auto2","Auto3","Auto4","Auto5",
+			"Auto6","Auto7","Auto8","Auto9","Auto10","Auto11","Auto12","DO NOTHING"}; // three different auto positions
 	//actuators
 	
 	//sensors

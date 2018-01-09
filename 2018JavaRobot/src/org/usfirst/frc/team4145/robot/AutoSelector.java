@@ -27,6 +27,38 @@ public class AutoSelector {
 		case 42: return new ExampleCommand();
 		case 43: return new ExampleCommand();
 		case 44: return new ExampleCommand();
+		case 51: return new ExampleCommand();
+		case 52: return new ExampleCommand();
+		case 53: return new ExampleCommand();
+		case 54: return new ExampleCommand();
+		case 61: return new ExampleCommand();
+		case 62: return new ExampleCommand();
+		case 63: return new ExampleCommand();
+		case 64: return new ExampleCommand();
+		case 71: return new ExampleCommand();
+		case 72: return new ExampleCommand();
+		case 73: return new ExampleCommand();
+		case 74: return new ExampleCommand();
+		case 81: return new ExampleCommand();
+		case 82: return new ExampleCommand();
+		case 83: return new ExampleCommand();
+		case 84: return new ExampleCommand();
+		case 91: return new ExampleCommand();
+		case 92: return new ExampleCommand();
+		case 93: return new ExampleCommand();
+		case 94: return new ExampleCommand();
+		case 101: return new ExampleCommand();
+		case 102: return new ExampleCommand();
+		case 103: return new ExampleCommand();
+		case 104: return new ExampleCommand();
+		case 111: return new ExampleCommand();
+		case 112: return new ExampleCommand();
+		case 113: return new ExampleCommand();
+		case 114: return new ExampleCommand();
+		case 121: return new ExampleCommand();
+		case 122: return new ExampleCommand();
+		case 123: return new ExampleCommand();
+		case 124: return new ExampleCommand();
 		default: return null; // this happens if UsrAuto == 5
 			
 		}
@@ -35,13 +67,21 @@ public class AutoSelector {
 	
 	private static int getUserAuto(String autoSelected) {
 		switch(autoSelected) {
-		case "Station 1": return 1;
-		case "Station 2 Left": return 2;
-		case "Station 2 Right": return 3;
-		case "Station 3": return 4;
+		case "Auto1": return 1;
+		case "Auto2": return 2;
+		case "Auto3": return 3;
+		case "Auto4": return 4;
+		case "Auto5": return 5;
+		case "Auto6": return 6;
+		case "Auto7": return 7;
+		case "Auto8": return 8;
+		case "Auto9": return 9;
+		case "Auto10": return 10;
+		case "Auto11": return 11;
+		case "Auto12": return 12;
 		case "DO NOTHING": // This selected case will cause the robot to do nothing
 		default: //if they dont chose an auto then default to nothing as well 
-			return 5;
+			return 13;
 		}
 	}
 	

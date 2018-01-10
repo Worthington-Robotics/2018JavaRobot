@@ -9,6 +9,7 @@ package org.usfirst.frc.team4145.robot;
 
 import org.usfirst.frc.team4145.robot.subsystems.ExampleSubsystem;
 
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix.motorcontrol.can.*;
 /**
@@ -24,9 +25,11 @@ public class RobotMap {
 			"Auto6","Auto7","Auto8","Auto9","Auto10","Auto11","Auto12","DO NOTHING"}; // three different auto positions
 	//actuators
 	public static TalonSRX Drive1,Drive2,Drive3,Drive4;
+	public static Spark Conveyor, Clamp;
 	
-	
+
 	//sensors
+	
 	
 	//subsystems public static
 	public static ExampleSubsystem exampleSystem;
@@ -40,6 +43,10 @@ public class RobotMap {
 		Drive2 = new TalonSRX(2);
 		Drive3 = new TalonSRX(3);
 		Drive4 = new TalonSRX(4);
+		Conveyor = new Spark(0);
+		Clamp = new Spark(1);
+
+		
 		
 		//all sensor objects here
 		

@@ -23,6 +23,11 @@ public class CubeManipulation extends Subsystem{
 	public void release(){
 		RobotMap.ClampL.set(-0.5);
 		RobotMap.ClampR.set(0.5);
-	}
+		
 
+	}
+	public void stall(){
+		RobotMap.ClampL.set(0);
+		RobotMap.ClampR.set(0);
+	}
 }

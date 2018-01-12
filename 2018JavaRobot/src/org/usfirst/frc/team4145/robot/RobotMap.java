@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team4145.robot;
 
+import org.usfirst.frc.team4145.robot.subsystems.CubeManipulation;
 import org.usfirst.frc.team4145.robot.subsystems.ExampleSubsystem;
 
 import edu.wpi.first.wpilibj.Spark;
@@ -33,6 +34,7 @@ public class RobotMap {
 	
 	//subsystems public static
 	public static ExampleSubsystem exampleSystem;
+	public static CubeManipulation CubeManipulator;
 	
 	public static void init() {
 		//all general objects instantated here
@@ -45,6 +47,7 @@ public class RobotMap {
 		Drive4 = new TalonSRX(4);
 		ClampL = new Spark(1);
 		ClampR = new Spark(2);
+		
 
 		
 		
@@ -53,7 +56,6 @@ public class RobotMap {
 		
 		//create all subsystem objects
 		exampleSystem = new ExampleSubsystem();
-		
-		
+		CubeManipulator = new CubeManipulation();
 	}
 }

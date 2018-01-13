@@ -7,7 +7,7 @@ public class AccessiblePIDOutput implements PIDOutput{
 	protected double value;
 	
 	public AccessiblePIDOutput() {
-		value = 0.00;
+		value = 0.0;
 	}
 
 	@Override

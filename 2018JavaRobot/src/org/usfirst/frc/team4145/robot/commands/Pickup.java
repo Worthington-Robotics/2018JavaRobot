@@ -13,12 +13,12 @@ public class Pickup extends Command{
 		requires(RobotMap.CubeManipulator);
 	}
 
-	protected void initialize(){
+	public void initialize(){
 		RobotMap.CubeManipulator.pickup();
 		// starts motors
 	}
 	
-	protected void execute(){
+	public void execute(){
 		// cole.exe.executed.numnumnum
 		try {
 			Thread.sleep(2000);
@@ -29,18 +29,19 @@ public class Pickup extends Command{
 	
 	
 	@Override
-	protected boolean isFinished() {
+	public boolean isFinished() {
 		// TODO Auto-generated method stub
 		return isDone;
 		// tells when done
 	}
 	
-	protected void end(){
+	public void end(){
 		RobotMap.CubeManipulator.stall();
-	// Cole made me do this so}
+	// Cole made me do this so
+		}
+	  
 	
-	
-	protected void interrupted (){
+	public void interrupted (){
 		end();
 	}
 	

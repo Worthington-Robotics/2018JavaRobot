@@ -23,7 +23,7 @@ public class RobotMap {
 	public static final String AutoList[] = {"Auto1","Auto2","Auto3","Auto4","Auto5",
 			"Auto6","Auto7","Auto8","Auto9","Auto10","Auto11","Auto12","DO NOTHING"}; // three different auto positions
 	//actuators
-	public static TalonSRX Drive1,Drive2,Drive3,Drive4;
+	public static WPI_TalonSRX Drive1,Drive2,Drive3,Drive4;
 	
 	
 	//sensors
@@ -36,10 +36,10 @@ public class RobotMap {
 		SmartDashboard.putStringArray("Auto Selector", AutoList); //publishes the auto list to the dashboard "Auto Selector"
 		
 		//all actuator objects here
-		Drive1 = new TalonSRX(1);
-		Drive2 = new TalonSRX(2);
-		Drive3 = new TalonSRX(3);
-		Drive4 = new TalonSRX(4);
+		Drive1 = new WPI_TalonSRX(1);
+		Drive2 = new WPI_TalonSRX(2);
+		Drive3 = new WPI_TalonSRX(3);
+		Drive4 = new WPI_TalonSRX(4);
 		
 		//all sensor objects here
 		

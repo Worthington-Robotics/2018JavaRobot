@@ -9,12 +9,5 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry exported="true" kind="var" path="USERLIBS_DIR/CTRE_Phoenix-sources.jar"/>
 	<classpathentry exported="true" kind="var" path="USERLIBS_DIR/CTRE_Phoenix.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Robotics2/wpilib/java/current/lib/cscore.jar" sourcepath="C:/Users/Robotics2/wpilib/java/current/lib/cscore-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Robotics2/wpilib/java/current/lib/ntcore.jar" sourcepath="C:/Users/Robotics2/wpilib/java/current/lib/ntcore-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Robotics2/wpilib/java/current/lib/opencv.jar" sourcepath="C:/Users/Robotics2/wpilib/java/current/lib/opencv-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Robotics2/wpilib/java/current/lib/WPILib.jar" sourcepath="C:/Users/Robotics2/wpilib/java/current/lib/WPILib-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Robotics2/wpilib/java/current/lib/wpiutil.jar" sourcepath="C:/Users/Robotics2/wpilib/java/current/lib/wpiutil-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Robotics2/wpilib/user/java/lib/CTRE_Phoenix.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Robotics2/wpilib/user/java/lib/navx_frc.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

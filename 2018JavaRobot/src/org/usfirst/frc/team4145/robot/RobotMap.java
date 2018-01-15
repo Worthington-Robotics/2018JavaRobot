@@ -8,6 +8,7 @@
 package org.usfirst.frc.team4145.robot;
 
 import org.usfirst.frc.team4145.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team4145.robot.subsystems.RobotDrive;
 
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -31,6 +32,7 @@ public class RobotMap {
 	
 	//subsystems public static
 	public static ExampleSubsystem exampleSystem;
+	public static RobotDrive Drive;
 	
 	public static void init() {
 		//all general objects instantated here
@@ -47,6 +49,7 @@ public class RobotMap {
 		
 		//create all subsystem objects
 		exampleSystem = new ExampleSubsystem();
+		Drive = new RobotDrive();
 		
 		
 	}

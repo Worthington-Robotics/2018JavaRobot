@@ -26,7 +26,7 @@ public class RobotMap {
 			"Auto6","Auto7","Auto8","Auto9","Auto10","Auto11","Auto12","DO NOTHING"}; // three different auto positions
 	//actuators
 	public static TalonSRX Drive1,Drive2,Drive3,Drive4;
-	public static Spark ClampL, ClampR;
+	public static Spark ClampL, ClampR, Dropper;
 	
 
 	//sensors
@@ -47,7 +47,7 @@ public class RobotMap {
 		Drive4 = new TalonSRX(4);
 		ClampL = new Spark(1);
 		ClampR = new Spark(2);
-		
+		Dropper = new Spark(3);
 
 		
 		

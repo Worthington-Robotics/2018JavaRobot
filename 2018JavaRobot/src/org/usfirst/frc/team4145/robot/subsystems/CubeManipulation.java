@@ -30,4 +30,11 @@ public class CubeManipulation extends Subsystem{
 		RobotMap.ClampL.set(0);
 		RobotMap.ClampR.set(0);
 	}
+	public void dropStop(){
+		RobotMap.Dropper.set(0);
+	}
+	public void dropStart(){
+		RobotMap.Dropper.set(0.1);
+	}
 }
+

@@ -13,6 +13,10 @@ import org.usfirst.frc.team4145.robot.subsystems.RobotDrive;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix.motorcontrol.can.*;
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.Joystick;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -29,6 +33,8 @@ public class RobotMap {
 	public static MecanumDrive robotdrive;
 	
 	//sensors
+	public static AHRS ahrs;
+	public static Joystick stick1;
 	
 	//subsystems public static
 	public static ExampleSubsystem exampleSystem;
@@ -44,8 +50,10 @@ public class RobotMap {
 		Drive3 = new WPI_TalonSRX(3);
 		Drive4 = new WPI_TalonSRX(4);
 		robotdrive = new MecanumDrive(Drive1, Drive2, Drive3, Drive4);
-		//all sensor objects here
 		
+		//all sensor objects here
+		ahrs = new AHRS(SPI.Port.kMXP);
+		stick1 = new Joystick(0);
 		
 		//create all subsystem objects
 		exampleSystem = new ExampleSubsystem();

@@ -104,7 +104,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		RobotMap.Drive.setXYZ(0, 0, 0);
+		RobotMap.Drive.setXYZ(RobotMap.stick1.getX(), RobotMap.stick1.getY(), RobotMap.stick1.getZ());
 		Scheduler.getInstance().run();
 	}
 

@@ -18,16 +18,17 @@ private double x, y, z;
 		GyroLock = new PIDController(0.1, 0, 0.1, null, Output);
 		//PID controller configs and output
 	}
+	//passes through cartesian parameters. do not use for drive!
 	public void Drive(double x, double y, double z) {
 		RobotMap.robotdrive.driveCartesian(y, x, z);
 		//passes through cartesian parameters
 	}
 	@Override
 	public void initDefaultCommand() {
-		// TODO Auto-generated method stub
 		this.Drive(0, 0, 0);
 	}
 	@Override
+	//periodic method runs roughly 50 times per second (20 ms)
 	public void periodic() {
 		if(enable) {
 			//Periodically updates while gyro locked
@@ -39,16 +40,15 @@ private double x, y, z;
 		}		
 	}
 	//Sets status of the PID controller
+	//also tells the update method to use the gyro lock pid
 	public void enableLock(boolean en) {
 		enable = en;
 		if(enable) {
-			GyroLock.enable();
-			
+			GyroLock.enable();// if true enable lock. 
 		}
 		else {
-			GyroLock.disable();
+			GyroLock.disable(); //if boolean is false disable lock
 		}
-		//Enables and disables gyro lock
 	}
 	public void setTarget(double rot) {
 		GyroLock.setSetpoint(rot);
@@ -56,6 +56,7 @@ private double x, y, z;
 	public void setPID(double p, double i, double d) {
 		GyroLock.setPID(p, i, d);
 	}
+	//enable with parameters
 	public void enWithParam(double p, double i, double d, double rot) {
 		setPID(p,i,d);
 		setTarget(rot);

@@ -15,12 +15,12 @@ private double x, y, z;
 	// here. Call these from Commands.
 	public RobotDrive() {
 		Output = new AccessiblePIDOutput();
-		GyroLock = new PIDController(0.1, 0, 0.1, null, Output);
+		GyroLock = new PIDController(0.05, 0, 0.01, RobotMap.ahrs, Output);
 		//PID controller configs and output
 	}
 	//passes through cartesian parameters. do not use for drive!
 	public void Drive(double x, double y, double z) {
-		RobotMap.robotdrive.driveCartesian(y, x, z);
+		RobotMap.robotdrive.driveCartesian(x, -y, z);
 		//passes through cartesian parameters
 	}
 	@Override

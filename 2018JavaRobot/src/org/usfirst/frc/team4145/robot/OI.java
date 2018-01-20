@@ -28,8 +28,8 @@ public class OI {
 	
 	public OI() {
 		masterStick = new Joystick(0);
-		Button trigger = new JoystickButton(masterStick, 0);
-		trigger.whileHeld(new GyroLock(RobotMap.ahrs.getYaw()));
+		Button trigger = new JoystickButton(masterStick, 1);
+		trigger.whileHeld(new GyroLock());
 	}
 	
 	public Joystick getMasterStick() {

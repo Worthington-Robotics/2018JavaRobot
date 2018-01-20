@@ -42,7 +42,7 @@ public class RobotMap {
 	
 	public static void init() {
 		//all general objects instantated here
-		SmartDashboard.putStringArray("Auto Selector", AutoList); //publishes the auto list to the dashboard "Auto Selector"
+		SmartDashboard.putStringArray("Auto State", AutoList); //publishes the auto list to the dashboard "Auto Selector"
 		
 		//all actuator objects here
 		Drive1 = new WPI_TalonSRX(1); 

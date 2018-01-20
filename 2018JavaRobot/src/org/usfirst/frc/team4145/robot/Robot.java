@@ -68,7 +68,7 @@ public class Robot extends TimedRobot {
 		RobotMap.ahrs.reset();
 
 		//pulls auto selector from labview DB
-		String autoSelected = SmartDashboard.getString("Auto List", RobotMap.AutoList[0]); 
+		String autoSelected = SmartDashboard.getString("Auto State", RobotMap.AutoList[0]); 
 
 		// this block builds the game data when auto starts
 		String GameData = DriverStation.getInstance().getGameSpecificMessage();
@@ -104,15 +104,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		RobotMap.Drive.setXYZ(RobotMap.stick1.getX(), RobotMap.stick1.getY(), RobotMap.stick1.getZ());
-		if(RobotMap.stick1.getTrigger()) {
-			RobotMap.Drive.setTarget(RobotMap.ahrs.getYaw());
-			RobotMap.Drive.enableLock(true);
-		}
-		else {
-			RobotMap.Drive.enableLock(false);
-		}
-		SmartDashboard.putNumber("Gyro Angle", RobotMap.ahrs.getYaw());
 		Scheduler.getInstance().run();
 	}
 

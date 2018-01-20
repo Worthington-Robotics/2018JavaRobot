@@ -6,6 +6,7 @@ import org.usfirst.team4145.robot.shared.AccessiblePIDOutput;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RobotDrive extends Subsystem {
 	private boolean enable = false;
@@ -14,13 +15,14 @@ public class RobotDrive extends Subsystem {
 	private double x, y, z;
 	private double setPoint = 0;
 	private double deadBandVal = 0.15;
-	private double[] lastInputSet = {0,0,0};
+	private double[] lastInputSet = { 0, 0, 0 };
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	public RobotDrive() {
 		Output = new AccessiblePIDOutput();
-		GyroLock = new PIDController(0.05, 0, 0.01, RobotMap.ahrs, Output);
+		GyroLock = new PIDController(0.025, 0, 0.025, RobotMap.ahrs, Output);
+		GyroLock.setAbsoluteTolerance(0.5);
 		this.setTarget(setPoint);
 		// PID controller configs and output
 	}
@@ -34,13 +36,16 @@ public class RobotDrive extends Subsystem {
 	// periodic method runs roughly 50 times per second (20 ms)
 	public void periodic() {
 		lastInputSet = getAdjStick();
+		SmartDashboard.putNumberArray("compensated stick values", lastInputSet);
+		SmartDashboard.putNumber("Gyro Target", setPoint+180);
+		SmartDashboard.putNumber("Gyro Angle", RobotMap.ahrs.getYaw()+180);
 		if (enable) {
 			// Periodically updates while gyro locked
-			Drive(lastInputSet[0],lastInputSet[1],Output.getValue());
+			Drive(lastInputSet[0], lastInputSet[1], Output.getValue());
 
 		} else {
 			// periodically updates drive
-			Drive(lastInputSet[0],lastInputSet[1],lastInputSet[2]);
+			Drive(lastInputSet[0], lastInputSet[1], lastInputSet[2]);
 		}
 	}
 
@@ -48,16 +53,20 @@ public class RobotDrive extends Subsystem {
 		double[] out = new double[3];
 		out[0] = evalDeadBand(Robot.oi.getMasterStick().getX(), deadBandVal);
 		out[1] = evalDeadBand(Robot.oi.getMasterStick().getY(), deadBandVal);
-		out[2] = evalDeadBand(Robot.oi.getMasterStick().getY(), deadBandVal);
+		out[2] = evalDeadBand(Robot.oi.getMasterStick().getZ(), deadBandVal);
 		return out;
 	}
 
 	// figures out if the stick value is within the deadband
 	private double evalDeadBand(double stickInpt, double deadBand) {
-		if (stickInpt < deadBand) {
+		if (Math.abs(stickInpt) < deadBand) {
 			return 0;
 		} else {
-			return Math.pow(stickInpt, 2);
+			if (stickInpt < 0) {
+				return (0 - Math.pow(stickInpt, 2));
+			} else {
+				return Math.pow(stickInpt, 2);
+			}
 		}
 	}
 

@@ -9,17 +9,17 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class GyroLock extends Command {
 
-	double target = 0;
+	//double target = 0;
+	private boolean isfin = false;
 	
-    public GyroLock(double yawTo) {
+    public GyroLock() {
         // Use requires() here to declare subsystem dependencies
         requires(RobotMap.Drive);
-        target = yawTo;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	RobotMap.Drive.enableTo(target, true);
+    	RobotMap.Drive.enableTo(RobotMap.ahrs.getYaw(), true);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -28,7 +28,7 @@ public class GyroLock extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isfin;
     }
 
     // Called once after isFinished returns true
@@ -39,5 +39,6 @@ public class GyroLock extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

@@ -2,12 +2,13 @@ package org.usfirst.frc.team4145.robot.commands;
 
 import org.usfirst.frc.team4145.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class Pickup extends Command{
 	
 	private boolean isDone = false;
+	private int Counter = 0;
+	private int TimeOut = 100;
 	
 	public Pickup(){
 		requires(RobotMap.CubeManipulator);
@@ -20,17 +21,18 @@ public class Pickup extends Command{
 	
 	public void execute(){
 		// cole.exe.executed.numnumnum
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {}
-		isDone = true;	
+		if(Counter < TimeOut){
+			Counter++;
+		}
+		else{
+			isDone = true;
+		}
 		
 	}
 	
 	
 	@Override
 	public boolean isFinished() {
-		// TODO Auto-generated method stub
 		return isDone;
 		// tells when done
 	}

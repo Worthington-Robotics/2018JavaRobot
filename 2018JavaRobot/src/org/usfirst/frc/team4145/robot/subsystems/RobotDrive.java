@@ -21,7 +21,7 @@ public class RobotDrive extends Subsystem {
 	// here. Call these from Commands.
 	public RobotDrive() {
 		Output = new AccessiblePIDOutput();
-		GyroLock = new PIDController(0.025, 0, 0.025, RobotMap.ahrs, Output);
+		GyroLock = new PIDController(0.025, 0.00, 0.025, RobotMap.ahrs, Output);
 		GyroLock.setAbsoluteTolerance(0.5);
 		this.setTarget(setPoint);
 		// PID controller configs and output
@@ -45,7 +45,7 @@ public class RobotDrive extends Subsystem {
 
 		} else {
 			// periodically updates drive
-			Drive(lastInputSet[0], lastInputSet[1], lastInputSet[2]);
+			Drive(lastInputSet[0], lastInputSet[1], lastInputSet[2]/2);
 		}
 	}
 

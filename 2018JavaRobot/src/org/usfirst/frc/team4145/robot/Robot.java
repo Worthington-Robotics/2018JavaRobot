@@ -104,6 +104,14 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		RobotMap.Drive.setXYZ(RobotMap.stick1.getX(), RobotMap.stick1.getY(), RobotMap.stick1.getZ());
+		if(RobotMap.stick1.getTrigger()) {
+			RobotMap.Drive.setTarget(RobotMap.ahrs.getAngle());
+			RobotMap.Drive.enableLock(true);
+		}
+		else {
+			RobotMap.Drive.enableLock(false);
+		}
 		Scheduler.getInstance().run();
 	}
 

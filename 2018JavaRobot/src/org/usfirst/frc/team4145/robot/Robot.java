@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team4145.robot.commands.ExampleCommand;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -34,7 +33,6 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		RobotMap.init();
 		oi = new OI();
-		
 		
 
 	}
@@ -67,9 +65,10 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		RobotMap.ahrs.reset();
 
 		//pulls auto selector from labview DB
-		String autoSelected = SmartDashboard.getString("Auto Selector","Default"); 
+		String autoSelected = SmartDashboard.getString("Auto List", RobotMap.AutoList[0]); 
 
 		// this block builds the game data when auto starts
 		String GameData = DriverStation.getInstance().getGameSpecificMessage();
@@ -93,6 +92,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		//RobotMap.ahrs.reset();
 		// This makes sure that the autonomous stops running when teleop starts.
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
@@ -106,12 +106,13 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		RobotMap.Drive.setXYZ(RobotMap.stick1.getX(), RobotMap.stick1.getY(), RobotMap.stick1.getZ());
 		if(RobotMap.stick1.getTrigger()) {
-			RobotMap.Drive.setTarget(RobotMap.ahrs.getAngle());
+			RobotMap.Drive.setTarget(RobotMap.ahrs.getYaw());
 			RobotMap.Drive.enableLock(true);
 		}
 		else {
 			RobotMap.Drive.enableLock(false);
 		}
+		SmartDashboard.putNumber("Gyro Angle", RobotMap.ahrs.getYaw());
 		Scheduler.getInstance().run();
 	}
 

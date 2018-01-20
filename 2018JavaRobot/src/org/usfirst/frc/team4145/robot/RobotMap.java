@@ -53,6 +53,7 @@ public class RobotMap {
 		
 		//all sensor objects here
 		ahrs = new AHRS(SPI.Port.kMXP); //finish declaring AHRS to MXP SPI bus
+		ahrs.reset();
 		stick1 = new Joystick(0);
 		
 		//create all subsystem objects

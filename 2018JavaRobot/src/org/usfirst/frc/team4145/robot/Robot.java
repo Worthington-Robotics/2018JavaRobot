@@ -68,7 +68,7 @@ public class Robot extends TimedRobot {
 		RobotMap.ahrs.reset();
 
 		//pulls auto selector from labview DB
-		String autoSelected = SmartDashboard.getString("Auto State", RobotMap.AutoList[0]); 
+		String autoSelected = SmartDashboard.getString("Auto State", RobotMap.autoList[0]); 
 
 		// this block builds the game data when auto starts
 		String GameData = DriverStation.getInstance().getGameSpecificMessage();

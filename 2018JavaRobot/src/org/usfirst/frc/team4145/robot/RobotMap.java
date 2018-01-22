@@ -26,7 +26,7 @@ import edu.wpi.first.wpilibj.Joystick;
 public class RobotMap {
 	//public variables
 	public static String GameData = null; //field alliance data about switch / scale 
-	public static final String AutoList[] = {"Auto1","Auto2","Auto3","Auto4","Auto5",
+	public static final String autoList[] = {"Auto1","Auto2","Auto3","Auto4","Auto5",
 			"Auto6","Auto7","Auto8","Auto9","Auto10","Auto11","Auto12","DO NOTHING"}; // three different auto positions
 	//actuators
 	public static WPI_TalonSRX Drive1,Drive2,Drive3,Drive4; //need to use WPI_talonSRX for drivetrain use
@@ -42,7 +42,7 @@ public class RobotMap {
 	
 	public static void init() {
 		//all general objects instantated here
-		SmartDashboard.putStringArray("Auto State", AutoList); //publishes the auto list to the dashboard "Auto Selector"
+		SmartDashboard.putStringArray("Auto State", autoList); //publishes the auto list to the dashboard "Auto Selector"
 		
 		//all actuator objects here
 		Drive1 = new WPI_TalonSRX(1); 

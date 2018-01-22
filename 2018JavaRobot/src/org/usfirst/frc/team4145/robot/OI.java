@@ -7,6 +7,12 @@
 
 package org.usfirst.frc.team4145.robot;
 
+import org.usfirst.frc.team4145.robot.commands.GyroLock;
+
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -17,6 +23,18 @@ public class OI {
 	//// joystick.
 	// You create one by telling it which joystick it's on and which button
 	// number it is.
+	
+	private Joystick masterStick;
+	
+	public OI() {
+		masterStick = new Joystick(0);
+		Button trigger = new JoystickButton(masterStick, 1);
+		trigger.whileHeld(new GyroLock());
+	}
+	
+	public Joystick getMasterStick() {
+		return masterStick;
+	}
 	// Joystick stick = new Joystick(port);
 	// Button button = new JoystickButton(stick, buttonNumber);
 

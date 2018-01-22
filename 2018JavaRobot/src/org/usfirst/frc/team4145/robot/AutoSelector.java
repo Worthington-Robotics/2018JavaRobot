@@ -25,7 +25,7 @@ public class AutoSelector {
 		case 34: return new ExampleCommand();
 		case 41: return new ExampleCommand();
 		case 42: return new ExampleCommand();
-		case 43: return new ExampleCommand();
+		case 43: return new ExampleCommand();	
 		case 44: return new ExampleCommand();
 		case 51: return new ExampleCommand();
 		case 52: return new ExampleCommand();

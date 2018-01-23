@@ -12,16 +12,19 @@ import org.usfirst.frc.team4145.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * An example subsystem.  You can replace me with your own Subsystem.
+ * An example subsystem. You can replace me with your own Subsystem.
  */
 public class Liftbot extends Subsystem {
 
 	// here. Call these from Commands.
-public void initDefaultCommand() {
-		RobotMap.liftbot.set(0);
-		// setDefaultCommand(new MySpecialCommand());
+	public void initDefaultCommand() {
+		RobotMap.liftBotMotor.set(0);
+
 	}
+
 	public void grappleOn() {
-		RobotMap.liftbot.set(-0.5);
+		RobotMap.liftBotMotor.set(0.5);
+
 	}
+
 }

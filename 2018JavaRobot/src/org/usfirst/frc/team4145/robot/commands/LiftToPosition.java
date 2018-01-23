@@ -19,11 +19,11 @@ public class LiftToPosition extends Command{
 		requires(RobotMap.lift);
 		newcount = count;
 		output = new AccessiblePIDOutput();
-		liftpid = new PIDController(0.1, 0, 0.1, RobotMap.liftenc,output); // create pid object with parameters
+		liftpid = new PIDController(0.1, 0, 0.1, RobotMap.liftEnc,output); // create pid object with parameters
 	}
 	
 	public void initialize(){
-		if((RobotMap.liftenc.get() + uppertol) < newcount || (RobotMap.liftenc.get() + lowertol) > newcount){  //if outside tolerance, start pid
+		if((RobotMap.liftEnc.get() + uppertol) < newcount || (RobotMap.liftEnc.get() + lowertol) > newcount){  //if outside tolerance, start pid
 			liftpid.setSetpoint(newcount); //set target of pid 
 			liftpid.setPercentTolerance(0.1); // set tolerance of pid
 			liftpid.enable(); //start pid

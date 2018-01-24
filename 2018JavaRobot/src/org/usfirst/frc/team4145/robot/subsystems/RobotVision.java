@@ -30,6 +30,9 @@ public class RobotVision extends Subsystem {
 	public void periodic() {
 		vision.heartbeat();
 		vision.updateVisionCoordinates();
+		//vision.getCoords();
 	}
 
 }
+
+

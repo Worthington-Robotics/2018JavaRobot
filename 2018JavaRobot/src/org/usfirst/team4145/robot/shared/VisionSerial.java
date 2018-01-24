@@ -38,14 +38,17 @@ public class VisionSerial {
     }
     
     public double getCoords() {
-    	return 0.0;
+    	return decode(coordinates);
     }
     
     private double decode(byte[] data) {
     	double out = 0.0;
-    	for(int a: data) {
-    		
-    	}
+    	out += (double data[0] - 48) * 100;
+    	out += (double data[1] - 48) * 10;
+    	out += (double data[2] - 48);
+    	//.
+    	out += (double data[4] - 48) * 0.1;
+    	out += (double data[5] - 48) * 0.01;
     	return out;
 
     }

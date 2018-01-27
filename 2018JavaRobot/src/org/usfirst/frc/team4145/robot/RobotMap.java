@@ -15,7 +15,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix.motorcontrol.can.*;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PIDSource;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -31,7 +33,7 @@ public class RobotMap {
 	//actuators
 	public static WPI_TalonSRX Drive1,Drive2,Drive3,Drive4; //need to use WPI_talonSRX for drivetrain use
 	public static MecanumDrive robotdrive; //meccanum drive object
-	
+	public static Encoder driveEncoder;
 	//sensors
 	public static AHRS ahrs; //AHRS system on navx
 	public static Joystick stick1;
@@ -50,6 +52,7 @@ public class RobotMap {
 		Drive3 = new WPI_TalonSRX(3);
 		Drive4 = new WPI_TalonSRX(4);
 		robotdrive = new MecanumDrive(Drive1, Drive2, Drive3, Drive4); //create meccanum drive
+		driveEncoder = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
 		
 		//all sensor objects here
 		ahrs = new AHRS(SPI.Port.kMXP); //finish declaring AHRS to MXP SPI bus

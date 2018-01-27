@@ -40,8 +40,8 @@ public class RobotDrive extends Subsystem {
 			lastInputSet = getAdjStick();
 		}
 		SmartDashboard.putNumberArray("compensated stick values", lastInputSet);
-		SmartDashboard.putNumber("Gyro Target", setPoint + 180);
-		SmartDashboard.putNumber("Gyro Angle", RobotMap.ahrs.getYaw() + 180);
+		SmartDashboard.putNumber("Gyro Target", getAdjustedGyro(setPoint));
+		SmartDashboard.putNumber("Gyro Angle", getAdjustedGyro(RobotMap.ahrs.getYaw()));
 		if (enable) {
 			// Periodically updates while gyro locked
 			Drive(lastInputSet[0], lastInputSet[1], Output.getValue());
@@ -73,6 +73,11 @@ public class RobotDrive extends Subsystem {
 				return Math.pow(stickInpt, 2);
 			}
 		}
+	}
+	private double getAdjustedGyro(double input) {
+		if(input > 0)
+			return input;
+		return 360 + input;
 	}
 
 	// Sets status of the PID controller

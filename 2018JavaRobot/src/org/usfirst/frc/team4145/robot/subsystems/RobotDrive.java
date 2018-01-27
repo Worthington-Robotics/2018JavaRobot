@@ -77,7 +77,7 @@ public class RobotDrive extends Subsystem {
 	private double getAdjustedGyro(double input) {
 		if(input > 0)
 			return input;
-		return 359 + input;
+		return 360 + input;
 	}
 
 	// Sets status of the PID controller

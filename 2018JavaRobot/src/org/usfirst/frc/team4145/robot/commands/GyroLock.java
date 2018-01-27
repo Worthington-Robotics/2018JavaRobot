@@ -19,7 +19,7 @@ public class GyroLock extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	RobotMap.Drive.enableTo(RobotMap.ahrs.getYaw(), true);
+    	RobotMap.Drive.enableTo(RobotMap.Drive.getAdjustedGyro(RobotMap.ahrs.getYaw()), true);
     }
 
     // Called repeatedly when this Command is scheduled to run

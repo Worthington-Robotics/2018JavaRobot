@@ -49,7 +49,7 @@ public class RobotDrive extends Subsystem {
 		} else {
 			// periodically updates drive
 			Drive(lastInputSet[0], lastInputSet[1], lastInputSet[2] / 2);
-			setTarget(RobotMap.ahrs.getYaw()); //Safety feature in case PID gets enabled
+			setTarget(RobotMap.ahrs.getYaw()); // Safety feature in case PID gets enabled
 		}
 	}
 
@@ -74,10 +74,17 @@ public class RobotDrive extends Subsystem {
 			}
 		}
 	}
-	private double getAdjustedGyro(double input) {
-		if(input > 0)
+
+	public double getAdjustedGyro(double input) {
+		if (input > 0)
 			return input;
 		return 360 + input;
+	}
+
+	private double getAdjustedInput(double input) {
+		if (input <= 180)
+			return input;
+		return input - 360;
 	}
 
 	// Sets status of the PID controller
@@ -93,6 +100,7 @@ public class RobotDrive extends Subsystem {
 
 	// passes new setpoint into gyro-lock and sets DB variable
 	private void setTarget(double rot) {
+		rot = getAdjustedInput(rot);
 		setPoint = rot;
 		GyroLock.setSetpoint(rot);
 	}

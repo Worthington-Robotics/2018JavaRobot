@@ -18,6 +18,7 @@ import com.ctre.phoenix.motorcontrol.can.*;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 
@@ -35,12 +36,12 @@ public class RobotMap {
 	//actuators
 	public static WPI_TalonSRX Drive1,Drive2,Drive3,Drive4; //need to use WPI_talonSRX for drivetrain use
 	public static MecanumDrive robotdrive; //meccanum drive object
-	public static Spark liftmotor,liftBotMotor; 
+	public static Spark liftmotorL, liftmotorH ,liftBotMotor; 
 	
 	//sensors
 	public static AHRS ahrs; //AHRS system on navx
-	public static Joystick stick1;
 	public static Encoder liftEnc;
+	public static DigitalInput switchLBase, switchLTop, switchHBase, switchHTop;
 	
 	//subsystems public static
 	public static ExampleSubsystem exampleSystem;
@@ -58,17 +59,21 @@ public class RobotMap {
 		Drive3 = new WPI_TalonSRX(3);
 		Drive4 = new WPI_TalonSRX(4);
 		robotdrive = new MecanumDrive(Drive1, Drive2, Drive3, Drive4); //create meccanum drive
-		liftmotor = new Spark(0);
+		liftmotorL = new Spark(0);
+		liftmotorH = new Spark(1);
 		liftBotMotor = new Spark(1);
 		//all sensor objects here
 		ahrs = new AHRS(SPI.Port.kMXP); //finish declaring AHRS to MXP SPI bus
 		ahrs.reset();
-		stick1 = new Joystick(0);
-		liftEnc = new Encoder(2,3,false,Encoder.EncodingType.k4X);
+		switchLBase = new DigitalInput(0);
+		switchLTop = new DigitalInput(1);
+		switchHBase = new DigitalInput(2);
+		switchHTop = new DigitalInput(3)
+		liftEnc = new Encoder(0,1,false,Encoder.EncodingType.k4X);
 		//create all subsystem objects
 		exampleSystem = new ExampleSubsystem();
 		Drive = new RobotDrive();
-		liftbot = new Liftbot();
+		liftbot = new Liftbot(); 
 		lift = new Lift();
 		
 		

@@ -9,6 +9,7 @@ package org.usfirst.frc.team4145.robot.subsystems;
 
 import org.usfirst.frc.team4145.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -22,9 +23,12 @@ public class Liftbot extends Subsystem {
 
 	}
 
-	public void grappleOn() {
-		RobotMap.liftBotMotor.set(0.5);
-
+	public void setSpeed( double in) {
+		RobotMap.liftBotMotor.set(in);
 	}
+	
+
+
+	
 
 }

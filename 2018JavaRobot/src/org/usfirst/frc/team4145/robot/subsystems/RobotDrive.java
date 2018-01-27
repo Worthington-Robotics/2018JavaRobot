@@ -49,6 +49,7 @@ public class RobotDrive extends Subsystem {
 		} else {
 			// periodically updates drive
 			Drive(lastInputSet[0], lastInputSet[1], lastInputSet[2] / 2);
+			setTarget(RobotMap.ahrs.getYaw()); //Safety feature in case PID gets enabled
 		}
 	}
 

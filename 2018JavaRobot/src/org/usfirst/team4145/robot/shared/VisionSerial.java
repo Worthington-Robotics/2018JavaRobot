@@ -10,6 +10,8 @@ public class VisionSerial {
     private static final byte[] ON_BYTE = new byte[(byte) 0xdd];
     private static final byte[] OFF_BYTE = new byte[(byte) 0xee];
     private static final byte[] HEARTBEAT_BYTE = new byte[(byte) 0xff];
+    private static final double PIXEL_TARGET = 160.0;
+    private static final double PIXEL_PER_DEGREE = 6.62;
 
 	public VisionSerial(int baudRate) {
 		serialPort = new SerialPort(baudRate, Port.kMXP);
@@ -52,6 +54,12 @@ public class VisionSerial {
     	return out;
 
     }
-
+    
+    public double getAngleOffset(double currentCenter) {
+    	double pixelOffset = currentCenter - PIXEL_TARGET;
+    	double angleOffset = pixelOffset / PIXEL_PER_DEGREE;
+    	return angleOffset;
+    	
+    }
 
 }

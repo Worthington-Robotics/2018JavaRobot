@@ -55,10 +55,11 @@ public class VisionSerial {
 
     }
     
-    public double getAngleOffset(double currentCenter) {
+    public double getTargetAngle(double currentCenter) {
     	double pixelOffset = currentCenter - PIXEL_TARGET;
     	double angleOffset = pixelOffset / PIXEL_PER_DEGREE;
-    	return angleOffset;
+    	double gyroValue = (RobotMap.Drive.getAdjustedGyro(RobotMap.ahrs.getYaw()) + angleOffset) % 360;
+    	return gyroValue;
     	
     }
 

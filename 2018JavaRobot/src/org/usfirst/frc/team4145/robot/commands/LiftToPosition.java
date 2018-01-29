@@ -25,7 +25,7 @@ public class LiftToPosition extends Command{
 	public void initialize(){
 		if((RobotMap.liftEnc.get() + uppertol) < newcount || (RobotMap.liftEnc.get() + lowertol) > newcount){  //if outside tolerance, start pid
 			liftpid.setSetpoint(newcount); //set target of pid 
-			liftpid.setPercentTolerance(0.1); // set tolerance of pid
+			liftpid.setAbsoluteTolerance(0.1); // set tolerance of pid
 			liftpid.enable(); //start pid
 
 		}
@@ -34,7 +34,7 @@ public class LiftToPosition extends Command{
 		}
 	}
 	public void execute(){
-		RobotMap.lift.liftspeed(output.getValue());
+		RobotMap.lift.liftspeedL(output.getValue());
 	}
 
 	public boolean isFinished(){
@@ -42,7 +42,7 @@ public class LiftToPosition extends Command{
 		
 	}
 	public void end(){
-		RobotMap.lift.stoplift();
+		RobotMap.lift.stopliftL();
 		liftpid.disable();// Stop Pid
 		liftpid.free(); // Frees sensor and actuator
 		// If pid is at tolerance

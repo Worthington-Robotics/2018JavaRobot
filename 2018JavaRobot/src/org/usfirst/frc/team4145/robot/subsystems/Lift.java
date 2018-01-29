@@ -17,25 +17,6 @@ public class Lift extends Subsystem {
 
 	}
 
-	public void liftupL() {
-		RobotMap.liftmotorL.set(0.5);
-
-	}
-
-	public void liftupH() {
-		RobotMap.liftmotorH.set(0.5);
-
-	}
-
-	public void liftdownL() {
-		RobotMap.liftmotorL.set(-0.5);
-
-	}
-
-	public void liftdownH() {
-		RobotMap.liftmotorH.set(-0.5);
-	}
-
 	public void stopliftL() {
 		RobotMap.liftmotorL.set(0);
 
@@ -48,15 +29,14 @@ public class Lift extends Subsystem {
 	public void liftspeedH(double n) {
 		RobotMap.liftmotorH.set(n);
 	}
+
 	public void liftspeedL(double n) {
 		RobotMap.liftmotorL.set(n);
 	}
 
 	public void periodic() {
 		updateLimits();
-		if (Limit1) {
-
-		}
+		watchdog();
 	}
 
 	private void updateLimits() {
@@ -64,5 +44,21 @@ public class Lift extends Subsystem {
 		Limit2 = RobotMap.switchHTop.get();
 		Limit3 = RobotMap.switchLBase.get();
 		Limit4 = RobotMap.switchLTop.get();
+	}
+
+	private void watchdog() {
+		if (Limit1 && RobotMap.liftmotorH.get() < 0) {
+			stopliftH();
+		}
+		if (Limit2 && RobotMap.liftmotorH.get() > 0) {
+			stopliftH();
+		}
+		if (Limit3 && RobotMap.liftmotorL.get() < 0) {
+			stopliftL();
+		}
+		if (Limit4 && RobotMap.liftmotorL.get() > 0) {
+			stopliftL();
+		}
+
 	}
 }

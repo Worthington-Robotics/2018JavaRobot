@@ -68,7 +68,7 @@ public class RobotMap {
 		switchLBase = new DigitalInput(0);
 		switchLTop = new DigitalInput(1);
 		switchHBase = new DigitalInput(2);
-		switchHTop = new DigitalInput(3)
+		switchHTop = new DigitalInput(3);
 		liftEnc = new Encoder(0,1,false,Encoder.EncodingType.k4X);
 		//create all subsystem objects
 		exampleSystem = new ExampleSubsystem();

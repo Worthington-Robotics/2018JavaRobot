@@ -1,5 +1,7 @@
 package org.usfirst.team4145.robot.shared;
 
+import java.io.UnsupportedEncodingException;
+
 import org.usfirst.frc.team4145.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.SerialPort;
@@ -10,11 +12,11 @@ public class VisionSerial {
 
 	private SerialPort serialPort;
 	private byte[] coordinates;
-    private static final byte[] ON_BYTE = new byte[(byte) 0xdd];
-    private static final byte[] OFF_BYTE = new byte[(byte) 0xee];
-    private static final byte[] HEARTBEAT_BYTE = new byte[(byte) 0xff];
-    private static final double PIXEL_TARGET = 160.0;
-    private static final double PIXEL_PER_DEGREE = 6.62;
+	private static final byte[] ON_BYTE = new byte[1];
+	private static final byte[] OFF_BYTE = new byte[1];
+	private static final byte[] HEARTBEAT_BYTE = new byte[1];
+	private static final double PIXEL_TARGET = 160.0;
+	private static final double PIXEL_PER_DEGREE = 6.62;
 
 	public VisionSerial(int baudRate) {
 		serialPort = new SerialPort(baudRate, Port.kMXP);
@@ -37,9 +39,10 @@ public class VisionSerial {
 		coordinates = serialPort.read(6);
 		SmartDashboard.putRaw("coordinates", coordinates);
 		System.out.println("SERIAL OUTPUT");
-		System.out.println(coordinates.toString());
-		SmartDashboard.putNumber("decoded", decode(coordinates));
-		System.out.println(decode(coordinates));
+		String decoded = new String(coordinates);
+		System.out.println(decoded);
+		SmartDashboard.putString("decoded", decoded);
+	
 	}
 
 	public void off() {
@@ -64,13 +67,13 @@ public class VisionSerial {
 		return out;
 
 	}
-    
-    public double getTargetAngle(double currentCenter) {
-    	double pixelOffset = currentCenter - PIXEL_TARGET;
-    	double angleOffset = pixelOffset / PIXEL_PER_DEGREE;
-    	double gyroValue = (RobotMap.ahrs.getYaw() + angleOffset + 180) % 360;
-    	return gyroValue;
-    	
-    }
+
+	public double getTargetAngle(double currentCenter) {
+		double pixelOffset = currentCenter - PIXEL_TARGET;
+		double angleOffset = pixelOffset / PIXEL_PER_DEGREE;
+		double gyroValue = (RobotMap.ahrs.getYaw() + angleOffset + 180) % 360;
+		return gyroValue;
+
+	}
 
 }

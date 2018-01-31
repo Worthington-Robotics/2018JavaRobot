@@ -1,7 +1,9 @@
 package org.usfirst.frc.team4145.robot.subsystems;
 
+import org.usfirst.frc.team4145.robot.Robot;
 import org.usfirst.frc.team4145.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Lift extends Subsystem {
@@ -9,6 +11,7 @@ public class Lift extends Subsystem {
 	private boolean Limit2 = false;
 	private boolean Limit3 = false;
 	private boolean Limit4 = false;
+	private double Liftval = 0.0;
 
 	@Override
 	public void initDefaultCommand() {
@@ -36,6 +39,7 @@ public class Lift extends Subsystem {
 
 	public void periodic() {
 		updateLimits();
+		updateLift();
 		watchdog();
 	}
 
@@ -59,6 +63,27 @@ public class Lift extends Subsystem {
 		if (Limit4 && RobotMap.liftmotorL.get() > 0) {
 			stopliftL();
 		}
+	}
 
+	private void updateLift() {
+		if (!DriverStation.getInstance().isAutonomous()) {
+			Liftval = evalDeadBand(Robot.oi.getSecondStick().getY(), 0.15);
+			
+		}
+		liftspeedH(Liftval);
+		
+
+	}
+	
+	private double evalDeadBand(double stickInpt, double deadBand) {
+		if (Math.abs(stickInpt) < deadBand) {
+			return 0;
+		} else {
+			if (stickInpt < 0) {
+				return (0 - Math.pow(stickInpt, 2));
+			} else {
+				return Math.pow(stickInpt, 2);
+			}
+		}
 	}
 }

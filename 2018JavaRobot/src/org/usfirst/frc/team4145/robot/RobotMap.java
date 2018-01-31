@@ -43,6 +43,7 @@ public class RobotMap {
 	public static Encoder liftEnc;
 	public static DigitalInput switchLBase, switchLTop, switchHBase, switchHTop;
 	
+	
 	//subsystems public static
 	public static ExampleSubsystem exampleSystem;
 	public static RobotDrive Drive;

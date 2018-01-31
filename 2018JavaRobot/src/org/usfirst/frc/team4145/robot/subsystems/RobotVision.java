@@ -11,7 +11,7 @@ public class RobotVision extends Subsystem {
 	private VisionSerial vision;
 
 	public RobotVision() {
-		vision = new VisionSerial(9600);
+		vision = new VisionSerial(115200);
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class RobotVision extends Subsystem {
 	@Override
 	public void periodic() {
 		//vision.heartbeat();
-		vision.updateVisionCoordinates();
+		//vision.updateVisionCoordinates();
 		//vision.getCoords();
 	}
 

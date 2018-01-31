@@ -23,8 +23,9 @@ public class Liftbot extends Subsystem {
 
 	}
 
-	public void setSpeed( double in) {
-		RobotMap.liftBotMotor.set(in);
+	public void GrappleOn(){
+		
+		
 	}
 	
 

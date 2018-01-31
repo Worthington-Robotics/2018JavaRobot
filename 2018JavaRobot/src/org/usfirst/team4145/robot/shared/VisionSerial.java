@@ -1,7 +1,5 @@
 package org.usfirst.team4145.robot.shared;
 
-import java.io.UnsupportedEncodingException;
-
 import org.usfirst.frc.team4145.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.SerialPort;
@@ -37,12 +35,8 @@ public class VisionSerial {
 	public void updateVisionCoordinates() {
 		// Read from Pi/Jetson over serial
 		coordinates = serialPort.read(6);
-		SmartDashboard.putRaw("coordinates", coordinates);
-		System.out.println("SERIAL OUTPUT");
-		String decoded = new String(coordinates);
-		System.out.println(decoded);
-		SmartDashboard.putString("decoded", decoded);
-	
+		double center = getCenterPixel();
+		SmartDashboard.putNumber("center", center);
 	}
 
 	public void off() {
@@ -50,22 +44,10 @@ public class VisionSerial {
 		serialPort.write(OFF_BYTE, 1);
 	}
 
-	public double getCoords() {
-		return decode(coordinates);
-	}
-
-	private double decode(byte[] data) {
-		double out = 0.0;
-		if (data.length >= 6) {
-			out += ((double) data[0] - 48) * 100;
-			out += ((double) data[1] - 48) * 10;
-			out += ((double) data[2] - 48);
-			// .
-			out += ((double) data[4] - 48) * 0.1;
-			out += ((double) data[5] - 48) * 0.01;
-		}
-		return out;
-
+	public double getCenterPixel() {
+		String decodedString = new String(coordinates);
+		Double decoded = Double.valueOf(decodedString);
+		return decoded;
 	}
 
 	public double getTargetAngle(double currentCenter) {
@@ -73,7 +55,6 @@ public class VisionSerial {
 		double angleOffset = pixelOffset / PIXEL_PER_DEGREE;
 		double gyroValue = (RobotMap.ahrs.getYaw() + angleOffset + 180) % 360;
 		return gyroValue;
-
 	}
 
 }

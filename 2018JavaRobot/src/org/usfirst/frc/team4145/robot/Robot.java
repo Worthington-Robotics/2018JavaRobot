@@ -7,11 +7,9 @@
 
 package org.usfirst.frc.team4145.robot;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -33,7 +31,6 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		RobotMap.init();
 		oi = new OI();
-		
 
 	}
 
@@ -65,17 +62,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		RobotMap.ahrs.reset();
-
-		//pulls auto selector from labview DB
-		String autoSelected = SmartDashboard.getString("Auto State", RobotMap.autoList[0]); 
-
-		// this block builds the game data when auto starts
-		String GameData = DriverStation.getInstance().getGameSpecificMessage();
-		
-		//choose auto command based on lists
-		autonomousCommand = AutoSelector.autoSelect(GameData, autoSelected);
-		
+	    
 		// schedule the autonomous command checking to make sure not null
 		if (autonomousCommand != null) {
 			autonomousCommand.start();

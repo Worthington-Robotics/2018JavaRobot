@@ -7,6 +7,8 @@
 
 package org.usfirst.frc.team4145.robot;
 
+import org.usfirst.frc.team4145.robot.commands.Masterstick;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -22,6 +24,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot {
 	public static OI oi;
+	
 
 	Command autonomousCommand;
 
@@ -33,6 +36,7 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		RobotMap.init();
 		oi = new OI();
+		
 		
 
 	}

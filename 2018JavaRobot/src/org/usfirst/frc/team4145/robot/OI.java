@@ -8,6 +8,8 @@
 package org.usfirst.frc.team4145.robot;
 
 import org.usfirst.frc.team4145.robot.commands.GyroLock;
+import org.usfirst.frc.team4145.robot.commands.LiftButtonDown;
+import org.usfirst.frc.team4145.robot.commands.LiftButtonUp;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -25,15 +27,28 @@ public class OI {
 	// number it is.
 	
 	private Joystick masterStick;
+	private Joystick secondStick;
+	
 	
 	public OI() {
 		masterStick = new Joystick(0);
 		Button trigger = new JoystickButton(masterStick, 1);
 		trigger.whileHeld(new GyroLock());
+		
+		secondStick = new Joystick(1);
+		Button sev = new JoystickButton(secondStick, 7);
+		sev.whileHeld(new LiftButtonUp());
+		Button six = new JoystickButton(secondStick, 6);
+		six.whileHeld(new LiftButtonDown());
+		
+		
 	}
 	
 	public Joystick getMasterStick() {
 		return masterStick;
+	}
+	public Joystick getSecondStick() {
+		return secondStick;
 	}
 	// Joystick stick = new Joystick(port);
 	// Button button = new JoystickButton(stick, buttonNumber);

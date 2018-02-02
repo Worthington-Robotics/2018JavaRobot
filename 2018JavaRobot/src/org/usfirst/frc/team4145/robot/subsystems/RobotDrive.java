@@ -40,8 +40,8 @@ public class RobotDrive extends Subsystem {
 			lastInputSet = getAdjStick();
 		}
 		SmartDashboard.putNumberArray("compensated stick values", lastInputSet);
-		SmartDashboard.putNumber("Gyro Target", getAdjustedGyro(setPoint));
-		SmartDashboard.putNumber("Gyro Angle", getAdjustedGyro(RobotMap.ahrs.getYaw()));
+		SmartDashboard.putNumber("Gyro Target", setPoint + 180);
+		SmartDashboard.putNumber("Gyro Angle", RobotMap.ahrs.getYaw() + 180);
 		if (enable) {
 			// Periodically updates while gyro locked
 			Drive(lastInputSet[0], lastInputSet[1], Output.getValue());
@@ -49,7 +49,6 @@ public class RobotDrive extends Subsystem {
 		} else {
 			// periodically updates drive
 			Drive(lastInputSet[0], lastInputSet[1], lastInputSet[2] / 2);
-			setTarget(RobotMap.ahrs.getYaw()); // Safety feature in case PID gets enabled
 		}
 	}
 
@@ -75,18 +74,6 @@ public class RobotDrive extends Subsystem {
 		}
 	}
 
-	public double getAdjustedGyro(double input) {
-		if (input > 0)
-			return input;
-		return 360 + input;
-	}
-
-	private double getAdjustedInput(double input) {
-		if (input <= 180)
-			return input;
-		return input - 360;
-	}
-
 	// Sets status of the PID controller
 	// also tells the update method to use the gyro lock pid
 	private void enableLock(boolean en) {
@@ -100,7 +87,6 @@ public class RobotDrive extends Subsystem {
 
 	// passes new setpoint into gyro-lock and sets DB variable
 	private void setTarget(double rot) {
-		rot = getAdjustedInput(rot);
 		setPoint = rot;
 		GyroLock.setSetpoint(rot);
 	}

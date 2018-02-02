@@ -8,6 +8,8 @@
 package org.usfirst.frc.team4145.robot;
 
 import org.usfirst.frc.team4145.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team4145.robot.subsystems.Lift;
+import org.usfirst.frc.team4145.robot.subsystems.Liftbot;
 import org.usfirst.frc.team4145.robot.subsystems.RobotDrive;
 
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
@@ -15,9 +17,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix.motorcontrol.can.*;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PIDSource;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -33,14 +36,19 @@ public class RobotMap {
 	//actuators
 	public static WPI_TalonSRX Drive1,Drive2,Drive3,Drive4; //need to use WPI_talonSRX for drivetrain use
 	public static MecanumDrive robotdrive; //meccanum drive object
-	public static Encoder driveEncoder;
+	public static Spark liftmotorL, liftmotorH ,liftBotMotor; 
+	
 	//sensors
 	public static AHRS ahrs; //AHRS system on navx
-	public static Joystick stick1;
+	public static Encoder liftEnc;
+	public static DigitalInput switchLBase, switchLTop, switchHBase, switchHTop;
+	
 	
 	//subsystems public static
 	public static ExampleSubsystem exampleSystem;
 	public static RobotDrive Drive;
+	public static Lift lift;
+	public static Liftbot liftbot;
 	
 	public static void init() {
 		//all general objects instantated here
@@ -52,16 +60,22 @@ public class RobotMap {
 		Drive3 = new WPI_TalonSRX(3);
 		Drive4 = new WPI_TalonSRX(4);
 		robotdrive = new MecanumDrive(Drive1, Drive2, Drive3, Drive4); //create meccanum drive
-		driveEncoder = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
-		
+		liftmotorL = new Spark(0);
+		liftmotorH = new Spark(1);
+		liftBotMotor = new Spark(1);
 		//all sensor objects here
 		ahrs = new AHRS(SPI.Port.kMXP); //finish declaring AHRS to MXP SPI bus
 		ahrs.reset();
-		stick1 = new Joystick(0);
-		
+		switchLBase = new DigitalInput(0);
+		switchLTop = new DigitalInput(1);
+		switchHBase = new DigitalInput(2);
+		switchHTop = new DigitalInput(3);
+		liftEnc = new Encoder(0,1,false,Encoder.EncodingType.k4X);
 		//create all subsystem objects
 		exampleSystem = new ExampleSubsystem();
 		Drive = new RobotDrive();
+		liftbot = new Liftbot(); 
+		lift = new Lift();
 		
 		
 	}

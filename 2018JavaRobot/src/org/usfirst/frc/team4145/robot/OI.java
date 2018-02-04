@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team4145.robot;
 
+import org.usfirst.frc.team4145.robot.commands.FlipRef;
 import org.usfirst.frc.team4145.robot.commands.GyroLock;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -28,8 +29,12 @@ public class OI {
 	
 	public OI() {
 		masterStick = new Joystick(0);
+		
 		Button trigger = new JoystickButton(masterStick, 1);
 		trigger.whileHeld(new GyroLock());
+		
+		Button thumb = new JoystickButton(masterStick, 2);
+		thumb.whileHeld(new FlipRef());
 	}
 	
 	public Joystick getMasterStick() {

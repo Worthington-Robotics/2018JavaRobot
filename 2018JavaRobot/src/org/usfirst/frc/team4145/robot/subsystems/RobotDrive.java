@@ -16,6 +16,7 @@ public class RobotDrive extends Subsystem {
 	private double setPoint = 0;
 	private double deadBandVal = 0.15;
 	private double[] lastInputSet = { 0, 0, 0 };
+	private boolean ifReversed = false;
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
@@ -38,6 +39,11 @@ public class RobotDrive extends Subsystem {
 		// checks if robot is in auto to avoid setting zero to the drive values
 		if (!DriverStation.getInstance().isAutonomous()) {
 			lastInputSet = getAdjStick();
+		}
+		if(ifReversed)
+		{
+			lastInputSet[0] = -lastInputSet[0];
+			lastInputSet[1] = -lastInputSet[1];
 		}
 		SmartDashboard.putNumberArray("compensated stick values", lastInputSet);
 		SmartDashboard.putNumber("Gyro Target", getAdjustedGyro(setPoint));
@@ -164,6 +170,17 @@ public class RobotDrive extends Subsystem {
 	 */
 	public void setInput(double[] inputVals) {
 		lastInputSet = inputVals;
+	}
+	
+	/**
+	 * this method is used to flip references
+	 * 
+	 * @param ifReversed
+	 * 			(boolean that carries whether the x and y axes are reversed)
+	 */
+	public void flipReference(boolean ifReversed)
+	{
+		this.ifReversed = ifReversed;
 	}
 
 }

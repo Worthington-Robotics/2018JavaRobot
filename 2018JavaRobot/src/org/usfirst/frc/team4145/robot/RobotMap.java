@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team4145.robot;
 
+import org.usfirst.frc.team4145.robot.subsystems.CubeManipulation;
 import org.usfirst.frc.team4145.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team4145.robot.subsystems.Lift;
 import org.usfirst.frc.team4145.robot.subsystems.Liftbot;
@@ -39,7 +40,8 @@ public class RobotMap {
 	public static WPI_TalonSRX Drive1,Drive2,Drive3,Drive4; //need to use WPI_talonSRX for drivetrain use
 	public static MecanumDrive robotdrive; //meccanum drive object
 	public static Encoder driveEncoder;
-	public static Spark liftmotorL, liftmotorH ,liftBotMotor; 
+	public static Spark liftmotorL, liftmotorH ,liftBotMotor;
+	public static Spark ClampL, ClampR, Dropper;
 	//sensors
 	public static AHRS ahrs; //AHRS system on navx
 	public static Encoder liftEnc;
@@ -51,6 +53,7 @@ public class RobotMap {
 	public static RobotVision vision;
 	public static Lift lift;
 	public static Liftbot liftbot;
+	public static CubeManipulation CubeManipulator;
 	
 	public static void init() {
 		//all general objects instantated here
@@ -66,6 +69,10 @@ public class RobotMap {
 		liftmotorL = new Spark(1);
 		liftmotorH = new Spark(0);
 		liftBotMotor = new Spark(5);
+		ClampL = new Spark(1);
+		ClampR = new Spark(2);
+		Dropper = new Spark(3);
+
 		
 		//all sensor objects here
 		ahrs = new AHRS(SPI.Port.kMXP); //finish declaring AHRS to MXP SPI bus
@@ -81,6 +88,7 @@ public class RobotMap {
 		vision = new RobotVision();
 		liftbot = new Liftbot(); 
 		lift = new Lift();
+		CubeManipulator = new CubeManipulation();
 		
 	}
 }

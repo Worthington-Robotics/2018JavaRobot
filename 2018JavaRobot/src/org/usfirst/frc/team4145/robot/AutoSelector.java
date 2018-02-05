@@ -1,7 +1,6 @@
 package org.usfirst.frc.team4145.robot;
 
 import org.usfirst.frc.team4145.robot.commands.ExampleCommand;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 public class AutoSelector {

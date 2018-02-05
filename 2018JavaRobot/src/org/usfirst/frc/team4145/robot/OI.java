@@ -7,9 +7,14 @@
 
 package org.usfirst.frc.team4145.robot;
 
+import org.usfirst.frc.team4145.robot.commands.DropManipulation;
+import org.usfirst.frc.team4145.robot.commands.FlipRef;
 import org.usfirst.frc.team4145.robot.commands.GyroLock;
 import org.usfirst.frc.team4145.robot.commands.LiftButtonDown;
 import org.usfirst.frc.team4145.robot.commands.LiftButtonUp;
+import org.usfirst.frc.team4145.robot.commands.LiftManipulation;
+import org.usfirst.frc.team4145.robot.commands.Pickup;
+import org.usfirst.frc.team4145.robot.commands.Release;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -25,51 +30,48 @@ public class OI {
 	//// joystick.
 	// You create one by telling it which joystick it's on and which button
 	// number it is.
-	
+
 	private Joystick masterStick;
 	private Joystick secondStick;
-	
-	
+
 	public OI() {
+		//driver stick - Extreme 3d pro
 		masterStick = new Joystick(0);
+
 		Button trigger = new JoystickButton(masterStick, 1);
 		trigger.whileHeld(new GyroLock());
+
+		Button thumb = new JoystickButton(masterStick, 2);
+		thumb.whileHeld(new FlipRef());
 		
+		
+		//operator stick - Attack 3
 		secondStick = new Joystick(1);
+		
+		Button two = new JoystickButton(secondStick, 2);
+		two.whileHeld(new Pickup());
+		
+		Button three = new JoystickButton(secondStick, 3);
+		three.whileHeld(new Release());
+		
+		Button four = new JoystickButton(secondStick, 4);
+		four.whileHeld(new DropManipulation());
+		
+		Button five = new JoystickButton(secondStick, 5);
+		five.whileHeld(new LiftManipulation());
+
 		Button sev = new JoystickButton(secondStick, 7);
 		sev.whileHeld(new LiftButtonUp());
+
 		Button six = new JoystickButton(secondStick, 6);
 		six.whileHeld(new LiftButtonDown());
-		
-		
 	}
-	
+
 	public Joystick getMasterStick() {
 		return masterStick;
 	}
+
 	public Joystick getSecondStick() {
 		return secondStick;
 	}
-	// Joystick stick = new Joystick(port);
-	// Button button = new JoystickButton(stick, buttonNumber);
-
-	// There are a few additional built in buttons you can use. Additionally,
-	// by subclassing Button you can create custom triggers and bind those to
-	// commands the same as any other Button.
-
-	//// TRIGGERING COMMANDS WITH BUTTONS
-	// Once you have a button, it's trivial to bind it to a button in one of
-	// three ways:
-
-	// Start the command when the button is pressed and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenPressed(new ExampleCommand());
-
-	// Run the command while the button is being held down and interrupt it once
-	// the button is released.
-	// button.whileHeld(new ExampleCommand());
-
-	// Start the command when the button is released and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenReleased(new ExampleCommand());
 }

@@ -23,13 +23,16 @@ public class Liftbot extends Subsystem {
 
 	}
 
-	public void GrappleOn(){
-		
-		
+	public void extend() {
+		RobotMap.liftBotMotor.set(0.5);
 	}
 	
-
-
+	public void pull() {
+		RobotMap.liftBotMotor.set(-0.5);
+	}
 	
+	public void stop() {
+		RobotMap.liftBotMotor.set(0);
+	}
 
 }

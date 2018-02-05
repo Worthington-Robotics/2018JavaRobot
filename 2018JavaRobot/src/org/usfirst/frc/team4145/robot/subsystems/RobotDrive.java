@@ -16,6 +16,7 @@ public class RobotDrive extends Subsystem {
 	private double setPoint = 0;
 	private double deadBandVal = 0.15;
 	private double[] lastInputSet = { 0, 0, 0 };
+	private boolean ifReversed = false;
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
@@ -39,9 +40,14 @@ public class RobotDrive extends Subsystem {
 		if (!DriverStation.getInstance().isAutonomous()) {
 			lastInputSet = getAdjStick();
 		}
+		if(ifReversed)
+		{
+			lastInputSet[0] = -lastInputSet[0];
+			lastInputSet[1] = -lastInputSet[1];
+		}
 		SmartDashboard.putNumberArray("compensated stick values", lastInputSet);
-		SmartDashboard.putNumber("Gyro Target", setPoint + 180);
-		SmartDashboard.putNumber("Gyro Angle", RobotMap.ahrs.getYaw() + 180);
+		SmartDashboard.putNumber("Gyro Target", getAdjustedGyro(setPoint));
+		SmartDashboard.putNumber("Gyro Angle", getAdjustedGyro(RobotMap.ahrs.getYaw()));
 		if (enable) {
 			// Periodically updates while gyro locked
 			Drive(lastInputSet[0], lastInputSet[1], Output.getValue());
@@ -49,6 +55,7 @@ public class RobotDrive extends Subsystem {
 		} else {
 			// periodically updates drive
 			Drive(lastInputSet[0], lastInputSet[1], lastInputSet[2] / 2);
+			setTarget(RobotMap.ahrs.getYaw()); // Safety feature in case PID gets enabled
 		}
 	}
 
@@ -74,6 +81,18 @@ public class RobotDrive extends Subsystem {
 		}
 	}
 
+	public double getAdjustedGyro(double input) {
+		if (input > 0)
+			return input;
+		return 360 + input;
+	}
+
+	private double getAdjustedInput(double input) {
+		if (input <= 180)
+			return input;
+		return input - 360;
+	}
+
 	// Sets status of the PID controller
 	// also tells the update method to use the gyro lock pid
 	private void enableLock(boolean en) {
@@ -87,6 +106,7 @@ public class RobotDrive extends Subsystem {
 
 	// passes new setpoint into gyro-lock and sets DB variable
 	private void setTarget(double rot) {
+		rot = getAdjustedInput(rot);
 		setPoint = rot;
 		GyroLock.setSetpoint(rot);
 	}
@@ -150,6 +170,17 @@ public class RobotDrive extends Subsystem {
 	 */
 	public void setInput(double[] inputVals) {
 		lastInputSet = inputVals;
+	}
+	
+	/**
+	 * this method is used to flip references
+	 * 
+	 * @param ifReversed
+	 * 			(boolean that carries whether the x and y axes are reversed)
+	 */
+	public void flipReference(boolean ifReversed)
+	{
+		this.ifReversed = ifReversed;
 	}
 
 }

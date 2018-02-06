@@ -63,22 +63,23 @@ public class RobotMap {
 		Drive3 = new WPI_TalonSRX(3);
 		Drive4 = new WPI_TalonSRX(4);
 		robotdrive = new MecanumDrive(Drive1, Drive2, Drive3, Drive4); //create meccanum drive
-		driveEncoder = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
 		liftmotorL = new Spark(1);
 		liftmotorH = new Spark(0);
 		liftBotMotor = new Spark(5);
-		ClampL = new Spark(1);
-		ClampR = new Spark(2);
-		Dropper = new Spark(3);
+		ClampL = new Spark(2);
+		ClampR = new Spark(3);
+		Dropper = new Spark(4);
 
 		
 		//all sensor objects here
 		ahrs = new AHRS(SPI.Port.kMXP); //finish declaring AHRS to MXP SPI bus
 		ahrs.reset();
-		switchLBase = new DigitalInput(0);
-		switchLTop = new DigitalInput(1);
-		switchHBase = new DigitalInput(2);
-		switchHTop = new DigitalInput(3);
+		driveEncoder = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
+		liftEnc = new Encoder(2,3,true,Encoder.EncodingType.k4X);
+		switchLBase = new DigitalInput(4);
+		switchLTop = new DigitalInput(5);
+		switchHBase = new DigitalInput(6);
+		switchHTop = new DigitalInput(7);
 		
 		//create all subsystem objects
 		exampleSystem = new ExampleSubsystem();

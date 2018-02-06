@@ -19,7 +19,7 @@ import org.usfirst.frc.team4145.robot.RobotMap;
 public class LiftButtonUp extends Command {
 	public LiftButtonUp() {
 		// Use requires() here to declare subsystem dependencies
-		requires(RobotMap.lift);
+		//requires(RobotMap.lift);
 	}
 
 	// Called just before this Command runs the first time

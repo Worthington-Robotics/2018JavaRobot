@@ -40,7 +40,7 @@ public class Lift extends Subsystem {
 	public void periodic() {
 		updateLimits();
 		updateLift();
-		watchdog();
+		//watchdog();
 	}
 
 	private void updateLimits() {
@@ -68,13 +68,11 @@ public class Lift extends Subsystem {
 	private void updateLift() {
 		if (!DriverStation.getInstance().isAutonomous()) {
 			Liftval = evalDeadBand(Robot.oi.getSecondStick().getY(), 0.15);
-			
 		}
 		liftspeedH(Liftval);
-		
 
 	}
-	
+
 	private double evalDeadBand(double stickInpt, double deadBand) {
 		if (Math.abs(stickInpt) < deadBand) {
 			return 0;

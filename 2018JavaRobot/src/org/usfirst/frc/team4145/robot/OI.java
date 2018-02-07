@@ -60,11 +60,17 @@ public class OI {
 		Button five = new JoystickButton(secondStick, 5);
 		five.whileHeld(new LiftManipulation());
 
-		Button sev = new JoystickButton(secondStick, 7);
-		sev.whileHeld(new LiftButtonUp());
-
 		Button six = new JoystickButton(secondStick, 6);
 		six.whileHeld(new LiftButtonDown());
+		
+		Button sev = new JoystickButton(secondStick, 7);
+		sev.whileHeld(new LiftButtonUp());
+		
+		Button eight = new JoystickButton(secondStick, 8);
+		eight.whileHeld(new DropManipulation());
+		
+		Button nine = new JoystickButton(secondStick, 9);
+		nine.whileHeld(new LiftManipulation());
 	}
 
 	public Joystick getMasterStick() {

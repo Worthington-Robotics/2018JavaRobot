@@ -12,7 +12,7 @@ public class LiftManipulation extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		RobotMap.CubeManipulator.dropStart();
+		RobotMap.CubeManipulator.lift();
 	}
 
 	// Called repeatedly when this Command is scheduled to run

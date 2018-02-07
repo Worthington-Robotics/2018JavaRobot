@@ -9,7 +9,7 @@ package org.usfirst.frc.team4145.robot.subsystems;
 
 import org.usfirst.frc.team4145.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -20,19 +20,40 @@ public class Liftbot extends Subsystem {
 	// here. Call these from Commands.
 	public void initDefaultCommand() {
 		RobotMap.liftBotMotor.set(0);
-
 	}
 
 	public void extend() {
 		RobotMap.liftBotMotor.set(0.5);
 	}
-	
+
 	public void pull() {
 		RobotMap.liftBotMotor.set(-0.5);
 	}
-	
+
 	public void stop() {
 		RobotMap.liftBotMotor.set(0);
+	}
+
+	public void lock() {
+		RobotMap.liftLock.set(true);
+	}
+
+	public void unlock() {
+		RobotMap.liftLock.set(false);
+	}
+
+	@Override
+	public void periodic() {
+		watchDog();
+		armLock();
+	}
+
+	public void watchDog() {
+
+	}
+
+	public void armLock() {
+		
 	}
 
 }

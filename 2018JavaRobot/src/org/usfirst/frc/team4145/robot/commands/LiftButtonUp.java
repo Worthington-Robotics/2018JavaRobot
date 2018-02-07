@@ -7,10 +7,7 @@
 
 package org.usfirst.frc.team4145.robot.commands;
 
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team4145.robot.Robot;
 import org.usfirst.frc.team4145.robot.RobotMap;
 
 /**
@@ -19,7 +16,7 @@ import org.usfirst.frc.team4145.robot.RobotMap;
 public class LiftButtonUp extends Command {
 	public LiftButtonUp() {
 		// Use requires() here to declare subsystem dependencies
-		requires(RobotMap.lift);
+		//requires(RobotMap.lift);
 	}
 
 	// Called just before this Command runs the first time
@@ -31,6 +28,7 @@ public class LiftButtonUp extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
+		System.out.println("LiftButtonUp Running:" + RobotMap.lift.getCurrentCommandName() + "  LiftmotorH code speed" + RobotMap.liftmotorH.get());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

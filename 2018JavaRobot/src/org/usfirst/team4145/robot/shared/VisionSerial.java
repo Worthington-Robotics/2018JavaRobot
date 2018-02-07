@@ -53,6 +53,10 @@ public class VisionSerial {
         SmartDashboard.putNumber("center", centerCoordinate);
         System.out.println("Center = " + centerCoordinate + " \'" + centerString + "\'");
 	}
+	
+	public double getCenter() {
+		return  centerCoordinate;
+	}
 
 	public void off() {
 		// Turns off Pi/Jetson over serial

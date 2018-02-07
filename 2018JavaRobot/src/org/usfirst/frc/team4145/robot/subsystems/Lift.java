@@ -69,7 +69,7 @@ public class Lift extends Subsystem {
 		if (!DriverStation.getInstance().isAutonomous()) {
 			Liftval = evalDeadBand(Robot.oi.getSecondStick().getY(), 0.15);
 		}
-		liftspeedH(Liftval);
+		liftspeedL(Liftval);
 
 	}
 

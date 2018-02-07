@@ -14,7 +14,7 @@ public class RobotDrive extends Subsystem {
 	private PIDController GyroLock;
 	private AccessiblePIDOutput Output;
 	private double setPoint = 0;
-	private double deadBandVal = 0.15;
+	private double deadBandVal = 0.35;
 	private double[] lastInputSet = { 0, 0, 0 };
 	private boolean ifReversed = false;
 
@@ -54,7 +54,7 @@ public class RobotDrive extends Subsystem {
 
 		} else {
 			// periodically updates drive
-			Drive(lastInputSet[0], lastInputSet[1], lastInputSet[2] / 2);
+			Drive(lastInputSet[0], lastInputSet[1], lastInputSet[2] / 1.25);
 			setTarget(RobotMap.ahrs.getYaw()); // Safety feature in case PID gets enabled
 		}
 	}

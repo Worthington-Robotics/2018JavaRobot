@@ -28,7 +28,6 @@ public class RobotVision extends Subsystem {
 
 	@Override
 	public void periodic() {
-		//vision.heartbeat();
 		//vision.updateVisionCoordinates();
 		//vision.getCoords();
 	}

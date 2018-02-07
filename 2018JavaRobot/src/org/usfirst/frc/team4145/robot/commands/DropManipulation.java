@@ -7,8 +7,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DropManipulation extends Command{
 	
 	private boolean isDone = false;
-	private int Counter = 0;
-	private int TimeOut = 12;
 	
 	public DropManipulation(){
 		requires(RobotMap.CubeManipulator);

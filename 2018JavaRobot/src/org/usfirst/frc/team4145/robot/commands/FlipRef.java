@@ -16,7 +16,7 @@ public class FlipRef extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	RobotMap.Drive.flipReference(true);
+    	RobotMap.Drive.flipRefrence(true);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -30,7 +30,7 @@ public class FlipRef extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	RobotMap.Drive.flipReference(false);
+    	RobotMap.Drive.flipRefrence(false);
     }
 
     // Called when another command which requires one or more of the same

@@ -31,7 +31,7 @@ public class DriveTo extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	// Set coordinates for the robot to move to
 	protected void execute() {
-		toSet[0] = output.getValue();
+		toSet[1] = output.getValue();
 		RobotMap.Drive.setInput(toSet);
 	}
 

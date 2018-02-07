@@ -2,3 +2,4 @@
 *.prefs
 *.class
 *.classpath
+/.recommenders/

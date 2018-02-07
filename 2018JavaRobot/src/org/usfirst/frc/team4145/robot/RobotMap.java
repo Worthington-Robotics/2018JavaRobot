@@ -7,12 +7,7 @@
 
 package org.usfirst.frc.team4145.robot;
 
-import org.usfirst.frc.team4145.robot.subsystems.CubeManipulation;
-import org.usfirst.frc.team4145.robot.subsystems.ExampleSubsystem;
-import org.usfirst.frc.team4145.robot.subsystems.Lift;
-import org.usfirst.frc.team4145.robot.subsystems.Liftbot;
-import org.usfirst.frc.team4145.robot.subsystems.RobotDrive;
-import org.usfirst.frc.team4145.robot.subsystems.RobotVision;
+import org.usfirst.frc.team4145.robot.subsystems.*;
 
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -51,7 +46,7 @@ public class RobotMap {
 
 	// subsystems public static
 	public static ExampleSubsystem exampleSystem;
-	public static RobotDrive Drive;
+	public static RobotDriveV2 Drive;
 	public static RobotVision vision;
 	public static Lift lift;
 	public static Liftbot liftbot;
@@ -88,7 +83,7 @@ public class RobotMap {
 
 		// create all subsystem objects
 		exampleSystem = new ExampleSubsystem();
-		Drive = new RobotDrive();
+		Drive = new RobotDriveV2();
 		vision = new RobotVision();
 		liftbot = new Liftbot();
 		lift = new Lift();

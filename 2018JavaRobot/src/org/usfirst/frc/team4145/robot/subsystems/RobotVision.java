@@ -29,12 +29,6 @@ public class RobotVision extends Subsystem {
 	@Override
 	protected void initDefaultCommand() {
 	}
-	
-	public double getAngle() {
-		if(lastRecievedAngle == lastUsedAngle) {
-			return RobotMap.ahrs.
-		}
-	}
 
 	public void startVision() {
 		vision.sendOn();

@@ -5,24 +5,24 @@ import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
+
+
 public abstract class CustomPIDSubsystem extends Subsystem implements PIDSource, PIDOutput{
 
-    public abstract double pidRead();
+    private PIDSourceType type = PIDSourceType.kDisplacement;
+
+    public abstract double pidGet();
 
     public abstract void pidWrite(double output);
 
     @Override
     public void setPIDSourceType(PIDSourceType pidSource) {
-
+        type = pidSource;
     }
 
     @Override
     public PIDSourceType getPIDSourceType() {
-        return null;
-    }
-
-    public double pidGet(){
-        return pidRead();
+        return type;
     }
 
 }

@@ -33,7 +33,7 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
 
     public RobotDriveV2() {
         output = new AccessiblePIDOutput();
-        gyroLock = new PIDController(Kp, Ki, Kd, this, output);
+        gyroLock = new PIDController(Kp, Ki, Kd, this, this::pidWrite);
         gyroLock.setAbsoluteTolerance(absTol);
         gyroLock.setOutputRange(-1,1);
         //gyroLock.setContinuous();
@@ -46,12 +46,13 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
     }
 
     @Override
-    public double pidRead() {
+    public double pidGet() {
         return getGyro();
     }
 
     @Override
     public void pidWrite(double output) {
+        SmartDashboard.putNumber("PIDWrite", output);
         pidOutput = output;
         pidOutput = gyroLock.get();
     }

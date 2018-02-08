@@ -54,7 +54,7 @@ public class RobotMap {
 
 	public static void init() {
 		// all general objects instantated here
-		SmartDashboard.putStringArray("Auto State", autoList); // publishes the auto list to the dashboard "Auto
+		SmartDashboard.putStringArray("Auto Selector", AutoSelector.buildArray()); // publishes the auto list to the dashboard "Auto
 																// Selector"
 
 		// all actuator objects here
@@ -63,8 +63,8 @@ public class RobotMap {
 		Drive3 = new WPI_TalonSRX(3);
 		Drive4 = new WPI_TalonSRX(4);
 		robotdrive = new MecanumDrive(Drive1, Drive2, Drive3, Drive4); // create meccanum drive
-		liftmotorL = new Spark(0);
-		liftmotorH = new Spark(1);
+		liftmotorL = new Spark(1);
+		liftmotorH = new Spark(0);
 		liftBotMotor = new Spark(5);
 		ClampL = new Spark(2);
 		ClampR = new Spark(3);

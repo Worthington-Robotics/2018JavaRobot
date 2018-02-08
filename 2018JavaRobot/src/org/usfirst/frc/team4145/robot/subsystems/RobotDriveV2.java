@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4145.robot.Robot;
 import org.usfirst.frc.team4145.robot.RobotMap;
+import org.usfirst.team4145.robot.shared.AccessiblePIDOutput;
 import org.usfirst.team4145.robot.shared.CustomPIDSubsystem;
 
 /**
@@ -16,6 +17,7 @@ import org.usfirst.team4145.robot.shared.CustomPIDSubsystem;
 public class RobotDriveV2 extends CustomPIDSubsystem {
 
     private PIDController gyroLock;
+    private AccessiblePIDOutput output;
 
     private boolean enLock = false;
     private double deadBandVal = 0.35;
@@ -26,12 +28,15 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
     private double Kp = 0.025;
     private double Ki = 0.0;
     private double Kd = 0.025;
-    private double absTol = 0.5;
+    private double absTol = 0;
     private double pidOutput = 0;
 
     public RobotDriveV2() {
-        gyroLock = new PIDController(Kp, Ki, Kd, this, this);
+        output = new AccessiblePIDOutput();
+        gyroLock = new PIDController(Kp, Ki, Kd, this, output);
         gyroLock.setAbsoluteTolerance(absTol);
+        gyroLock.setOutputRange(-1,1);
+        //gyroLock.setContinuous();
 
     }
 
@@ -48,6 +53,7 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
     @Override
     public void pidWrite(double output) {
         pidOutput = output;
+        pidOutput = gyroLock.get();
     }
 
     public void periodic() {
@@ -59,9 +65,13 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
         SmartDashboard.putNumberArray("compensated stick values", lastInputSet);
         SmartDashboard.putNumber("Gyro Target", gyroLock.getSetpoint());
         SmartDashboard.putNumber("Gyro Angle", getGyro());
+        SmartDashboard.putNumber("Pid error", gyroLock.getError());
+        SmartDashboard.putNumber("PID Output",output.getValue());
+        SmartDashboard.putBoolean("IS enabled", gyroLock.isEnabled());
         if (enLock) {
             // Periodically updates while gyro locked
-            setCartesianDrive(lastInputSet[0], lastInputSet[1], pidOutput);
+
+            setCartesianDrive(lastInputSet[0], lastInputSet[1], output.getValue());
 
         } else {
             // periodically updates drive
@@ -84,7 +94,7 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
     }
 
     public double getGyro() {
-        return (RobotMap.ahrs.getAngle() % 360);
+        return Math.abs(RobotMap.ahrs.getAngle() % 360);
     }
 
     private void setCartesianDrive(double x, double y, double z) {
@@ -97,8 +107,12 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
 
     private void enableLock(boolean en) {
         enLock = en;
-        if (enLock) gyroLock.enable();
-        else gyroLock.disable();
+        if (enLock) {
+        	gyroLock.enable();
+        }
+        else {
+        	gyroLock.disable();
+        }
     }
 
     private double[] getAdjStick() {

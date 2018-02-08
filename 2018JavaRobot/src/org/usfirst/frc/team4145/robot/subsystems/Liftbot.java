@@ -19,7 +19,7 @@ public class Liftbot extends Subsystem {
 
 	// here. Call these from Commands.
 	public void initDefaultCommand() {
-		RobotMap.liftBotMotor.set(0);
+		//RobotMap.liftBotMotor.set(0);
 	}
 
 	public void extend() {
@@ -44,8 +44,8 @@ public class Liftbot extends Subsystem {
 
 	@Override
 	public void periodic() {
-		watchDog();
-		armLock();
+		//watchDog();
+		//armLock();
 	}
 
 	public void watchDog() {

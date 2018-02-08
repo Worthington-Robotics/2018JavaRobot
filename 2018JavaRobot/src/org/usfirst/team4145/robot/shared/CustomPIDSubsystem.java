@@ -9,7 +9,6 @@ public abstract class CustomPIDSubsystem extends Subsystem implements PIDSource,
 
     public abstract double pidRead();
 
-    @Override
     public abstract void pidWrite(double output);
 
     @Override

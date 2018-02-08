@@ -7,14 +7,7 @@
 
 package org.usfirst.frc.team4145.robot;
 
-import org.usfirst.frc.team4145.robot.commands.DropManipulation;
-import org.usfirst.frc.team4145.robot.commands.FlipRef;
-import org.usfirst.frc.team4145.robot.commands.GyroLock;
-import org.usfirst.frc.team4145.robot.commands.LiftButtonDown;
-import org.usfirst.frc.team4145.robot.commands.LiftButtonUp;
-import org.usfirst.frc.team4145.robot.commands.LiftManipulation;
-import org.usfirst.frc.team4145.robot.commands.Pickup;
-import org.usfirst.frc.team4145.robot.commands.Release;
+import org.usfirst.frc.team4145.robot.commands.*;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -43,7 +36,12 @@ public class OI {
 
 		Button thumb = new JoystickButton(masterStick, 2);
 		thumb.whileHeld(new FlipRef());
-		
+
+		Button eleven = new JoystickButton(masterStick, 11);
+		eleven.whileHeld(new BotUp());
+
+		Button twelve = new JoystickButton(masterStick,12);
+		twelve.whileHeld(new BotDown());
 		
 		//operator stick - Attack 3
 		secondStick = new Joystick(1);
@@ -66,11 +64,11 @@ public class OI {
 		Button sev = new JoystickButton(secondStick, 7);
 		sev.whileHeld(new LiftButtonUp());
 		
-		Button eight = new JoystickButton(secondStick, 8);
-		eight.whileHeld(new DropManipulation());
+		Button eighttwo = new JoystickButton(secondStick, 8);
+		eighttwo.whileHeld(new DropManipulation());
 		
-		Button nine = new JoystickButton(secondStick, 9);
-		nine.whileHeld(new LiftManipulation());
+		Button ninetwo = new JoystickButton(secondStick, 9);
+		ninetwo.whileHeld(new LiftManipulation());
 	}
 
 	public Joystick getMasterStick() {

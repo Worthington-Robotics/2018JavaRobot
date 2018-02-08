@@ -36,7 +36,7 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
         gyroLock = new PIDController(Kp, Ki, Kd, this, this::pidWrite);
         gyroLock.setAbsoluteTolerance(absTol);
         gyroLock.setOutputRange(-1,1);
-        //gyroLock.setContinuous();
+        gyroLock.setContinuous();
 
     }
 

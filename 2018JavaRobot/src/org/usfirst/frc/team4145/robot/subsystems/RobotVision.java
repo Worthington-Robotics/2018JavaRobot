@@ -11,15 +11,17 @@ public class RobotVision extends Subsystem {
     private VisionSerial vision;
     private Runnable runnable;
     private Thread serialReadThread;
-    private volatile double lastRecievedAngle;
-    private volatile double lastUsedAngle;
+    private volatile double lastRecievedCenter;
+    private volatile double lastUsedCenter;
+
+    private int tolerance = 3; //minimum value necesstating a gyro turn Nominal:3
 
 
     public RobotVision() {
         vision = new VisionSerial(115200);
         runnable = () -> { //ooh look at the shiny lambda (:
             vision.updateVisionCoordinates();
-            //lastCoords = vision.getTargetAngle(vision.getCenter()
+            lastRecievedCenter = vision.getCenter();
         };
     }
 
@@ -44,7 +46,15 @@ public class RobotVision extends Subsystem {
         }
     }
 
-    public void flush(){
+    public double calcError() {
+        if (lastRecievedCenter < lastUsedCenter - tolerance || lastRecievedCenter > lastUsedCenter + tolerance) {
+            lastUsedCenter = lastRecievedCenter;
+            return vision.getTargetAngle(lastRecievedCenter);
+        }
+        return vision.getTargetAngle(lastUsedCenter);
+    }
+
+    public void flush() {
         vision.flush();
     }
 

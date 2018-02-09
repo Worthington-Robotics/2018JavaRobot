@@ -40,7 +40,7 @@ public class VisionSerial {
         try {
             centerString = serialPort.readString(6);
         } catch (Exception e) {
-            centerString = "-2";
+            centerString = "-2"; //catches a non-connected port error
         }
 
         // Reset centerCoordinate
@@ -54,7 +54,7 @@ public class VisionSerial {
         }
 
         SmartDashboard.putNumber("center", centerCoordinate);
-        System.out.println("Center = " + centerCoordinate + " \'" + centerString + "\'");
+        //System.out.println("Center = " + centerCoordinate + " \'" + centerString + "\'");
     }
 
     public double getCenter() {

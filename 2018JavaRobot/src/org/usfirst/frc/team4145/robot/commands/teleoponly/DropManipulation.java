@@ -1,4 +1,4 @@
-package org.usfirst.frc.team4145.robot.commands;
+package org.usfirst.frc.team4145.robot.commands.teleoponly;
 
 import org.usfirst.frc.team4145.robot.RobotMap;
 

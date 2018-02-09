@@ -8,6 +8,7 @@ public class CubeManipulation extends Subsystem {
 
 	private double shoot = 1;
 	private double pull = 0.5;
+	private double push = 0.5;
 
 	public CubeManipulation() {
 
@@ -20,15 +21,19 @@ public class CubeManipulation extends Subsystem {
 	}
 
 	public void pickup() {
-		RobotMap.ClampL.set(0.5);
-		RobotMap.ClampR.set(-0.5);
+		RobotMap.ClampL.set(pull);
+		RobotMap.ClampR.set(-pull);
 
 	}
 
 	public void release() {
+		RobotMap.ClampL.set(-push);
+		RobotMap.ClampR.set(push);
+	}
+
+	public void fire(){
 		RobotMap.ClampL.set(-shoot);
 		RobotMap.ClampR.set(shoot);
-
 	}
 
 	public void stall() {

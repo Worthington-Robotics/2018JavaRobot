@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package org.usfirst.frc.team4145.robot.commands;
+package org.usfirst.frc.team4145.robot.commands.teleoponly;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team4145.robot.RobotMap;
@@ -13,22 +13,22 @@ import org.usfirst.frc.team4145.robot.RobotMap;
 /**
  * An example command.  You can replace me with your own command.
  */
-public class LiftButtonDown extends Command {
-	public LiftButtonDown() {
+public class LiftButtonUp extends Command {
+	public LiftButtonUp() {
 		// Use requires() here to declare subsystem dependencies
-		requires(RobotMap.lift);
+		//requires(RobotMap.lift);
 	}
 
 	// Called just before this Command runs the first time
 	@Override
-	protected void initialize() {
-		RobotMap.lift.liftspeedH(-0.5);
+	protected void initialize() { 
+		RobotMap.lift.liftspeedH(0.5);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		System.out.println("LiftButtonDown Running:" + RobotMap.lift.getCurrentCommandName() + "  LiftmotorH code speed" + RobotMap.liftmotorH.get());
+		System.out.println("LiftButtonUp Running:" + RobotMap.lift.getCurrentCommandName() + "  LiftmotorH code speed" + RobotMap.liftmotorH.get());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

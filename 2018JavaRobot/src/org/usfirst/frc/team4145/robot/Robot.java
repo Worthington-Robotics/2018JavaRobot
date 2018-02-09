@@ -96,7 +96,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopInit() {
 		//RobotMap.ahrs.reset();
-		// This makes sure that the autonomous stops running when teleop starts.
+		// This makes sure that the autonomous stops running when teleoponly starts.
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}

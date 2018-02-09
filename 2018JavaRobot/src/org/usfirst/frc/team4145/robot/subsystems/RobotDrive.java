@@ -162,7 +162,7 @@ public class RobotDrive extends Subsystem {
 	}
 
 	/**
-	 * this method is for use in Auto only! The stick will Override in teleop
+	 * this method is for use in Auto only! The stick will Override in teleoponly
 	 * 
 	 * @param inputVals
 	 *            (double array of length 3) - {x,y,z} - the x, y and z values to be

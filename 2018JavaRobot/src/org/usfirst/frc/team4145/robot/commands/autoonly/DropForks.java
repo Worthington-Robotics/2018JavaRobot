@@ -1,39 +1,44 @@
-package org.usfirst.frc.team4145.robot.commands;
+package org.usfirst.frc.team4145.robot.commands.autoonly;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team4145.robot.RobotMap;
 
-/**
- *
- */
-public class GyroLock extends Command {
+public class DropForks extends Command{
 
-    public GyroLock() {
-        // Use requires() here to declare subsystem dependencies
-        //requires(RobotMap.Drive);
+    private int cycles = 0;
+    private int complete = 10;
+
+    public DropForks(){
+
     }
-
     // Called just before this Command runs the first time
+    @Override
     protected void initialize() {
-        RobotMap.Drive.enableTo(RobotMap.Drive.getGyro(), true);
+        RobotMap.CubeManipulator.dropStart();
     }
 
     // Called repeatedly when this Command is scheduled to run
+    @Override
     protected void execute() {
+        cycles++;
     }
 
     // Make this return true when this Command no longer needs to run execute()
+    @Override
     protected boolean isFinished() {
-        return false;
+        return cycles > complete;
+        // tells when done
     }
 
     // Called once after isFinished returns true
+    @Override
     protected void end() {
-        RobotMap.Drive.enableTo(0, false);
+        RobotMap.CubeManipulator.dropStop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
+    @Override
     protected void interrupted() {
         end();
     }

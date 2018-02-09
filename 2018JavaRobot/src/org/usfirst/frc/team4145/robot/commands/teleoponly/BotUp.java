@@ -1,7 +1,6 @@
-package org.usfirst.frc.team4145.robot.commands;
+package org.usfirst.frc.team4145.robot.commands.teleoponly;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import org.usfirst.frc.team4145.robot.RobotMap;
 
 public class BotUp extends Command {

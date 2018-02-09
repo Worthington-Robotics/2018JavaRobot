@@ -45,29 +45,29 @@ public class OI {
 		//operator stick - Attack 3
 		secondStick = new Joystick(1);
 		
-		Button two = new JoystickButton(secondStick, 2);
-		two.whileHeld(new Pickup());
+		Button secondStickTwo = new JoystickButton(secondStick, 2);
+		secondStickTwo.whileHeld(new Pickup());
 		
-		Button three = new JoystickButton(secondStick, 3);
-		three.whileHeld(new Release());
+		Button secondStickThree = new JoystickButton(secondStick, 3);
+		secondStickThree.whileHeld(new Release());
 		
-		Button four = new JoystickButton(secondStick, 4);
-		four.whileHeld(new DropManipulation());
+		Button secondStickFour = new JoystickButton(secondStick, 4);
+		secondStickFour.whileHeld(new DropManipulation());
 		
-		Button five = new JoystickButton(secondStick, 5);
-		five.whileHeld(new LiftManipulation());
+		Button secondStickFive = new JoystickButton(secondStick, 5);
+		secondStickFive.whileHeld(new LiftManipulation());
 
-		Button six = new JoystickButton(secondStick, 6);
-		six.whileHeld(new LiftButtonDown());
+		Button secondStickSix = new JoystickButton(secondStick, 6);
+		secondStickSix.whileHeld(new LiftButtonDown());
 		
-		Button sev = new JoystickButton(secondStick, 7);
-		sev.whileHeld(new LiftButtonUp());
+		Button secondStickSeven = new JoystickButton(secondStick, 7);
+		secondStickSeven.whileHeld(new LiftButtonUp());
 		
-		Button eighttwo = new JoystickButton(secondStick, 8);
-		eighttwo.whileHeld(new DropManipulation());
+		Button secondStickEight = new JoystickButton(secondStick, 8);
+		secondStickEight.whileHeld(new DropManipulation());
 		
-		Button ninetwo = new JoystickButton(secondStick, 9);
-		ninetwo.whileHeld(new LiftManipulation());
+		Button secondStickNine = new JoystickButton(secondStick, 9);
+		secondStickNine.whileHeld(new LiftManipulation());
 	}
 
 	public Joystick getMasterStick() {

@@ -20,7 +20,7 @@ import org.usfirst.frc.team4145.robot.subsystems.*;
  * floating around.
  */
 public class RobotMap {
-    
+
     // public variables
 
 

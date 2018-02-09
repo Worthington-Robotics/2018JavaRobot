@@ -23,7 +23,7 @@ public class DriveTo extends Command {
 
 	// Set Setpoint to length
 	protected void initialize() {
-		RobotMap.Drive.enableTo(RobotMap.ahrs.getYaw(), true);
+		RobotMap.drive.enableTo(RobotMap.ahrs.getYaw(), true);
 		driveTo.setSetpoint(length);
 		driveTo.enable();
 	}
@@ -32,7 +32,7 @@ public class DriveTo extends Command {
 	// Set coordinates for the robot to move to
 	protected void execute() {
 		toSet[0] = output.getValue();
-		RobotMap.Drive.setInput(toSet);
+		RobotMap.drive.setInput(toSet);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -42,7 +42,7 @@ public class DriveTo extends Command {
 
 	// Called once after isFinished returns true and disable driveTo
 	protected void end() {
-		RobotMap.Drive.enableTo(0, false);
+		RobotMap.drive.enableTo(0, false);
 		driveTo.disable();
 	}
 

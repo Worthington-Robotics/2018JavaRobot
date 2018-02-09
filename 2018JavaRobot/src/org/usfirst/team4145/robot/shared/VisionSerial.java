@@ -69,7 +69,7 @@ public class VisionSerial {
     public double getTargetAngle(double currentCenter) {
         double pixelOffset = currentCenter - PIXEL_TARGET;
         double angleOffset = pixelOffset / PIXEL_PER_DEGREE;
-        double gyroValue = RobotMap.Drive.getGyro() + angleOffset;
+        double gyroValue = RobotMap.drive.getGyro() + angleOffset;
         return gyroValue;
     }
 

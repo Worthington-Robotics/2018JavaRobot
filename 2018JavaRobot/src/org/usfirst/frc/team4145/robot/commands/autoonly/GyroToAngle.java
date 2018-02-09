@@ -1,7 +1,6 @@
 package org.usfirst.frc.team4145.robot.commands.autoonly;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team4145.robot.Robot;
 import org.usfirst.frc.team4145.robot.RobotMap;
 
 /**
@@ -19,7 +18,7 @@ public class GyroToAngle extends Command {
     }
 
     public void initialize(){
-        RobotMap.Drive.enableTo(target,true);
+        RobotMap.drive.enableTo(target,true);
     }
 
     public boolean isFinished(){
@@ -35,7 +34,7 @@ public class GyroToAngle extends Command {
     }
 
     public void end(){
-        RobotMap.Drive.enableTo(0,false); //disables gyro lock
+        RobotMap.drive.enableTo(0,false); //disables gyro lock
     }
 
     /**

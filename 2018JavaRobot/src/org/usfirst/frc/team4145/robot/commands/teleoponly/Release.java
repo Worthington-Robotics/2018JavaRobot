@@ -7,7 +7,7 @@ public class Release extends Command {
     private boolean isDone = false;
 
     public Release() {
-        requires(RobotMap.CubeManipulator);
+        requires(RobotMap.cubeManipulator);
     }
 
     @Override
@@ -17,7 +17,7 @@ public class Release extends Command {
     }
 
     public void initialize() {
-        RobotMap.CubeManipulator.fire();
+        RobotMap.cubeManipulator.fire();
         // starts motors y'all
     }
 
@@ -26,7 +26,7 @@ public class Release extends Command {
     }
 
     public void end() {
-        RobotMap.CubeManipulator.stall();
+        RobotMap.cubeManipulator.stall();
     }
 
     public void interrupted() {

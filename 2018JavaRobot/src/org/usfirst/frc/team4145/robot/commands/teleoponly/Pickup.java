@@ -11,11 +11,11 @@ public class Pickup extends Command{
 	private int TimeOut = 100;
 	
 	public Pickup(){
-		requires(RobotMap.CubeManipulator);
+		requires(RobotMap.cubeManipulator);
 	}
 
 	public void initialize(){
-		RobotMap.CubeManipulator.pickup();
+		RobotMap.cubeManipulator.pickup();
 		// starts motors
 	}
 	
@@ -31,7 +31,7 @@ public class Pickup extends Command{
 	}
 	
 	public void end(){
-		RobotMap.CubeManipulator.stall();
+		RobotMap.cubeManipulator.stall();
 	// Cole made me do this so
 		}
 	  

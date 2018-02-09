@@ -9,7 +9,7 @@ public class PickCube extends Command{
     private int count = 10;
 
     public PickCube() {
-        requires(RobotMap.CubeManipulator);
+        requires(RobotMap.cubeManipulator);
     }
 
     @Override
@@ -18,7 +18,7 @@ public class PickCube extends Command{
     }
 
     public void initialize() {
-        RobotMap.CubeManipulator.pickup();
+        RobotMap.cubeManipulator.pickup();
         // starts motors y'all
     }
 
@@ -27,7 +27,7 @@ public class PickCube extends Command{
     }
 
     public void end() {
-        RobotMap.CubeManipulator.stall();
+        RobotMap.cubeManipulator.stall();
     }
 
     public void interrupted() {

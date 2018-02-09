@@ -9,7 +9,7 @@ public class DropCube extends Command{
     private int count = 10;
 
     public DropCube() {
-        requires(RobotMap.CubeManipulator);
+        requires(RobotMap.cubeManipulator);
     }
 
     @Override
@@ -18,7 +18,7 @@ public class DropCube extends Command{
     }
 
     public void initialize() {
-        RobotMap.CubeManipulator.release();
+        RobotMap.cubeManipulator.release();
         // starts motors y'all
     }
 
@@ -27,7 +27,7 @@ public class DropCube extends Command{
     }
 
     public void end() {
-        RobotMap.CubeManipulator.stall();
+        RobotMap.cubeManipulator.stall();
     }
 
     public void interrupted() {

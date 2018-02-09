@@ -10,12 +10,12 @@ public class GyroLock extends Command {
 
     public GyroLock() {
         // Use requires() here to declare subsystem dependencies
-        //requires(RobotMap.Drive);
+        //requires(RobotMap.drive);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        RobotMap.Drive.enableTo(RobotMap.Drive.getGyro(), true);
+        RobotMap.drive.enableTo(RobotMap.drive.getGyro(), true);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -29,7 +29,7 @@ public class GyroLock extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-        RobotMap.Drive.enableTo(0, false);
+        RobotMap.drive.enableTo(0, false);
     }
 
     // Called when another command which requires one or more of the same

@@ -6,13 +6,13 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class LiftManipulation extends Command {
 	public LiftManipulation() {
-		requires(RobotMap.CubeManipulator);
+		requires(RobotMap.cubeManipulator);
 		
 	}
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		RobotMap.CubeManipulator.lift();
+		RobotMap.cubeManipulator.lift();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -31,7 +31,7 @@ public class LiftManipulation extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		RobotMap.CubeManipulator.dropStop();
+		RobotMap.cubeManipulator.dropStop();
 	}
 
 	// Called when another command which requires one or more of the same

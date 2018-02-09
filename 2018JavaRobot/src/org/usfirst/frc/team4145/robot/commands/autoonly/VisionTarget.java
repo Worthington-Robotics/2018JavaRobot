@@ -12,11 +12,11 @@ public class VisionTarget extends Command {
     }
 
     public void initialize() {
-        RobotMap.Drive.enableTo(calculatedGyroTarget, true);
+        RobotMap.drive.enableTo(calculatedGyroTarget, true);
     }
 
     public boolean isFinished() {
-        return RobotMap.Drive.isOnTarget();
+        return RobotMap.drive.isOnTarget();
     }
 
     public void execute() {
@@ -28,7 +28,7 @@ public class VisionTarget extends Command {
     }
 
     public void end() {
-        RobotMap.Drive.enableTo(0, false); //disables gyro lock
+        RobotMap.drive.enableTo(0, false); //disables gyro lock
     }
 
 }

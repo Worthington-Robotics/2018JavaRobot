@@ -16,40 +16,40 @@ public class CubeManipulation extends Subsystem {
 
 	@Override
 	public void initDefaultCommand() {
-		RobotMap.ClampL.set(0);
-		RobotMap.ClampR.set(0);
+		RobotMap.clampL.set(0);
+		RobotMap.clampR.set(0);
 	}
 
 	public void pickup() {
-		RobotMap.ClampL.set(pull);
-		RobotMap.ClampR.set(-pull);
+		RobotMap.clampL.set(pull);
+		RobotMap.clampR.set(-pull);
 
 	}
 
 	public void release() {
-		RobotMap.ClampL.set(-push);
-		RobotMap.ClampR.set(push);
+		RobotMap.clampL.set(-push);
+		RobotMap.clampR.set(push);
 	}
 
 	public void fire(){
-		RobotMap.ClampL.set(-shoot);
-		RobotMap.ClampR.set(shoot);
+		RobotMap.clampL.set(-shoot);
+		RobotMap.clampR.set(shoot);
 	}
 
 	public void stall() {
-		RobotMap.ClampL.set(0);
-		RobotMap.ClampR.set(0);
+		RobotMap.clampL.set(0);
+		RobotMap.clampR.set(0);
 	}
 
 	public void dropStop() {
-		RobotMap.Dropper.set(0);
+		RobotMap.dropper.set(0);
 	}
 
 	public void dropStart() {
-		RobotMap.Dropper.set(0.5);
+		RobotMap.dropper.set(0.5);
 	}
 
 	public void lift() {
-		RobotMap.Dropper.set(-0.5);
+		RobotMap.dropper.set(-0.5);
 	}
 }

@@ -14,7 +14,7 @@ public class DropForks extends Command{
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-        RobotMap.CubeManipulator.dropStart();
+        RobotMap.cubeManipulator.dropStart();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -33,7 +33,7 @@ public class DropForks extends Command{
     // Called once after isFinished returns true
     @Override
     protected void end() {
-        RobotMap.CubeManipulator.dropStop();
+        RobotMap.cubeManipulator.dropStop();
     }
 
     // Called when another command which requires one or more of the same

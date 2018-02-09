@@ -20,16 +20,16 @@ import org.usfirst.frc.team4145.robot.subsystems.*;
  * floating around.
  */
 public class RobotMap {
-    public static final String autoList[] = {"Auto1", "Auto2", "Auto3", "Auto4", "Auto5", "Auto6", "Auto7", "Auto8",
-            "Auto9", "Auto10", "Auto11", "Auto12", "DO NOTHING"}; // three different auto positions
+    
     // public variables
-    public static String GameData = null; // field alliance data about switch / scale
+
+
     // actuators
-    public static WPI_TalonSRX Drive1, Drive2, Drive3, Drive4; // need to use WPI_talonSRX for drivetrain use
+    public static WPI_TalonSRX driveMotor1, driveMotor2, driveMotor3, driveMotor4; // need to use WPI_talonSRX for drivetrain use
     public static MecanumDrive robotdrive; // meccanum drive object
     public static Encoder driveEncoder;
     public static Spark liftmotorL, liftmotorH, liftBotMotor;
-    public static Spark ClampL, ClampR, Dropper;
+    public static Spark clampL, clampR, dropper;
     public static Solenoid liftLock;
 
     // sensors
@@ -40,30 +40,30 @@ public class RobotMap {
 
     // subsystems public static
     public static ExampleSubsystem exampleSystem;
-    public static RobotDriveV2 Drive;
+    public static RobotDriveV2 drive;
     public static RobotVision vision;
     public static Lift lift;
-    public static Liftbot liftbot;
-    public static CubeManipulation CubeManipulator;
+    public static Liftbot liftBot;
+    public static CubeManipulation cubeManipulator;
 
     public static void init() {
         // all general objects instantated here
 
 
         // all Motor controller objects
-        Drive1 = new WPI_TalonSRX(1);
-        Drive2 = new WPI_TalonSRX(2);
-        Drive3 = new WPI_TalonSRX(3);
-        Drive4 = new WPI_TalonSRX(4);
-        robotdrive = new MecanumDrive(Drive1, Drive2, Drive3, Drive4); // create meccanum drive
+        driveMotor1 = new WPI_TalonSRX(1);
+        driveMotor2 = new WPI_TalonSRX(2);
+        driveMotor3 = new WPI_TalonSRX(3);
+        driveMotor4 = new WPI_TalonSRX(4);
+        robotdrive = new MecanumDrive(driveMotor1, driveMotor2, driveMotor3, driveMotor4); // create meccanum drive
         liftmotorH = new Spark(0);
         liftmotorL = new Spark(1);
-        ClampL = new Spark(2);
-        ClampR = new Spark(3);
-        Dropper = new Spark(4);
+        clampL = new Spark(2);
+        clampR = new Spark(3);
+        dropper = new Spark(4);
         liftBotMotor = new Spark(5);
 
-        //all solenoid objects here
+        // all solenoid objects here
         liftLock = new Solenoid(1);
 
         // all sensor objects here
@@ -78,13 +78,13 @@ public class RobotMap {
         botHighSw = new DigitalInput(8);
         botLowSw = new DigitalInput(9);
 
-        // create all subsystem objects
+        // all subsystem objects here
         exampleSystem = new ExampleSubsystem();
-        Drive = new RobotDriveV2();
+        drive = new RobotDriveV2();
         vision = new RobotVision();
-        liftbot = new Liftbot();
+        liftBot = new Liftbot();
         lift = new Lift();
-        CubeManipulator = new CubeManipulation();
+        cubeManipulator = new CubeManipulation();
 
     }
 }

@@ -6,7 +6,7 @@ import org.usfirst.frc.team4145.robot.RobotMap;
 public class BotUp extends Command {
 
 	public BotUp() {
-		requires(RobotMap.liftbot);
+		requires(RobotMap.liftBot);
 	}
 	
     public void initialize(){

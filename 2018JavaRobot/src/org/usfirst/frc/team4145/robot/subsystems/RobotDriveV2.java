@@ -16,28 +16,26 @@ import org.usfirst.team4145.robot.shared.CustomPIDSubsystem;
 public class RobotDriveV2 extends CustomPIDSubsystem {
 
     private PIDController gyroLock;
-    //private AccessiblePIDOutput output;
 
     private boolean enLock = false;
-    private double deadBandVal = 0.25;
-    private double xyPercentage = 0.75; // cut to xy output
+    private double deadBandVal = 0.15; //nominal deadband 0.15 percent of stick
+    private double xyPercentage = 0.75; // decrease xy output to percent of full Nominal: 0.75
     private double zPercentage = 0.50; // drivers prefer 80
     private double[] lastInputSet = {0, 0, 0};
     private boolean isReversed = false;
 
     //PID variables
-    private double Kp = 0.015;
-    private double Ki = 0.0;
+    private double Kp = 0.025; //stable at 0.025
+    private double Ki = 0.0; //dont generally use Integral as it makes things unstable over time
     private double Kd = 0.0; //was 0.025
     private double absTol = 0;
     private double pidOutput = 0;
-    private double pidLimit = 0.6;
+    private double pidLimit = 0.6; //limits pid output Nominal: 0.6
 
     public RobotDriveV2() {
-        //output = new AccessiblePIDOutput();
         gyroLock = new PIDController(Kp, Ki, Kd, this, this::pidWrite);
         gyroLock.setAbsoluteTolerance(absTol);
-        gyroLock.setOutputRange(-1, 1);
+        gyroLock.setOutputRange(-1, pidLimit);
         gyroLock.setInputRange(0,360);
         gyroLock.setContinuous();
 
@@ -69,14 +67,9 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
         SmartDashboard.putNumberArray("compensated stick values", lastInputSet);
         SmartDashboard.putNumber("Gyro Target", gyroLock.getSetpoint());
         SmartDashboard.putNumber("Gyro Angle", getGyro());
-        //SmartDashboard.putNumber("Pid error", gyroLock.getError());
-        //SmartDashboard.putNumber("PID Output variable", pidOutput);
-        //SmartDashboard.putNumber("Pid output.get", gyroLock.get());
-        //SmartDashboard.putBoolean("Pid IS enabled", gyroLock.isEnabled());
         if (enLock) {
             // Periodically updates while gyro locked
-
-            setCartesianDrive(lastInputSet[0]*xyPercentage, lastInputSet[1]*xyPercentage, pidOutput*pidLimit);
+            setCartesianDrive(lastInputSet[0]*xyPercentage, lastInputSet[1]*xyPercentage, pidOutput);
 
         } else {
             // periodically updates drive
@@ -84,6 +77,12 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
             setTarget(getGyro()); // Safety feature in case PID gets enabled
         }
     }
+
+    /**
+     * Enables gyro-lock to a certain setpoint -- used for auto
+     * @param rot - rotation angle target
+     * @param en - whether to enable or disable the lock
+     */
 
     public void enableTo(double rot, boolean en) {
         this.setTarget(rot);
@@ -94,12 +93,23 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
         lastInputSet = inputvals;
     }
 
+    /**
+     * method for activating the axial reverse that the drivers use
+     * it simply tells the periodic method to multipy x and y by -1
+     * @param isReversed whether or not is in a reversed state
+     */
+
     public void flipRefrence(boolean isReversed) {
         this.isReversed = isReversed;
     }
 
+    /**
+     * method for getting current gyro heading
+     * @return current gyro position (0-359.99999)
+     */
+
     public double getGyro() {
-        return ((RobotMap.ahrs.getAngle()  + 360) % 360);
+        return ((RobotMap.ahrs.getAngle()  + 360) % 360); //add 360 to make all positive then mod by 360 to get remainder
     }
 
     public void setPid(double p, double i, double d) {

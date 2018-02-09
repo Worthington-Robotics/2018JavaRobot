@@ -50,18 +50,20 @@ public class RobotMap {
         // all general objects instantated here
 
 
-        // all actuator objects here
+        // all Motor controller objects
         Drive1 = new WPI_TalonSRX(1);
         Drive2 = new WPI_TalonSRX(2);
         Drive3 = new WPI_TalonSRX(3);
         Drive4 = new WPI_TalonSRX(4);
         robotdrive = new MecanumDrive(Drive1, Drive2, Drive3, Drive4); // create meccanum drive
-        liftmotorL = new Spark(1);
         liftmotorH = new Spark(0);
-        liftBotMotor = new Spark(5);
+        liftmotorL = new Spark(1);
         ClampL = new Spark(2);
         ClampR = new Spark(3);
         Dropper = new Spark(4);
+        liftBotMotor = new Spark(5);
+
+        //all solenoid objects here
         liftLock = new Solenoid(1);
 
         // all sensor objects here

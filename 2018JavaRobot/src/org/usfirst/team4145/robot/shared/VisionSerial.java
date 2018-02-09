@@ -21,7 +21,9 @@ public class VisionSerial {
 
 	public VisionSerial(int baudRate) {
 		serialPort = new SerialPort(baudRate, Port.kMXP);
-		serialPort.setTimeout(0.5);
+		serialPort.reset();
+		serialPort.setTimeout(3);
+		serialPort.flush();
 	}
 
 	public void sendOn() {
@@ -38,7 +40,11 @@ public class VisionSerial {
 
 	public void updateVisionCoordinates() {
 		// Read from Pi/Jetson over serial
-		centerString = serialPort.readString(6);
+		try {
+			centerString = serialPort.readString(6);
+		} catch(Exception e){
+			centerString = "-2";
+		}
 
 		// Reset centerCoordinate
 		centerCoordinate = 0.0;
@@ -68,6 +74,10 @@ public class VisionSerial {
 		double angleOffset = pixelOffset / PIXEL_PER_DEGREE;
 		double gyroValue = (RobotMap.ahrs.getYaw() + angleOffset + 180) % 360;
 		return gyroValue;
+	}
+
+	public void flush(){
+		serialPort.flush();
 	}
 
 }

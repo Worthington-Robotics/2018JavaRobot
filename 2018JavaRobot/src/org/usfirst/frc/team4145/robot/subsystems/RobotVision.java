@@ -39,9 +39,13 @@ public class RobotVision extends Subsystem {
     public void periodic() {
         if (serialReadThread == null || !serialReadThread.isAlive()) {
             serialReadThread = new Thread(runnable);
-            serialReadThread.setDaemon(false);
-            //serialReadThread.start();
+            serialReadThread.setDaemon(true);
+            serialReadThread.start();
         }
+    }
+
+    public void flush(){
+        vision.flush();
     }
 
 }

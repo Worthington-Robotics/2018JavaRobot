@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.team4145.robot.shared.VisionSerial;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -44,6 +45,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
+		SmartDashboard.putStringArray("Auto Selector", AutoSelector.buildArray()); // publishes the auto list to the dashboard "Auto Selector"
+		RobotMap.vision.flush();
 
 	}
 

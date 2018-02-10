@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class Postion1Scale extends CommandGroup {
     public Postion1Scale(int autonumber){
-    	if(autonumber == 1){ //If it is the 1st auto assignment
+    	if(autonumber == 0){ //If it is the 1st auto assignment
     		addParallel(new DriveTo(19*299.65)); //drive 299.65 inches to Scale
     		addParallel(new GyroToAngle(RobotMap.drive.getGyro())); //Actually drive straight forward
     		addParallel(new DropForks()); //what it says on the tin
@@ -29,7 +29,7 @@ public class Postion1Scale extends CommandGroup {
     		
     		//addSequential(new DriveTo(19*103.65)); //drive 103.65 inches to Switch
     	}
-    	if(autonumber == 3){
+    	if(autonumber == 1){
     		addParallel(new DriveTo(19*228.735)); //drive 228.735 inches
     		addParallel(new GyroToAngle(RobotMap.drive.getGyro())); //Actually drive straight forward
     		addParallel(new DropForks()); //what it says on the tin
@@ -39,7 +39,7 @@ public class Postion1Scale extends CommandGroup {
     		
     		addParallel(new DriveTo(19*190)); //drive 190 inches
     		
-    		addsequential(new GyroToAngle(RobotMap.drive.getGyro()-81.5)); //Turn 81.5 degrees the other direction
+    		addsequential(new GyroToAngle(RobotMap.drive.getGyro()-90)); //Turn 90 degrees the other direction
     		addParallel(new DriveTo(19*70.915)); //Drive 70.915 inches
     		addParallel(new HighLiftUp()); //Lift up top bit
     	}

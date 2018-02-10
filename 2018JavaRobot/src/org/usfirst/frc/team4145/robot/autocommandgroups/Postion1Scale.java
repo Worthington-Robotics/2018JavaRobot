@@ -2,6 +2,7 @@ package org.usfirst.frc.team4145.robot.autocommandgroups;
 
 import org.usfirst.frc.team4145.robot.RobotMap;
 import org.usfirst.frc.team4145.robot.commands.autoonly.DriveTo;
+import org.usfirst.frc.team4145.robot.commands.autoonly.DropCube;
 import org.usfirst.frc.team4145.robot.commands.autoonly.DropForks;
 import org.usfirst.frc.team4145.robot.commands.autoonly.GyroToAngle;
 import org.usfirst.frc.team4145.robot.commands.autoonly.HighLiftUp;
@@ -12,25 +13,33 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Postion1Scale extends CommandGroup {
     public Postion1Scale(int autonumber){
     	if(autonumber == 1){ //If it is the 1st auto assignment
-    		addParallel(new DriveTo(19*299.65)); //drive 299.65 inches
+    		addParallel(new DriveTo(19*299.65)); //drive 299.65 inches to Scale
     		addParallel(new GyroToAngle(RobotMap.drive.getGyro())); //Actually drive straight forward
     		addParallel(new DropForks()); //what it says on the tin
-    		addParallel(new LiftToPosition()); //Lift Stage 1 (the lower bit)
+    		addParallel(new LiftToPosition(1000)); //Lift Stage 1 (the lower bit), Placeholder number
     		
-    		addsequntial(new GyroToAngle(RobotMap.drive.getGyro()+90)); //Turn 90 degrees
-    		addParallel(new HighLiftUp(1000)); //Lift up top bit
+    		addSequential(new GyroToAngle(RobotMap.drive.getGyro()+90)); //Turn 90 degrees
+    		addParallel(new HighLiftUp(1000)); //Lift up top bit, Placeholder number
+    		
+    		addSequential(new DropCube); //off loads cube
+    		
+    		addSequential(HighLiftDown(1000)); //Lowers high bit, Placeholder number
+    		addParallel(new LiftToPosition(0)); //Lowers low bit
+    		addParallel(newGyroToAngle(RobotMap.drive.getGyro()+90)); //Finishes turn around
+    		
+    		addSequential(new DriveTo(19*103.65)); //drive 103.65 inches to Switch
     	}
     	if(autonumber == 3){
     		addParallel(new DriveTo(19*60)); //drive 60 inches
     		addParallel(new GyroToAngle(RobotMap.drive.getGyro())); //Actually drive straight forward
     		
-    		addsequntial(new GyroToAngle(RobotMap.drive.getGyro()+90)); //Turn 90 degrees
+    		addsequential(new GyroToAngle(RobotMap.drive.getGyro()+90)); //Turn 90 degrees
     		addParallel(new DropForks()); //what it says on the tin
-    		addParallel(new LiftToPosition()); //Lift Stage 1 (the lower bit)
+    		addParallel(new LiftToPosition(1000)); //Lift Stage 1 (the lower bit), Placeholder number
     		
-    		addsequntial(new GyroToAngle(RobotMap.drive.getGyro()-81.5)); //Turn 81.5 degrees the other direction
+    		addsequential(new GyroToAngle(RobotMap.drive.getGyro()-81.5)); //Turn 81.5 degrees the other direction
     		addParallel(new DriveTo(19*220)); //Drive 220 inches
-    		addParallel(new HighLiftUp(1000)); //Lift up top bit
+    		addParallel(new HighLiftUp(1000)); //Lift up top bit, Placeholder number
     	}
     }
 }

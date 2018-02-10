@@ -17,7 +17,7 @@ public class Postion1Scale extends CommandGroup {
     		addParallel(new DropForks()); //what it says on the tin
     		addParallel(new LiftToPosition()); //Lift Stage 1 (the lower bit)
     		
-    		addsequntial(new GyroToAngle(RobotMap.drive.getGyro()+110)); //Turn 110 degrees
+    		addsequntial(new GyroToAngle(RobotMap.drive.getGyro()+70)); //Turn 110 degrees
     		addParallel(new DriveTo(19*12)); //Drive 12 inches
     		addParallel(new HighLiftUp(1000)); //Lift up top bit
     	}

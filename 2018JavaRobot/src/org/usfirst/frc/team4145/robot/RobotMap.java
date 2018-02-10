@@ -35,7 +35,7 @@ public class RobotMap {
     // sensors
     public static AHRS ahrs; // AHRS system on navx
     public static Encoder liftEnc;
-    public static DigitalInput switchLBase, switchLTop, switchHBase, switchHTop;
+    public static DigitalInput switchHBase, switchHTop;
     public static DigitalInput botHighSw, botLowSw;
 
     // subsystems public static
@@ -71,8 +71,6 @@ public class RobotMap {
         ahrs.reset();
         driveEncoder = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
         liftEnc = new Encoder(2, 3, true, Encoder.EncodingType.k4X);
-        switchLBase = new DigitalInput(4);
-        switchLTop = new DigitalInput(5);
         switchHBase = new DigitalInput(6);
         switchHTop = new DigitalInput(7);
         botHighSw = new DigitalInput(8);

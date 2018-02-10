@@ -12,13 +12,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Postion1Scale extends CommandGroup {
     public Postion1Scale(int autonumber){
     	if(autonumber == 1){ //If it is the 1st auto assignment
-    		addParallel(new DriveTo(19*248)); //drive 248 inches
+    		addParallel(new DriveTo(19*299.65)); //drive 299.65 inches
     		addParallel(new GyroToAngle(RobotMap.drive.getGyro())); //Actually drive straight forward
     		addParallel(new DropForks()); //what it says on the tin
     		addParallel(new LiftToPosition()); //Lift Stage 1 (the lower bit)
     		
-    		addsequntial(new GyroToAngle(RobotMap.drive.getGyro()+70)); //Turn 110 degrees
-    		addParallel(new DriveTo(19*12)); //Drive 12 inches
+    		addsequntial(new GyroToAngle(RobotMap.drive.getGyro()+90)); //Turn 90 degrees
     		addParallel(new HighLiftUp(1000)); //Lift up top bit
     	}
     	if(autonumber == 3){

@@ -37,14 +37,15 @@ public class FongSwitch extends CommandGroup {
 			addParallel(new LiftToPosition(500));
 			
 			//Start going forward towards switch
-			addsequential(new GyroToAngle(RobotMap.drive.getGyro() + 47));
-			addsequential(new DriveTo(19 * 70));
-			addParallel(new GyroToAngle(RobotMap.drive.getGyro()))
+			addSequential(new GyroToAngle(RobotMap.drive.getGyro() + 47));
+			addSequential(new DriveTo(19 * 70));
+			addParallel(new GyroToAngle(RobotMap.drive.getGyro()));
 			
 			//Go towards switch and drop cube
-			addsequential(new GyroToAngle(RobotMap.drive.getGyro()))
-			addsequential(new VisionTarget);
-			addsequential(new DriveTo(19 * 36));
+			addsequential(new GyroToAngle(RobotMap.drive.getGyro() - 47));
+			addSequential(new VisionTarget());
+			addSequential(new DriveTo(19 * 36));
+			addParallel(new GyroToAngle(RobotMap.drive.getGyro()));
 			addsequential(new DropCube());
 		}
 		if (autonumber == 1) {
@@ -52,19 +53,19 @@ public class FongSwitch extends CommandGroup {
 			addParallel(new DriveTo(19 * 50));
 			addParallel(new DropForks());
 			addParallel(new LiftToPosition(500));
-			addParallel(new GyroToAngle(RobotMap.drive.getGyro());
+			addParallel(new GyroToAngle(RobotMap.drive.getGyro()));
 			
 			//Turn Right and go forward
-			addsequential(new GyroToAngle(RobotMap.drive.getGyro() + 90));
-			addsequential(new DriveTo(19 * 70));
-			addParallel(new GyroToAngle(RobotMap.drive.getGyro())
+			addSequential(new GyroToAngle(RobotMap.drive.getGyro() - 90));
+			addSequential(new DriveTo(19 * 70));
+			addParallel(new GyroToAngle(RobotMap.drive.getGyro()));
 					
 			//Go towards switch and	drop cube
-			addsequential (new GyroToAngle(RobotMap.drive.getGyro()))
-			addsequential(new VisionTarget());
-			addsequential(new DriveTo(19 * 70));
+			addSequential (new GyroToAngle(RobotMap.drive.getGyro() + 90));
+			addSequential(new VisionTarget());
+			addSequential(new DriveTo(19 * 70));
 			addParallel(new GyroToAngle(RobotMap.drive.getGyro());
-			addsequential(new DropCube());
+			addSequential(new DropCube());
 		}
 	}
 	

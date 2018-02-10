@@ -19,27 +19,29 @@ public class Postion1Scale extends CommandGroup {
     		addParallel(new LiftToPosition(1000)); //Lift Stage 1 (the lower bit), Placeholder number
     		
     		addSequential(new GyroToAngle(RobotMap.drive.getGyro()+90)); //Turn 90 degrees
-    		addParallel(new HighLiftUp(1000)); //Lift up top bit, Placeholder number
+    		addParallel(new HighLiftUp()); //Lift up top bit
     		
     		addSequential(new DropCube); //off loads cube
     		
-    		addSequential(HighLiftDown(1000)); //Lowers high bit, Placeholder number
+    		addSequential(HighLiftDown()); //Lowers high bit
     		addParallel(new LiftToPosition(0)); //Lowers low bit
     		addParallel(newGyroToAngle(RobotMap.drive.getGyro()+90)); //Finishes turn around
     		
-    		addSequential(new DriveTo(19*103.65)); //drive 103.65 inches to Switch
+    		//addSequential(new DriveTo(19*103.65)); //drive 103.65 inches to Switch
     	}
     	if(autonumber == 3){
-    		addParallel(new DriveTo(19*60)); //drive 60 inches
+    		addParallel(new DriveTo(19*228.735)); //drive 228.735 inches
     		addParallel(new GyroToAngle(RobotMap.drive.getGyro())); //Actually drive straight forward
-    		
-    		addsequential(new GyroToAngle(RobotMap.drive.getGyro()+90)); //Turn 90 degrees
     		addParallel(new DropForks()); //what it says on the tin
     		addParallel(new LiftToPosition(1000)); //Lift Stage 1 (the lower bit), Placeholder number
     		
+    		addsequential(new GyroToAngle(RobotMap.drive.getGyro()+90)); //Turn 90 degrees
+    		
+    		addParallel(new DriveTo(19*190)); //drive 190 inches
+    		
     		addsequential(new GyroToAngle(RobotMap.drive.getGyro()-81.5)); //Turn 81.5 degrees the other direction
-    		addParallel(new DriveTo(19*220)); //Drive 220 inches
-    		addParallel(new HighLiftUp(1000)); //Lift up top bit, Placeholder number
+    		addParallel(new DriveTo(19*70.915)); //Drive 70.915 inches
+    		addParallel(new HighLiftUp()); //Lift up top bit
     	}
     }
 }

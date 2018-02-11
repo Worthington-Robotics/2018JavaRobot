@@ -31,6 +31,7 @@ public class DriveTo extends Command implements PIDOutput, PIDSource {
 	// Set Setpoint to length
 	protected void initialize() {
 		RobotMap.drive.enableTo(RobotMap.drive.getGyro(), true);
+		RobotMap.driveEncoder.reset();
 		driveTo.setSetpoint(length);
 		driveTo.setEnabled(true);
 	}
@@ -65,6 +66,7 @@ public class DriveTo extends Command implements PIDOutput, PIDSource {
 	// Called once after isFinished returns true and disable driveTo
 	protected void end() {
 		//RobotMap.drive.enableTo(0, false);
+		RobotMap.driveEncoder.reset();
 		driveTo.disable();
 	}
 

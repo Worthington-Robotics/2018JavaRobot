@@ -14,10 +14,12 @@ public class GyroToAngle extends Command {
 
     private double target;
     private int cycles = 0;
-    private int multiplier = 2;
+    private int multiplier = 3;
     private int timeout;
 
     public GyroToAngle(double addtlRot) {
+    	SmartDashboard.putNumber("turnTo adjustment", addtlRot);
+    	SmartDashboard.putNumber("TurnTo gyro at loadTime", RobotMap.drive.getGyro());
         target = (RobotMap.drive.getGyro() + addtlRot) % 360;
         timeout = (int)Math.abs(target) * multiplier;
 
@@ -25,7 +27,8 @@ public class GyroToAngle extends Command {
 
     public void initialize() {
         RobotMap.drive.enableTo(target, true);
-        System.out.println("Sucessfully set gyro Target to:" + target);
+        SmartDashboard.putNumber("TurnTo gyro", RobotMap.drive.getGyro());
+        SmartDashboard.putNumber("new turnTo angle at runtime", target);
     }
 
     public boolean isFinished() {

@@ -48,6 +48,7 @@ public class Robot extends TimedRobot {
 	public void disabledInit() {
 		SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray()); // publishes the auto list to the dashboard "Auto Selector"
 		RobotMap.vision.flush();
+		RobotMap.drive.enableTo(0, false);
 
 	}
 

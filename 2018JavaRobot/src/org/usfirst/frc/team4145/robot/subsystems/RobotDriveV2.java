@@ -28,19 +28,19 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
     private double deadBandVal = 0.15; //nominal deadband 0.15 percent of stick
     private double xyPercentage = 0.75; // decrease xy output to percent of full Nominal: 0.75
     private double zPercentage = 0.50; // z percentage of full stick deflection Nominal: 80
-    private double frontRamp = 2.0; //ramp time on front motors Nominal: 2.0
-    private double rearRamp = 2.0; //ramp time on rear motors Nominal: 2.0
+    private double frontRamp = 0.0; //ramp time on front motors Nominal: 0.0
+    private double rearRamp = 0.0; //ramp time on rear motors Nominal: 0.0
 
     //PID variables
-    private double Kp = 0.020; //stable at 0.020
+    private double Kp = 0.033; //stable at 0.020
     private double Ki = 0.0; //dont generally use Integral as it makes things unstable over time
-    private double Kd = 0.075; //was 0.025
+    private double Kd = 0.0013; //was 0.025
     private double absTol = 0.5; //tolerance on PID control Nominal: 0.5
     private double pidLimit = 0.6; //limits pid output Nominal: 0.6
 
 
     public RobotDriveV2() {
-        gyroLock = new PIDController(Kp, Ki, Kd, this, this::pidWrite);
+        gyroLock = new PIDController(Kp, Ki, Kd, this, this::pidWrite, 20);
         gyroLock.setAbsoluteTolerance(absTol);
         gyroLock.setOutputRange(-1, 1);
         gyroLock.setInputRange(0, 360);

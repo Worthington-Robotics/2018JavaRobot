@@ -28,14 +28,14 @@ public class RobotMap {
     public static WPI_TalonSRX driveMotor1, driveMotor2, driveMotor3, driveMotor4; // need to use WPI_talonSRX for drivetrain use
     public static MecanumDrive robotdrive; // meccanum drive object
     public static Encoder driveEncoder;
-    public static Spark liftmotorL, liftmotorH, liftBotMotor;
+    public static Spark liftMotorL, liftMotorH, liftBotMotor;
     public static Spark clampL, clampR, dropper;
     public static Solenoid liftLock;
 
     // sensors
     public static AHRS ahrs; // AHRS system on navx
     public static Encoder liftEnc;
-    public static DigitalInput switchHBase, switchHTop;
+    public static DigitalInput switchLBase, switchLTop, switchHBase, switchHTop;
     public static DigitalInput botHighSw, botLowSw;
 
     // subsystems public static
@@ -56,8 +56,8 @@ public class RobotMap {
         driveMotor3 = new WPI_TalonSRX(3);
         driveMotor4 = new WPI_TalonSRX(4);
         robotdrive = new MecanumDrive(driveMotor1, driveMotor2, driveMotor3, driveMotor4); // create meccanum drive
-        liftmotorH = new Spark(0);
-        liftmotorL = new Spark(1);
+        liftMotorH = new Spark(0);
+        liftMotorL = new Spark(1);
         clampL = new Spark(2);
         clampR = new Spark(3);
         dropper = new Spark(4);
@@ -71,6 +71,8 @@ public class RobotMap {
         ahrs.reset();
         driveEncoder = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
         liftEnc = new Encoder(2, 3, true, Encoder.EncodingType.k4X);
+        switchLTop = new DigitalInput(4);
+        switchLBase = new DigitalInput(5);
         switchHBase = new DigitalInput(6);
         switchHTop = new DigitalInput(7);
         botHighSw = new DigitalInput(8);

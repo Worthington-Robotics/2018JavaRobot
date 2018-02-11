@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team4145.robot.autocommandgroups.FongSwitch;
 import org.usfirst.team4145.robot.shared.VisionSerial;
 
 /**
@@ -69,6 +70,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		RobotMap.ahrs.reset();
+		RobotMap.driveEncoder.reset();
 
 		//pulls auto selector from labview DB
 		String autoSelected = SmartDashboard.getString("Auto Selector", AutoSelector.buildArray()[AutoSelector.buildArray().length-1]);
@@ -77,9 +79,11 @@ public class Robot extends TimedRobot {
 		String GameData = DriverStation.getInstance().getGameSpecificMessage();
 		
 		//choose auto command based on lists
-		autonomousCommand = AutoSelector.autoSelect(GameData, autoSelected);
+		//autonomousCommand = AutoSelector.autoSelect(GameData, autoSelected);
+		autonomousCommand = new FongSwitch(0);
 		
 		// schedule the autonomous command checking to make sure not null
+		SmartDashboard.putString("auto command", "FongSwitch");
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
 		}

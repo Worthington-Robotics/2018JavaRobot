@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4145.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -15,30 +16,37 @@ import org.usfirst.team4145.robot.shared.CustomPIDSubsystem;
 
 public class RobotDriveV2 extends CustomPIDSubsystem {
 
+    //used internally for data
     private PIDController gyroLock;
-
+    private double pidOutput = 0; //DO NOT MODIFY
     private boolean enLock = false;
     private boolean isReversed = false;
-    private double deadBandVal = 0.15; //nominal deadband 0.15 percent of stick
-    private double xyPercentage = 0.75; // decrease xy output to percent of full Nominal: 0.75
-    private double zPercentage = 0.50; // drivers prefer 80
     private double[] lastInputSet = {0, 0, 0}; //last input set from joystick update
 
+    //general use variables
+    private boolean brakeMode = true; //whether to disable or enable brake mode Nominal: true
+    private double deadBandVal = 0.15; //nominal deadband 0.15 percent of stick
+    private double xyPercentage = 0.75; // decrease xy output to percent of full Nominal: 0.75
+    private double zPercentage = 0.50; // z percentage of full stick deflection Nominal: 80
+    private double frontRamp = 2.0; //ramp time on front motors Nominal: 2.0
+    private double rearRamp = 2.0; //ramp time on rear motors Nominal: 2.0
+
     //PID variables
-    private double Kp = 0.025; //stable at 0.025
+    private double Kp = 0.020; //stable at 0.020
     private double Ki = 0.0; //dont generally use Integral as it makes things unstable over time
-    private double Kd = 0.0; //was 0.025
+    private double Kd = 0.075; //was 0.025
     private double absTol = 0.5; //tolerance on PID control Nominal: 0.5
     private double pidLimit = 0.6; //limits pid output Nominal: 0.6
-    private double pidOutput = 0; //DO NOT MODIFY
+
 
     public RobotDriveV2() {
         gyroLock = new PIDController(Kp, Ki, Kd, this, this::pidWrite);
         gyroLock.setAbsoluteTolerance(absTol);
-        gyroLock.setOutputRange(-1, pidLimit);
+        gyroLock.setOutputRange(-1, 1);
         gyroLock.setInputRange(0, 360);
         gyroLock.setContinuous();
-
+        setBrakeMode(brakeMode);
+        setRamp(frontRamp, rearRamp);
     }
 
     @Override
@@ -67,7 +75,7 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
         SmartDashboard.putNumber("Gyro Angle", getGyro());
         if (enLock) {
             // Periodically updates while gyro locked
-            setCartesianDrive(lastInputSet[0], lastInputSet[1], pidOutput);
+            setCartesianDrive(lastInputSet[0], lastInputSet[1], pidOutput * pidLimit);
 
         } else {
             // periodically updates drive
@@ -108,7 +116,7 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
      * @return current gyro position (0-359.99999)
      */
     public double getGyro() {
-        return ((RobotMap.ahrs.getAngle() + 360) % 360); //add 360 to make all positive then mod by 360 to get remainder
+        return ((RobotMap.ahrs.getYaw() + 360) % 360); //add 360 to make all positive then mod by 360 to get remainder
     }
 
     /**
@@ -140,6 +148,25 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
         return gyroLock.onTarget();
     }
 
+    public void setRamp(double front, double rear) {
+        RobotMap.driveMotor1.configOpenloopRamp(front, 10);
+        RobotMap.driveMotor2.configOpenloopRamp(rear, 10);
+        RobotMap.driveMotor3.configOpenloopRamp(front, 10);
+        RobotMap.driveMotor4.configOpenloopRamp(rear, 10);
+    }
+
+    public void setBrakeMode(boolean brakeMode) {
+        if (brakeMode) {
+            RobotMap.driveMotor1.setNeutralMode(NeutralMode.Brake);
+            RobotMap.driveMotor2.setNeutralMode(NeutralMode.Brake);
+            RobotMap.driveMotor3.setNeutralMode(NeutralMode.Brake);
+            RobotMap.driveMotor4.setNeutralMode(NeutralMode.Brake);
+        }
+        RobotMap.driveMotor1.setNeutralMode(NeutralMode.Coast);
+        RobotMap.driveMotor2.setNeutralMode(NeutralMode.Coast);
+        RobotMap.driveMotor3.setNeutralMode(NeutralMode.Coast);
+        RobotMap.driveMotor4.setNeutralMode(NeutralMode.Coast);
+    }
 
     //private methods here
     private void setCartesianDrive(double x, double y, double z) {

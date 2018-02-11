@@ -1,12 +1,14 @@
 package org.usfirst.frc.team4145.robot.commands.autoonly;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc.team4145.robot.RobotMap;
 
 public class DropForks extends Command{
 
     private int cycles = 0;
-    private int complete = 10;
+    private int complete = 110;
 
     public DropForks(){
 
@@ -20,7 +22,7 @@ public class DropForks extends Command{
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        cycles++;
+        SmartDashboard.putNumber("current cycle",cycles++);
     }
 
     // Make this return true when this Command no longer needs to run execute()

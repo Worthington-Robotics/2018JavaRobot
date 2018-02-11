@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4145.robot.subsystems;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.team4145.robot.shared.VisionSerial;
 
@@ -16,6 +17,7 @@ public class RobotVision extends Subsystem {
     private int baudRate = 115200; //serial baudrate Nominal: 115200
 
     public RobotVision() {
+        CameraServer.getInstance().startAutomaticCapture();// starts driver vision camera
         vision = new VisionSerial(baudRate);
         runnable = () -> { //ooh look at the shiny lambda (:
             vision.updateVisionCoordinates();

@@ -73,6 +73,7 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
         SmartDashboard.putNumberArray("compensated stick values", lastInputSet);
         SmartDashboard.putNumber("Gyro Target", gyroLock.getSetpoint());
         SmartDashboard.putNumber("Gyro Angle", getGyro());
+        SmartDashboard.putBoolean("Gyro lock enabled",enLock);
         if (enLock) {
             // Periodically updates while gyro locked
             setCartesianDrive(lastInputSet[0], lastInputSet[1], pidOutput * pidLimit);
@@ -117,6 +118,10 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
      */
     public double getGyro() {
         return ((RobotMap.ahrs.getYaw() + 360) % 360); //add 360 to make all positive then mod by 360 to get remainder
+    }
+
+    public double getAHRS(){
+        return RobotMap.ahrs.getYaw();
     }
 
     /**

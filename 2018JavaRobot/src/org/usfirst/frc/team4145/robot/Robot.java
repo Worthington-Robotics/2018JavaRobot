@@ -83,7 +83,6 @@ public class Robot extends TimedRobot {
 		autonomousCommand = new FongSwitch(0);
 		
 		// schedule the autonomous command checking to make sure not null
-		SmartDashboard.putString("auto command", "FongSwitch");
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
 		}
@@ -104,6 +103,7 @@ public class Robot extends TimedRobot {
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}
+		RobotMap.drive.enableTo(0, false);
 	}
 
 	/**

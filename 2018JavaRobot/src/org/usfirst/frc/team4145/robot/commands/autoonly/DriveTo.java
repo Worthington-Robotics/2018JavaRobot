@@ -64,7 +64,7 @@ public class DriveTo extends Command implements PIDOutput, PIDSource {
 
 	// Called once after isFinished returns true and disable driveTo
 	protected void end() {
-		RobotMap.drive.enableTo(0, false);
+		//RobotMap.drive.enableTo(0, false);
 		driveTo.disable();
 	}
 

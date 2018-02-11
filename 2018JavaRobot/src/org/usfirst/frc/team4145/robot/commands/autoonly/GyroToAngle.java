@@ -10,39 +10,29 @@ import org.usfirst.frc.team4145.robot.RobotMap;
 
 public class GyroToAngle extends Command {
 
-    private boolean isDoneFlag = false;
     private double target;
 
-    public GyroToAngle(double target){
+    public GyroToAngle(double target) {
         this.target = target;
     }
 
-    public void initialize(){
-        RobotMap.drive.enableTo(target,true);
+    public void initialize() {
+        RobotMap.drive.enableTo(target, true);
     }
 
-    public boolean isFinished(){
-        return isDoneFlag;
+    public boolean isFinished() {
+        return true;
     }
 
-    public void execute(){
+    public void execute() {
         //do nothing the drivetrain automatically handles this
     }
 
-    public void interrupted(){
+    public void interrupted() {
         end();
     }
 
-    public void end(){
-        RobotMap.drive.enableTo(0,false); //disables gyro lock
-    }
+    public void end() {
 
-    /**
-     * sets whether or not the lock is done executing
-     * @param flag true to end the lock for a new one
-     */
-    public void setDoneFlag(boolean flag){
-        isDoneFlag = flag;
     }
-
 }

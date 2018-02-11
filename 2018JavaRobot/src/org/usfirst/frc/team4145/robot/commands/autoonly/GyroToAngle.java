@@ -13,19 +13,21 @@ import org.usfirst.frc.team4145.robot.RobotMap;
 public class GyroToAngle extends Command {
 
     private double target;
+    private double addtlRot;
     private int cycles = 0;
     private int multiplier = 3;
     private int timeout;
 
     public GyroToAngle(double addtlRot) {
+    	this.addtlRot = addtlRot;
     	SmartDashboard.putNumber("turnTo adjustment", addtlRot);
     	SmartDashboard.putNumber("TurnTo gyro at loadTime", RobotMap.drive.getGyro());
-        target = (RobotMap.drive.getGyro() + addtlRot) % 360;
         timeout = (int)Math.abs(target) * multiplier;
 
     }
 
     public void initialize() {
+        target = (RobotMap.drive.getGyro() + addtlRot) % 360;
         RobotMap.drive.enableTo(target, true);
         SmartDashboard.putNumber("TurnTo gyro", RobotMap.drive.getGyro());
         SmartDashboard.putNumber("new turnTo angle at runtime", target);

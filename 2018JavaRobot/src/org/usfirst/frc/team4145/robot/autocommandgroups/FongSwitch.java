@@ -11,7 +11,7 @@ public class FongSwitch extends CommandGroup {
     public FongSwitch(int autonumber) {
         if (autonumber == 0) {
             //Go forward and do fork stuff
-            addParallel(new DriveTo(19 * 24), 3);
+            addParallel(new DriveTo(19 * 24), 5);
             addSequential(new DropForks());
             //addParallel(new LiftToPosition(500));
 

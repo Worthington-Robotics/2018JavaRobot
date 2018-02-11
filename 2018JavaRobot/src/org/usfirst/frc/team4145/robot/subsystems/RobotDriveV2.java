@@ -32,15 +32,15 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
     private double rearRamp = 0.0; //ramp time on rear motors Nominal: 0.0
 
     //PID variables
-    private double Kp = 0.033; //stable at 0.020
+    private double Kp = 0.033; //stable at 0.033
     private double Ki = 0.0; //dont generally use Integral as it makes things unstable over time
-    private double Kd = 0.0013; //was 0.025
+    private double Kd = 0.055; //stable at 0.045
     private double absTol = 0.5; //tolerance on PID control Nominal: 0.5
-    private double pidLimit = 0.6; //limits pid output Nominal: 0.6
+    private double pidLimit = 1.0; //limits pid output Nominal: 0.6
 
 
     public RobotDriveV2() {
-        gyroLock = new PIDController(Kp, Ki, Kd, this, this::pidWrite, 20);
+        gyroLock = new PIDController(Kp, Ki, Kd, this, this::pidWrite);
         gyroLock.setAbsoluteTolerance(absTol);
         gyroLock.setOutputRange(-1, 1);
         gyroLock.setInputRange(0, 360);

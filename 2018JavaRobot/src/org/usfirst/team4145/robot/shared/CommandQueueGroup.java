@@ -14,6 +14,16 @@ public class CommandQueueGroup {
     public CommandQueueGroup(){
         queueGroup = new ArrayList();
     }
+    
+    public queueGroup newPointer(queueGroup x)
+    {
+    		queueGroup copy = new queueGroup();
+    		for (int i = 0; i<x.size(); i++)
+    		{
+    			copy.add(x.get(i));
+    		}
+    		return copy;
+    }
 
     public void addCommandContainer(CommandContainer container){
         requireNonNull(container , "Container cannot be null!");

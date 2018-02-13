@@ -73,8 +73,8 @@ public class RobotMap {
         liftEnc = new Encoder(2, 3, true, Encoder.EncodingType.k4X);
         switchLTop = new DigitalInput(4);
         switchLBase = new DigitalInput(5);
-        switchHBase = new DigitalInput(6);
-        switchHTop = new DigitalInput(7);
+        switchHTop = new DigitalInput(6);
+        switchHBase = new DigitalInput(7);
         botHighSw = new DigitalInput(8);
         botLowSw = new DigitalInput(9);
 

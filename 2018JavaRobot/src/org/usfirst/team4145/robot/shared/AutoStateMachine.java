@@ -20,6 +20,7 @@ public class AutoStateMachine {
     }
 
     private void buildStates(){
+       // queue is pronounced que not q
         CommandQueueGroup queueGroup = new CommandQueueGroup();
         for (int i = 0; i < toQueue.size(); i++) {
             if(toQueue.get(i).getIsPara()){

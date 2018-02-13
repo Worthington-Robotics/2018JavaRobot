@@ -10,6 +10,7 @@ public class Lift extends Subsystem {
     private boolean limit1 = false;
     private boolean limit2 = false;
     private boolean limit3 = false;
+    private boolean limit4 = false;
     private double liftVal = 0.0;
     private boolean[] buttonArray = new boolean[4];
     private int bottomLimit = 0;
@@ -50,7 +51,7 @@ public class Lift extends Subsystem {
     public void periodic() {
         updateLimits();
         updateLift();
-        //watchdog();
+        watchdog();
     }
 
     /**
@@ -66,6 +67,7 @@ public class Lift extends Subsystem {
         limit1 = !RobotMap.switchHBase.get(); //normally open
         limit2 = !RobotMap.switchHTop.get(); //normally open
         limit3 = !RobotMap.switchLTop.get();
+        limit4 = !RobotMap.switchLBase.get();
         buttonArray[0] = limit1;
         buttonArray[1] = limit2;
         buttonArray[2] = limit3;
@@ -81,7 +83,7 @@ public class Lift extends Subsystem {
         if (limit3 && RobotMap.liftMotorL.get() > 0) {
             stopliftL();
         }
-        if (RobotMap.liftMotorL.get() < 0 && RobotMap.liftEnc.get() <= bottomLimit) {
+        if (limit4 && RobotMap.liftEnc.get() <= bottomLimit) {
             stopliftL();
         }
     }

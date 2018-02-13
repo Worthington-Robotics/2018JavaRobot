@@ -1,8 +1,10 @@
-package src.org.usfirst.team4145.robot.shared;
+package org.usfirst.team4145.robot.shared;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 public class CommandContainer {
 	private Command command;
-	private boolean isPara;
+	private boolean isPara; // is parallel with previous command
 	private long timeout = -1;
 	
 	public CommandContainer(Command com, boolean IP)
@@ -23,11 +25,16 @@ public class CommandContainer {
 	{
 		return timeout;
 	}
+
+	/**
+	 * gets whether or not the command is parallel with previous
+	 * @return is parallel with previous
+	 */
 	public boolean getIsPara()
 	{
 		return isPara;
 	}
-	public long getCommand()
+	public Command getCommand()
 	{
 		return command;
 	}

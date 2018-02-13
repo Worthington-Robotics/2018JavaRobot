@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4145.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.kauailabs.navx.frc.Quaternion;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -207,6 +208,14 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
                 return Math.pow(stickInpt, 2);
             }
         }
+    }
+
+    private Quaternion getQuarternion(){
+        float w = RobotMap.ahrs.getQuaternionW();
+        float x = RobotMap.ahrs.getQuaternionX();
+        float y  = RobotMap.ahrs.getQuaternionY();
+        float z = RobotMap.ahrs.getQuaternionZ();
+        return new Quaternion(w, x, y, z);
     }
 
 }

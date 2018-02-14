@@ -1,77 +1,73 @@
 package org.usfirst.team4145.robot.shared;
 
-import java.util.ArrayList;
 
-import static java.util.Objects.requireNonNull;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.Command;
+
+import java.util.LinkedList;
 
 public class CommandQueueGroup {
 
-    private ArrayList<CommandContainer> queueGroup;
+    private LinkedList<Command> queueGroup;
+    private double FPGA_TIME_AT_START;
+    private double timeOut;
     private boolean isDead = true;
 
-    private volatile boolean monitorStatus = false;
+    /**
+     * Data structure for storing a series of commands with a timeout
+     * @param commands an array of commands
+     * @param timeOutMs timeout in milliseconds for the group
+     */
 
-    public Runnable runnable = () -> {
-        startQueueGroup();
-        while (!checkQueueGroup()) {
-            try {
-                Thread.sleep(20);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+    public CommandQueueGroup(Command[] commands, long timeOutMs){
+        timeOut = timeOutMs / 1000;
+        for (Command command : commands) {
+            queueGroup.add(command);
         }
-        setMonitorStatus(true);
-    };
-
-    public CommandQueueGroup() {
-        queueGroup = new ArrayList();
     }
 
-    public CommandQueueGroup copyOf() {
-        CommandQueueGroup copy = new CommandQueueGroup();
-        for (int i = 0; i < queueGroup.size(); i++) {
-            copy.addCommandContainer(queueGroup.get(i));
+    /**
+     * method for checking the status of a queue group
+     * @return whether or not the commands have all finished or the timeout was exceeded
+     */
+    public boolean checkQueueGroup() {
+        if((FPGA_TIME_AT_START + timeOut) > Timer.getFPGATimestamp()){
+            return true;
         }
-        return copy;
-    }
-
-    public void addCommandContainer(CommandContainer container) {
-        requireNonNull(container, "Container cannot be null!");
-        queueGroup.add(container);
-    }
-
-    public void queueGroupForExecution() {
-        Thread thread = new Thread(runnable);
-        thread.setDaemon(true);
-        thread.start();
-    }
-
-    private boolean checkQueueGroup() {
-        for (CommandContainer container : queueGroup) {
-            if (container.getTimeout() > (container.getCommand().timeSinceInitialized() * 1000))
-                container.getCommand().cancel();
-            isDead &= !container.getCommand().isRunning();
+        isDead = true;
+        for (Command command : queueGroup) {
+            isDead &= !command.isRunning();
         }
         return isDead;
     }
 
-    private void startQueueGroup() {
-        for (CommandContainer container : queueGroup) {
-            container.getCommand().start();
+    /**
+     * begins running the entire queued group
+     * also records FPGA timestamp for timeout purposes.
+     */
+    public void startQueueGroup() {
+        FPGA_TIME_AT_START = Timer.getFPGATimestamp();
+        for (Command command: queueGroup) {
+            command.start();
         }
     }
 
+    /**
+     * Does what it says on the tin
+     * this method kills the running queue group.
+     */
     public void killQueueGroup() {
-        for (CommandContainer container : queueGroup) {
-            container.getCommand().cancel();
+        for (Command command : queueGroup) {
+            command.cancel();
         }
     }
 
-    public boolean getMonitorStatus(){
-        return monitorStatus;
+    /**
+     * gets the Linked list for the state machine to run
+     * @return a Linked List of all queued groups.
+     */
+    public LinkedList getQueueGroup(){
+        return queueGroup;
     }
 
-    private void setMonitorStatus(boolean state) {
-        monitorStatus = state;
-    }
 }

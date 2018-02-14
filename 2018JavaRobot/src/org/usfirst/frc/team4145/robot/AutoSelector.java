@@ -1,7 +1,9 @@
 package org.usfirst.frc.team4145.robot;
 
-import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team4145.robot.commands.ExampleCommand;
+import org.usfirst.frc.team4145.robot.autocommandgroups.FongSwitch;
+import org.usfirst.team4145.robot.shared.CommandQueueGroup;
+
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * @author Cole Tucker This enum encompasses all user selectable autonomous
@@ -57,7 +59,7 @@ public class AutoSelector {
      * @param name checked against all possible enum name parameters
      * @return The internally used enum for auto calculations
      */
-    public static UserSelection getSelFromStr(String name) {
+    private static UserSelection getSelFromStr(String name) {
         for (UserSelection sel : UserSelection.values()) {
             if (sel.toString().equalsIgnoreCase(name)) {
                 return sel;
@@ -91,106 +93,106 @@ public class AutoSelector {
      * @return the proper auto command to run. It should include all movements in
      * one command
      */
-    public static Command autoSelect(String GameData, String selection) {
+    public static LinkedBlockingQueue<CommandQueueGroup> autoSelect(String GameData, String selection) {
         int UsrAuto = getSelFromStr(selection).getNum();
         int fieldPos = getFieldPos(GameData);
         switch (UsrAuto * 10 + fieldPos) {
             case 11:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 12:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 13:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 14:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 21:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 22:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 23:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 24:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 31:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 32:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 33:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 34:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 41:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 42:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 43:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 44:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 51:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 52:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 53:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 54:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 61:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 62:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 63:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 64:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 71:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 72:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 73:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 74:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 81:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 82:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 83:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 84:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 91:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 92:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 93:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 94:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 101:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 102:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 103:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 104:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 111:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 112:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 113:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 114:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 121:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 122:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 123:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             case 124:
-                return new ExampleCommand();
+                return new FongSwitch(0).getQueuedStates();
             default:
                 return null; // this happens if UsrAuto == 5
 

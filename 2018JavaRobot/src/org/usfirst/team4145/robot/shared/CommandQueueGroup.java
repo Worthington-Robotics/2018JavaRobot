@@ -10,7 +10,7 @@ public class CommandQueueGroup {
 
     private LinkedList<Command> queueGroup;
     private double FPGA_TIME_AT_START;
-    private double timeOut;
+    private double TIME_OUT;
     private boolean isDead = true;
 
     /**
@@ -20,7 +20,8 @@ public class CommandQueueGroup {
      */
 
     public CommandQueueGroup(Command[] commands, long timeOutMs){
-        timeOut = timeOutMs / 1000;
+        TIME_OUT = timeOutMs / 1000;
+        queueGroup = new LinkedList<Command>();
         for (Command command : commands) {
             queueGroup.add(command);
         }
@@ -31,7 +32,7 @@ public class CommandQueueGroup {
      * @return whether or not the commands have all finished or the timeout was exceeded
      */
     public boolean checkQueueGroup() {
-        if((FPGA_TIME_AT_START + timeOut) > Timer.getFPGATimestamp()){
+        if((FPGA_TIME_AT_START + TIME_OUT) > Timer.getFPGATimestamp()){
             return true;
         }
         isDead = true;

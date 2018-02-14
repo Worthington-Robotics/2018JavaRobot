@@ -13,6 +13,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4145.robot.autocommandgroups.FongSwitch;
+import org.usfirst.team4145.robot.shared.AutoStateMachine;
+import org.usfirst.team4145.robot.shared.CommandQueueGroup;
+
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,7 +29,7 @@ import org.usfirst.frc.team4145.robot.autocommandgroups.FongSwitch;
 public class Robot extends TimedRobot {
 	public static OI oi;
 
-	Command autonomousCommand;
+	LinkedBlockingQueue<CommandQueueGroup> AutoStateQueue;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -82,13 +87,9 @@ public class Robot extends TimedRobot {
 		String GameData = DriverStation.getInstance().getGameSpecificMessage();
 		
 		//choose auto command based on lists
-		//autonomousCommand = AutoSelector.autoSelect(GameData, autoSelected);
-		autonomousCommand = new FongSwitch(0);
-		
-		// schedule the autonomous command checking to make sure not null
-		if (autonomousCommand != null) {
-			autonomousCommand.start();
-		}
+		AutoStateQueue = AutoSelector.autoSelect(GameData, autoSelected);
+		//run state machine
+		AutoStateMachine.runMachine(AutoStateQueue);
 	}
 
 	/**
@@ -103,11 +104,7 @@ public class Robot extends TimedRobot {
 	public void teleopInit() {
 		SmartDashboard.putNumber("In Auto", 0);
 		SmartDashboard.putNumber("Auto State", -1);
-		//RobotMap.ahrs.reset();
-		// This makes sure that the autonomous stops running when teleoponly starts.
-		if (autonomousCommand != null) {
-			autonomousCommand.cancel();
-		}
+		RobotMap.ahrs.reset();
 		RobotMap.drive.enableTo(0, false);
 	}
 

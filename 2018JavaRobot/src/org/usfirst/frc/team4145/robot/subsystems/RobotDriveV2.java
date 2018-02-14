@@ -26,30 +26,30 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
     private double[] lastInputSet = {0, 0, 0}; //last input set from joystick update
 
     //general use variables
-    private boolean brakeMode = true; //whether to disable or enable brake mode Nominal: true
-    private double deadBandVal = 0.15; //nominal deadband 0.15 percent of stick
-    private double yPercentage = 0.75; // decrease xy output to percent of full Nominal: 0.75
-    private double xPercentage = 1.0; //decrease X to percent of full Nominal: 1.0
-    private double zPercentage = 0.50; // z percentage of full stick deflection Nominal: 80
-    private double frontRamp = 0.0; //ramp time on front motors Nominal: 0.0
-    private double rearRamp = 0.0; //ramp time on rear motors Nominal: 0.0
+    private boolean BRAKE_MODE = true; //whether to disable or enable brake mode Nominal: true
+    private double DEADBAND_VALUE = 0.15; //nominal deadband 0.15 percent of stick
+    private double Y_PERCENTAGE = 0.75; // decrease xy output to percent of full Nominal: 0.75
+    private double X_PERCENTAGE = 1.0; //decrease X to percent of full Nominal: 1.0
+    private double Z_PERCENTAGE = 0.50; // z percentage of full stick deflection Nominal: 80
+    private double FRONT_RAMP = 0.0; //ramp time on front motors Nominal: 0.0
+    private double REAR_RAMP = 0.0; //ramp time on rear motors Nominal: 0.0
 
     //PID variables
-    private double Kp = 0.033; //stable at 0.033
-    private double Ki = 0.0; //dont generally use Integral as it makes things unstable over time
-    private double Kd = 0.055; //stable at 0.045
-    private double absTol = 0.5; //tolerance on PID control Nominal: 0.5
-    private double pidLimit = 1.0; //limits pid output Nominal: 0.6
+    private double PROPORTIONAL_GAIN = 0.033; //stable at 0.033
+    private double INTEGRAL_GAIN = 0.0; //dont generally use Integral as it makes things unstable over time
+    private double DERIVATIVE_GAIN = 0.055; //stable at 0.045
+    private double ABSOLUTE_TOLERANCE = 0.5; //tolerance on PID control Nominal: 0.5
+    private double PID_LIMIT = 1.0; //limits pid output Nominal: 0.6
 
 
     public RobotDriveV2() {
-        gyroLock = new PIDController(Kp, Ki, Kd, this, this::pidWrite);
-        gyroLock.setAbsoluteTolerance(absTol);
+        gyroLock = new PIDController(PROPORTIONAL_GAIN, INTEGRAL_GAIN, DERIVATIVE_GAIN, this, this::pidWrite);
+        gyroLock.setAbsoluteTolerance(ABSOLUTE_TOLERANCE);
         gyroLock.setOutputRange(-1, 1);
         gyroLock.setInputRange(0, 360);
         gyroLock.setContinuous();
-        setBrakeMode(brakeMode);
-        setRamp(frontRamp, rearRamp);
+        setBRAKE_MODE(BRAKE_MODE);
+        setRamp(FRONT_RAMP, REAR_RAMP);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
         SmartDashboard.putNumber("FPGA Time" , Timer.getFPGATimestamp());
         if (enLock) {
             // Periodically updates while gyro locked
-            setCartesianDrive(lastInputSet[0], lastInputSet[1], pidOutput * pidLimit);
+            setCartesianDrive(lastInputSet[0], lastInputSet[1], pidOutput * PID_LIMIT);
 
         } else {
             // periodically updates drive
@@ -164,8 +164,8 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
         RobotMap.driveMotor4.configOpenloopRamp(rear, 10);
     }
 
-    public void setBrakeMode(boolean brakeMode) {
-        if (brakeMode) {
+    public void setBRAKE_MODE(boolean BRAKE_MODE) {
+        if (BRAKE_MODE) {
             RobotMap.driveMotor1.setNeutralMode(NeutralMode.Brake);
             RobotMap.driveMotor2.setNeutralMode(NeutralMode.Brake);
             RobotMap.driveMotor3.setNeutralMode(NeutralMode.Brake);
@@ -194,9 +194,9 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
 
     private double[] getAdjStick() {
         double[] out = new double[3];
-        out[0] = evalDeadBand(Robot.oi.getMasterStick().getY(), deadBandVal) * yPercentage;
-        out[1] = evalDeadBand(Robot.oi.getMasterStick().getX(), deadBandVal) * xPercentage;
-        out[2] = evalDeadBand(Robot.oi.getMasterStick().getZ(), deadBandVal) * zPercentage;
+        out[0] = evalDeadBand(Robot.oi.getMasterStick().getY(), DEADBAND_VALUE) * Y_PERCENTAGE;
+        out[1] = evalDeadBand(Robot.oi.getMasterStick().getX(), DEADBAND_VALUE) * X_PERCENTAGE;
+        out[2] = evalDeadBand(Robot.oi.getMasterStick().getZ(), DEADBAND_VALUE) * Z_PERCENTAGE;
         return out;
     }
 

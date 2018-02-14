@@ -34,7 +34,7 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		RobotMap.init();
 		oi = new OI();
-
+		SmartDashboard.putNumber("Auto State", -1);
 		
 
 	}
@@ -50,6 +50,7 @@ public class Robot extends TimedRobot {
 		RobotMap.vision.flush();
 		RobotMap.drive.enableTo(0, false);
 		SmartDashboard.putNumber("In Auto", 0);
+		SmartDashboard.putNumber("Auto State", -1);
 	}
 
 	@Override
@@ -101,6 +102,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopInit() {
 		SmartDashboard.putNumber("In Auto", 0);
+		SmartDashboard.putNumber("Auto State", -1);
 		//RobotMap.ahrs.reset();
 		// This makes sure that the autonomous stops running when teleoponly starts.
 		if (autonomousCommand != null) {

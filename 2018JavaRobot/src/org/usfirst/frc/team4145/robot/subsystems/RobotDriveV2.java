@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.kauailabs.navx.frc.Quaternion;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4145.robot.Robot;
 import org.usfirst.frc.team4145.robot.RobotMap;
@@ -27,7 +28,8 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
     //general use variables
     private boolean brakeMode = true; //whether to disable or enable brake mode Nominal: true
     private double deadBandVal = 0.15; //nominal deadband 0.15 percent of stick
-    private double xyPercentage = 0.75; // decrease xy output to percent of full Nominal: 0.75
+    private double yPercentage = 0.75; // decrease xy output to percent of full Nominal: 0.75
+    private double xPercentage = 1.0; //decrease X to percent of full Nominal: 1.0
     private double zPercentage = 0.50; // z percentage of full stick deflection Nominal: 80
     private double frontRamp = 0.0; //ramp time on front motors Nominal: 0.0
     private double rearRamp = 0.0; //ramp time on rear motors Nominal: 0.0
@@ -75,6 +77,7 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
         SmartDashboard.putNumber("Gyro Target", gyroLock.getSetpoint());
         SmartDashboard.putNumber("Gyro Angle", getGyro());
         SmartDashboard.putBoolean("Gyro lock enabled",enLock);
+        SmartDashboard.putNumber("FPGA Time" , Timer.getFPGATimestamp());
         if (enLock) {
             // Periodically updates while gyro locked
             setCartesianDrive(lastInputSet[0], lastInputSet[1], pidOutput * pidLimit);
@@ -191,8 +194,8 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
 
     private double[] getAdjStick() {
         double[] out = new double[3];
-        out[0] = evalDeadBand(Robot.oi.getMasterStick().getY(), deadBandVal) * xyPercentage;
-        out[1] = evalDeadBand(Robot.oi.getMasterStick().getX(), deadBandVal) * xyPercentage;
+        out[0] = evalDeadBand(Robot.oi.getMasterStick().getY(), deadBandVal) * yPercentage;
+        out[1] = evalDeadBand(Robot.oi.getMasterStick().getX(), deadBandVal) * xPercentage;
         out[2] = evalDeadBand(Robot.oi.getMasterStick().getZ(), deadBandVal) * zPercentage;
         return out;
     }

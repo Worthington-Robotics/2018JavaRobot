@@ -11,8 +11,6 @@ public class AutoStateMachine {
     private ArrayList<CommandContainer> toQueue;
     private ArrayList<CommandQueueGroup> queueGroups;
     private int state = 0;
-    private Thread monitorThread;
-    private Runnable monitor;
 
     public AutoStateMachine(){
         toQueue = new ArrayList();
@@ -20,7 +18,6 @@ public class AutoStateMachine {
     }
 
     private void buildStates(){
-       // queue is pronounced que not q
         CommandQueueGroup queueGroup = new CommandQueueGroup();
         for (int i = 0; i < toQueue.size(); i++) {
             if(toQueue.get(i).getIsPara()){
@@ -30,7 +27,7 @@ public class AutoStateMachine {
                 queueGroup.addCommandContainer(toQueue.get(i));
             }
             else{
-                queueGroups.add(queueGroup);
+                queueGroups.add(queueGroup.copyOf());
                 queueGroup = new CommandQueueGroup();
                 queueGroup.addCommandContainer(toQueue.get(i));
             }
@@ -39,6 +36,16 @@ public class AutoStateMachine {
 
     public void runMachine(){
         buildStates();
+
+    }
+
+    private void startMachine(){
+        for(CommandQueueGroup group : queueGroups){
+            group.startQueueGroup();
+            while(group.getMonitorStatus()){
+
+            }
+        }
     }
 
     public int getState(){

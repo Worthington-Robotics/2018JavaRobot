@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4145.robot.autocommandgroups.FongSwitch;
-import org.usfirst.team4145.robot.shared.VisionSerial;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -35,6 +34,7 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		RobotMap.init();
 		oi = new OI();
+
 		
 
 	}
@@ -49,7 +49,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray()); // publishes the auto list to the dashboard "Auto Selector"
 		RobotMap.vision.flush();
 		RobotMap.drive.enableTo(0, false);
-
+		SmartDashboard.putNumber("In Auto", 0);
 	}
 
 	@Override
@@ -72,6 +72,7 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		RobotMap.ahrs.reset();
 		RobotMap.driveEncoder.reset();
+		SmartDashboard.putNumber("In Auto", 1);
 
 		//pulls auto selector from labview DB
 		String autoSelected = SmartDashboard.getString("Auto Selector", AutoSelector.buildArray()[AutoSelector.buildArray().length-1]);
@@ -99,6 +100,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		SmartDashboard.putNumber("In Auto", 0);
 		//RobotMap.ahrs.reset();
 		// This makes sure that the autonomous stops running when teleoponly starts.
 		if (autonomousCommand != null) {

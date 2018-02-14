@@ -34,9 +34,14 @@ public class CommandContainer {
 	{
 		return isPara;
 	}
+
 	public Command getCommand()
 	{
 		return command;
+	}
+
+	public boolean hasExceededTimeout(){
+		return command.timeSinceInitialized() >= timeout;
 	}
 
 }

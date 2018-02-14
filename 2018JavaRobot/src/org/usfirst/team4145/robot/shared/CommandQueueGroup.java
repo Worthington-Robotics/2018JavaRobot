@@ -11,28 +11,9 @@ public class CommandQueueGroup {
 
     private volatile boolean monitorStatus = false;
 
-    public CommandQueueGroup(){
-        queueGroup = new ArrayList();
-    }
-    
-    public queueGroup newPointer(queueGroup x)
-    {
-    		queueGroup copy = new queueGroup();
-    		for (int i = 0; i<x.size(); i++)
-    		{
-    			copy.add(x.get(i));
-    		}
-    		return copy;
-    }
-
-    public void addCommandContainer(CommandContainer container){
-        requireNonNull(container , "Container cannot be null!");
-        queueGroup.add(container);
-    }
-
     public Runnable runnable = () -> {
         startQueueGroup();
-        while(!checkQueueGroup()){
+        while (!checkQueueGroup()) {
             try {
                 Thread.sleep(20);
             } catch (InterruptedException e) {
@@ -42,33 +23,55 @@ public class CommandQueueGroup {
         setMonitorStatus(true);
     };
 
-    public void queueGroupForExecution(){
+    public CommandQueueGroup() {
+        queueGroup = new ArrayList();
+    }
+
+    public CommandQueueGroup copyOf() {
+        CommandQueueGroup copy = new CommandQueueGroup();
+        for (int i = 0; i < queueGroup.size(); i++) {
+            copy.addCommandContainer(queueGroup.get(i));
+        }
+        return copy;
+    }
+
+    public void addCommandContainer(CommandContainer container) {
+        requireNonNull(container, "Container cannot be null!");
+        queueGroup.add(container);
+    }
+
+    public void queueGroupForExecution() {
         Thread thread = new Thread(runnable);
         thread.setDaemon(true);
         thread.start();
     }
 
-    public boolean checkQueueGroup(){
-        for(CommandContainer container: queueGroup){
-            if(container.getTimeout() > (container.getCommand().timeSinceInitialized()*1000)) container.getCommand().cancel();
+    private boolean checkQueueGroup() {
+        for (CommandContainer container : queueGroup) {
+            if (container.getTimeout() > (container.getCommand().timeSinceInitialized() * 1000))
+                container.getCommand().cancel();
             isDead &= !container.getCommand().isRunning();
         }
         return isDead;
     }
 
-    public void startQueueGroup(){
-        for(CommandContainer container : queueGroup){
+    private void startQueueGroup() {
+        for (CommandContainer container : queueGroup) {
             container.getCommand().start();
         }
     }
 
-    public void killQueueGroup(){
-        for(CommandContainer container : queueGroup){
+    public void killQueueGroup() {
+        for (CommandContainer container : queueGroup) {
             container.getCommand().cancel();
         }
     }
 
-    private void setMonitorStatus(boolean state){
+    public boolean getMonitorStatus(){
+        return monitorStatus;
+    }
+
+    private void setMonitorStatus(boolean state) {
         monitorStatus = state;
     }
 }

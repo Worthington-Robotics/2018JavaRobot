@@ -53,7 +53,7 @@ public class VisionSerial {
             centerCoordinate = -1.0;
         }
 
-        SmartDashboard.putNumber("center", centerCoordinate);
+        SmartDashboard.putNumber("Vision Error", centerCoordinate);
         //System.out.println("Center = " + centerCoordinate + " \'" + centerString + "\'");
     }
 

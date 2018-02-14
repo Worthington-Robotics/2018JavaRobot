@@ -21,13 +21,13 @@ public class QueueGroup {
     }
 
 
-    public void addSequential(Command command, long timeOutMs){
+    public void addSequential(Command command, long timeOutMs) {
         requireNonNull(command, "Command cannot be null");
-        queuedStates.add(new CommandQueueGroup( new Command[] {command}  , timeOutMs));
+        queuedStates.add(new CommandQueueGroup(new Command[]{command}, timeOutMs));
     }
 
-    public void addParallel(Command[] commands, long timeOutMs){
-        requireNonNull(commands , "Command cannot be null");
+    public void addParallel(Command[] commands, long timeOutMs) {
+        requireNonNull(commands, "Command cannot be null");
         queuedStates.add(new CommandQueueGroup(commands, timeOutMs));
     }
 

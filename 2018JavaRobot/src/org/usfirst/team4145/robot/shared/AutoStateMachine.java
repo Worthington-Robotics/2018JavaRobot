@@ -1,8 +1,5 @@
 package org.usfirst.team4145.robot.shared;
 
-
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class AutoStateMachine {
@@ -12,12 +9,10 @@ public class AutoStateMachine {
 
     };
 
-    public static void runMachine(LinkedBlockingQueue<CommandQueueGroup> queueGroups){
+    public static void runMachine(LinkedBlockingQueue<CommandQueueGroup> queueGroups) {
         blockingQueue = queueGroups;
         //start thread to run state execution
     }
-
-
 
 
 }

@@ -11,7 +11,7 @@ public class BotUp extends Command {
 	
     public void initialize(){
     	
-        RobotMap.liftBotMotor.set(0.5);
+        RobotMap.liftBotMotor.set(0.75);
     }
 
     @Override

@@ -12,7 +12,12 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.team4145.robot.shared.VisionSerial;
+import org.usfirst.frc.team4145.robot.autocommandgroups.FongSwitch;
+import org.usfirst.team4145.robot.shared.AutoStateMachine;
+import org.usfirst.team4145.robot.shared.CommandQueueGroup;
+
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,7 +29,7 @@ import org.usfirst.team4145.robot.shared.VisionSerial;
 public class Robot extends TimedRobot {
 	public static OI oi;
 
-	Command autonomousCommand;
+	LinkedBlockingQueue<CommandQueueGroup> AutoStateQueue;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -34,6 +39,7 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		RobotMap.init();
 		oi = new OI();
+		SmartDashboard.putNumber("Auto State", -1);
 		
 
 	}
@@ -45,9 +51,11 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-		SmartDashboard.putStringArray("Auto Selector", AutoSelector.buildArray()); // publishes the auto list to the dashboard "Auto Selector"
+		SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray()); // publishes the auto list to the dashboard "Auto Selector"
 		RobotMap.vision.flush();
-
+		RobotMap.drive.enableTo(0, false);
+		SmartDashboard.putNumber("In Auto", 0);
+		SmartDashboard.putNumber("Auto State", -1);
 	}
 
 	@Override
@@ -69,6 +77,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		RobotMap.ahrs.reset();
+		RobotMap.driveEncoder.reset();
+		SmartDashboard.putNumber("In Auto", 1);
 
 		//pulls auto selector from labview DB
 		String autoSelected = SmartDashboard.getString("Auto Selector", AutoSelector.buildArray()[AutoSelector.buildArray().length-1]);
@@ -77,12 +87,9 @@ public class Robot extends TimedRobot {
 		String GameData = DriverStation.getInstance().getGameSpecificMessage();
 		
 		//choose auto command based on lists
-		autonomousCommand = AutoSelector.autoSelect(GameData, autoSelected);
-		
-		// schedule the autonomous command checking to make sure not null
-		if (autonomousCommand != null) {
-			autonomousCommand.start();
-		}
+		AutoStateQueue = AutoSelector.autoSelect(GameData, autoSelected);
+		//run state machine
+		AutoStateMachine.runMachine(AutoStateQueue);
 	}
 
 	/**
@@ -95,11 +102,10 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
-		//RobotMap.ahrs.reset();
-		// This makes sure that the autonomous stops running when teleoponly starts.
-		if (autonomousCommand != null) {
-			autonomousCommand.cancel();
-		}
+		SmartDashboard.putNumber("In Auto", 0);
+		SmartDashboard.putNumber("Auto State", -1);
+		RobotMap.ahrs.reset();
+		RobotMap.drive.enableTo(0, false);
 	}
 
 	/**

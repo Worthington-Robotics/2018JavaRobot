@@ -1,6 +1,8 @@
 package org.usfirst.frc.team4145.robot.commands.autoonly;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc.team4145.robot.RobotMap;
 
 /**
@@ -10,39 +12,36 @@ import org.usfirst.frc.team4145.robot.RobotMap;
 
 public class GyroToAngle extends Command {
 
-    private boolean isDoneFlag = false;
     private double target;
+    private double addtlRot;
+    private int cycles = 0;
+    private int multiplier = 3;
+    private int timeout;
 
-    public GyroToAngle(double target){
-        this.target = target;
+    public GyroToAngle(double addtlRot) {
+    	this.addtlRot = addtlRot;
+        timeout = (int)Math.abs(target) * multiplier;
+
     }
 
-    public void initialize(){
-        RobotMap.drive.enableTo(target,true);
+    public void initialize() {
+        target = (RobotMap.drive.getGyro() + addtlRot) % 360;
+        RobotMap.drive.enableTo(target, true);
     }
 
-    public boolean isFinished(){
-        return isDoneFlag;
+    public boolean isFinished() {
+        return cycles > timeout;
     }
 
-    public void execute(){
-        //do nothing the drivetrain automatically handles this
+    public void execute() {
+        cycles++;
     }
 
-    public void interrupted(){
+    public void interrupted() {
         end();
     }
 
-    public void end(){
-        RobotMap.drive.enableTo(0,false); //disables gyro lock
-    }
+    public void end() {
 
-    /**
-     * sets whether or not the lock is done executing
-     * @param flag true to end the lock for a new one
-     */
-    public void setDoneFlag(boolean flag){
-        isDoneFlag = flag;
     }
-
 }

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4145.robot.subsystems;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.team4145.robot.shared.VisionSerial;
 
@@ -11,17 +12,16 @@ public class RobotVision extends Subsystem {
     private VisionSerial vision;
     private Runnable runnable;
     private Thread serialReadThread;
-    private volatile double lastRecievedCenter;
-    private volatile double lastUsedCenter;
+    private volatile double lastReceivedCenter;
 
-    private int tolerance = 3; //minimum value necesstating a gyro turn Nominal:3
-
+    private int baudRate = 115200; //serial baudrate Nominal: 115200
 
     public RobotVision() {
-        vision = new VisionSerial(115200);
+        CameraServer.getInstance().startAutomaticCapture();// starts driver vision camera
+        vision = new VisionSerial(baudRate);
         runnable = () -> { //ooh look at the shiny lambda (:
             vision.updateVisionCoordinates();
-            lastRecievedCenter = vision.getCenter();
+            lastReceivedCenter = vision.getCenter();
         };
     }
 
@@ -47,11 +47,7 @@ public class RobotVision extends Subsystem {
     }
 
     public double calcError() {
-        if (lastRecievedCenter < lastUsedCenter - tolerance || lastRecievedCenter > lastUsedCenter + tolerance) {
-            lastUsedCenter = lastRecievedCenter;
-            return vision.getTargetAngle(lastRecievedCenter);
-        }
-        return vision.getTargetAngle(lastUsedCenter);
+        return vision.getTargetAngle(lastReceivedCenter);
     }
 
     public void flush() {

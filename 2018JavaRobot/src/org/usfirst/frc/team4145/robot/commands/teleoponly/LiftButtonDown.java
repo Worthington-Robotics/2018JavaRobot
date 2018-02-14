@@ -22,13 +22,13 @@ public class LiftButtonDown extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		RobotMap.lift.liftspeedH(-0.5);
+		RobotMap.lift.stage2Down();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		System.out.println("LiftButtonDown Running:" + RobotMap.lift.getCurrentCommandName() + "  LiftmotorH code speed" + RobotMap.liftmotorH.get());
+		System.out.println("LiftButtonDown Running:" + RobotMap.lift.getCurrentCommandName() + "  LiftmotorH code speed" + RobotMap.liftMotorH.get());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

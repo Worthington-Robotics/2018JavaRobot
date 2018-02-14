@@ -1,7 +1,10 @@
 package org.usfirst.frc.team4145.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.kauailabs.navx.frc.Quaternion;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4145.robot.Robot;
 import org.usfirst.frc.team4145.robot.RobotMap;
@@ -15,30 +18,38 @@ import org.usfirst.team4145.robot.shared.CustomPIDSubsystem;
 
 public class RobotDriveV2 extends CustomPIDSubsystem {
 
+    //used internally for data
     private PIDController gyroLock;
-
+    private double pidOutput = 0; //DO NOT MODIFY
     private boolean enLock = false;
     private boolean isReversed = false;
-    private double deadBandVal = 0.15; //nominal deadband 0.15 percent of stick
-    private double xyPercentage = 0.75; // decrease xy output to percent of full Nominal: 0.75
-    private double zPercentage = 0.50; // drivers prefer 80
     private double[] lastInputSet = {0, 0, 0}; //last input set from joystick update
 
+    //general use variables
+    private boolean BRAKE_MODE = true; //whether to disable or enable brake mode Nominal: true
+    private double DEADBAND_VALUE = 0.15; //nominal deadband 0.15 percent of stick
+    private double Y_PERCENTAGE = 0.75; // decrease xy output to percent of full Nominal: 0.75
+    private double X_PERCENTAGE = 1.0; //decrease X to percent of full Nominal: 1.0
+    private double Z_PERCENTAGE = 0.50; // z percentage of full stick deflection Nominal: 80
+    private double FRONT_RAMP = 0.0; //ramp time on front motors Nominal: 0.0
+    private double REAR_RAMP = 0.0; //ramp time on rear motors Nominal: 0.0
+
     //PID variables
-    private double Kp = 0.025; //stable at 0.025
-    private double Ki = 0.0; //dont generally use Integral as it makes things unstable over time
-    private double Kd = 0.0; //was 0.025
-    private double absTol = 0.5; //tolerance on PID control Nominal: 0.5
-    private double pidLimit = 0.6; //limits pid output Nominal: 0.6
-    private double pidOutput = 0; //DO NOT MODIFY
+    private double PROPORTIONAL_GAIN = 0.033; //stable at 0.033
+    private double INTEGRAL_GAIN = 0.0; //dont generally use Integral as it makes things unstable over time
+    private double DERIVATIVE_GAIN = 0.055; //stable at 0.045
+    private double ABSOLUTE_TOLERANCE = 0.5; //tolerance on PID control Nominal: 0.5
+    private double PID_LIMIT = 1.0; //limits pid output Nominal: 0.6
+
 
     public RobotDriveV2() {
-        gyroLock = new PIDController(Kp, Ki, Kd, this, this::pidWrite);
-        gyroLock.setAbsoluteTolerance(absTol);
-        gyroLock.setOutputRange(-1, pidLimit);
+        gyroLock = new PIDController(PROPORTIONAL_GAIN, INTEGRAL_GAIN, DERIVATIVE_GAIN, this, this::pidWrite);
+        gyroLock.setAbsoluteTolerance(ABSOLUTE_TOLERANCE);
+        gyroLock.setOutputRange(-1, 1);
         gyroLock.setInputRange(0, 360);
         gyroLock.setContinuous();
-
+        setBRAKE_MODE(BRAKE_MODE);
+        setRamp(FRONT_RAMP, REAR_RAMP);
     }
 
     @Override
@@ -65,9 +76,11 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
         SmartDashboard.putNumberArray("compensated stick values", lastInputSet);
         SmartDashboard.putNumber("Gyro Target", gyroLock.getSetpoint());
         SmartDashboard.putNumber("Gyro Angle", getGyro());
+        SmartDashboard.putBoolean("Gyro lock enabled",enLock);
+        SmartDashboard.putNumber("FPGA Time" , Timer.getFPGATimestamp());
         if (enLock) {
             // Periodically updates while gyro locked
-            setCartesianDrive(lastInputSet[0], lastInputSet[1], pidOutput);
+            setCartesianDrive(lastInputSet[0], lastInputSet[1], pidOutput * PID_LIMIT);
 
         } else {
             // periodically updates drive
@@ -108,7 +121,11 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
      * @return current gyro position (0-359.99999)
      */
     public double getGyro() {
-        return ((RobotMap.ahrs.getAngle() + 360) % 360); //add 360 to make all positive then mod by 360 to get remainder
+        return ((RobotMap.ahrs.getYaw() + 360) % 360); //add 360 to make all positive then mod by 360 to get remainder
+    }
+
+    public double getAHRS(){
+        return RobotMap.ahrs.getYaw();
     }
 
     /**
@@ -140,6 +157,25 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
         return gyroLock.onTarget();
     }
 
+    public void setRamp(double front, double rear) {
+        RobotMap.driveMotor1.configOpenloopRamp(front, 10);
+        RobotMap.driveMotor2.configOpenloopRamp(rear, 10);
+        RobotMap.driveMotor3.configOpenloopRamp(front, 10);
+        RobotMap.driveMotor4.configOpenloopRamp(rear, 10);
+    }
+
+    public void setBRAKE_MODE(boolean BRAKE_MODE) {
+        if (BRAKE_MODE) {
+            RobotMap.driveMotor1.setNeutralMode(NeutralMode.Brake);
+            RobotMap.driveMotor2.setNeutralMode(NeutralMode.Brake);
+            RobotMap.driveMotor3.setNeutralMode(NeutralMode.Brake);
+            RobotMap.driveMotor4.setNeutralMode(NeutralMode.Brake);
+        }
+        RobotMap.driveMotor1.setNeutralMode(NeutralMode.Coast);
+        RobotMap.driveMotor2.setNeutralMode(NeutralMode.Coast);
+        RobotMap.driveMotor3.setNeutralMode(NeutralMode.Coast);
+        RobotMap.driveMotor4.setNeutralMode(NeutralMode.Coast);
+    }
 
     //private methods here
     private void setCartesianDrive(double x, double y, double z) {
@@ -158,9 +194,9 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
 
     private double[] getAdjStick() {
         double[] out = new double[3];
-        out[0] = evalDeadBand(Robot.oi.getMasterStick().getY(), deadBandVal) * xyPercentage;
-        out[1] = evalDeadBand(Robot.oi.getMasterStick().getX(), deadBandVal) * xyPercentage;
-        out[2] = evalDeadBand(Robot.oi.getMasterStick().getZ(), deadBandVal) * zPercentage;
+        out[0] = evalDeadBand(Robot.oi.getMasterStick().getY(), DEADBAND_VALUE) * Y_PERCENTAGE;
+        out[1] = evalDeadBand(Robot.oi.getMasterStick().getX(), DEADBAND_VALUE) * X_PERCENTAGE;
+        out[2] = evalDeadBand(Robot.oi.getMasterStick().getZ(), DEADBAND_VALUE) * Z_PERCENTAGE;
         return out;
     }
 
@@ -175,6 +211,14 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
                 return Math.pow(stickInpt, 2);
             }
         }
+    }
+
+    private Quaternion getQuarternion(){
+        float w = RobotMap.ahrs.getQuaternionW();
+        float x = RobotMap.ahrs.getQuaternionX();
+        float y  = RobotMap.ahrs.getQuaternionY();
+        float z = RobotMap.ahrs.getQuaternionZ();
+        return new Quaternion(w, x, y, z);
     }
 
 }

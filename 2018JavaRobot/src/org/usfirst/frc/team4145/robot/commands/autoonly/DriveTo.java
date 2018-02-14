@@ -1,38 +1,61 @@
 package org.usfirst.frc.team4145.robot.commands.autoonly;
 
+import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import org.usfirst.frc.team4145.robot.RobotMap;
-import org.usfirst.team4145.robot.shared.AccessiblePIDOutput;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class DriveTo extends Command {
+public class DriveTo extends Command implements PIDOutput, PIDSource {
 
 	private int length = 0;
 	private PIDController driveTo;
-	private AccessiblePIDOutput output;
 	private double[] toSet = { 0.0, 0.0, 0.0 };
+	
+	private double kP = 0.0011; //nominal 0.0011
+	private double kI = 0.0000; //nominal 0.0000
+	private double kD = 0.0130; //nominal 0.0130
 
-	//constructor to initialize stuff
+	// constructor to initialize stuff
 	public DriveTo(int count) {
-		output = new AccessiblePIDOutput();
 		length = count;
-		driveTo = new PIDController(0.1, 0.1, 0.1, RobotMap.driveEncoder, output);
+		driveTo = new PIDController(kP, kI, kD, this, this::pidWrite);
 		driveTo.setAbsoluteTolerance(3);
+		driveTo.setContinuous(false);
+		driveTo.setOutputRange(-0.4, 0.4);
 	}
 
 	// Set Setpoint to length
 	protected void initialize() {
-		RobotMap.drive.enableTo(RobotMap.ahrs.getYaw(), true);
+		RobotMap.drive.enableTo(RobotMap.drive.getGyro(), true);
+		RobotMap.driveEncoder.reset();
 		driveTo.setSetpoint(length);
-		driveTo.enable();
+		driveTo.setEnabled(true);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	// Set coordinates for the robot to move to
 	protected void execute() {
-		toSet[0] = output.getValue();
+		//SmartDashboard.putNumber("PID target", driveTo.getSetpoint());
+		//SmartDashboard.putNumber("EncoderCount", pidGet());
+		//SmartDashboard.putNumber("PID ERROR", driveTo.getError());
+		//SmartDashboard.putNumber("PID output", driveTo.get());
+		//SmartDashboard.putBoolean("PID Enabled", driveTo.isEnabled());
+	}
+
+	@Override
+	public double pidGet() {
+		return RobotMap.driveEncoder.get();
+	}
+
+	@Override
+	public void pidWrite(double output) {
+		toSet[0] = -output;
 		RobotMap.drive.setInput(toSet);
+		
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -42,7 +65,8 @@ public class DriveTo extends Command {
 
 	// Called once after isFinished returns true and disable driveTo
 	protected void end() {
-		RobotMap.drive.enableTo(0, false);
+		//RobotMap.drive.enableTo(0, false);
+		RobotMap.driveEncoder.reset();
 		driveTo.disable();
 	}
 
@@ -51,4 +75,15 @@ public class DriveTo extends Command {
 	protected void interrupted() {
 		end();
 	}
+
+	@Override
+	public void setPIDSourceType(PIDSourceType pidSource) {
+
+	}
+
+	@Override
+	public PIDSourceType getPIDSourceType() {
+		return PIDSourceType.kDisplacement;
+	}
+
 }

@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+@Deprecated
 public class RobotDrive extends Subsystem {
 	private boolean enable = false;
 	private PIDController GyroLock;
@@ -20,6 +21,7 @@ public class RobotDrive extends Subsystem {
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
+	@Deprecated
 	public RobotDrive() {
 		Output = new AccessiblePIDOutput();
 		GyroLock = new PIDController(0.025, 0.00, 0.025, RobotMap.ahrs, Output);

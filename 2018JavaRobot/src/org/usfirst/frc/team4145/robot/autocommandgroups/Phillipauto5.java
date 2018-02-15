@@ -10,33 +10,42 @@ public class PhillipExchange extends QueueGroup {
 	public PhillipExchange(int autonumber) {
 		if (autonumber == 1) {
 			// Go forward
-			addParallel(new Command[] { DriveTo(19 * 10), DropForks(),
+			addParallel(new Command[] { DriveTo(19 * 20), DropForks(),
+					GyroToAngle(RobotMap.Drive.getGyro()) });
+			addSequential(new GyroToAngle(RobotMap.Drive.getGyro() - 90));
+			addSequential(new DriveTo(19 * 67));
+			addSequential(new GyroToAngle(RobotMap.Drive.getGyro() - 90));
+			addSequential(new DriveTo(19 * 20));
+			addSequential(new DropCube());
+			addSequential(new GyroToAngle(RobotMap.Drive.getGyro() + 200));
+			addSequential(new DriveTo(19 * 89));
+			addSequential(new PickCube());
+		}
+		if (autonumber == 2) {
+			// Go forward
+			addParallel(new Command[] { DriveTo(19 * 20), DropForks(),
 					GyroToAngle(RobotMap.Drive.getGyro()) });
 			addSequential(new GyroToAngle(RobotMap.Drive.getGyro() + 90));
 			addSequential(new DriveTo(19 * 40));
 			addSequential(new GyroToAngle(RobotMap.Drive.getGyro() + 90));
-			addSequential(new DriveTo(19 * 10));
+			addSequential(new DriveTo(19 * 20));
 			addSequential(new DropCube());
-		}
-		if (autonumber == 2) {
-			// Go forward
-			addParallel(new Command[] { DriveTo(19 * 10), DropForks(),
-					GyroToAngle(RobotMap.Drive.getGyro()) });
-			addSequential(new GyroToAngle(RobotMap.Drive.getGyro() - 90));
-			addSequential(new DriveTo(19 * 90));
-			addSequential(new GyroToAngle(RobotMap.Drive.getGyro() - 90));
-			addSequential(new DriveTo(19 * 10));
-			addSequential(new DropCube());
+			addSequential(new GyroToAngle(RobotMap.Drive.getGyro() + 200));
+			addSequential(new DriveTo(19 * 89));
+			addSequential(new PickCube());
 		}
 		if (autonumber == 3) {
 			// Go forward
-			addParallel(new Command[] { DriveTo(19 * 10), DropForks(),
+			addParallel(new Command[] { DriveTo(19 * 20), DropForks(),
 					GyroToAngle(RobotMap.Drive.getGyro()) });
-			addSequential(new GyroToAngle(RobotMap.Drive.getGyro() - 90));
-			addSequential(new DriveTo(19 * 140));
+			addSequential(new GyroToAngle(RobotMap.Drive.getGyro() + 90));
+			addSequential(new DriveTo(19 * 144));
 			addSequential(new GyroToAngle(RobotMap.Drive.getGyro() + -90));
-			addSequential(new DriveTo(19 * 10));
+			addSequential(new DriveTo(19 * 20));
 			addSequential(new DropCube());
+			addSequential(new GyroToAngle(RobotMap.Drive.getGyro() + 200));
+			addSequential(new DriveTo(19 * 89));
+			addSequential(new PickCube());
 		}
 	}
 }

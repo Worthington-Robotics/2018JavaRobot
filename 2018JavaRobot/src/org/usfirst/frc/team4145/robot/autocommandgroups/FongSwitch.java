@@ -10,8 +10,8 @@ public class FongSwitch extends QueueGroup {
     public FongSwitch(int autonumber) {
         if (autonumber == 0) {
             //Go forward and do fork stuff
-            addParallel(new Command[]{new DriveTo(19 * 24), new DropForks()}, 1500);
-            //addParallel(new LiftToPosition(500));
+            addParallel(new Command[]{new DriveTo(19 * 24), new LiftToPosition(1000)}, 2000);
+            //addParallel();
 
             //Start going forward towards switch
             addSequential(new GyroToAngle(47), 1500);
@@ -20,9 +20,9 @@ public class FongSwitch extends QueueGroup {
             //Go towards switch and drop cube
             addSequential(new GyroToAngle(-47), 1500);
             //addSequential(new VisionTarget(), 1000);
-            addSequential(new DriveTo(19 * 28), 1000);
+            addParallel(new Command[] {new DriveTo(19 * 40), new DropForks()}, 2000);
 
-            addSequential(new DropCube(), 750);
+            addSequential(new DropCube(), 1000);
         }
         if (autonumber == 1) {
             //Drive Forward and do fork stuff

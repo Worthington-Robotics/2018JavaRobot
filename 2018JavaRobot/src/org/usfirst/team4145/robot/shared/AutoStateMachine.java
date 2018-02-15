@@ -10,6 +10,7 @@ public class AutoStateMachine {
     private static CommandQueueGroup inspectedElement;
     private static int autoState = 0;
     private static Runnable runnable = () -> {
+    	autoState = 0;
         if (blockingQueue != null) {
             System.out.println("State machine size:" + blockingQueue.size());
             SmartDashboard.putString("Auto State Machine status", "State machine preparing to start!");

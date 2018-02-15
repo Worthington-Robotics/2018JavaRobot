@@ -90,7 +90,7 @@ public class Robot extends TimedRobot {
 		
 		//choose auto command based on lists
 		SmartDashboard.putStringArray("Auto selected and game data", new String[] {autoSelected,GameData});
-		//AutoStateQueue = AutoSelector.autoSelect(GameData, autoSelected);
+		AutoStateQueue = AutoSelector.autoSelect(GameData, autoSelected);
 		//AutoStateQueue = new FongSwitch(0).getQueuedStates();
 		//run state machine
 		AutoStateMachine.runMachine(AutoStateQueue);

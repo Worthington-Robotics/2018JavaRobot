@@ -62,6 +62,10 @@ public class Lift extends Subsystem {
     public boolean[] getLimits() {
         return buttonArray;
     }
+    
+    public void setSpeed(double speed) {
+    	liftVal = speed;
+    }
 
     private void updateLimits() {
         limit1 = !RobotMap.switchHBase.get(); //normally open

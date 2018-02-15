@@ -15,13 +15,12 @@ public class GyroToAngle extends Command {
     private double target;
     private double addtlRot;
     private int cycles = 0;
-    private int multiplier = 3;
+    private int multiplier = 5;
     private int timeout;
 
     public GyroToAngle(double addtlRot) {
     	this.addtlRot = addtlRot;
-        timeout = (int)Math.abs(target) * multiplier;
-
+        timeout = (int)Math.abs(addtlRot) * multiplier;
     }
 
     public void initialize() {
@@ -30,6 +29,7 @@ public class GyroToAngle extends Command {
     }
 
     public boolean isFinished() {
+        //System.out.println("Gyro to angle with timeout of " + timeout + " has completed? " + (cycles < timeout));
         return cycles > timeout;
     }
 

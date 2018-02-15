@@ -56,6 +56,7 @@ public class Robot extends TimedRobot {
 		RobotMap.drive.enableTo(0, false);
 		SmartDashboard.putNumber("In Auto", 0);
 		SmartDashboard.putNumber("Auto State", -1);
+		Scheduler.getInstance().removeAll();
 	}
 
 	@Override
@@ -87,7 +88,8 @@ public class Robot extends TimedRobot {
 		String GameData = DriverStation.getInstance().getGameSpecificMessage();
 		
 		//choose auto command based on lists
-		AutoStateQueue = AutoSelector.autoSelect(GameData, autoSelected);
+		//AutoStateQueue = AutoSelector.autoSelect(GameData, autoSelected);
+		AutoStateQueue = new FongSwitch(0).getQueuedStates();
 		//run state machine
 		AutoStateMachine.runMachine(AutoStateQueue);
 	}

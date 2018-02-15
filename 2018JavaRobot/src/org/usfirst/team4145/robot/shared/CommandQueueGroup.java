@@ -11,7 +11,6 @@ public class CommandQueueGroup {
     private LinkedList<Command> queueGroup;
     private double FPGA_TIME_AT_START;
     private double TIME_OUT;
-    private boolean isDead = true;
 
     /**
      * Data structure for storing a series of commands with a timeout
@@ -32,13 +31,19 @@ public class CommandQueueGroup {
      * @return whether or not the commands have all finished or the timeout was exceeded
      */
     public boolean checkQueueGroup() {
-        if((FPGA_TIME_AT_START + TIME_OUT) > Timer.getFPGATimestamp()){
+        //System.out.println("Time at queue group start:" + FPGA_TIME_AT_START);
+        //System.out.println("Time at check call:"+ Timer.getFPGATimestamp());
+        if((FPGA_TIME_AT_START + TIME_OUT) <= Timer.getFPGATimestamp()){
+            System.out.println("Queue group timed out");
             return true;
         }
-        isDead = true;
+        boolean isDead = true;
         for (Command command : queueGroup) {
             isDead &= !command.isRunning();
+            //System.out.println("Command dead?" + command.isRunning());
+            
         }
+        //System.out.println("Queue group is dead?" + isDead);
         return isDead;
     }
 

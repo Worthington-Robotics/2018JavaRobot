@@ -5,7 +5,7 @@ import org.usfirst.frc.team4145.robot.commands.autoonly.*;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class PhillipExchange extends CommandGroup {
+public class PhillipExchange extends QueueGroup {
 
 	public PhillipExchange(int autonumber) {
 		if (autonumber == 1) {

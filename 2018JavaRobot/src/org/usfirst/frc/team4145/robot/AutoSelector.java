@@ -71,16 +71,17 @@ public class AutoSelector {
 
     private static int getFieldPos(String GameData) {
         GameData.toLowerCase(); // ensure all data in known form
+        //Switch first then Scale
         char c0 = GameData.charAt(0);
         char c1 = GameData.charAt(1);
         if (c0 == 'l' && c1 == 'l') {
-            return 1;
+            return 1; //LL
         } else if (c0 == 'l' && c1 == 'r') {
-            return 2;
+            return 2; //LR
         } else if (c0 == 'r' && c1 == 'l') {
-            return 3;
-        } else { // essentially r r
-            return 4;
+            return 3; //RL
+        } else {
+            return 4; //RR
         }
     }
 
@@ -98,101 +99,101 @@ public class AutoSelector {
         int fieldPos = getFieldPos(GameData);
         switch (UsrAuto * 10 + fieldPos) {
             case 11:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 12:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 13:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 14:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 21:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 22:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 23:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 24:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 31:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 32:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 33:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 34:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 41:
-                return new FongSwitch(0).getQueuedStates();
+                return new FongSwitch(1).getQueuedStates(); //Switch Right
             case 42:
-                return new FongSwitch(0).getQueuedStates();
+                return new FongSwitch(1).getQueuedStates();
             case 43:
-                return new FongSwitch(0).getQueuedStates();
+                return new FongSwitch(0).getQueuedStates(); //Switch Left
             case 44:
                 return new FongSwitch(0).getQueuedStates();
             case 51:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 52:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 53:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 54:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 61:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 62:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 63:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 64:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 71:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 72:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 73:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 74:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 81:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 82:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 83:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 84:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 91:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 92:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 93:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 94:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 101:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 102:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 103:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 104:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 111:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 112:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 113:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 114:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 121:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 122:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 123:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             case 124:
-                return new FongSwitch(0).getQueuedStates();
+                return null;
             default:
                 return null; // this happens if UsrAuto == 5
 

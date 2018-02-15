@@ -18,11 +18,11 @@ public class FongSwitch extends QueueGroup {
             addSequential(new DriveTo(19 * 70), 2000);
 
             //Go towards switch and drop cube
-            addSequential(new GyroToAngle(-47), 2000);
+            addSequential(new GyroToAngle(-47), 1500);
             //addSequential(new VisionTarget(), 1000);
             addSequential(new DriveTo(19 * 28), 1000);
 
-            addSequential(new DropCube(), 500);
+            addSequential(new DropCube(), 750);
         }
         if (autonumber == 1) {
             //Drive Forward and do fork stuff

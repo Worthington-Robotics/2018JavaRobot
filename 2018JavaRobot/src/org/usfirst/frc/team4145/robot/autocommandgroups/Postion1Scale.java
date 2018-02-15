@@ -6,20 +6,30 @@ import edu.wpi.first.wpilibj.command.QueueGroup;
 public class Postion1Scale extends QueueGroup {
     public Postion1Scale(int autonumber){
     	if(autonumber == 0){ //If it is the 1st auto assignment
-    		addParallel(new Command[]{new DriveTo(19*299.65)), new GyroToAngle(RobotMap.drive.getGyro()), new DropForks(), new LiftToPosition(1000)});
+    		addParallel(new Command[]{new DriveTo(19*299.65),new DropForks(), new LiftToPosition(500)},1000);
     		
-    		addParallel(new Command[]{GyroToAngle(RobotMap.drive.getGyro()+90), HighLiftUp()});
+    		addParallel(new LiftToPosition(500));
+    		
+    		addSequential(new GyroToAngle(110), 1500);
+    		
+    		addParallel(new Command[]{new DriveTo(19*12),new DropForks(), new LiftToPosition(1000)},1000);
     		
     		addSequential(new DropCube);
     		
-    		addParallel(new Command[]{HighLiftDown()), new LiftToPosition(0), new GyroToAngle(RobotMap.drive.getGyro()+90)});
+    		
     	}
     	if(autonumber == 1){
-    		addParallel(new Command[]{new DriveTo(19*228.735)), addSequential( GyroToAngle(), new DropForks(), new LiftToPosition(1000)};
+    		addParallel(new Command[]{new DriveTo(19*60), new LiftToPosition(500)},1500);
     		
-    		addParallel(new Command[]{new GyroToAngle(RobotMap.drive.getGyro()+90), new DriveTo(19*190)});
+    		addSequential(new GyroToAngle(90), 500);
     		
-    		addParallel(new Command[]{new GyroToAngle(RobotMap.drive.getGyro()-90), new DriveTo(19*70.915), new HighLiftUp()}); 
+    		addParallel(new Command[]{new DriveTo(19*190),new DropForks(), new LiftToPosition(500)},1000);
+    		
+    		addSequential(new GyroToAngle(81.5), 500);
+    		
+    		addParallel(new Command[]{new DriveTo(19*220), new LiftToPosition(1000)},1500);
+    		
+    		addSequential(new DropCube);
     	}
     }
 }

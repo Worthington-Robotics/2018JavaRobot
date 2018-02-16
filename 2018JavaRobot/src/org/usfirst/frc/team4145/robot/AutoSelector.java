@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4145.robot;
 
-import org.usfirst.frc.team4145.robot.autocommandgroups.FongSwitch;
+import org.usfirst.frc.team4145.robot.autocommandgroups.FongSwitchLeft;
+import org.usfirst.frc.team4145.robot.autocommandgroups.FongSwitchRight;
 import org.usfirst.team4145.robot.shared.CommandQueueGroup;
 
 import java.util.concurrent.LinkedBlockingQueue;
@@ -70,10 +71,11 @@ public class AutoSelector {
     }
 
     private static int getFieldPos(String GameData) {
-        GameData.toLowerCase(); // ensure all data in known form
+        GameData = GameData.toLowerCase(); // ensure all data in known form
         //Switch first then Scale
         char c0 = GameData.charAt(0);
         char c1 = GameData.charAt(1);
+        System.out.println("Game data " + c0 + " " + c1);
         if (c0 == 'l' && c1 == 'l') {
             return 1; //LL
         } else if (c0 == 'l' && c1 == 'r') {
@@ -95,9 +97,10 @@ public class AutoSelector {
      * one command
      */
     public static LinkedBlockingQueue<CommandQueueGroup> autoSelect(String GameData, String selection) {
-        int UsrAuto = getSelFromStr(selection).getNum();
+        int usrAuto = getSelFromStr(selection).getNum();
         int fieldPos = getFieldPos(GameData);
-        switch (UsrAuto * 10 + fieldPos) {
+        System.out.println("Auto choice:" + (usrAuto * 10 + fieldPos));
+        switch (usrAuto * 10 + fieldPos) {
             case 11:
                 return null;
             case 12:
@@ -123,13 +126,13 @@ public class AutoSelector {
             case 34:
                 return null;
             case 41:
-                return new FongSwitch(1).getQueuedStates(); //Switch Right
+                return new FongSwitchLeft().getQueuedStates(); //Switch Right
             case 42:
-                return new FongSwitch(1).getQueuedStates();
+                return new FongSwitchLeft().getQueuedStates();
             case 43:
-                return new FongSwitch(0).getQueuedStates(); //Switch Left
+                return new FongSwitchRight().getQueuedStates(); //Switch Left
             case 44:
-                return new FongSwitch(0).getQueuedStates();
+                return new FongSwitchRight().getQueuedStates();
             case 51:
                 return null;
             case 52:
@@ -196,9 +199,8 @@ public class AutoSelector {
                 return null;
             default:
                 return null; // this happens if UsrAuto == 5
-
+         	
         }
-
     }
 
 }

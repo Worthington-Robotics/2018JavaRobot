@@ -9,10 +9,8 @@ package org.usfirst.frc.team4145.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team4145.robot.autocommandgroups.FongSwitch;
 import org.usfirst.team4145.robot.shared.AutoStateMachine;
 import org.usfirst.team4145.robot.shared.CommandQueueGroup;
 
@@ -91,7 +89,7 @@ public class Robot extends TimedRobot {
 		//choose auto command based on lists
 		SmartDashboard.putStringArray("Auto selected and game data", new String[] {autoSelected,GameData});
 		AutoStateQueue = AutoSelector.autoSelect(GameData, autoSelected);
-		//AutoStateQueue = new FongSwitch(0).getQueuedStates();
+		//AutoStateQueue = new FongSwitchRight(0).getQueuedStates();
 		//run state machine
 		AutoStateMachine.runMachine(AutoStateQueue);
 	}

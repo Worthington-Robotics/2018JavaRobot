@@ -37,7 +37,7 @@ public class LiftToPosition extends Command implements PIDSource, PIDOutput {
 	}
 
 	public void initialize() {
-		System.out.println("Starting LiftPID");
+		//System.out.println("Starting LiftPID");
 		liftPid.setSetpoint(newCount); // set target of pid
 		liftPid.enable(); // start pid
 

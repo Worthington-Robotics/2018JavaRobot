@@ -15,22 +15,24 @@ public class GyroToAngle extends Command {
     private double target;
     private double addtlRot;
     private int cycles = 0;
-    private int multiplier = 3;
+    private int multiplier = 5;
     private int timeout;
 
     public GyroToAngle(double addtlRot) {
     	this.addtlRot = addtlRot;
-        timeout = (int)Math.abs(target) * multiplier;
-
+        timeout = (int)Math.abs(addtlRot) * multiplier;
     }
 
     public void initialize() {
-        target = (RobotMap.drive.getGyro() + addtlRot) % 360;
+        target = Math.abs((RobotMap.drive.getGyro() + 360 + addtlRot) % 360);
+        //System.out.println("Gyro target = " + target);
         RobotMap.drive.enableTo(target, true);
     }
 
     public boolean isFinished() {
-        return cycles > timeout;
+        //System.out.println("Gyro to angle with timeout of " + timeout + " has completed? " + (cycles < timeout));
+        //return cycles > timeout;
+    	return false;
     }
 
     public void execute() {

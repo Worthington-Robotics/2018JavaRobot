@@ -9,14 +9,11 @@ package org.usfirst.frc.team4145.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team4145.robot.autocommandgroups.FongSwitch;
-import org.usfirst.team4145.robot.shared.AutoStateMachine;
-import org.usfirst.team4145.robot.shared.CommandQueueGroup;
+import org.usfirst.frc.team4145.robot.shared.AutoStateMachine;
+import org.usfirst.frc.team4145.robot.shared.CommandQueueGroup;
 
-import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
@@ -56,6 +53,9 @@ public class Robot extends TimedRobot {
 		RobotMap.drive.enableTo(0, false);
 		SmartDashboard.putNumber("In Auto", 0);
 		SmartDashboard.putNumber("Auto State", -1);
+		SmartDashboard.putString("Auto State Machine status", "State machine not yet started");
+		Scheduler.getInstance().removeAll();
+
 	}
 
 	@Override
@@ -87,7 +87,9 @@ public class Robot extends TimedRobot {
 		String GameData = DriverStation.getInstance().getGameSpecificMessage();
 		
 		//choose auto command based on lists
+		SmartDashboard.putStringArray("Auto selected and game data", new String[] {autoSelected,GameData});
 		AutoStateQueue = AutoSelector.autoSelect(GameData, autoSelected);
+		//AutoStateQueue = new FongSwitchRight(0).getQueuedStates();
 		//run state machine
 		AutoStateMachine.runMachine(AutoStateQueue);
 	}

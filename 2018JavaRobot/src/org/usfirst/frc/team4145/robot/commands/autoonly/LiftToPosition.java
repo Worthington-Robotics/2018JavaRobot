@@ -1,53 +1,73 @@
 package org.usfirst.frc.team4145.robot.commands.autoonly;
 
+import edu.wpi.first.wpilibj.PIDOutput;
 import org.usfirst.frc.team4145.robot.RobotMap;
-import org.usfirst.team4145.robot.shared.AccessiblePIDOutput;
 
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class LiftToPosition extends Command{
-	
-	private int uppertol = 1;
-	private int newcount;	
-	private int lowertol = -1;
-	
-	private PIDController liftpid; 
-	private AccessiblePIDOutput output;
+public class LiftToPosition extends Command implements PIDSource, PIDOutput {
 
-	public LiftToPosition(int count){ //
+	private int newCount;
+	private PIDController liftPid;
+
+	private int TOLERANCE = 1;
+	private int AUTHORITY = 1;
+	private double kP = 0.025;
+	private double kI = 0.000;
+	private double kD = 0.005;
+
+	public LiftToPosition(int count) { //
 		requires(RobotMap.lift);
-		newcount = count;
-		output = new AccessiblePIDOutput();
-		liftpid = new PIDController(0.1, 0, 0.1, RobotMap.liftEnc,output); // create pid object with parameters
-	}
-	
-	public void initialize(){
-		if((RobotMap.liftEnc.get() + uppertol) < newcount || (RobotMap.liftEnc.get() + lowertol) > newcount){  //if outside tolerance, start pid
-			liftpid.setSetpoint(newcount); //set target of pid 
-			liftpid.setAbsoluteTolerance(0.1); // set tolerance of pid
-			liftpid.enable(); //start pid
-
-		}
-		else{ //else ignore command
-			end();
-		}
-	}
-	public void execute(){
-		RobotMap.lift.liftspeedL(output.getValue());
+		newCount = count;
+		RobotMap.liftEnc.reset();
+		liftPid = new PIDController(kP, kI, kD, this, this::pidWrite); // create pid object with parameters
+		liftPid.setOutputRange(-AUTHORITY, AUTHORITY);
+		liftPid.setAbsoluteTolerance(TOLERANCE); // set tolerance of pid
 	}
 
-	public boolean isFinished(){
-		return liftpid.onTarget(); // If pid is at tolerance
-		
+	public double pidGet() {
+		return -RobotMap.liftEnc.get();
 	}
-	public void end(){
-		RobotMap.lift.stopliftL();
-		liftpid.disable();// Stop Pid
-		liftpid.free(); // Frees sensor and actuator
+
+	public void pidWrite(double set) {
+		RobotMap.lift.setSpeed(set);
+	}
+
+	public void initialize() {
+		//System.out.println("Starting LiftPID");
+		liftPid.setSetpoint(newCount); // set target of pid
+		liftPid.enable(); // start pid
+
+	}
+
+	public void execute() {
+	}
+
+	public boolean isFinished() {
+		return liftPid.onTarget(); // If pid is at tolerance
+
+	}
+
+	public void end() {
+		liftPid.disable();// Stop Pid
+		liftPid.free(); // Frees sensor and actuator
 		// If pid is at tolerance
-		}
-	public void interrupted(){ // 
+	}
+
+	public void interrupted() { //
 		end();
-	}	
+	}
+
+	@Override
+	public void setPIDSourceType(PIDSourceType pidSource) {
+
+	}
+
+	@Override
+	public PIDSourceType getPIDSourceType() {
+		return PIDSourceType.kDisplacement;
+	}
 }

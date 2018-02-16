@@ -1,4 +1,4 @@
-package org.usfirst.team4145.robot.shared;
+package org.usfirst.frc.team4145.robot.shared;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -21,12 +21,12 @@ public class QueueGroup {
     }
 
 
-    public void addSequential(Command command, long timeOutMs) {
+    protected void addSequential(Command command, long timeOutMs) {
         requireNonNull(command, "Command cannot be null");
         queuedStates.add(new CommandQueueGroup(new Command[]{command}, timeOutMs));
     }
 
-    public void addParallel(Command[] commands, long timeOutMs) {
+    protected void addParallel(Command[] commands, long timeOutMs) {
         requireNonNull(commands, "Command cannot be null");
         queuedStates.add(new CommandQueueGroup(commands, timeOutMs));
     }

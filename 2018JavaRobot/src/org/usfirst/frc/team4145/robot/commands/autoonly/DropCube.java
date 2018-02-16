@@ -6,7 +6,7 @@ import org.usfirst.frc.team4145.robot.RobotMap;
 public class DropCube extends Command{
 
     private int cycles = 0;
-    private int count = 10;
+    private int count = 100;
 
     public DropCube() {
         requires(RobotMap.cubeManipulator);

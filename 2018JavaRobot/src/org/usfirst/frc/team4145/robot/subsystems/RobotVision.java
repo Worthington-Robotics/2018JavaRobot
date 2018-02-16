@@ -2,7 +2,7 @@ package org.usfirst.frc.team4145.robot.subsystems;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import org.usfirst.team4145.robot.shared.VisionSerial;
+import org.usfirst.frc.team4145.robot.shared.VisionSerial;
 
 /**
  *

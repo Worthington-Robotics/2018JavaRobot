@@ -2,6 +2,10 @@ package org.usfirst.frc.team4145.robot;
 
 import org.usfirst.frc.team4145.robot.autocommandgroups.FongSwitch;
 import org.usfirst.frc.team4145.robot.shared.CommandQueueGroup;
+import org.usfirst.frc.team4145.robot.shared.Postion1Scale;
+import org.usfirst.frc.team4145.robot.shared.AdamScale;
+import org.usfirst.frc.team4145.robot.shared.VedScale;
+
 
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -109,13 +113,13 @@ public class AutoSelector {
             case 14:
                 return null;
             case 21:
-                return null;
+                return Postion1Scale(0).getQueueStates();
             case 22:
-                return null;
+                return Postion1Scale(0).getQueueStates();
             case 23:
-                return null;
+                return Postion1Scale(1).getQueueStates();
             case 24:
-                return null;
+                return Postion1Scale(1).getQueueStates();
             case 31:
                 return PhillipExchange(0).getQueueStates();
             case 32:
@@ -157,13 +161,13 @@ public class AutoSelector {
             case 74:
                 return null;
             case 81:
-                return null;
+                return VedScale(0).getQueueStates();
             case 82:
-                return null;
+                return VedScale(0).getQueueStates();
             case 83:
-                return null;
+                return VedScale(1).getQueueStates();
             case 84:
-                return null;
+                return VedScale(1).getQueueStates();
             case 91:
                 return PhillipExchange(2).getQueueStates();
             case 92:

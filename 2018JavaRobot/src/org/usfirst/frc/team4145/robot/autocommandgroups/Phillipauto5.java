@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class PhillipExchange extends QueueGroup {
 
 	public PhillipExchange(int autonumber) {
-		if (autonumber == 1) {
-			// Go forward
+		if (autonumber == 2) {
+			// Center
 			addParallel(new Command[] { DriveTo(19 * 20), DropForks(),
 					GyroToAngle(RobotMap.Drive.getGyro()) });
 			addSequential(new GyroToAngle(RobotMap.Drive.getGyro() - 90));
@@ -21,8 +21,8 @@ public class PhillipExchange extends QueueGroup {
 			addSequential(new DriveTo(19 * 89));
 			addSequential(new PickCube());
 		}
-		if (autonumber == 2) {
-			// Go forward
+		if (autonumber == 1) {
+			// Far Left
 			addParallel(new Command[] { DriveTo(19 * 20), DropForks(),
 					GyroToAngle(RobotMap.Drive.getGyro()) });
 			addSequential(new GyroToAngle(RobotMap.Drive.getGyro() + 90));
@@ -35,7 +35,7 @@ public class PhillipExchange extends QueueGroup {
 			addSequential(new PickCube());
 		}
 		if (autonumber == 3) {
-			// Go forward
+			// Far right
 			addParallel(new Command[] { DriveTo(19 * 20), DropForks(),
 					GyroToAngle(RobotMap.Drive.getGyro()) });
 			addSequential(new GyroToAngle(RobotMap.Drive.getGyro() + 90));

@@ -9,7 +9,11 @@ public class VedScale extends QueueGroup {
 	public VedScale(int autonumber) {
 		if (autonumber == 0) {
 			//Forward then rotate
+<<<<<<< HEAD
 			addSequential(new DriveTo(19 * 20), 500);
+=======
+			addParallel(new Command[]{new DriveTo(19 * 20)}, 500);
+>>>>>>> 21338b9385bd8a051454943d874b35ba00d1dff3
 			addSequential(new GyrotoAngle(90), 100);
 			
 			//Forward then rotate
@@ -19,12 +23,21 @@ public class VedScale extends QueueGroup {
 			//Forward then rotate and drop
 			addSequential(new DriveTo(19 * 240), 500);
 			addSequential(new GyroToAngle(45), 100);
+<<<<<<< HEAD
 			addParallel(new Command[] {new HighLiftUp(), new LiftToPosition(500), new DropForks()}, 500);
+=======
+			addParallel(new Command[] {new HighLiftUp(), new LiftToPosition(500),new DropForks()}, 500);
+			
+>>>>>>> 21338b9385bd8a051454943d874b35ba00d1dff3
 			addSequential(new DropCube(), 100);
 		}
 		if (autonumber == 1) {
 			//Forward then rotate
+<<<<<<< HEAD
 			addSequential(new DriveTo(19 * 60), 300);
+=======
+			addParallel(new Command[]{new DriveTo(19 * 60)}, 300);
+>>>>>>> 21338b9385bd8a051454943d874b35ba00d1dff3
 			addSequential(new GyroToAngle(-90), 100);
 			
 			//Forward then rotate
@@ -34,8 +47,14 @@ public class VedScale extends QueueGroup {
 			//Forward Toward Scale and Drop
 			addSequential(new DriveTo(19 * 210), 500);
 			addSequential(new GyroToAngle(45), 100);
+<<<<<<< HEAD
 			addParallel(new Command[] {new HighLiftUp(), new LiftToPosition(500), new DropForks()},  500);
+=======
+			addParallel(new Command[] {new HighLiftUp(), new LiftToPosition(500),new DropForks()}, 500);
+			
+>>>>>>> 21338b9385bd8a051454943d874b35ba00d1dff3
 			addSequential(new DropCube(), 100);
+			
 		}
 	}
 

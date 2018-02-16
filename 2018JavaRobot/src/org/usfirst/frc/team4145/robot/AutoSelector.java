@@ -117,13 +117,13 @@ public class AutoSelector {
             case 24:
                 return null;
             case 31:
-                return null;
+                return PhillipExchange(0).getQueueStates();
             case 32:
-                return null;
+                return PhillipExchange(0).getQueueStates();
             case 33:
-                return null;
+                return PhillipExchange(0).getQueueStates();
             case 34:
-                return null;
+                return PhillipExchange(0).getQueueStates();
             case 41:
                 return new FongSwitch(0).getQueuedStates(); //Switch Right
             case 42:
@@ -141,13 +141,13 @@ public class AutoSelector {
             case 54:
                 return null;
             case 61:
-                return null;
+                return PhillipExchange(1).getQueueStates();
             case 62:
-                return null;
+                return PhillipExchange(1).getQueueStates();
             case 63:
-                return null;
+                return PhillipExchange(1).getQueueStates();
             case 64:
-                return null;
+                return PhillipExchange(1).getQueueStates();
             case 71:
                 return null;
             case 72:
@@ -165,13 +165,13 @@ public class AutoSelector {
             case 84:
                 return null;
             case 91:
-                return null;
+                return PhillipExchange(2).getQueueStates();
             case 92:
-                return null;
+                return PhillipExchange(2).getQueueStates();
             case 93:
-                return null;
+                return PhillipExchange(2).getQueueStates();
             case 94:
-                return null;
+                return PhillipExchange(2).getQueueStates();
             case 101:
                 return null;
             case 102:

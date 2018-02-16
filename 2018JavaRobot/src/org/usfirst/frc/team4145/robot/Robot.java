@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.team4145.robot.shared.AutoStateMachine;
-import org.usfirst.team4145.robot.shared.CommandQueueGroup;
+import org.usfirst.frc.team4145.robot.shared.AutoStateMachine;
+import org.usfirst.frc.team4145.robot.shared.CommandQueueGroup;
 
 import java.util.concurrent.LinkedBlockingQueue;
 

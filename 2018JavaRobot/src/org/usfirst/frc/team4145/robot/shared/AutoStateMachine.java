@@ -1,4 +1,4 @@
-package org.usfirst.team4145.robot.shared;
+package org.usfirst.frc.team4145.robot.shared;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 

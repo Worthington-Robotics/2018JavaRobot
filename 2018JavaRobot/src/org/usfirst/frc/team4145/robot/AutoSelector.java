@@ -1,8 +1,7 @@
 package org.usfirst.frc.team4145.robot;
 
-import org.usfirst.frc.team4145.robot.autocommandgroups.FongSwitchLeft;
-import org.usfirst.frc.team4145.robot.autocommandgroups.FongSwitchRight;
-import org.usfirst.team4145.robot.shared.CommandQueueGroup;
+import org.usfirst.frc.team4145.robot.autocommandgroups.FongSwitch;
+import org.usfirst.frc.team4145.robot.shared.CommandQueueGroup;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -75,7 +74,7 @@ public class AutoSelector {
         //Switch first then Scale
         char c0 = GameData.charAt(0);
         char c1 = GameData.charAt(1);
-        System.out.println("Game data " + c0 + " " + c1);
+        //System.out.println("Game data " + c0 + " " + c1);
         if (c0 == 'l' && c1 == 'l') {
             return 1; //LL
         } else if (c0 == 'l' && c1 == 'r') {
@@ -99,7 +98,7 @@ public class AutoSelector {
     public static LinkedBlockingQueue<CommandQueueGroup> autoSelect(String GameData, String selection) {
         int usrAuto = getSelFromStr(selection).getNum();
         int fieldPos = getFieldPos(GameData);
-        System.out.println("Auto choice:" + (usrAuto * 10 + fieldPos));
+        //System.out.println("Auto choice:" + (usrAuto * 10 + fieldPos));
         switch (usrAuto * 10 + fieldPos) {
             case 11:
                 return null;
@@ -126,13 +125,13 @@ public class AutoSelector {
             case 34:
                 return null;
             case 41:
-                return new FongSwitchLeft().getQueuedStates(); //Switch Right
+                return new FongSwitch(0).getQueuedStates(); //Switch Right
             case 42:
-                return new FongSwitchLeft().getQueuedStates();
+                return new FongSwitch(0).getQueuedStates();
             case 43:
-                return new FongSwitchRight().getQueuedStates(); //Switch Left
+                return new FongSwitch(1).getQueuedStates(); //Switch Left
             case 44:
-                return new FongSwitchRight().getQueuedStates();
+                return new FongSwitch(1).getQueuedStates();
             case 51:
                 return null;
             case 52:

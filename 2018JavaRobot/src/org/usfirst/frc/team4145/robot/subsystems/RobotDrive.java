@@ -2,7 +2,7 @@ package org.usfirst.frc.team4145.robot.subsystems;
 
 import org.usfirst.frc.team4145.robot.Robot;
 import org.usfirst.frc.team4145.robot.RobotMap;
-import org.usfirst.team4145.robot.shared.AccessiblePIDOutput;
+import org.usfirst.frc.team4145.robot.shared.AccessiblePIDOutput;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;

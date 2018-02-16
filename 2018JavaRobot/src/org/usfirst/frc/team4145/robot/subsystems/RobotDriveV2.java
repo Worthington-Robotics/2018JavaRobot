@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4145.robot.Robot;
 import org.usfirst.frc.team4145.robot.RobotMap;
-import org.usfirst.team4145.robot.shared.CustomPIDSubsystem;
+import org.usfirst.frc.team4145.robot.shared.CustomPIDSubsystem;
 
 /**
  * Robot drive version 2
@@ -30,7 +30,7 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
     private double DEADBAND_VALUE = 0.15; //nominal deadband 0.15 percent of stick
     private double Y_PERCENTAGE = 0.75; // decrease xy output to percent of full Nominal: 0.75
     private double X_PERCENTAGE = 1.0; //decrease X to percent of full Nominal: 1.0
-    private double Z_PERCENTAGE = 0.50; // z percentage of full stick deflection Nominal: 80
+    private double Z_PERCENTAGE = 0.50; // z percentage of full stick deflection Nominal: 0.50
     private double FRONT_RAMP = 0.0; //ramp time on front motors Nominal: 0.0
     private double REAR_RAMP = 0.0; //ramp time on rear motors Nominal: 0.0
 
@@ -39,13 +39,13 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
     private double INTEGRAL_GAIN = 0.0; //dont generally use Integral as it makes things unstable over time
     private double DERIVATIVE_GAIN = 0.055; //stable at 0.045
     private double ABSOLUTE_TOLERANCE = 0.5; //tolerance on PID control Nominal: 0.5
-    private double PID_LIMIT = 1.0; //limits pid output Nominal: 0.6
+    private double PID_LIMIT = 0.75; //limits pid output Nominal: 0.6
 
 
     public RobotDriveV2() {
         gyroLock = new PIDController(PROPORTIONAL_GAIN, INTEGRAL_GAIN, DERIVATIVE_GAIN, this, this::pidWrite);
         gyroLock.setAbsoluteTolerance(ABSOLUTE_TOLERANCE);
-        gyroLock.setOutputRange(-1, 1);
+        gyroLock.setOutputRange(-PID_LIMIT, PID_LIMIT);
         gyroLock.setInputRange(0, 360);
         gyroLock.setContinuous();
         setBRAKE_MODE(BRAKE_MODE);
@@ -80,7 +80,7 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
         SmartDashboard.putNumber("FPGA Time" , Timer.getFPGATimestamp());
         if (enLock) {
             // Periodically updates while gyro locked
-            setCartesianDrive(lastInputSet[0], lastInputSet[1], pidOutput * PID_LIMIT);
+            setCartesianDrive(lastInputSet[0], lastInputSet[1], pidOutput);
 
         } else {
             // periodically updates drive

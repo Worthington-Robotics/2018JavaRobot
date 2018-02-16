@@ -10,11 +10,11 @@ public class PhillipExchange extends QueueGroup {
 	public PhillipExchange(int autonumber) {
 		if (autonumber == 2) {
 			// Center
-			addParallel(new Command[] { DriveTo(19 * 20), DropForks() }, 500);
+			addSequential(new DriveTo(19 * 20), 500);
 			addSequential(new GyroToAngle(RobotMap.Drive.getGyro() - 90), 250);
 			addSequential(new DriveTo(19 * 67), 1500);
 			addSequential(new GyroToAngle(RobotMap.Drive.getGyro() - 90), 250);
-			addSequential(new DriveTo(19 * 20), 500);
+			addParallel(new Command[] { DriveTo(19 * 20), DropForks() }, 500);
 			addSequential(new DropCube(), 500);
 			addSequential(new GyroToAngle(RobotMap.Drive.getGyro() + 200), 1000);
 			addSequential(new DriveTo(19 * 89),1500);
@@ -22,11 +22,11 @@ public class PhillipExchange extends QueueGroup {
 		}
 		if (autonumber == 1) {
 			// Far Left
-			addParallel(new Command[] { DriveTo(19 * 20), DropForks() }, 500);
+			addSequential(new DriveTo(19 * 20), 500);
 			addSequential(new GyroToAngle(RobotMap.Drive.getGyro() - 90), 250);
 			addSequential(new DriveTo(19 * 40), 750);
 			addSequential(new GyroToAngle(RobotMap.Drive.getGyro() - 90), 250);
-			addSequential(new DriveTo(19 * 20), 500);
+			addParallel(new Command[] { DriveTo(19 * 20), DropForks() }, 500);
 			addSequential(new DropCube(), 500);
 			addSequential(new GyroToAngle(RobotMap.Drive.getGyro() + 200), 1000);
 			addSequential(new DriveTo(19 * 89),1500);
@@ -34,11 +34,11 @@ public class PhillipExchange extends QueueGroup {
 		}
 		if (autonumber == 3) {
 			// Far right
-			addParallel(new Command[] { DriveTo(19 * 20), DropForks() }, 500);
+			addSequential(new DriveTo(19 * 20), 500);
 			addSequential(new GyroToAngle(RobotMap.Drive.getGyro() - 90), 250);
 			addSequential(new DriveTo(19 * 144), 2500);
 			addSequential(new GyroToAngle(RobotMap.Drive.getGyro() - 90), 250);
-			addSequential(new DriveTo(19 * 20), 500);
+			addParallel(new Command[] { DriveTo(19 * 20), DropForks() }, 500);
 			addSequential(new DropCube(), 500);
 			addSequential(new GyroToAngle(RobotMap.Drive.getGyro() + 200), 1000);
 			addSequential(new DriveTo(19 * 89),1500);

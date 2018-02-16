@@ -19,8 +19,8 @@ public class VedScale extends QueueGroup {
 			//Forward then rotate and drop
 			addSequential(new DriveTo(19 * 240), 500);
 			addSequential(new GyroToAngle(45), 100);
-			addParallel(new Command[] {new HighLiftUp(), new LiftToPosition(500)}, 500);
-			addSequential(new DropForks(), 200);
+			addParallel(new Command[] {new HighLiftUp(), new LiftToPosition(500),new DropForks()}, 500);
+			
 			addSequential(new DropCube(), 100);
 		}
 		if (autonumber == 1) {
@@ -35,8 +35,8 @@ public class VedScale extends QueueGroup {
 			//Forward Toward Scale and Drop
 			addSequential(new DriveTo(19 * 210), 500);
 			addSequential(new GyroToAngle(45), 100);
-			addParallel(new Command[] {new HighLiftUp(), new LiftToPosition(500)}, 500);
-			addSequential(new DropForks(), 200)
+			addParallel(new Command[] {new HighLiftUp(), new LiftToPosition(500),new DropForks()}, 500);
+			
 			addSequential(new DropCube(), 100);
 			
 		}

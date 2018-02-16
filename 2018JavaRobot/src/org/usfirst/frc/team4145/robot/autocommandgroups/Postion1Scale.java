@@ -11,8 +11,8 @@ public class Postion1Scale extends QueueGroup {
     		addParallel(new LiftToPosition(500));
     		addSequential(new GyroToAngle(110), 500);
     		addParallel(new Command[] {new HighLiftUp(), new LiftToPosition(500)}, 500);
-    		addParallel(new Command[]{new DriveTo(19*12)},1000);
-    		addSequential(new DropForks(),200);
+    		addParallel(new Command[]{new DriveTo(19*12),new DropForks()},1000);
+
     		
     			addSequential(new DropCube(), 100);
     		
@@ -24,8 +24,8 @@ public class Postion1Scale extends QueueGroup {
     		addParallel(new Command[]{new DriveTo(19*190)},1000);
     		addSequential(new GyroToAngle(81.5), 500);
     		addParallel(new Command[] {new HighLiftUp(), new LiftToPosition(500)}, 500);
-    		addParallel(new Command[]{new DriveTo(19*220)},1500);
-    		addSequential(new DropForks(), 200);
+    		addParallel(new Command[]{new DriveTo(19*220),new DropForks()},1500);
+    		
     		
     			addSequential(new DropCube(), 100);
     	}

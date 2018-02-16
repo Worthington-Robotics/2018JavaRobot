@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4145.robot;
 
 import org.usfirst.frc.team4145.robot.autocommandgroups.FongSwitch;
+import org.usfirst.frc.team4145.robot.autocommandgroups.PhillipExchange;
 import org.usfirst.frc.team4145.robot.shared.CommandQueueGroup;
 
 import java.util.concurrent.LinkedBlockingQueue;
@@ -117,13 +118,13 @@ public class AutoSelector {
             case 24:
                 return null;
             case 31:
-                return new PhillipExchange(0).getQueueStates();
+                return new PhillipExchange(0).getQueuedStates();
             case 32:
-                return new PhillipExchange(0).getQueueStates();
+                return new PhillipExchange(0).getQueuedStates();
             case 33:
-                return new PhillipExchange(0).getQueueStates();
+                return new PhillipExchange(0).getQueuedStates();
             case 34:
-                return new PhillipExchange(0).getQueueStates();
+                return new PhillipExchange(0).getQueuedStates();
             case 41:
                 return new FongSwitch(0).getQueuedStates(); //Switch Right
             case 42:
@@ -141,13 +142,13 @@ public class AutoSelector {
             case 54:
                 return null;
             case 61:
-                return new PhillipExchange(1).getQueueStates();
+                return new PhillipExchange(1).getQueuedStates();
             case 62:
-                return new PhillipExchange(1).getQueueStates();
+                return new PhillipExchange(1).getQueuedStates();
             case 63:
-                return new PhillipExchange(1).getQueueStates();
+                return new PhillipExchange(1).getQueuedStates();
             case 64:
-                return new PhillipExchange(1).getQueueStates();
+                return new PhillipExchange(1).getQueuedStates();
             case 71:
                 return null;
             case 72:
@@ -165,13 +166,13 @@ public class AutoSelector {
             case 84:
                 return null;
             case 91:
-                return new PhillipExchange(2).getQueueStates();
+                return new PhillipExchange(2).getQueuedStates();
             case 92:
-                return new PhillipExchange(2).getQueueStates();
+                return new PhillipExchange(2).getQueuedStates();
             case 93:
-                return new PhillipExchange(2).getQueueStates();
+                return new PhillipExchange(2).getQueuedStates();
             case 94:
-                return new PhillipExchange(2).getQueueStates();
+                return new PhillipExchange(2).getQueuedStates();
             case 101:
                 return null;
             case 102:

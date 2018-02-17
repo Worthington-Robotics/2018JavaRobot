@@ -45,7 +45,6 @@ public class OI {
 
 		Button nine = new JoystickButton(masterStick, 9);
 		nine.whileHeld(new LowGear());
-		System.out.println(masterStick.getPOV());
 		
 		//operator stick - Attack 3
 		secondStick = new Joystick(1);

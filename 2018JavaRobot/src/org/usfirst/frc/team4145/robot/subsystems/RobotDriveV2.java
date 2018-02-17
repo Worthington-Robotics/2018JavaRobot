@@ -76,6 +76,7 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
             lastInputSet[0] *= -1;
             lastInputSet[1] *= -1;
         }
+        evalLowGear();
         if(isLowGear){
             lastInputSet[0] *= Y_CUT_PERCENTAGE;
             lastInputSet[1] *= X_CUT_PERCENTAGE;
@@ -193,6 +194,14 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
         RobotMap.robotdrive.driveCartesian(y, -x, z);
     }
 
+    private void evalLowGear() {
+        if(Robot.oi.getMasterStick().getPOV() >= 0) {
+        	isLowGear = true;
+        } else {
+        	isLowGear = false;
+        }
+    }
+    
     private void setTarget(double target) {
         gyroLock.setSetpoint(target);
     }

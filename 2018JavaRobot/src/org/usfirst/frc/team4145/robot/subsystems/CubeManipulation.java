@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class CubeManipulation extends Subsystem {
 
-	private double shoot = 1;
+	private double shoot = 0.5;
 	private double pull = 0.5;
 	private double push = 0.5;
 
@@ -46,10 +46,10 @@ public class CubeManipulation extends Subsystem {
 	}
 
 	public void dropStart() {
-		RobotMap.dropper.set(0.5);
+		RobotMap.dropper.set(-0.5);
 	}
 
 	public void lift() {
-		RobotMap.dropper.set(-0.5);
+		RobotMap.dropper.set(0.5);
 	}
 }

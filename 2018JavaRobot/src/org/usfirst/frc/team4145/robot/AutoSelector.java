@@ -1,11 +1,8 @@
 package org.usfirst.frc.team4145.robot;
 
-import org.usfirst.frc.team4145.robot.autocommandgroups.FongSwitch;
-import org.usfirst.frc.team4145.robot.autocommandgroups.PhillipExchange;
+import org.usfirst.frc.team4145.robot.autocommandgroups.*;
 import org.usfirst.frc.team4145.robot.shared.CommandQueueGroup;
-import org.usfirst.frc.team4145.robot.shared.Postion1Scale;
-import org.usfirst.frc.team4145.robot.shared.AdamScale;
-import org.usfirst.frc.team4145.robot.shared.VedScale;
+
 
 
 import java.util.concurrent.LinkedBlockingQueue;
@@ -114,13 +111,13 @@ public class AutoSelector {
             case 14:
                 return null;
             case 21:
-                return Postion1Scale(0).getQueueStates();
+                return new Postion1Scale(0).getQueuedStates();
             case 22:
-                return Postion1Scale(0).getQueueStates();
+                return new Postion1Scale(1).getQueuedStates();
             case 23:
-                return Postion1Scale(1).getQueueStates();
+                return new Postion1Scale(0).getQueuedStates();
             case 24:
-                return Postion1Scale(1).getQueueStates();
+                return new Postion1Scale(1).getQueuedStates();
             case 31:
                 return new PhillipExchange(1).getQueuedStates();
             case 32:
@@ -138,13 +135,13 @@ public class AutoSelector {
             case 44:
                 return new FongSwitch(1).getQueuedStates();
             case 51:
-                return VedScale(0).getQueueStates();
+                return null; //new VedScale(0).getQueuedStates();
             case 52:
-                return VedScale(0).getQueueStates();
+                return null; //new VedScale(0).getQueuedStates();
             case 53:
-                return VedScale(1).getQueueStates();
+                return null; //new VedScale(1).getQueuedStates();
             case 54:
-                return VedScale(1).getQueueStates();
+                return null; //new VedScale(1).getQueuedStates();
             case 61:
                 return new PhillipExchange(2).getQueuedStates();
             case 62:
@@ -162,13 +159,13 @@ public class AutoSelector {
             case 74:
                 return null;
             case 81:
-                return AdamScale(0).getQueueStates();
+                return new AdamScale(0).getQueuedStates();
             case 82:
-                return AdamScale(0).getQueueStates();
+                return new AdamScale(1).getQueuedStates();
             case 83:
-                return AdamScale(1).getQueueStates();
+                return new AdamScale(0).getQueuedStates();
             case 84:
-                return AdamScale(1).getQueueStates();
+                return new AdamScale(1).getQueuedStates();
             case 91:
                 return new PhillipExchange(3).getQueuedStates();
             case 92:

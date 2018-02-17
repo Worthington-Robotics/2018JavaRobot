@@ -75,6 +75,7 @@ public class Lift extends Subsystem {
         buttonArray[0] = limit1;
         buttonArray[1] = limit2;
         buttonArray[2] = limit3;
+        buttonArray[3] = limit4;
     }
 
     private void watchdog() {

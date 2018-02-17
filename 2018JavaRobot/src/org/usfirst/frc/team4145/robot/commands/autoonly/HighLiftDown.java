@@ -15,7 +15,7 @@ public class HighLiftDown extends Command {
     }
 
     public void initialize() {
-        RobotMap.lift.liftspeedH(-liftSpeed);
+        RobotMap.lift.stage2Down();
     }
 
     public void execute() {
@@ -23,7 +23,7 @@ public class HighLiftDown extends Command {
     }
 
     public boolean isFinished() {
-        return RobotMap.lift.getLimits()[1] || cycles > timeout;
+        return RobotMap.lift.getLimits()[0] || cycles > timeout;
     }
 
     public void end() {

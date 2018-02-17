@@ -2,7 +2,7 @@ package org.usfirst.frc.team4145.robot.autocommandgroups;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team4145.robot.commands.autoonly.*;
-import org.usfirst.team4145.robot.shared.QueueGroup;
+import org.usfirst.frc.team4145.robot.shared.QueueGroup;
 
 public class VedScale extends QueueGroup {
 	
@@ -10,7 +10,7 @@ public class VedScale extends QueueGroup {
 		if (autonumber == 0) {
 			//Forward then rotate
 			addSequential(new DriveTo(19 * 20), 500);
-			addSequential(new GyrotoAngle(90), 100);
+			addSequential(new GyroToAngle(90), 100);
 			
 			//Forward then rotate
 			addSequential(new DriveTo(19 * 90), 500);

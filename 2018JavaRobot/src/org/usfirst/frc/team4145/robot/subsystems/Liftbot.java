@@ -58,6 +58,7 @@ public class Liftbot extends Subsystem {
 	public void armLock() {
 		if (DriverStation.getInstance().getMatchTime() > 120){
 			//enable locking of lift
+			
 		}
 	}
 

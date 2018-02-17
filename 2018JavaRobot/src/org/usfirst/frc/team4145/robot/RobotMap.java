@@ -31,6 +31,7 @@ public class RobotMap {
     public static Spark liftMotorL, liftMotorH, liftBotMotor;
     public static Spark clampL, clampR, dropper;
     public static Solenoid liftLock;
+    public static Compressor liftlockC;
 
     // sensors
     public static AHRS ahrs; // AHRS system on navx
@@ -65,6 +66,9 @@ public class RobotMap {
 
         // all solenoid objects here
         liftLock = new Solenoid(1);
+        
+        //all compressor objects here
+        liftlockC = new Compressor(0);
 
         // all sensor objects here
         ahrs = new AHRS(SPI.Port.kMXP); // finish declaring AHRS to MXP SPI bus

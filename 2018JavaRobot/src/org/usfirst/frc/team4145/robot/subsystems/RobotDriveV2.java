@@ -23,13 +23,16 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
     private double pidOutput = 0; //DO NOT MODIFY
     private boolean enLock = false;
     private boolean isReversed = false;
+    private boolean isLowGear = false;
     private double[] lastInputSet = {0, 0, 0}; //last input set from joystick update
 
     //general use variables
     private boolean BRAKE_MODE = true; //whether to disable or enable brake mode Nominal: true
     private double DEADBAND_VALUE = 0.15; //nominal deadband 0.15 percent of stick
     private double Y_PERCENTAGE = 0.75; // decrease xy output to percent of full Nominal: 0.75
+    private double Y_CUT_PERCENTAGE = 0.5; //fine adjust Y Nominal: 0.5
     private double X_PERCENTAGE = 1.0; //decrease X to percent of full Nominal: 1.0
+    private double X_CUT_PERCENTAGE = 1.0; //fine adjust X Nominal: 1.0
     private double Z_PERCENTAGE = 0.50; // z percentage of full stick deflection Nominal: 0.50
     private double FRONT_RAMP = 0.0; //ramp time on front motors Nominal: 0.0
     private double REAR_RAMP = 0.0; //ramp time on rear motors Nominal: 0.0
@@ -73,6 +76,10 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
             lastInputSet[0] *= -1;
             lastInputSet[1] *= -1;
         }
+        if(isLowGear){
+            lastInputSet[0] *= Y_CUT_PERCENTAGE;
+            lastInputSet[1] *= X_CUT_PERCENTAGE;
+        }
         SmartDashboard.putNumberArray("compensated stick values", lastInputSet);
         SmartDashboard.putNumber("Gyro Target", gyroLock.getSetpoint());
         SmartDashboard.putNumber("Gyro Angle", getGyro());
@@ -113,6 +120,10 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
      */
     public void flipRefrence(boolean isReversed) {
         this.isReversed = isReversed;
+    }
+
+    public void setLowGear(boolean toSet){
+        isLowGear = toSet;
     }
 
     /**

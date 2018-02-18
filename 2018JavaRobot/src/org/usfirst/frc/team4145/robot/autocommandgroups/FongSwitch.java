@@ -9,6 +9,8 @@ import org.usfirst.frc.team4145.robot.commands.autoonly.LiftToPosition;
 import org.usfirst.frc.team4145.robot.commands.autoonly.DropCube;
 import org.usfirst.frc.team4145.robot.shared.QueueGroup;
 
+import edu.wpi.first.wpilibj.command.Command;
+
 public class FongSwitch extends QueueGroup {
     public FongSwitch(int autoNum) {
         if(autoNum == 0) {

@@ -1,23 +1,26 @@
 package org.usfirst.frc.team4145.robot.autocommandgroups;
 
-import edu.wpi.first.wpilibj.command.QueueGroup;
+import org.usfirst.frc.team4145.robot.commands.autoonly.*;
+import org.usfirst.frc.team4145.robot.shared.QueueGroup;
+
+import edu.wpi.first.wpilibj.command.Command;
+
 
 public class SaahibSwitch extends QueueGroup {
 	public SaahibSwitch(int autonumber){
 		if(autonumber == 0){
-    		addParallel(new Command[]{new DriveTo(19 * 194),new liftToPosition(1000)}, 1500);
-    		addSequential(new GyroToAngle(90), 200);
-    		addSequential(new DropForks(), 200);
-    		addSequential(new DropCube(), 200);
+    		addParallel(new Command[]{new DriveTo(19 * 194),new LiftToPosition(1000)}, 3000);
+    		addSequential(new GyroToAngle(90), 1000);
+    		addSequential(new DropForks(), 1000);
+    		addSequential(new DropCube(), 1000);
 		}
 		if(autonumber == 1 ){
-			addParallel(new Command[]{new DriveTo(19 * 200)}, 1500); 
-			addSequential(new GyroToAngle(90));
-			addParallel(new Command[]{new DriveTo(19 * 154),new liftToPosition(1000)}, 1500);
-			addSequential(new GyroToAngle(90));
-			addSequential(new DriveTo(19 * 5), 3000);
-			addSequential(new DropForks(), 200);
-			addSequential(new DropCube(), 200);
+			addParallel(new Command[]{new DriveTo(19 * 200)}, 2000); 
+			addSequential(new GyroToAngle(90), 1000);
+			addParallel(new Command[]{new DriveTo(19 * 154),new LiftToPosition(1000)}, 4000);
+			addSequential(new GyroToAngle(90), 1000);
+			addParallel(new Command[] {new DriveTo(19 * 5), new DropForks()}, 3000);
+			addSequential(new DropCube(), 1000);
 		}
     }
 }

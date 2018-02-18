@@ -135,13 +135,13 @@ public class AutoSelector {
             case 44:
                 return new FongSwitch(1).getQueuedStates();
             case 51:
-                return null; //new VedScale(0).getQueuedStates();
+                return new VedScale(0).getQueuedStates();
             case 52:
-                return null; //new VedScale(0).getQueuedStates();
+                return new VedScale(0).getQueuedStates();
             case 53:
-                return null; //new VedScale(1).getQueuedStates();
+                return new VedScale(1).getQueuedStates();
             case 54:
-                return null; //new VedScale(1).getQueuedStates();
+                return new VedScale(1).getQueuedStates();
             case 61:
                 return new PhillipExchange(2).getQueuedStates();
             case 62:
@@ -153,11 +153,11 @@ public class AutoSelector {
             case 71:
                 return new MeinekeSwitch(0).getQueuedStates();
             case 72:
-                return new MeienekeSwitch(0).getQueuedStates();
+                return new MeinekeSwitch(0).getQueuedStates();
             case 73:
-                return new MeienekeSwitch(1).getQueuedStates(); 
+                return new MeinekeSwitch(1).getQueuedStates(); 
             case 74:
-                return new MeienekeSwitch(1).getQueuedStates();
+                return new MeinekeSwitch(1).getQueuedStates();
             case 81:
                 return new AdamScale(0).getQueuedStates();
             case 82:

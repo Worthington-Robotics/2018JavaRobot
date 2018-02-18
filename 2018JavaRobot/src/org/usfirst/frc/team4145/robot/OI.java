@@ -74,10 +74,10 @@ public class OI {
 		secondStickNine.whileHeld(new LiftManipulation());
 
 		Button secondStickTen = new JoystickButton(secondStick,10);
-		//secondStickTen.whenPressed(new UnlockLift());
+		secondStickTen.whenPressed(new UnlockLift());
 
 		Button secondStickEleven = new JoystickButton(secondStick, 11);
-		//secondStickEleven.whenPressed(new LockLift());
+		secondStickEleven.whenPressed(new LockLift());
 	}
 
 	public Joystick getMasterStick() {

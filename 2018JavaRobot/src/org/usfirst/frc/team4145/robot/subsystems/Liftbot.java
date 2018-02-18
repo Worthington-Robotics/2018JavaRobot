@@ -45,7 +45,7 @@ public class Liftbot extends Subsystem {
 	public void periodic() {
 		updateLimits();
 		//watchDog();
-		armLock();
+		//armLock();
 	}
 
 	private void updateLimits(){

@@ -15,23 +15,24 @@ public class DriveTo extends Command implements PIDOutput, PIDSource {
 	private PIDController driveTo;
 	private double[] toSet = { 0.0, 0.0, 0.0 };
 	
-	private double kP = 0.0011; //nominal 0.0011
+	private double kP = 0.0050; //nominal 0.0060
 	private double kI = 0.0000; //nominal 0.0000
-	private double kD = 0.0130; //nominal 0.0130
+	private double kD = 0.0120; //nominal 0.0130
 
 	// constructor to initialize stuff
 	public DriveTo(int count) {
 		length = count;
 		driveTo = new PIDController(kP, kI, kD, this, this::pidWrite);
-		driveTo.setAbsoluteTolerance(3);
+		driveTo.setAbsoluteTolerance(5);
 		driveTo.setContinuous(false);
-		driveTo.setOutputRange(-0.4, 0.4);
+		driveTo.setOutputRange(-0.6, 0.6);
 	}
 
 	// Set Setpoint to length
 	protected void initialize() {
 		RobotMap.drive.enableTo(RobotMap.drive.getGyro(), true);
 		RobotMap.driveEncoder.reset();
+		SmartDashboard.putNumber("Wheel Encoder Target", length);
 		driveTo.setSetpoint(length);
 		driveTo.setEnabled(true);
 	}
@@ -60,7 +61,7 @@ public class DriveTo extends Command implements PIDOutput, PIDSource {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return driveTo.onTarget();
+		return false; //return driveTo.onTarget();
 	}
 
 	// Called once after isFinished returns true and disable driveTo

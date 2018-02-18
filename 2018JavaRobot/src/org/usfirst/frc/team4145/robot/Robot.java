@@ -54,6 +54,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("In Auto", 0);
 		SmartDashboard.putNumber("Auto State", -1);
 		SmartDashboard.putString("Auto State Machine status", "State machine not yet started");
+		SmartDashboard.putNumber("Lift Encoder Target", 0);
+		SmartDashboard.putNumber("Wheel Encoder Target", 0);
 		Scheduler.getInstance().removeAll();
 
 	}

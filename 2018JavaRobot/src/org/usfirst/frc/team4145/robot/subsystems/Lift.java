@@ -2,6 +2,8 @@ package org.usfirst.frc.team4145.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc.team4145.robot.Robot;
 import org.usfirst.frc.team4145.robot.RobotMap;
 
@@ -52,6 +54,15 @@ public class Lift extends Subsystem {
         updateLimits();
         updateLift();
         watchdog();
+        runPrints();
+    }
+    
+    private void runPrints() {
+    	SmartDashboard.putNumber("Lift Encoder", RobotMap.liftEnc.get());
+    	SmartDashboard.putBoolean("Stage 1 Low", limit4);
+    	SmartDashboard.putBoolean("Stage 1 High", limit3);
+    	SmartDashboard.putBoolean("Stage 2 Low", limit2);
+    	SmartDashboard.putBoolean("Stage 2 High", limit1);
     }
 
     /**

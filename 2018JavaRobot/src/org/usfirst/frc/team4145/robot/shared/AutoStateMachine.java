@@ -13,7 +13,7 @@ public class AutoStateMachine {
     	autoState = 0;
         if (blockingQueue != null) {
             System.out.println("State machine size:" + blockingQueue.size());
-            SmartDashboard.putString("Auto State Machine status", "State machine preparing to start!");
+            SmartDashboard.putString("Auto State Machine Status", "State machine preparing to start!");
             //System.out.println("blocking queue elements:" + blockingQueue.toArray());
             while (blockingQueue.iterator().hasNext()) {
                 System.out.println("Entering state " + autoState);
@@ -36,11 +36,11 @@ public class AutoStateMachine {
             }
 
             System.out.println("Finished queue");
-            SmartDashboard.putString("Auto State Machine status", "State machine finished Queue");
+            SmartDashboard.putString("Auto State Machine Status", "State machine finished Queue");
         } else {
             System.out.println("State machine list was null!");
             SmartDashboard.putNumber("Auto State", -2);
-            SmartDashboard.putString("Auto State Machine status", "List was NULL!");
+            SmartDashboard.putString("Auto State Machine Status", "List was NULL!");
         }
     };
 

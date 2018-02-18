@@ -13,32 +13,31 @@ public class FongSwitch extends QueueGroup {
         if(autoNum == 0) {
             //LEFT CODE
             //Drive Forward and do fork stuff
-            addParallel(new Command[]{new DriveTo(19 * 50), new LiftToPosition(1000)}, 2000);
+            addParallel(new Command[]{new DriveTo(19 * 10), new LiftToPosition(1000)}, 2000);
 
             //Turn Right and go forward
-            addSequential(new GyroToAngle(-88), 1250);
-            addSequential(new DriveTo(19 * 65), 1900);
+            addSequential(new GyroToAngle(-45), 1000);
+            addSequential(new DriveTo(19 * 65), 3000);
 
             //Go towards switch and	drop cube
-            addSequential(new GyroToAngle(88), 1250);
+            addSequential(new GyroToAngle(45), 1000);
             //addSequential(new VisionTarget(), 2000);
-            addParallel(new Command[]{new DriveTo(19 * 65), new DropForks()}, 2000);
+            addParallel(new Command[]{new DriveTo(19 * 18), new DropForks()}, 2000);
             addSequential(new DropCube(), 1000);
         }
         else{
             //RIGHT CODE
             //Go forward and do fork stuff
-            addParallel(new Command[]{new DriveTo(19 * 24), new LiftToPosition(1000)}, 2000);
-            //addParallel();
+            addParallel(new Command[]{new DriveTo(350), new LiftToPosition(1000)}, 2000);
 
             //Start going forward towards switch
-            addSequential(new GyroToAngle(47), 1400);
-            addSequential(new DriveTo(19 * 70), 2000);
+            addSequential(new GyroToAngle(47), 1000);
+            addSequential(new DriveTo(19 * 60), 3000);
 
             //Go towards switch and drop cube
-            addSequential(new GyroToAngle(-47), 1300);
+            addSequential(new GyroToAngle(-47), 1000);
             //addSequential(new VisionTarget(), 1000);
-            addParallel(new Command[]{new DriveTo(19 * 40), new DropForks()}, 2000);
+            addParallel(new Command[]{new DriveTo(19 * 20), new DropForks()}, 1500);
 
             addSequential(new DropCube(), 1000);
 

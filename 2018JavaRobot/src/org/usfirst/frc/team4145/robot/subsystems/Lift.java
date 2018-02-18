@@ -99,7 +99,7 @@ public class Lift extends Subsystem {
         if (limit3 && RobotMap.liftMotorL.get() > 0) {
             stopliftL();
         }
-        if (limit4 && RobotMap.liftMotorL.get() < 0) {
+        if (DriverStation.getInstance().isAutonomous() && limit4 && RobotMap.liftMotorL.get() < 0) {
             stopliftL();
         }
     }

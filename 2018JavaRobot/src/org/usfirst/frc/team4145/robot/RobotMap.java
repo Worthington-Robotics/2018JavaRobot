@@ -64,11 +64,11 @@ public class RobotMap {
         dropper = new Spark(4);
         liftBotMotor = new Spark(5);
 
-        // all solenoid objects here
-        liftLock = new DoubleSolenoid(1,2);
-        
         //all compressor objects here
-        liftlockC = new Compressor(0);
+        liftlockC = new Compressor(5);
+        
+        // all solenoid objects here
+        liftLock = new DoubleSolenoid(5,0,1);
 
         // all sensor objects here
         ahrs = new AHRS(SPI.Port.kMXP); // finish declaring AHRS to MXP SPI bus

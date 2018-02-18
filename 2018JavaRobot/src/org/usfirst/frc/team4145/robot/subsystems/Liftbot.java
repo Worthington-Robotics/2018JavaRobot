@@ -7,7 +7,10 @@
 
 package org.usfirst.frc.team4145.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.usfirst.frc.team4145.robot.Robot;
 import org.usfirst.frc.team4145.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -31,18 +34,18 @@ public class Liftbot extends Subsystem {
 	}
 
 	public void lock() {
-		RobotMap.liftLock.set(true);
+		RobotMap.liftLock.set(DoubleSolenoid.Value.kReverse);
 	}
 
 	public void unlock() {
-		RobotMap.liftLock.set(false);
+		RobotMap.liftLock.set(DoubleSolenoid.Value.kForward);
 	}
 
 	@Override
 	public void periodic() {
 		updateLimits();
 		//watchDog();
-		//armLock();
+		armLock();
 	}
 
 	private void updateLimits(){
@@ -54,9 +57,17 @@ public class Liftbot extends Subsystem {
 		if (RobotMap.liftBotMotor.get() > 0 && LowLimit) stop();
 		if (RobotMap.liftBotMotor.get() < 0 && highLimit) stop();
 	}
-
-	public void armLock() {
-
+	
+	private void armLock() {
+		if(Robot.oi.getSecondStick().getRawButton(10)) {
+			SmartDashboard.putString("Lock State", "Lift Locked");
+			lock();
+		}
+		else if(Robot.oi.getSecondStick().getRawButton(11)) {
+			SmartDashboard.putString("Lock State", "Lift Unlocked");
+			unlock();
+		}
+		
 	}
 
 }

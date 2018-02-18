@@ -1,7 +1,9 @@
 package org.usfirst.frc.team4145.robot;
 
-import org.usfirst.frc.team4145.robot.autocommandgroups.FongSwitch;
+import org.usfirst.frc.team4145.robot.autocommandgroups.*;
 import org.usfirst.frc.team4145.robot.shared.CommandQueueGroup;
+
+
 
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -109,21 +111,21 @@ public class AutoSelector {
             case 14:
                 return null;
             case 21:
-                return null;
+                return new Postion1Scale(0).getQueuedStates();
             case 22:
-                return null;
+                return new Postion1Scale(1).getQueuedStates();
             case 23:
-                return null;
+                return new Postion1Scale(0).getQueuedStates();
             case 24:
-                return null;
+                return new Postion1Scale(1).getQueuedStates();
             case 31:
-                return null;
+                return new PhillipExchange(1).getQueuedStates();
             case 32:
-                return null;
+                return new PhillipExchange(1).getQueuedStates();
             case 33:
-                return null;
+                return new PhillipExchange(1).getQueuedStates();
             case 34:
-                return null;
+                return new PhillipExchange(1).getQueuedStates();
             case 41:
                 return new FongSwitch(0).getQueuedStates(); //Switch Right
             case 42:
@@ -133,21 +135,21 @@ public class AutoSelector {
             case 44:
                 return new FongSwitch(1).getQueuedStates();
             case 51:
-                return null;
+                return null; //new VedScale(0).getQueuedStates();
             case 52:
-                return null;
+                return null; //new VedScale(0).getQueuedStates();
             case 53:
-                return null;
+                return null; //new VedScale(1).getQueuedStates();
             case 54:
-                return null;
+                return null; //new VedScale(1).getQueuedStates();
             case 61:
-                return null;
+                return new PhillipExchange(2).getQueuedStates();
             case 62:
-                return null;
+                return new PhillipExchange(2).getQueuedStates();
             case 63:
-                return null;
+                return new PhillipExchange(2).getQueuedStates();
             case 64:
-                return null;
+                return new PhillipExchange(2).getQueuedStates();
             case 71:
                 return null;
             case 72:
@@ -157,21 +159,21 @@ public class AutoSelector {
             case 74:
                 return null;
             case 81:
-                return null;
+                return new AdamScale(0).getQueuedStates();
             case 82:
-                return null;
+                return new AdamScale(1).getQueuedStates();
             case 83:
-                return null;
+                return new AdamScale(0).getQueuedStates();
             case 84:
-                return null;
+                return new AdamScale(1).getQueuedStates();
             case 91:
-                return null;
+                return new PhillipExchange(3).getQueuedStates();
             case 92:
-                return null;
+                return new PhillipExchange(3).getQueuedStates();
             case 93:
-                return null;
+                return new PhillipExchange(3).getQueuedStates();
             case 94:
-                return null;
+                return new PhillipExchange(3).getQueuedStates();
             case 101:
                 return null;
             case 102:

@@ -7,50 +7,42 @@ import org.usfirst.frc.team4145.robot.commands.autoonly.GyroToAngle;
 import org.usfirst.frc.team4145.robot.commands.autoonly.HighLiftUp;
 import org.usfirst.frc.team4145.robot.commands.autoonly.LiftToPosition;
 import org.usfirst.frc.team4145.robot.commands.autoonly.DropCube;
+import org.usfirst.frc.team4145.robot.shared.QueueGroup;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
+public class FongSwitch extends QueueGroup {
+    public FongSwitch(int autoNum) {
+        if(autoNum == 0) {
+            //LEFT CODE
+            //Drive Forward and do fork stuff
+            addParallel(new Command[]{new DriveTo(19 * 10), new LiftToPosition(1000)}, 2000);
 
-public class FongSwitch extends CommandGroup {
+            //Turn Right and go forward
+            addSequential(new GyroToAngle(-45), 1000);
+            addSequential(new DriveTo(19 * 65), 3000);
 
-	public FongSwitch(int autonumber) {
-		if (autonumber == 0) {
-			//Go forward and do fork stuff
-			addParallel(new DriveTo(19 * 24));
-			addParallel(new GyroToAngle(RobotMap.drive.getGyro()));
-			addParallel(new DropForks);
-			addSequential(new LiftToPosition(500));
-			
-			//Start going forward towards switch
-			addSequential(new GyroToAngle(RobotMap.drive.getGyro() + 47));
-			addParallel(new GyroToAngle(RobotMap.drive.getGyro()));
-			addSequential(new DriveTo(19 * 70));
-			
-			//Go towards switch and drop cube
-			addsequential(new GyroToAngle(RobotMap.drive.getGyro() - 47));
-			addSequential(new VisionTarget());
-			addParallel(new GyroToAngle(RobotMap.drive.getGyro()));
-			addSequential(new DriveTo(19 * 36));
-			addsequential(new DropCube());
-		}
-		if (autonumber == 1) {
-			//Drive Forward and do fork stuff
-			addParallel(new DriveTo(19 * 50));
-			addParallel(new DropForks());
-			addParallel(new LiftToPosition(500));
-			addSequential(new GyroToAngle(RobotMap.drive.getGyro()));
-			
-			//Turn Right and go forward
-			addSequential(new GyroToAngle(RobotMap.drive.getGyro() - 90));
-			addParallel(new GyroToAngle(RobotMap.drive.getGyro()));
-			addSequential(new DriveTo(19 * 70));
-					
-			//Go towards switch and	drop cube
-			addSequential (new GyroToAngle(RobotMap.drive.getGyro() + 90));
-			addSequential(new VisionTarget());
-			addParallel(new GyroToAngle(RobotMap.drive.getGyro());
-			addSequential(new DriveTo(19 * 70));
-			addSequential(new DropCube());
-		}
-	}
-	
+            //Go towards switch and	drop cube
+            addSequential(new GyroToAngle(45), 1000);
+            //addSequential(new VisionTarget(), 2000);
+            addParallel(new Command[]{new DriveTo(19 * 18), new DropForks()}, 2000);
+            addSequential(new DropCube(), 1000);
+        }
+        else{
+            //RIGHT CODE
+            //Go forward and do fork stuff
+            addParallel(new Command[]{new DriveTo(350), new LiftToPosition(1000)}, 2000);
+
+            //Start going forward towards switch
+            addSequential(new GyroToAngle(47), 1000);
+            addSequential(new DriveTo(19 * 60), 3000);
+
+            //Go towards switch and drop cube
+            addSequential(new GyroToAngle(-47), 1000);
+            //addSequential(new VisionTarget(), 1000);
+            addParallel(new Command[]{new DriveTo(19 * 20), new DropForks()}, 1500);
+
+            addSequential(new DropCube(), 1000);
+
+
+        }
+    }
 }

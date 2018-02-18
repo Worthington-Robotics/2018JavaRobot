@@ -1,12 +1,12 @@
 package org.usfirst.frc.team4145.robot.commands.autoonly;
 
+import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team4145.robot.RobotMap;
 
-public class HighLiftUp {
+public class HighLiftUp extends Command {
 
     private int cycles = 0; //DO NOT CHANGE
-    private int timeout = 50; //timeout on command Nominal: 50 cycles (1 second)
-    private double liftSpeed = 0.5; //sets speed of lift Nominal: 0.5
+    private int timeout = 500; //timeout on command Nominal: 50 cycles (1 second)
 
 
     public HighLiftUp() {
@@ -14,7 +14,8 @@ public class HighLiftUp {
     }
 
     public void initialize() {
-        RobotMap.lift.liftspeedH(liftSpeed);
+        RobotMap.lift.stage2Up();
+        System.out.println("Starting high lift up");
     }
 
     public void execute() {
@@ -22,11 +23,12 @@ public class HighLiftUp {
     }
 
     public boolean isFinished() {
-        return RobotMap.lift.getLimits()[0] || cycles > timeout;
+        return false; //RobotMap.lift.getLimits()[1]; //|| cycles > timeout;
     }
 
     public void end() {
         RobotMap.lift.stopliftH();
+        System.out.println("Stopping Lift");
     }
 
     public void interrupted() {

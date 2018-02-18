@@ -2,6 +2,8 @@ package org.usfirst.frc.team4145.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc.team4145.robot.Robot;
 import org.usfirst.frc.team4145.robot.RobotMap;
 
@@ -52,6 +54,15 @@ public class Lift extends Subsystem {
         updateLimits();
         updateLift();
         watchdog();
+        runPrints();
+    }
+    
+    private void runPrints() {
+    	SmartDashboard.putNumber("Lift Encoder", RobotMap.liftEnc.get());
+    	SmartDashboard.putBoolean("Stage 1 Low", limit4);
+    	SmartDashboard.putBoolean("Stage 1 High", limit3);
+    	SmartDashboard.putBoolean("Stage 2 Low", limit2);
+    	SmartDashboard.putBoolean("Stage 2 High", limit1);
     }
 
     /**
@@ -75,6 +86,7 @@ public class Lift extends Subsystem {
         buttonArray[0] = limit1;
         buttonArray[1] = limit2;
         buttonArray[2] = limit3;
+        buttonArray[3] = limit4;
     }
 
     private void watchdog() {
@@ -87,7 +99,7 @@ public class Lift extends Subsystem {
         if (limit3 && RobotMap.liftMotorL.get() > 0) {
             stopliftL();
         }
-        if (limit4 && RobotMap.liftEnc.get() <= bottomLimit) {
+        if (DriverStation.getInstance().isAutonomous() && limit4 && RobotMap.liftMotorL.get() < 0) {
             stopliftL();
         }
     }

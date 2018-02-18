@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class LiftToPosition extends Command implements PIDSource, PIDOutput {
 
@@ -38,6 +39,7 @@ public class LiftToPosition extends Command implements PIDSource, PIDOutput {
 
 	public void initialize() {
 		//System.out.println("Starting LiftPID");
+        SmartDashboard.putNumber("Lift Encoder Target", newCount);
 		liftPid.setSetpoint(newCount); // set target of pid
 		liftPid.enable(); // start pid
 

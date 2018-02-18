@@ -9,9 +9,10 @@ public class MeinekeSwitch extends CommandGroup {
 
 		if (autonomous == 0) {
 			//Forward 109 inches, raise lift, drop forks
-			addParallel(new Command[] {new DriveTo(19*109), new liftToPosition(1000), new DropForks()}, 2500);
+			addParallel(new Command[] {new DriveTo(19*109), new liftToPosition(1000)}, 2500);
 			addSequential(new GyroToAngle(-15), 1500);// turn left 15 degrees
-			addSequential(new DropCube(), 500); // launch cube 
+			addSequential(new DropForks(), 200);
+			addSequential(new DropCube(), 200); // launch cube 
 		}
 		else
 		{
@@ -21,6 +22,7 @@ public class MeinekeSwitch extends CommandGroup {
 			// Forward 189 inches, raise lift, drop forks
 			addParallel(new Command[] {new DriveTo(19*189), new liftToPosition(1000), new DropForks()}, 2000);
 			addSequential(new GyroToAngle(-90), 2000);//turn left 90 degrees
+			addSequential(new DropForks(), 200);
 			addSequential(DropCube(), 500);//launch cube 
 		}
 	}

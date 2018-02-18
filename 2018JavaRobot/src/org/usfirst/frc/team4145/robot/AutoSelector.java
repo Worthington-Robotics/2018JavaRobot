@@ -103,13 +103,13 @@ public class AutoSelector {
         //System.out.println("Auto choice:" + (usrAuto * 10 + fieldPos));
         switch (usrAuto * 10 + fieldPos) {
             case 11:
-                return null;
+                return new SaahibSwitch(1).getQueuedStates();
             case 12:
-                return null;
+                return new SaahibSwitch(1).getQueuedStates();
             case 13:
-                return null;
+                return new SaahibSwitch(1).getQueuedStates();
             case 14:
-                return null;
+                return new SaahibSwitch(1).getQueuedStates();
             case 21:
                 return new Postion1Scale(0).getQueuedStates();
             case 22:
@@ -151,13 +151,13 @@ public class AutoSelector {
             case 64:
                 return new PhillipExchange(2).getQueuedStates();
             case 71:
-                return null;
+                return new MeinekeSwitch(0).getQueuedStates();
             case 72:
-                return null;
+                return new MeienekeSwitch(0).getQueuedStates();
             case 73:
-                return null;
+                return new MeienekeSwitch(1).getQueuedStates(); 
             case 74:
-                return null;
+                return new MeienekeSwitch(1).getQueuedStates();
             case 81:
                 return new AdamScale(0).getQueuedStates();
             case 82:

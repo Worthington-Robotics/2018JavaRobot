@@ -16,9 +16,9 @@ public class LiftToPosition extends Command implements PIDSource, PIDOutput {
 
 	private int TOLERANCE = 1;
 	private int AUTHORITY = 1;
-	private double kP = 0.025;
+	private double kP = 0.035;
 	private double kI = 0.000;
-	private double kD = 0.005;
+	private double kD = 0.045;
 
 	public LiftToPosition(int count) { //
 		requires(RobotMap.lift);
@@ -49,7 +49,7 @@ public class LiftToPosition extends Command implements PIDSource, PIDOutput {
 	}
 
 	public boolean isFinished() {
-		return liftPid.onTarget(); // If pid is at tolerance
+		return false; // If pid is at tolerance
 
 	}
 

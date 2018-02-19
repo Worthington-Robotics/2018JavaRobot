@@ -15,9 +15,9 @@ public class DriveTo extends Command implements PIDOutput, PIDSource {
 	private PIDController driveTo;
 	private double[] toSet = { 0.0, 0.0, 0.0 };
 	
-	private double kP = 0.0050; //nominal 0.0060
+	private double kP = 0.0045; //nominal 0.0060
 	private double kI = 0.0000; //nominal 0.0000
-	private double kD = 0.0120; //nominal 0.0130
+	private double kD = 0.0070; //nominal 0.0130
 
 	// constructor to initialize stuff
 	public DriveTo(int count) {
@@ -25,7 +25,7 @@ public class DriveTo extends Command implements PIDOutput, PIDSource {
 		driveTo = new PIDController(kP, kI, kD, this, this::pidWrite);
 		driveTo.setAbsoluteTolerance(5);
 		driveTo.setContinuous(false);
-		driveTo.setOutputRange(-0.6, 0.6);
+		driveTo.setOutputRange(-0.4, 0.4);
 	}
 
 	// Set Setpoint to length

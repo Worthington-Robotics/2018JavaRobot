@@ -27,7 +27,7 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
     private double[] lastInputSet = {0, 0, 0}; //last input set from joystick update
 
     //general use variables
-    private boolean BRAKE_MODE = false; //whether to disable or enable brake mode Nominal: true
+    private boolean BRAKE_MODE = true; //whether to disable or enable brake mode Nominal: true
     private double DEADBAND_VALUE = 0.15; //nominal deadband 0.15 percent of stick
     private double Y_PERCENTAGE = 0.75; // decrease xy output to percent of full Nominal: 0.75
     private double Y_CUT_PERCENTAGE = 0.5; //fine adjust Y Nominal: 0.5

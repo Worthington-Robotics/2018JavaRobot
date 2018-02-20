@@ -81,8 +81,8 @@ public class Lift extends Subsystem {
     private void updateLimits() {
         limit1 = !RobotMap.switchHBase.get(); //normally open
         limit2 = !RobotMap.switchHTop.get(); //normally open
-        limit3 = !RobotMap.switchLTop.get();
-        limit4 = !RobotMap.switchLBase.get();
+        limit3 = RobotMap.liftMotorL.getSensorCollection().isFwdLimitSwitchClosed();
+        limit4 = RobotMap.liftMotorL.getSensorCollection().isRevLimitSwitchClosed();
         buttonArray[0] = limit1;
         buttonArray[1] = limit2;
         buttonArray[2] = limit3;
@@ -95,12 +95,6 @@ public class Lift extends Subsystem {
         }
         if (limit2 && RobotMap.liftMotorH.get() > 0) {
             stopliftH();
-        }
-        if (limit3 && RobotMap.liftMotorL.get() > 0) {
-            stopliftL();
-        }
-        if (DriverStation.getInstance().isAutonomous() && limit4 && RobotMap.liftMotorL.get() < 0) {
-            stopliftL();
         }
     }
 

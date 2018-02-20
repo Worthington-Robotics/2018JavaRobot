@@ -28,7 +28,8 @@ public class RobotMap {
     public static WPI_TalonSRX driveMotor1, driveMotor2, driveMotor3, driveMotor4; // need to use WPI_talonSRX for drivetrain use
     public static MecanumDrive robotdrive; // meccanum drive object
     public static Encoder driveEncoder;
-    public static Spark liftMotorL, liftMotorH, liftBotMotor;
+    public static WPI_TalonSRX liftMotorL;
+    public static Spark liftMotorH, liftBotMotor;
     public static Spark clampL, clampR, dropper;
     public static DoubleSolenoid liftLock;
     public static Compressor liftlockC;
@@ -58,7 +59,7 @@ public class RobotMap {
         driveMotor4 = new WPI_TalonSRX(4);
         robotdrive = new MecanumDrive(driveMotor1, driveMotor2, driveMotor3, driveMotor4); // create meccanum drive
         liftMotorH = new Spark(0);
-        liftMotorL = new Spark(1);
+        liftMotorL = new WPI_TalonSRX(6);
         clampL = new Spark(2);
         clampR = new Spark(3);
         dropper = new Spark(4);
@@ -74,18 +75,14 @@ public class RobotMap {
         ahrs = new AHRS(SPI.Port.kMXP); // finish declaring AHRS to MXP SPI bus
         ahrs.reset();
         driveEncoder = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
-        liftEnc = new Encoder(2, 3, true, Encoder.EncodingType.k4X);
-        switchLTop = new DigitalInput(4);
-        switchLBase = new DigitalInput(5);
+        liftEnc = new Encoder(4, 5, true, Encoder.EncodingType.k4X);
         switchHTop = new DigitalInput(6);
         switchHBase = new DigitalInput(7);
-        botHighSw = new DigitalInput(8);
-        botLowSw = new DigitalInput(9);
 
         // all subsystem objects here
         exampleSystem = new ExampleSubsystem();
         drive = new RobotDriveV2();
-        vision = new RobotVision();
+        //vision = new RobotVision();
         liftBot = new Liftbot();
         lift = new Lift();
         cubeManipulator = new CubeManipulation();

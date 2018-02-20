@@ -1,10 +1,8 @@
 package org.usfirst.frc.team4145.robot.autocommandgroups;
 
-import org.usfirst.frc.team4145.robot.RobotMap;
 import org.usfirst.frc.team4145.robot.commands.autoonly.DriveTo;
 import org.usfirst.frc.team4145.robot.commands.autoonly.DropForks;
 import org.usfirst.frc.team4145.robot.commands.autoonly.GyroToAngle;
-import org.usfirst.frc.team4145.robot.commands.autoonly.HighLiftUp;
 import org.usfirst.frc.team4145.robot.commands.autoonly.LiftToPosition;
 import org.usfirst.frc.team4145.robot.commands.autoonly.DropCube;
 import org.usfirst.frc.team4145.robot.shared.QueueGroup;

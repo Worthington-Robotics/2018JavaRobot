@@ -43,7 +43,7 @@ public class Liftbot extends Subsystem {
 
 	@Override
 	public void periodic() {
-		updateLimits();
+		//updateLimits();
 		//watchDog();
 		//armLock();
 	}

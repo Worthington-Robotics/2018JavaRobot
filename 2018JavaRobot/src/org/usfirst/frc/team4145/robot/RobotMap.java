@@ -37,7 +37,7 @@ public class RobotMap {
     // sensors
     public static AHRS ahrs; // AHRS system on navx
     public static Encoder liftEnc;
-    public static DigitalInput switchLBase, switchLTop, switchHBase, switchHTop;
+    public static DigitalInput switchHBase, switchHTop;
     public static DigitalInput botHighSw, botLowSw;
 
     // subsystems public static

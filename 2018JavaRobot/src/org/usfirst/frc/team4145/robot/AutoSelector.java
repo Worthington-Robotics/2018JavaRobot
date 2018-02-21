@@ -68,7 +68,7 @@ public class AutoSelector {
             }
         }
         // return the last possible enum by default
-        return UserSelection.values()[UserSelection.values().length];
+        return UserSelection.values()[UserSelection.values().length-1];
     }
 
     private static int getFieldPos(String GameData) {

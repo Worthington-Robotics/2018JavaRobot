@@ -6,9 +6,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class CubeManipulation extends Subsystem {
 
-	private double shoot = 0.5;
-	private double pull = 0.5;
-	private double push = 0.5;
+	private double shoot = 0.85; //Nominal Real 0.50
+	private double pull = 0.75; //Nominal Real 0.50
+	private double push = 0.85; //Nominal Real 0.50
 
 	public CubeManipulation() {
 

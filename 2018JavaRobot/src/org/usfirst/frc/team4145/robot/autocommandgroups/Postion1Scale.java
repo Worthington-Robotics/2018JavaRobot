@@ -17,10 +17,10 @@ public class Postion1Scale extends QueueGroup {
     	//Right
     	if(autonumber == 1){
     		addParallel(new Command[]{new DriveTo(-19*220)},5000);
-    		addSequential(new GyroToAngle(90), 1000);
-    		addParallel(new Command[]{new DriveTo(-19*215), new HighLiftUp()},4000);
-    		addParallel(new Command[] {new GyroToAngle(90), new HighLiftUp()}, 1000);
-    		//addParallel(new Command[] {new HighLiftUp(), new DriveTo(19*50)}, 2000);
+    		addSequential(new GyroToAngle(100), 1000);
+    		//addParallel(new Command[]{new DriveTo(-19*215), new HighLiftUp()},4000);
+    		//addParallel(new Command[] {new GyroToAngle(80), new HighLiftUp()}, 1000);
+    		//addParallel(new Command[] {new HighLiftUp(), new DriveTo(19*38)}, 2000);
     		//ddSequential(new DropCube(), 1000);
     	}
     }

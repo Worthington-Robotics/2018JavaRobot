@@ -23,7 +23,7 @@ public class DriveTo extends Command implements PIDOutput, PIDSource {
 	public DriveTo(int count) {
 		length = count;
 		driveTo = new PIDController(kP, kI, kD, this, this::pidWrite);
-		driveTo.setAbsoluteTolerance(5);
+		driveTo.setAbsoluteTolerance(19);
 		driveTo.setContinuous(false);
 		driveTo.setOutputRange(-0.6, 0.6);
 	}

@@ -16,9 +16,9 @@ public class LiftToPosition extends Command implements PIDSource, PIDOutput {
 
 	private int TOLERANCE = 1;
 	private int AUTHORITY = 1;
-	private double kP = 0.025;
+	private double kP = 0.020;
 	private double kI = 0.000;
-	private double kD = 0.045;
+	private double kD = 0.000;
 
 	public LiftToPosition(int count) { //
 		requires(RobotMap.lift);

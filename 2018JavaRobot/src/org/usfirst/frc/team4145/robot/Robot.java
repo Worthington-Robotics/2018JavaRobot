@@ -39,6 +39,7 @@ public class Robot extends TimedRobot {
         oi = new OI();
         SmartDashboard.putNumber("Auto State", -1);
         CameraServer.getInstance().startAutomaticCapture();
+        SmartDashboard.putNumber("Code Revision", 106);
 
     }
 

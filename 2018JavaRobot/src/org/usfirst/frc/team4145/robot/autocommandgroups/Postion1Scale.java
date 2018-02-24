@@ -6,12 +6,15 @@ import org.usfirst.frc.team4145.robot.commands.autoonly.*;
 import org.usfirst.frc.team4145.robot.shared.QueueGroup;
 
 public class Postion1Scale extends QueueGroup {
+
+	private int LEFT_LIFT_TO = 1000;
+
     public Postion1Scale(int autonumber){
     	//Left
     	if(autonumber == 0){ //If it is the 1st auto assignment
-    		addParallel(new Command[]{new DriveTo(-19*265),new HighLiftUp()},4500);
-    		addParallel(new Command[] {new GyroToAngle(-125)}, 1500);
-    		addParallel(new Command[]{new DriveTo(19*20),new DropForks()},1200);
+			addParallel(new Command[]{new DriveTo(-19*270), new LiftToPosition(LEFT_LIFT_TO)},4500);
+    		addParallel(new Command[] {new GyroToAngle(-125), new HighLiftUp(), new LiftToPosition(LEFT_LIFT_TO)}, 1500);
+    		addParallel(new Command[]{new DriveTo(19*17), new LiftToPosition(LEFT_LIFT_TO)},1500);
     		addSequential(new DropCube(), 1000);
     	}
     	//Right

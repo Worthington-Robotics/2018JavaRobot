@@ -41,8 +41,8 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
     private double PROPORTIONAL_GAIN = 0.033; //stable at 0.033
     private double INTEGRAL_GAIN = 0.0; //dont generally use Integral as it makes things unstable over time
     private double DERIVATIVE_GAIN = 0.055; //stable at 0.045
-    private double ABSOLUTE_TOLERANCE = 0.5; //tolerance on PID control Nominal: 0.5
-    private double PID_LIMIT = 0.75; //limits pid output Nominal: 0.6
+    private double ABSOLUTE_TOLERANCE = 1.0; //tolerance on PID control Nominal: 0.5
+    private double PID_LIMIT = 0.65; //limits pid output Nominal: 0.6
 
 
     public RobotDriveV2() {

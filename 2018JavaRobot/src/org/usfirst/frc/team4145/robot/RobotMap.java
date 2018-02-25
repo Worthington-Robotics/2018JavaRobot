@@ -21,7 +21,18 @@ import org.usfirst.frc.team4145.robot.subsystems.*;
  */
 public class RobotMap {
 
-    // public variables
+    //close scale variables
+    public static int CLOSE_SCALE_DISTANCE = -19 * 270;
+    public static double CLOSE_SCALE_TURN = 125;
+    public static int CLOSE_SCALE_ROLL = 19*17;
+    public static int LIFT_TO_SCALE = 1000;
+
+    //far scale variables
+    public static int FAR_SCALE_DISTANCE_1 = -19 * 190;
+    public static double FAR_SCALE_TURN_1 = 90;
+    public static int FAR_SCALE_DISTANCE_2 = -19*215;
+    public static double FAR_SCALE_TURN_2 = 80;
+    public static int FAR_SCALE_DISTANCE_3 = 19*38;
 
 
     // actuators

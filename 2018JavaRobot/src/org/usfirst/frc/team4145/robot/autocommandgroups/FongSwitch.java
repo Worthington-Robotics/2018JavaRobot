@@ -14,32 +14,29 @@ public class FongSwitch extends QueueGroup {
         if(autoNum == 0) {
             //LEFT CODE
             //Drive Forward and do fork stuff
-            addParallel(new Command[]{new DriveTo(19 * 10), new LiftToPosition(1000)}, 2000);
+            addParallel(new Command[]{new DriveTo(19 * 12), new LiftToPosition(1000)}, 1500);
 
             //Turn Right and go forward
-            addSequential(new GyroToAngle(-45), 1000);
-            addSequential(new DriveTo(19 * 65), 3000);
+            addParallel(new Command[]{new GyroToAngle(-45), new LiftToPosition(1000)}, 1000);
+            addParallel(new Command[]{new DriveTo(19 * 85), new LiftToPosition(1000)}, 3000);
 
             //Go towards switch and	drop cube
-            addSequential(new GyroToAngle(45), 1000);
-            //addSequential(new VisionTarget(), 2000);
-            addParallel(new Command[]{new DriveTo(19 * 18), new DropForks()}, 2000);
+            addParallel(new Command[]{new GyroToAngle(45), new LiftToPosition(1000)}, 1000);
+            addParallel(new Command[]{new DriveTo(19 * 40), new DropForks(), new LiftToPosition(1000)}, 1900);
             addSequential(new DropCube(), 1000);
         }
         else{
             //RIGHT CODE
             //Go forward and do fork stuff
-            addParallel(new Command[]{new DriveTo(350), new LiftToPosition(1000)}, 2000);
+            addParallel(new Command[]{new DriveTo(19 * 12), new LiftToPosition(1000)}, 1500);
 
-            //Start going forward towards switch
-            addSequential(new GyroToAngle(47), 1000);
-            addSequential(new DriveTo(19 * 60), 3000);
+            //Turn Right and go forward
+            addParallel(new Command[]{new GyroToAngle(45), new LiftToPosition(1000)}, 1000);
+            addParallel(new Command[]{new DriveTo(19 * 75), new LiftToPosition(1000)}, 3000);
 
-            //Go towards switch and drop cube
-            addSequential(new GyroToAngle(-47), 1000);
-            //addSequential(new VisionTarget(), 1000);
-            addParallel(new Command[]{new DriveTo(19 * 20), new DropForks()}, 1500);
-
+            //Go towards switch and	drop cube
+            addParallel(new Command[]{new GyroToAngle(-45), new LiftToPosition(1000)}, 1000);
+            addParallel(new Command[]{new DriveTo(19 * 40), new DropForks(), new LiftToPosition(1000)}, 1900);
             addSequential(new DropCube(), 1000);
 
 

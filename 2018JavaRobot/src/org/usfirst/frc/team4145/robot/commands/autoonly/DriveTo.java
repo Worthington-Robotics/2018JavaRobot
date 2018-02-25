@@ -15,21 +15,27 @@ public class DriveTo extends Command implements PIDOutput, PIDSource {
 	private PIDController driveTo;
 	private double[] toSet = { 0.0, 0.0, 0.0 };
 	
-	private double kP = 0.0060; //nominal 0.0060
+	private double kP = 0.0040; //nominal 0.0040
 	private double kI = 0.0000; //nominal 0.0000
-	private double kD = 0.0400; //nominal 0.0230
+	private double kD = 0.0250; //nominal 0.0250
+	private double FORWARD_AUTHORITY = 0.4; //nominal 0.4
+	private double REVERSE_AUTHORITY = 0.6; //nominal 0.6
 
 	// constructor to initialize stuff
 	public DriveTo(int count) {
 		length = count;
 		driveTo = new PIDController(kP, kI, kD, this, this::pidWrite);
-		driveTo.setAbsoluteTolerance(19);
+		//driveTo.setAbsoluteTolerance(0);
 		driveTo.setContinuous(false);
-		driveTo.setOutputRange(-0.6, 0.6);
+		if(count > 0)
+			driveTo.setOutputRange(-FORWARD_AUTHORITY, FORWARD_AUTHORITY);
+		else
+			driveTo.setOutputRange(-REVERSE_AUTHORITY,REVERSE_AUTHORITY);
 	}
 
 	// Set Setpoint to length
 	protected void initialize() {
+		//RobotMap.drive.setDynamicBrakeMode(new boolean[] {true, false, true, false});
 		RobotMap.drive.enableTo(RobotMap.drive.getGyro(), true);
 		RobotMap.driveEncoder.reset();
 		SmartDashboard.putNumber("Wheel Encoder Target", length);
@@ -54,6 +60,8 @@ public class DriveTo extends Command implements PIDOutput, PIDSource {
 
 	@Override
 	public void pidWrite(double output) {
+		System.out.println("Pid Written to: " + output);
+		System.out.println("Encoder Value at call: " + pidGet());
 		toSet[0] = -output;
 		RobotMap.drive.setInput(toSet);
 		

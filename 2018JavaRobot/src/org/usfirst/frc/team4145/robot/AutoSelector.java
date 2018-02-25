@@ -17,9 +17,20 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 enum UserSelection {
 
-    Auto1("Position 1 Switch", 1), Auto2("Position 1 Scale", 2), Auto3("Position 1 Exchange", 3), Auto4("Position 2 Switch", 4),
-    Auto5("Position 2 Scale", 5), Auto6("Position 2 Exchange", 6), Auto7("Position 3 Switch", 7), Auto8("Position 3 Scale", 8),
-    Auto9("Position 3 Exchange", 9), Auto10("Auto 10", 10), Auto11("Auto 11", 11), Auto12("Auto 12", 12), Auto13("Do Nothing", 13);
+    //Auto1("Position 1 Switch", 1),
+    Auto2("Position 1 Scale", 2),
+    //Auto3("Position 1 Exchange", 3),
+    Auto4("Position 2 Switch", 4),
+    //Auto5("Position 2 Scale", 5),
+    //Auto6("Position 2 Exchange", 6),
+    //Auto7("Position 3 Switch", 7),
+    Auto8("Position 3 Scale", 8),
+    //Auto9("Position 3 Exchange", 9),
+    Auto10("Cross The Line", 10),
+    //Auto11("Auto 11", 11),
+    //Auto12("Auto 12", 12),
+    Auto13("Do Nothing", 13)
+    ;
 
     private String name;
     private int num;
@@ -175,13 +186,13 @@ public class AutoSelector {
             case 94:
                 return new PhillipExchange(3).getQueuedStates();
             case 101:
-                return null;
+                return new CrossTheLine().getQueuedStates();
             case 102:
-                return null;
+                return new CrossTheLine().getQueuedStates();
             case 103:
-                return null;
+                return new CrossTheLine().getQueuedStates();
             case 104:
-                return null;
+                return new CrossTheLine().getQueuedStates();
             case 111:
                 return null;
             case 112:

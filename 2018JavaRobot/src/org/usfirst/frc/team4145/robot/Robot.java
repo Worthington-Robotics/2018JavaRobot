@@ -39,7 +39,7 @@ public class Robot extends TimedRobot {
         oi = new OI();
         SmartDashboard.putNumber("Auto State", -1);
         CameraServer.getInstance().startAutomaticCapture();
-        SmartDashboard.putNumber("Code Revision", 106);
+        SmartDashboard.putNumber("Code Revision", 109);
 
     }
 
@@ -79,6 +79,8 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousInit() {
+        RobotMap.drive.setDynamicBrakeMode(new boolean[] {false, false, false,false});
+        //RobotMap.drive.setDynamicBrakeMode(new boolean[] {true, true, true, true});
         RobotMap.ahrs.reset();
         RobotMap.driveEncoder.reset();
         SmartDashboard.putNumber("In Auto", 1);
@@ -113,6 +115,7 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("Auto State", -1);
         RobotMap.ahrs.reset();
         RobotMap.drive.enableTo(0, false);
+        RobotMap.drive.setDynamicBrakeMode(new boolean[] {true, true, true, true});
     }
 
     /**

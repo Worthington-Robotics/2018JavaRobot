@@ -51,7 +51,6 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
         gyroLock.setOutputRange(-PID_LIMIT, PID_LIMIT);
         gyroLock.setInputRange(0, 360);
         gyroLock.setContinuous();
-        setBRAKE_MODE(BRAKE_MODE);
         setRamp(FRONT_RAMP, REAR_RAMP);
     }
 
@@ -177,8 +176,9 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
         RobotMap.driveMotor4.configOpenloopRamp(rear, 10);
     }
 
-    public void setBRAKE_MODE(boolean BRAKE_MODE) {
-        if (BRAKE_MODE) {
+    public void setBrakeMode(boolean BRAKE_MODE) {
+        System.out.println("Setting brake mode to: " + BRAKE_MODE);
+        if(BRAKE_MODE) {
             RobotMap.driveMotor1.setNeutralMode(NeutralMode.Brake);
             RobotMap.driveMotor2.setNeutralMode(NeutralMode.Brake);
             RobotMap.driveMotor3.setNeutralMode(NeutralMode.Brake);
@@ -188,6 +188,33 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
         RobotMap.driveMotor2.setNeutralMode(NeutralMode.Coast);
         RobotMap.driveMotor3.setNeutralMode(NeutralMode.Coast);
         RobotMap.driveMotor4.setNeutralMode(NeutralMode.Coast);
+    }
+
+    public void setDynamicBrakeMode(boolean[] brake){
+        if(brake[0]){
+            RobotMap.driveMotor1.setNeutralMode(NeutralMode.Brake);
+        }
+        else{
+            RobotMap.driveMotor1.setNeutralMode(NeutralMode.Coast);
+        }
+        if(brake[1]){
+            RobotMap.driveMotor2.setNeutralMode(NeutralMode.Brake);
+        }
+        else{
+            RobotMap.driveMotor2.setNeutralMode(NeutralMode.Coast);
+        }
+        if(brake[2]){
+            RobotMap.driveMotor3.setNeutralMode(NeutralMode.Brake);
+        }
+        else{
+            RobotMap.driveMotor3.setNeutralMode(NeutralMode.Coast);
+        }
+        if(brake[3]){
+            RobotMap.driveMotor4.setNeutralMode(NeutralMode.Brake);
+        }
+        else{
+            RobotMap.driveMotor4.setNeutralMode(NeutralMode.Coast);
+        }
     }
 
     //private methods here

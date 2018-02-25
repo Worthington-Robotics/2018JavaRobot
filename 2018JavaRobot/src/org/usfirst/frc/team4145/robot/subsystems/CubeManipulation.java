@@ -8,7 +8,7 @@ public class CubeManipulation extends Subsystem {
 
 	private double shoot = 0.85; //Nominal Real 0.50
 	private double pull = 0.75; //Nominal Real 0.50
-	private double push = 1.00; //Nominal Real 0.50
+	private double push = 0.33; //Nominal Real 0.50
 
 	public CubeManipulation() {
 

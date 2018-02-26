@@ -14,7 +14,7 @@ public class PhillipExchange extends QueueGroup {
 			addSequential(new DriveTo(19 * 67), 3000);
 			addSequential(new GyroToAngle(-90), 1000);
 			addParallel(new Command[] {new DriveTo(19 * 20), new DropForks()}, 500);
-			addSequential(new DropCube(), 1000);
+			addSequential(new DropCube(true), 1000);
 			addSequential(new GyroToAngle( 200), 2000);
 			addSequential(new DriveTo(19 * 89),3000);
 			addSequential(new PickCube(), 2000);
@@ -26,7 +26,7 @@ public class PhillipExchange extends QueueGroup {
 			addSequential(new DriveTo(19 * 85), 3000);
 			addSequential(new GyroToAngle(87), 2000);
 			addParallel(new Command[] {new DriveTo(19 * 20), new DropForks()}, 2000);
-			addSequential(new DropCube(), 2000);
+			addSequential(new DropCube(true), 2000);
 			addSequential(new GyroToAngle(200), 2000);
 			addSequential(new DriveTo(19 * 80),3000);
 			addSequential(new PickCube(), 2000);
@@ -38,7 +38,7 @@ public class PhillipExchange extends QueueGroup {
 			addSequential(new DriveTo(19 * 144), 4000);
 			addSequential(new GyroToAngle(-90), 1000);
 			addParallel(new Command[] {new DriveTo(19 * 20), new DropForks()}, 1000);
-			addSequential(new DropCube(), 1000);
+			addSequential(new DropCube(true), 1000);
 			addSequential(new GyroToAngle(200), 2000);
 			addSequential(new DriveTo(19 * 89),3000);
 			addSequential(new PickCube(), 2000);

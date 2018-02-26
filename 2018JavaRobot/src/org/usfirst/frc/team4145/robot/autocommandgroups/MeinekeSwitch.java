@@ -14,7 +14,7 @@ public class MeinekeSwitch extends QueueGroup {
 			addParallel(new Command[] {new DriveTo(19*109), new LiftToPosition(1000)}, 2500);
 			addSequential(new GyroToAngle(-15), 1500);// turn left 15 degrees
 			addSequential(new DropForks(), 200);
-			addSequential(new DropCube(), 200); // launch cube 
+			addSequential(new DropCube(false), 200); // launch cube
 		}
 		else
 		{
@@ -25,7 +25,7 @@ public class MeinekeSwitch extends QueueGroup {
 			addParallel(new Command[] {new DriveTo(19*189), new LiftToPosition(1000), new DropForks()}, 2000);
 			addSequential(new GyroToAngle(-90), 2000);//turn left 90 degrees
 			addSequential(new DropForks(), 200);
-			addSequential(new DropCube(), 500);//launch cube 
+			addSequential(new DropCube(false), 500);//launch cube
 		}
 	}
 }

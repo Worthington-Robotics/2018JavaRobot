@@ -7,9 +7,11 @@ public class DropCube extends Command{
 
     private int cycles = 0;
     private int count = 100;
+    private boolean shoot;
 
-    public DropCube() {
+    public DropCube(boolean shoot) {
         requires(RobotMap.cubeManipulator);
+        this.shoot = shoot;
     }
 
     @Override
@@ -18,8 +20,13 @@ public class DropCube extends Command{
     }
 
     public void initialize() {
-        RobotMap.cubeManipulator.release();
         // starts motors y'all
+        if(shoot){
+            RobotMap.cubeManipulator.fire();
+        }
+        else {
+            RobotMap.cubeManipulator.release();
+        }
     }
 
     public void execute() {

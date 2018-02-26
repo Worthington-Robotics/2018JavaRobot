@@ -15,7 +15,7 @@ public class Postion1Scale extends QueueGroup {
 			addParallel(new Command[]{new DriveTo(RobotMap.CLOSE_SCALE_DISTANCE), new LiftToPosition(RobotMap.LIFT_TO_SCALE)},4500);
     		addParallel(new Command[] {new GyroToAngle(-RobotMap.CLOSE_SCALE_TURN), new HighLiftUp(), new LiftToPosition(RobotMap.LIFT_TO_SCALE)}, 1500);
     		addParallel(new Command[]{new DriveTo(RobotMap.CLOSE_SCALE_ROLL), new LiftToPosition(RobotMap.LIFT_TO_SCALE)},1500);
-    		addSequential(new DropCube(), 1000);
+    		addSequential(new DropCube(true), 1000);
     	}
     	//Right
     	if(autonumber == 1){
@@ -24,7 +24,7 @@ public class Postion1Scale extends QueueGroup {
 			addParallel(new Command[]{new DriveTo(RobotMap.FAR_SCALE_DISTANCE_2), new HighLiftUp(), new LiftToPosition(RobotMap.LIFT_TO_SCALE)},4000);
 			addParallel(new Command[] {new GyroToAngle(RobotMap.FAR_SCALE_TURN_2), new HighLiftUp(), new LiftToPosition(RobotMap.LIFT_TO_SCALE)}, 1000);
 			addParallel(new Command[] {new HighLiftUp(), new DriveTo(RobotMap.FAR_SCALE_DISTANCE_3), new LiftToPosition(RobotMap.LIFT_TO_SCALE)}, 2000);
-			addSequential(new DropCube(), 1000);
+			addSequential(new DropCube(true), 1000);
     	}
     }
 }

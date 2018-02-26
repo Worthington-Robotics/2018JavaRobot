@@ -27,7 +27,7 @@ enum UserSelection {
     Auto8("Position 3 Scale", 8),
     //Auto9("Position 3 Exchange", 9),
     Auto10("Cross The Line", 10),
-    //Auto11("Auto 11", 11),
+    Auto11("Cross The Line Long", 11),
     //Auto12("Auto 12", 12),
     Auto13("Do Nothing", 13)
     ;
@@ -194,13 +194,13 @@ public class AutoSelector {
             case 104:
                 return new CrossTheLine().getQueuedStates();
             case 111:
-                return null;
+                return new CrossLineLong().getQueuedStates();
             case 112:
-                return null;
+                return new CrossLineLong().getQueuedStates();
             case 113:
-                return null;
+                return new CrossLineLong().getQueuedStates();
             case 114:
-                return null;
+                return new CrossLineLong().getQueuedStates();
             case 121:
                 return null;
             case 122:

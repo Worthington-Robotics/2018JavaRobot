@@ -13,6 +13,7 @@ public class Lift extends Subsystem {
     private boolean limit2 = false;
     private boolean limit3 = false;
     private boolean limit4 = false;
+    private boolean triggerLastCycle = false;
     private double liftVal = 0.0;
     private boolean[] buttonArray = new boolean[4];
     private int bottomLimit = 0;
@@ -101,6 +102,14 @@ public class Lift extends Subsystem {
     private void updateLift() {
         if (!DriverStation.getInstance().isAutonomous()) {
             liftVal = evalDeadBand(Robot.oi.getSecondStick().getY(), 0.15);
+        }
+        if(Robot.oi.getSecondStick().getRawButton(1)){ //get trigger status
+            liftspeedH(-liftVal * 4); //if pressed run lift directly
+            triggerLastCycle = true;
+        }
+        else if (triggerLastCycle){
+            liftspeedH(0);
+            triggerLastCycle = false;
         }
         liftspeedL(liftVal);
 

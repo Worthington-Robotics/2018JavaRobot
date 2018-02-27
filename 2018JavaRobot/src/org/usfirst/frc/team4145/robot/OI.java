@@ -37,11 +37,11 @@ public class OI {
 		Button thumb = new JoystickButton(masterStick, 2);
 		thumb.whileHeld(new FlipRef());
 		
-		Button eight = new JoystickButton(masterStick, 10);
-		eight.whileHeld(new BotUp());
+		Button eight = new JoystickButton(masterStick, 8);
+		eight.whileHeld(new BotUp()); //up
 		
-		Button seven = new JoystickButton(masterStick, 9);
-		seven.whileHeld(new BotDown());
+		Button seven = new JoystickButton(masterStick, 7);
+		seven.whileHeld(new BotDown()); //down
 
 		Button eleven = new JoystickButton(masterStick, 11);
 		eleven.whileHeld(new DropManipulation());

@@ -18,8 +18,8 @@ public class DriveTo extends Command implements PIDOutput, PIDSource {
 	private double kP = 0.0040; //nominal 0.0040
 	private double kI = 0.0000; //nominal 0.0000
 	private double kD = 0.0250; //nominal 0.0250
-	private double FORWARD_AUTHORITY = 0.4; //nominal 0.4
-	private double REVERSE_AUTHORITY = 0.6; //nominal 0.6
+	private double FORWARD_AUTHORITY = 0.75; //nominal 0.4
+	private double REVERSE_AUTHORITY = 0.60; //nominal 0.6
 
 	// constructor to initialize stuff
 	public DriveTo(int count) {
@@ -60,8 +60,8 @@ public class DriveTo extends Command implements PIDOutput, PIDSource {
 
 	@Override
 	public void pidWrite(double output) {
-		System.out.println("Pid Written to: " + output);
-		System.out.println("Encoder Value at call: " + pidGet());
+		//System.out.println("Pid Written to: " + output);
+		//System.out.println("Encoder Value at call: " + pidGet());
 		toSet[0] = -output;
 		RobotMap.drive.setInput(toSet);
 		

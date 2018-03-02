@@ -21,15 +21,9 @@ public class AutoStateMachine {
                 try {
                     inspectedElement = blockingQueue.take();
                     inspectedElement.startQueueGroup(); //starts queue group running
-                    Thread.sleep(40);
                     while (!inspectedElement.checkQueueGroup()) { //checks status of state and whether it is or should be dead
                         //System.out.println("Waiting for previous task to die");
-                        Thread.sleep(20);
-                    }
-                    Thread.sleep(20);
-                    while (!inspectedElement.checkQueueGroup()) { //checks status of state and whether it is or should be dead
-                        //System.out.println("Waiting for previous task to die");
-                        Thread.sleep(20);
+                        Thread.sleep(10);
                     }
                     SmartDashboard.putNumber("State Advance Flag",1);
                     inspectedElement.killQueueGroup(); //forcefully kills group (just in case)

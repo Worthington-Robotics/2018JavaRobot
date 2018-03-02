@@ -28,29 +28,29 @@ public class Position2Switch extends QueueGroup {
         if(autoNum == 0) {
             //LEFT CODE
             //Drive Forward and lift lift
-            addParallel(new Command[]{new DriveTo(WALL_BREAK, false), new LiftToPosition(LIFT_TO)}, 1500);
+            addParallel(new Command[]{new DriveTo(WALL_BREAK), new LiftToPosition(LIFT_TO)}, 1500);
 
             //Turn Right and go forward
             addParallel(new Command[]{new GyroToAngle(-TURN_ONE), new LiftToPosition(LIFT_TO)}, 1000);
-            addParallel(new Command[]{new DriveTo(LEFT_DISTANCE, false), new LiftToPosition(LIFT_TO)}, 3000);
+            addParallel(new Command[]{new DriveTo(LEFT_DISTANCE), new LiftToPosition(LIFT_TO)}, 3000);
 
             //Go towards switch and	drop cube
             addParallel(new Command[]{new GyroToAngle(TURN_TWO), new LiftToPosition(LIFT_TO)}, 1000);
-            addParallel(new Command[]{new DriveTo(LEFT_SWITCH_ROLL, false), new DropForks(), new LiftToPosition(LIFT_TO)}, 2000);
+            addParallel(new Command[]{new DriveTo(LEFT_SWITCH_ROLL), new DropForks(), new LiftToPosition(LIFT_TO)}, 2000);
             addSequential(new DropCube(HARD_SHOT), 1000);
         }
         else{
             //RIGHT CODE
             //Go forward and do fork stuff
-            addParallel(new Command[]{new DriveTo(WALL_BREAK, false), new LiftToPosition(LIFT_TO)}, 1500);
+            addParallel(new Command[]{new DriveTo(WALL_BREAK), new LiftToPosition(LIFT_TO)}, 1500);
 
             //Turn Right and go forward
             addParallel(new Command[]{new GyroToAngle(TURN_ONE), new LiftToPosition(LIFT_TO)}, 1000);
-            addParallel(new Command[]{new DriveTo(RIGHT_DISTANCE, false), new LiftToPosition(LIFT_TO)}, 2500);
+            addParallel(new Command[]{new DriveTo(RIGHT_DISTANCE), new LiftToPosition(LIFT_TO)}, 2500);
 
             //Go towards switch and	drop cube
             addParallel(new Command[]{new GyroToAngle(-TURN_TWO), new LiftToPosition(LIFT_TO)}, 1000);
-            addParallel(new Command[]{new DriveTo(RIGHT_SWITCH_ROLL, false), new DropForks(), new LiftToPosition(LIFT_TO)}, 3000);
+            addParallel(new Command[]{new DriveTo(RIGHT_SWITCH_ROLL), new DropForks(), new LiftToPosition(LIFT_TO)}, 3000);
             addSequential(new DropCube(HARD_SHOT), 1000);
 
 

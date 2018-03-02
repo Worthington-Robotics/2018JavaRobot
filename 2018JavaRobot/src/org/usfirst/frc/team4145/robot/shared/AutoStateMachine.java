@@ -23,10 +23,12 @@ public class AutoStateMachine {
                     inspectedElement.startQueueGroup(); //starts queue group running
                     while (!inspectedElement.checkQueueGroup()) { //checks status of state and whether it is or should be dead
                         //System.out.println("Waiting for previous task to die");
+                        SmartDashboard.putString("Auto State Machine Status", "Waiting for previous task to die");
                         Thread.sleep(10);
                     }
-                    SmartDashboard.putNumber("State Advance Flag",1);
+                    //SmartDashboard.putNumber("State Advance Flag",1);
                     inspectedElement.killQueueGroup(); //forcefully kills group (just in case)
+
                     //System.out.println("killing group " + autoState);
                 } catch (Exception e) {
                     System.out.println("Failed to sleep or retrieve element");

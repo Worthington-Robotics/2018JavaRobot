@@ -5,6 +5,6 @@ import org.usfirst.frc.team4145.robot.shared.QueueGroup;
 
 public class CrossLineLong extends QueueGroup {
     public CrossLineLong(){
-        addSequential(new DriveTo(19 * 204), 2000);
+        addSequential(new DriveTo(19 * 204,false), 2000);
     }
 }

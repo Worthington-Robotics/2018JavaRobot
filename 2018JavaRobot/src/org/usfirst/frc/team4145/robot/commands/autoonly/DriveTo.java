@@ -18,19 +18,19 @@ public class DriveTo extends Command implements PIDOutput, PIDSource {
 	private double kP = 0.0040; //nominal 0.0040
 	private double kI = 0.0000; //nominal 0.0000
 	private double kD = 0.0250; //nominal 0.0250
-	private double FORWARD_AUTHORITY = 0.60; //nominal 0.4
-	private double REVERSE_AUTHORITY = 0.60; //nominal 0.6
+	private double SHORT_AUTHORITY = 0.60; //nominal 0.4
+	private double LONG_AUTHORITY = 0.75; //nominal 0.6
 
 	// constructor to initialize stuff
-	public DriveTo(int count) {
+	public DriveTo(int count, boolean isLong) {
 		length = count;
 		driveTo = new PIDController(kP, kI, kD, this, this::pidWrite);
 		//driveTo.setAbsoluteTolerance(0);
 		driveTo.setContinuous(false);
 		if(count > 0)
-			driveTo.setOutputRange(-FORWARD_AUTHORITY, FORWARD_AUTHORITY);
+			driveTo.setOutputRange(-SHORT_AUTHORITY, SHORT_AUTHORITY);
 		else
-			driveTo.setOutputRange(-REVERSE_AUTHORITY,REVERSE_AUTHORITY);
+			driveTo.setOutputRange(-LONG_AUTHORITY,LONG_AUTHORITY);
 	}
 
 	// Set Setpoint to length

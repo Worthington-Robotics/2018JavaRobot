@@ -12,15 +12,16 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Position2Switch extends QueueGroup {
 
     //driving distances
-    private int WALL_BREAK = 19*12;
+    private int WALL_BREAK = 19*20;
     private int TURN_ONE = 45;
-    private int LEFT_DISTANCE = 19*85;
-    private int RIGHT_DISTANCE = 19*75;
+    private int LEFT_DISTANCE = 19*100;
+    private int RIGHT_DISTANCE = 19*90;
     private int TURN_TWO = 45;
-    private int SWITCH_ROLL = 19*42;
+    private int LEFT_SWITCH_ROLL = 19*28;
+    private int RIGHT_SWITCH_ROLL = 19*50;
 
     //other class variables
-    private int LIFT_TO = 200;
+    private int LIFT_TO = 0;
     private boolean HARD_SHOT = false;
 
     public Position2Switch(int autoNum) {
@@ -35,7 +36,7 @@ public class Position2Switch extends QueueGroup {
 
             //Go towards switch and	drop cube
             addParallel(new Command[]{new GyroToAngle(TURN_TWO), new LiftToPosition(LIFT_TO)}, 1000);
-            addParallel(new Command[]{new DriveTo(SWITCH_ROLL), new DropForks(), new LiftToPosition(LIFT_TO)}, 2000);
+            addParallel(new Command[]{new DriveTo(LEFT_SWITCH_ROLL), new DropForks(), new LiftToPosition(LIFT_TO)}, 2000);
             addSequential(new DropCube(HARD_SHOT), 1000);
         }
         else{
@@ -49,7 +50,7 @@ public class Position2Switch extends QueueGroup {
 
             //Go towards switch and	drop cube
             addParallel(new Command[]{new GyroToAngle(-TURN_TWO), new LiftToPosition(LIFT_TO)}, 1000);
-            addParallel(new Command[]{new DriveTo(SWITCH_ROLL), new DropForks(), new LiftToPosition(LIFT_TO)}, 2000);
+            addParallel(new Command[]{new DriveTo(RIGHT_SWITCH_ROLL), new DropForks(), new LiftToPosition(LIFT_TO)}, 3000);
             addSequential(new DropCube(HARD_SHOT), 1000);
 
 

@@ -26,6 +26,12 @@ public class AutoStateMachine {
                         //System.out.println("Waiting for previous task to die");
                         Thread.sleep(20);
                     }
+                    Thread.sleep(20);
+                    while (!inspectedElement.checkQueueGroup()) { //checks status of state and whether it is or should be dead
+                        //System.out.println("Waiting for previous task to die");
+                        Thread.sleep(20);
+                    }
+                    SmartDashboard.putNumber("State Advance Flag",1);
                     inspectedElement.killQueueGroup(); //forcefully kills group (just in case)
                     //System.out.println("killing group " + autoState);
                 } catch (Exception e) {
@@ -48,6 +54,7 @@ public class AutoStateMachine {
         blockingQueue = queueGroups;
         Thread monitor = new Thread(runnable);
         monitor.setDaemon(true);
+        monitor.setPriority(8);
         System.out.println("Starting Machine thread now!");
         monitor.start();
     }

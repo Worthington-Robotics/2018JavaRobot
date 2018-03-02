@@ -114,86 +114,68 @@ public class AutoSelector {
         int fieldPos = getFieldPos(GameData);
         SmartDashboard.putNumber("Final Auto Choice", (usrAuto * 10 + fieldPos));
         switch (usrAuto * 10 + fieldPos) {
-            case 11:
-                return null; //new Position1Switch(1).getQueuedStates();
-            case 12:
-                return null; //new Position1Switch(1).getQueuedStates();
-            case 13:
-                return null; //new Position1Switch(1).getQueuedStates();
-            case 14:
-                return null; //new Position1Switch(1).getQueuedStates();
-            case 21:
-                return new Position1Scale(0).getQueuedStates();
-            case 22:
-                return new Position1Scale(1).getQueuedStates();
-            case 23:
-                return new Position1Scale(0).getQueuedStates();
-            case 24:
-                return new Position1Scale(1).getQueuedStates();
+            
+            case 11: return null; //new Position1Switch(1).getQueuedStates();
+            case 12: return null; //new Position1Switch(1).getQueuedStates();
+            case 13: return null; //new Position1Switch(1).getQueuedStates();
+            case 14: return null; //new Position1Switch(1).getQueuedStates();
+
+            case 21: return new Position1Scale(0).getQueuedStates();
+            case 22: return new Position1Scale(1).getQueuedStates();
+            case 23: return new Position1Scale(0).getQueuedStates();
+            case 24: return new Position1Scale(1).getQueuedStates();
+
             case 31:
             case 32:
             case 33:
-            case 34:
-                return null; //new ExchangeAll(1).getQueuedStates();
-            case 41:
-                return new Position2Switch(0).getQueuedStates(); //Switch Right
-            case 42:
-                return new Position2Switch(0).getQueuedStates();
-            case 43:
-                return new Position2Switch(1).getQueuedStates(); //Switch Left
-            case 44:
-                return new Position2Switch(1).getQueuedStates();
-            case 51:
-                return null; //new Position2Scale(1).getQueuedStates();
-            case 52:
-                return null; //new Position2Scale(0).getQueuedStates();
-            case 53:
-                return null; //new Position2Scale(1).getQueuedStates();
-            case 54:
-                return null; //new Position2Scale(0).getQueuedStates();
+            case 34: return null; //new ExchangeAll(1).getQueuedStates();
+
+            case 41: return new Position2Switch(0).getQueuedStates(); //Switch Right
+            case 42: return new Position2Switch(0).getQueuedStates();
+            case 43: return new Position2Switch(1).getQueuedStates(); //Switch Left
+            case 44: return new Position2Switch(1).getQueuedStates();
+
+            case 51: return null; //new Position2Scale(1).getQueuedStates();
+            case 52: return null; //new Position2Scale(0).getQueuedStates();
+            case 53: return null; //new Position2Scale(1).getQueuedStates();
+            case 54: return null; //new Position2Scale(0).getQueuedStates();
+
             case 61:
             case 62:
             case 63:
-            case 64:
-                return null; //new ExchangeAll(2).getQueuedStates();
-            case 71:
-                return null; //new Position3Switch(0).getQueuedStates();
-            case 72:
-                return null; //new Position3Switch(0).getQueuedStates();
-            case 73:
-                return null; //new Position3Switch(1).getQueuedStates();
-            case 74:
-                return null; //new Position3Switch(1).getQueuedStates();
-            case 81:
-                return new Position3Scale(1).getQueuedStates();
-            case 82:
-                return new Position3Scale(0).getQueuedStates();
-            case 83:
-                return new Position3Scale(1).getQueuedStates();
-            case 84:
-                return new Position3Scale(0).getQueuedStates();
+            case 64: return null; //new ExchangeAll(2).getQueuedStates();
+
+            case 71: return null; //new Position3Switch(0).getQueuedStates();
+            case 72: return null; //new Position3Switch(0).getQueuedStates();
+            case 73: return null; //new Position3Switch(1).getQueuedStates();
+            case 74: return null; //new Position3Switch(1).getQueuedStates();
+
+            case 81: return new Position3Scale(1).getQueuedStates();
+            case 82: return new Position3Scale(0).getQueuedStates();
+            case 83: return new Position3Scale(1).getQueuedStates();
+            case 84: return new Position3Scale(0).getQueuedStates();
+
             case 91:
             case 92:
             case 93:
-            case 94:
-                return null; //new ExchangeAll(3).getQueuedStates();
+            case 94: return null; //new ExchangeAll(3).getQueuedStates();
+
             case 101:
             case 102:
             case 103:
-            case 104:
-                return new CrossTheLine().getQueuedStates();
+            case 104: return new CrossTheLine().getQueuedStates();
+
             case 111:
             case 112:
             case 113:
-            case 114:
-                return new CrossLineLong().getQueuedStates();
+            case 114: return new CrossLineLong().getQueuedStates();
+
             case 121:
             case 122:
             case 123:
-            case 124:
-                return null;
-            default:
-                return null; // this happens if UsrAuto == 5
+            case 124: return null;
+
+            default: return null;
          	
         }
     }

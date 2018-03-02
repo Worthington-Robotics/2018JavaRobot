@@ -6,8 +6,8 @@ import org.usfirst.frc.team4145.robot.shared.QueueGroup;
 import edu.wpi.first.wpilibj.command.Command;
 
 
-public class SaahibSwitch extends QueueGroup {
-	public SaahibSwitch(int autonumber){
+public class Position1Switch extends QueueGroup {
+	public Position1Switch(int autonumber){
 		if(autonumber == 0){
     		addParallel(new Command[]{new DriveTo(19 * 194),new LiftToPosition(1000)}, 3000);
     		addSequential(new GyroToAngle(90), 1000);

@@ -23,7 +23,7 @@ public class RobotMap {
 
     //close scale variables
     public static int CLOSE_SCALE_DISTANCE = 19 * 265;
-    public static double CLOSE_SCALE_TURN = -65;
+    public static double CLOSE_SCALE_TURN = -45;
     public static int CLOSE_SCALE_ROLL = 19*17;
     public static int LIFT_TO_SCALE = 200;
 
@@ -86,7 +86,7 @@ public class RobotMap {
         ahrs = new AHRS(SPI.Port.kMXP); // finish declaring AHRS to MXP SPI bus
         ahrs.reset();
         driveEncoder = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
-        liftEnc = new Encoder(2, 3, true, Encoder.EncodingType.k4X);
+        liftEnc = new Encoder(4, 5, true, Encoder.EncodingType.k4X);
         switchHTop = new DigitalInput(6);
         switchHBase = new DigitalInput(7);
 

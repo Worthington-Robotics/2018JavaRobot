@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4145.robot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4145.robot.autocommandgroups.*;
 import org.usfirst.frc.team4145.robot.shared.CommandQueueGroup;
 
@@ -111,80 +112,80 @@ public class AutoSelector {
     public static LinkedBlockingQueue<CommandQueueGroup> autoSelect(String GameData, String selection) {
         int usrAuto = getSelFromStr(selection).getNum();
         int fieldPos = getFieldPos(GameData);
-        //System.out.println("Auto choice:" + (usrAuto * 10 + fieldPos));
+        SmartDashboard.putNumber("Final Auto Choice", (usrAuto * 10 + fieldPos));
         switch (usrAuto * 10 + fieldPos) {
             case 11:
-                return new SaahibSwitch(1).getQueuedStates();
+                return null; //new Position1Switch(1).getQueuedStates();
             case 12:
-                return new SaahibSwitch(1).getQueuedStates();
+                return null; //new Position1Switch(1).getQueuedStates();
             case 13:
-                return new SaahibSwitch(1).getQueuedStates();
+                return null; //new Position1Switch(1).getQueuedStates();
             case 14:
-                return new SaahibSwitch(1).getQueuedStates();
+                return null; //new Position1Switch(1).getQueuedStates();
             case 21:
-                return new Postion1Scale(0).getQueuedStates();
+                return new Position1Scale(0).getQueuedStates();
             case 22:
-                return new Postion1Scale(1).getQueuedStates();
+                return new Position1Scale(1).getQueuedStates();
             case 23:
-                return new Postion1Scale(0).getQueuedStates();
+                return new Position1Scale(0).getQueuedStates();
             case 24:
-                return new Postion1Scale(1).getQueuedStates();
+                return new Position1Scale(1).getQueuedStates();
             case 31:
-                return new PhillipExchange(1).getQueuedStates();
+                return null; //new ExchangeAll(1).getQueuedStates();
             case 32:
-                return new PhillipExchange(1).getQueuedStates();
+                return null; //new ExchangeAll(1).getQueuedStates();
             case 33:
-                return new PhillipExchange(1).getQueuedStates();
+                return null; //new ExchangeAll(1).getQueuedStates();
             case 34:
-                return new PhillipExchange(1).getQueuedStates();
+                return null; //new ExchangeAll(1).getQueuedStates();
             case 41:
-                return new FongSwitch(0).getQueuedStates(); //Switch Right
+                return new Position2Switch(0).getQueuedStates(); //Switch Right
             case 42:
-                return new FongSwitch(0).getQueuedStates();
+                return new Position2Switch(0).getQueuedStates();
             case 43:
-                return new FongSwitch(1).getQueuedStates(); //Switch Left
+                return new Position2Switch(1).getQueuedStates(); //Switch Left
             case 44:
-                return new FongSwitch(1).getQueuedStates();
+                return new Position2Switch(1).getQueuedStates();
             case 51:
-                return new VedScale(0).getQueuedStates();
+                return null; //new Position2Scale(1).getQueuedStates();
             case 52:
-                return new VedScale(0).getQueuedStates();
+                return null; //new Position2Scale(0).getQueuedStates();
             case 53:
-                return new VedScale(1).getQueuedStates();
+                return null; //new Position2Scale(1).getQueuedStates();
             case 54:
-                return new VedScale(1).getQueuedStates();
+                return null; //new Position2Scale(0).getQueuedStates();
             case 61:
-                return new PhillipExchange(2).getQueuedStates();
+                return null; //new ExchangeAll(2).getQueuedStates();
             case 62:
-                return new PhillipExchange(2).getQueuedStates();
+                return null; //new ExchangeAll(2).getQueuedStates();
             case 63:
-                return new PhillipExchange(2).getQueuedStates();
+                return null; //new ExchangeAll(2).getQueuedStates();
             case 64:
-                return new PhillipExchange(2).getQueuedStates();
+                return null; //new ExchangeAll(2).getQueuedStates();
             case 71:
-                return new MeinekeSwitch(0).getQueuedStates();
+                return null; //new Position3Switch(0).getQueuedStates();
             case 72:
-                return new MeinekeSwitch(0).getQueuedStates();
+                return null; //new Position3Switch(0).getQueuedStates();
             case 73:
-                return new MeinekeSwitch(1).getQueuedStates(); 
+                return null; //new Position3Switch(1).getQueuedStates();
             case 74:
-                return new MeinekeSwitch(1).getQueuedStates();
+                return null; //new Position3Switch(1).getQueuedStates();
             case 81:
-                return new AdamScale(0).getQueuedStates();
+                return new Position3Scale(0).getQueuedStates();
             case 82:
-                return new AdamScale(1).getQueuedStates();
+                return new Position3Scale(1).getQueuedStates();
             case 83:
-                return new AdamScale(0).getQueuedStates();
+                return new Position3Scale(0).getQueuedStates();
             case 84:
-                return new AdamScale(1).getQueuedStates();
+                return new Position3Scale(1).getQueuedStates();
             case 91:
-                return new PhillipExchange(3).getQueuedStates();
+                return null; //new ExchangeAll(3).getQueuedStates();
             case 92:
-                return new PhillipExchange(3).getQueuedStates();
+                return null; //new ExchangeAll(3).getQueuedStates();
             case 93:
-                return new PhillipExchange(3).getQueuedStates();
+                return null; //new ExchangeAll(3).getQueuedStates();
             case 94:
-                return new PhillipExchange(3).getQueuedStates();
+                return null; //new ExchangeAll(3).getQueuedStates();
             case 101:
                 return new CrossTheLine().getQueuedStates();
             case 102:

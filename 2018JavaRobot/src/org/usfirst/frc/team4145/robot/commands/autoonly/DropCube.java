@@ -16,7 +16,7 @@ public class DropCube extends Command{
 
     @Override
     protected boolean isFinished() {
-        return cycles > count;
+        return false;
     }
 
     public void initialize() {

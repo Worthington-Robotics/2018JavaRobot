@@ -54,7 +54,7 @@ public class Robot extends TimedRobot {
         RobotMap.drive.enableTo(0, false);
         SmartDashboard.putNumber("In Auto", 0);
         SmartDashboard.putNumber("Auto State", -1);
-        SmartDashboard.putString("Auto State Machine status", "State machine not yet started");
+        SmartDashboard.putString("Auto State Machine Status", "State machine not yet started");
         SmartDashboard.putNumber("Lift Encoder Target", 0);
         SmartDashboard.putNumber("Wheel Encoder Target", 0);
         Scheduler.getInstance().removeAll();
@@ -96,7 +96,7 @@ public class Robot extends TimedRobot {
         //choose auto command based on lists
         SmartDashboard.putStringArray("Auto selected and game data", new String[]{autoSelected, GameData});
         AutoStateQueue = AutoSelector.autoSelect(GameData, autoSelected);
-        //AutoStateQueue = new FongSwitchRight(0).getQueuedStates();
+
         //run state machine
         AutoStateMachine.runMachine(AutoStateQueue);
     }

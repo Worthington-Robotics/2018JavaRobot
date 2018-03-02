@@ -1,13 +1,12 @@
 package org.usfirst.frc.team4145.robot.autocommandgroups;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc.team4145.robot.commands.autoonly.*;
 import org.usfirst.frc.team4145.robot.shared.QueueGroup;
 
 
-public class MeinekeSwitch extends QueueGroup {
-	public MeinekeSwitch(int autonomous) {
+public class Position3Switch extends QueueGroup {
+	public Position3Switch(int autonomous) {
 
 		if (autonomous == 0) {
 			//Forward 109 inches, raise lift, drop forks

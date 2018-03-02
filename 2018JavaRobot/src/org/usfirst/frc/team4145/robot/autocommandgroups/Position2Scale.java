@@ -4,9 +4,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team4145.robot.commands.autoonly.*;
 import org.usfirst.frc.team4145.robot.shared.QueueGroup;
 
-public class VedScale extends QueueGroup {
+public class Position2Scale extends QueueGroup {
 	
-	public VedScale(int autonumber) {
+	public Position2Scale(int autonumber) {
 		if (autonumber == 0) {
 			//Forward then rotate
 			addSequential(new DriveTo(19 * 20), 500);

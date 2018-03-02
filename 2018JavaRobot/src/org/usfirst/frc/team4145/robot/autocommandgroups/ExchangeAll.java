@@ -4,9 +4,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team4145.robot.commands.autoonly.*;
 import org.usfirst.frc.team4145.robot.shared.QueueGroup;
 
-public class PhillipExchange extends QueueGroup {
+public class ExchangeAll extends QueueGroup {
 
-	public PhillipExchange(int autonumber) {
+	public ExchangeAll(int autonumber) {
 		if (autonumber == 2) {
 			// Center
 			addSequential(new DriveTo(19 * 20), 1000);

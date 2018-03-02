@@ -30,7 +30,7 @@ public class LiftToPosition extends Command implements PIDSource, PIDOutput {
 	}
 
 	public double pidGet() {
-		return -RobotMap.liftEnc.get();
+		return RobotMap.liftEnc.get();
 	}
 
 	public void pidWrite(double set) {

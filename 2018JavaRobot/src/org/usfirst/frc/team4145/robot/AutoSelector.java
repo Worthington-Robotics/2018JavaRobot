@@ -131,11 +131,8 @@ public class AutoSelector {
             case 24:
                 return new Position1Scale(1).getQueuedStates();
             case 31:
-                return null; //new ExchangeAll(1).getQueuedStates();
             case 32:
-                return null; //new ExchangeAll(1).getQueuedStates();
             case 33:
-                return null; //new ExchangeAll(1).getQueuedStates();
             case 34:
                 return null; //new ExchangeAll(1).getQueuedStates();
             case 41:
@@ -155,11 +152,8 @@ public class AutoSelector {
             case 54:
                 return null; //new Position2Scale(0).getQueuedStates();
             case 61:
-                return null; //new ExchangeAll(2).getQueuedStates();
             case 62:
-                return null; //new ExchangeAll(2).getQueuedStates();
             case 63:
-                return null; //new ExchangeAll(2).getQueuedStates();
             case 64:
                 return null; //new ExchangeAll(2).getQueuedStates();
             case 71:
@@ -171,43 +165,31 @@ public class AutoSelector {
             case 74:
                 return null; //new Position3Switch(1).getQueuedStates();
             case 81:
-                return new Position3Scale(0).getQueuedStates();
+                return new Position3Scale(1).getQueuedStates();
             case 82:
-                return new Position3Scale(1).getQueuedStates();
-            case 83:
                 return new Position3Scale(0).getQueuedStates();
-            case 84:
+            case 83:
                 return new Position3Scale(1).getQueuedStates();
+            case 84:
+                return new Position3Scale(0).getQueuedStates();
             case 91:
-                return null; //new ExchangeAll(3).getQueuedStates();
             case 92:
-                return null; //new ExchangeAll(3).getQueuedStates();
             case 93:
-                return null; //new ExchangeAll(3).getQueuedStates();
             case 94:
                 return null; //new ExchangeAll(3).getQueuedStates();
             case 101:
-                return new CrossTheLine().getQueuedStates();
             case 102:
-                return new CrossTheLine().getQueuedStates();
             case 103:
-                return new CrossTheLine().getQueuedStates();
             case 104:
                 return new CrossTheLine().getQueuedStates();
             case 111:
-                return new CrossLineLong().getQueuedStates();
             case 112:
-                return new CrossLineLong().getQueuedStates();
             case 113:
-                return new CrossLineLong().getQueuedStates();
             case 114:
                 return new CrossLineLong().getQueuedStates();
             case 121:
-                return null;
             case 122:
-                return null;
             case 123:
-                return null;
             case 124:
                 return null;
             default:

@@ -39,7 +39,7 @@ public class CommandQueueGroup {
         }
         boolean isDead = true;
         for (Command command : queueGroup) {
-            isDead &= !command.isRunning();
+            isDead &= command.isCompleted();
             //System.out.println("Command dead?" + command.isRunning());
             
         }

@@ -23,16 +23,16 @@ public class RobotMap {
 
     //close scale variables
     public static int CLOSE_SCALE_DISTANCE = 19 * 265;
-    public static double CLOSE_SCALE_TURN = -45;
-    public static int CLOSE_SCALE_ROLL = 19*17;
+    public static double CLOSE_SCALE_TURN = -50;
+    public static int CLOSE_SCALE_ROLL = 19*0;
     public static int LIFT_TO_SCALE = 200;
 
     //far scale variables
     public static int FAR_SCALE_DISTANCE_1 = 19 * 220;
-    public static double FAR_SCALE_TURN_1 = 90;
-    public static int FAR_SCALE_DISTANCE_2 = 19*210;
-    public static double FAR_SCALE_TURN_2 = -93;
-    public static int FAR_SCALE_DISTANCE_3 = 19*36;
+    public static double FAR_SCALE_TURN_1 = 85;
+    public static int FAR_SCALE_DISTANCE_2 = 19*225;
+    public static double FAR_SCALE_TURN_2 = -113;
+    public static int FAR_SCALE_DISTANCE_3 = 19*75;
 
 
     // actuators

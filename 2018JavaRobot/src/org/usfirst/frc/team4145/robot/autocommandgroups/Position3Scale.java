@@ -17,7 +17,7 @@ public class Position3Scale extends QueueGroup {
         }
         //Left
         if (autonumber == 1) {
-            addParallel(new Command[]{new DriveTo(RobotMap.FAR_SCALE_DISTANCE_1)},5000);
+            addParallel(new Command[]{new DriveTo(RobotMap.FAR_SCALE_DISTANCE_1)}, 4000);
             addSequential(new GyroToAngle(-RobotMap.FAR_SCALE_TURN_1), 1000);
             addParallel(new Command[]{new DriveTo(RobotMap.FAR_SCALE_DISTANCE_2), new HighLiftUp(), new LiftToPosition(RobotMap.LIFT_TO_SCALE)},4000);
             addParallel(new Command[] {new GyroToAngle(-RobotMap.FAR_SCALE_TURN_2), new HighLiftUp(), new LiftToPosition(RobotMap.LIFT_TO_SCALE)}, 1000);

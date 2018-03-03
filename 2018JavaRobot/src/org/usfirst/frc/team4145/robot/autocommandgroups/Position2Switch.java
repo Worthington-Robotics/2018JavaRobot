@@ -15,7 +15,7 @@ public class Position2Switch extends QueueGroup {
     private int WALL_BREAK = 19*20;
     private int TURN_ONE = 45;
     private int LEFT_DISTANCE = 19*100;
-    private int RIGHT_DISTANCE = 19*90;
+    private int RIGHT_DISTANCE = 19*80;
     private int TURN_TWO = 45;
     private int LEFT_SWITCH_ROLL = 19*28;
     private int RIGHT_SWITCH_ROLL = 19*50;

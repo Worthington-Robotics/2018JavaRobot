@@ -2,7 +2,7 @@ package org.usfirst.frc.team4145.robot;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4145.robot.autocommandgroups.*;
-import org.usfirst.frc.team4145.robot.shared.CommandQueueGroup;
+import org.usfirst.frc.team4145.robot.shared.AutoStateMachine.CommandQueueGroup;
 
 
 

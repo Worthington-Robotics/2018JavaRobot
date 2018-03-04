@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4145.robot.Robot;
 import org.usfirst.frc.team4145.robot.RobotMap;
-import org.usfirst.frc.team4145.robot.shared.CustomPIDSubsystem;
+import org.usfirst.frc.team4145.robot.shared.PidStuff.CustomPIDSubsystem;
 
 /**
  * Robot drive version 2
@@ -46,7 +46,7 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
 
 
     public RobotDriveV2() {
-        gyroLock = new PIDController(PROPORTIONAL_GAIN, INTEGRAL_GAIN, DERIVATIVE_GAIN, this, this::pidWrite);
+        gyroLock = new PIDController(PROPORTIONAL_GAIN, INTEGRAL_GAIN, DERIVATIVE_GAIN,  this, this::pidWrite);
         gyroLock.setAbsoluteTolerance(ABSOLUTE_TOLERANCE);
         gyroLock.setOutputRange(-PID_LIMIT, PID_LIMIT);
         gyroLock.setInputRange(0, 360);
@@ -170,50 +170,50 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
     }
 
     public void setRamp(double front, double rear) {
-        RobotMap.driveMotor1.configOpenloopRamp(front, 10);
-        RobotMap.driveMotor2.configOpenloopRamp(rear, 10);
-        RobotMap.driveMotor3.configOpenloopRamp(front, 10);
-        RobotMap.driveMotor4.configOpenloopRamp(rear, 10);
+        RobotMap.driveFrontLeft.configOpenloopRamp(front, 10);
+        RobotMap.driveRearLeft.configOpenloopRamp(rear, 10);
+        RobotMap.driveFrontRight.configOpenloopRamp(front, 10);
+        RobotMap.driveRearRight.configOpenloopRamp(rear, 10);
     }
 
     public void setBrakeMode(boolean BRAKE_MODE) {
         System.out.println("Setting brake mode to: " + BRAKE_MODE);
         if(BRAKE_MODE) {
-            RobotMap.driveMotor1.setNeutralMode(NeutralMode.Brake);
-            RobotMap.driveMotor2.setNeutralMode(NeutralMode.Brake);
-            RobotMap.driveMotor3.setNeutralMode(NeutralMode.Brake);
-            RobotMap.driveMotor4.setNeutralMode(NeutralMode.Brake);
+            RobotMap.driveFrontLeft.setNeutralMode(NeutralMode.Brake);
+            RobotMap.driveRearLeft.setNeutralMode(NeutralMode.Brake);
+            RobotMap.driveFrontRight.setNeutralMode(NeutralMode.Brake);
+            RobotMap.driveRearRight.setNeutralMode(NeutralMode.Brake);
         }
-        RobotMap.driveMotor1.setNeutralMode(NeutralMode.Coast);
-        RobotMap.driveMotor2.setNeutralMode(NeutralMode.Coast);
-        RobotMap.driveMotor3.setNeutralMode(NeutralMode.Coast);
-        RobotMap.driveMotor4.setNeutralMode(NeutralMode.Coast);
+        RobotMap.driveFrontLeft.setNeutralMode(NeutralMode.Coast);
+        RobotMap.driveRearLeft.setNeutralMode(NeutralMode.Coast);
+        RobotMap.driveFrontRight.setNeutralMode(NeutralMode.Coast);
+        RobotMap.driveRearRight.setNeutralMode(NeutralMode.Coast);
     }
 
     public void setDynamicBrakeMode(boolean[] brake){
         if(brake[0]){
-            RobotMap.driveMotor1.setNeutralMode(NeutralMode.Brake);
+            RobotMap.driveFrontLeft.setNeutralMode(NeutralMode.Brake);
         }
         else{
-            RobotMap.driveMotor1.setNeutralMode(NeutralMode.Coast);
+            RobotMap.driveFrontLeft.setNeutralMode(NeutralMode.Coast);
         }
         if(brake[1]){
-            RobotMap.driveMotor2.setNeutralMode(NeutralMode.Brake);
+            RobotMap.driveRearLeft.setNeutralMode(NeutralMode.Brake);
         }
         else{
-            RobotMap.driveMotor2.setNeutralMode(NeutralMode.Coast);
+            RobotMap.driveRearLeft.setNeutralMode(NeutralMode.Coast);
         }
         if(brake[2]){
-            RobotMap.driveMotor3.setNeutralMode(NeutralMode.Brake);
+            RobotMap.driveFrontRight.setNeutralMode(NeutralMode.Brake);
         }
         else{
-            RobotMap.driveMotor3.setNeutralMode(NeutralMode.Coast);
+            RobotMap.driveFrontRight.setNeutralMode(NeutralMode.Coast);
         }
         if(brake[3]){
-            RobotMap.driveMotor4.setNeutralMode(NeutralMode.Brake);
+            RobotMap.driveRearRight.setNeutralMode(NeutralMode.Brake);
         }
         else{
-            RobotMap.driveMotor4.setNeutralMode(NeutralMode.Coast);
+            RobotMap.driveRearRight.setNeutralMode(NeutralMode.Coast);
         }
     }
 

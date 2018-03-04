@@ -2,7 +2,7 @@ package org.usfirst.frc.team4145.robot.autocommandgroups;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team4145.robot.commands.autoonly.*;
-import org.usfirst.frc.team4145.robot.shared.QueueGroup;
+import org.usfirst.frc.team4145.robot.shared.AutoStateMachine.QueueGroup;
 
 public class ExchangeAll extends QueueGroup {
 

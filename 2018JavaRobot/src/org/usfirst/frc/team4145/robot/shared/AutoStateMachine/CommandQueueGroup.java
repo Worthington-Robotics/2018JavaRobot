@@ -1,4 +1,4 @@
-package org.usfirst.frc.team4145.robot.shared;
+package org.usfirst.frc.team4145.robot.shared.AutoStateMachine;
 
 
 import edu.wpi.first.wpilibj.Timer;

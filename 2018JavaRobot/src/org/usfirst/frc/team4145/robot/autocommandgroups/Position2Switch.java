@@ -5,7 +5,7 @@ import org.usfirst.frc.team4145.robot.commands.autoonly.DropForks;
 import org.usfirst.frc.team4145.robot.commands.autoonly.GyroToAngle;
 import org.usfirst.frc.team4145.robot.commands.autoonly.LiftToPosition;
 import org.usfirst.frc.team4145.robot.commands.autoonly.DropCube;
-import org.usfirst.frc.team4145.robot.shared.QueueGroup;
+import org.usfirst.frc.team4145.robot.shared.AutoStateMachine.QueueGroup;
 
 import edu.wpi.first.wpilibj.command.Command;
 

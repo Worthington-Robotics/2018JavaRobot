@@ -23,7 +23,7 @@ public class Position1Scale extends QueueGroup {
 			addParallel(new Command[] {new GyroToAngle(RobotMap.FAR_SCALE_TURN_2), new HighLiftUp(), new LiftToPosition(RobotMap.LIFT_TO_SCALE)}, 1000);
 			addParallel(new Command[] {new HighLiftUp(), new DriveTo(RobotMap.FAR_SCALE_DISTANCE_3), new LiftToPosition(RobotMap.LIFT_TO_SCALE)}, 2000);
 			addParallel(new Command[]{new DropForks(), new HighLiftUp()},1000);
-			//addSequential(new DropCube(true), 1000);
+			addSequential(new DropCube(true), 1000);
     	}
     }
 }

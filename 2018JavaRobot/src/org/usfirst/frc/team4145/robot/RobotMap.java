@@ -31,8 +31,8 @@ public class RobotMap {
     public static int FAR_SCALE_DISTANCE_1 = 19 * 220;
     public static double FAR_SCALE_TURN_1 = 85;
     public static int FAR_SCALE_DISTANCE_2 = 19*225;
-    public static double FAR_SCALE_TURN_2 = -113;
-    public static int FAR_SCALE_DISTANCE_3 = 19*75;
+    public static double FAR_SCALE_TURN_2 = -107;
+    public static int FAR_SCALE_DISTANCE_3 = 19*40; //was 75
 
 
     // actuators

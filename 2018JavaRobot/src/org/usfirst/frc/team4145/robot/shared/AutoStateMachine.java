@@ -10,7 +10,8 @@ public class AutoStateMachine {
     private static LinkedBlockingQueue<CommandQueueGroup> blockingQueue;
     private static CommandQueueGroup inspectedElement;
     private static int autoState = 0;
-    private static Runnable runnable = () -> {
+
+    private static Runnable taskRunnable = () -> {
     	autoState = 0;
         if (blockingQueue != null) {
             System.out.println("State machine size:" + blockingQueue.size());
@@ -47,9 +48,16 @@ public class AutoStateMachine {
         }
     };
 
+
+    private int drivePoint = 0;
+
+    private static Runnable driveRunnable = () -> {
+
+    };
+
     public static void runMachine(LinkedBlockingQueue<CommandQueueGroup> queueGroups) {
         blockingQueue = queueGroups;
-        Thread monitor = new Thread(runnable);
+        Thread monitor = new Thread(taskRunnable);
         monitor.setDaemon(true);
         monitor.setPriority(8);
         System.out.println("Starting Machine thread now!");

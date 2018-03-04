@@ -36,7 +36,7 @@ public class RobotMap {
 
 
     // actuators
-    public static WPI_TalonSRX driveMotor1, driveMotor2, driveMotor3, driveMotor4; // need to use WPI_talonSRX for drivetrain use
+    public static WPI_TalonSRX driveFrontLeft, driveRearLeft, driveFrontRight, driveRearRight; // need to use WPI_talonSRX for drivetrain use
     public static MecanumDrive robotdrive; // meccanum drive object
     public static Encoder driveEncoder;
     public static WPI_TalonSRX liftMotorL;
@@ -64,11 +64,11 @@ public class RobotMap {
 
 
         // all Motor controller objects
-        driveMotor1 = new WPI_TalonSRX(1);
-        driveMotor2 = new WPI_TalonSRX(2);
-        driveMotor3 = new WPI_TalonSRX(3);
-        driveMotor4 = new WPI_TalonSRX(4);
-        robotdrive = new MecanumDrive(driveMotor1, driveMotor2, driveMotor3, driveMotor4); // create meccanum drive
+        driveFrontLeft = new WPI_TalonSRX(1);
+        driveRearLeft = new WPI_TalonSRX(2);
+        driveFrontRight = new WPI_TalonSRX(3);
+        driveRearRight = new WPI_TalonSRX(4);
+        robotdrive = new MecanumDrive(driveFrontLeft, driveRearLeft, driveFrontRight, driveRearRight); // create meccanum drive
         liftMotorH = new Spark(0);
         liftMotorL = new WPI_TalonSRX(6);
         clampL = new Spark(2);

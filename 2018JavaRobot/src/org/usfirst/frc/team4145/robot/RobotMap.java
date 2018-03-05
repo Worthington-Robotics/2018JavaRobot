@@ -10,7 +10,6 @@ package org.usfirst.frc.team4145.robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.*;
-import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import org.usfirst.frc.team4145.robot.subsystems.*;
 import org.usfirst.frc.team4145.robot.subsystems.RobotDriveV3.RobotDriveV3;
 
@@ -38,24 +37,19 @@ public class RobotMap {
 
     // actuators
     public static WPI_TalonSRX driveFrontLeft, driveRearLeft, driveFrontRight, driveRearRight; // need to use WPI_talonSRX for drivetrain use
-    //public static MecanumDrive robotdrive; // meccanum drive object
     public static WPI_TalonSRX liftMotorL;
-    public static Spark liftMotorH, liftBotMotor;
-    public static Spark clampL, clampR, dropper;
+    public static Spark liftMotorH, liftBotMotor, clampL, clampR, dropper;
     public static DoubleSolenoid liftLock;
-    public static Compressor liftlockC;
+    public static Compressor compressor;
 
     // sensors
     public static AHRS ahrs; // AHRS system on navx
-    public static Encoder liftEnc;
-    public static Encoder rightWheelEncoder, leftWheelEncoder;
-    public static DigitalInput switchHBase, switchHTop;
-    public static DigitalInput botHighSw, botLowSw;
+    public static Encoder rightWheelEncoder, leftWheelEncoder, liftEnc;
+    public static DigitalInput switchHBase, switchHTop, botHighSw, botLowSw;
 
     // subsystems public static
     public static ExampleSubsystem exampleSystem;
     public static RobotDriveV3 drive;
-    public static RobotVision vision;
     public static Lift lift;
     public static Liftbot liftBot;
     public static CubeManipulation cubeManipulator;
@@ -69,7 +63,6 @@ public class RobotMap {
         driveRearLeft = new WPI_TalonSRX(2);
         driveFrontRight = new WPI_TalonSRX(3);
         driveRearRight = new WPI_TalonSRX(4);
-        //robotdrive = new MecanumDrive(driveFrontLeft, driveRearLeft, driveFrontRight, driveRearRight); // create meccanum drive
         liftMotorH = new Spark(0);
         liftMotorL = new WPI_TalonSRX(6);
         clampL = new Spark(2);
@@ -78,7 +71,7 @@ public class RobotMap {
         liftBotMotor = new Spark(5);
 
         //all compressor objects here
-        liftlockC = new Compressor(5);
+        compressor = new Compressor(5);
         
         // all solenoid objects here
         liftLock = new DoubleSolenoid(5,0,1);

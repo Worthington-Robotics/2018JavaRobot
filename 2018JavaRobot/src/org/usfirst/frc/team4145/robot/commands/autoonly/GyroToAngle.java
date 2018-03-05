@@ -9,7 +9,7 @@ import org.usfirst.frc.team4145.robot.RobotMap;
  * this class is for using the gyro lick to a certain angle during auto.
  * when you are ready to release the command call setDoneFlag(true)
  */
-
+@Deprecated
 public class GyroToAngle extends Command {
 
     private double target;
@@ -18,7 +18,6 @@ public class GyroToAngle extends Command {
     private int multiplier = 5;
     private int timeout;
 
-    @Deprecated
     public GyroToAngle(double addtlRot) {
     	this.addtlRot = addtlRot;
         timeout = (int)Math.abs(addtlRot) * multiplier;

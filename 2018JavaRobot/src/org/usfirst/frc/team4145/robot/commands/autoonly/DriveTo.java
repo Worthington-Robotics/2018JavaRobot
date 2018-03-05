@@ -8,7 +8,7 @@ import org.usfirst.frc.team4145.robot.RobotMap;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+@Deprecated
 public class DriveTo extends Command implements PIDOutput, PIDSource {
 
 	private int length = 0;
@@ -22,7 +22,6 @@ public class DriveTo extends Command implements PIDOutput, PIDSource {
 	private double REVERSE_AUTHORITY = 0.60; //nominal 0.6
 
 	// constructor to initialize stuff
-	@Deprecated
 	public DriveTo(int count) {
 		length = count;
 		driveTo = new PIDController(kP, kI, kD, this, this::pidWrite);

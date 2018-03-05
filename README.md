@@ -3,9 +3,11 @@
 
 This is the container for all Java programming
 ---
-Subsystem branches have been locked for archival purposes only. 
+Subsystem & Autobranches have been removed. 
 **General test should now be used for corrections.**
-Each autonomous will get its own branch in the following days.
+Motion_Profiling_Test should now be used for further development of the robot autonomous. 
+
+~~Each autonomous will get its own branch in the following days.~~
 
 ~~Each substem will have its own branch~~
 

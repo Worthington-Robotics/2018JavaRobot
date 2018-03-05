@@ -1,7 +1,7 @@
 package org.usfirst.frc.team4145.robot.shared.AutoStateMachine;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team4145.robot.shared.HardwareTimer;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -26,7 +26,7 @@ public class AutoStateMachine {
                     while (!inspectedElement.checkQueueGroup()) { //checks status of state and whether it is or should be dead
                         //System.out.println("Waiting for previous task to die");
                         SmartDashboard.putString("Auto State Machine Status", "Waiting for previous task to die");
-                        hardwareSleep(10);
+                        HardwareTimer.hardwareSleep(10);
                     }
                     //SmartDashboard.putNumber("State Advance Flag",1);
                     inspectedElement.killQueueGroup(); //forcefully kills group (just in case)
@@ -63,19 +63,5 @@ public class AutoStateMachine {
         System.out.println("Starting Machine thread now!");
         monitor.start();
     }
-
-    public static void hardwareSleep(long SLEEP_LENGTH_MS){
-        double FPGA_TIMESTAMP_AT_ENTRY = Timer.getFPGATimestamp() * 1000;
-        while(Timer.getFPGATimestamp() * 1000 < (FPGA_TIMESTAMP_AT_ENTRY + SLEEP_LENGTH_MS)){
-            //maybe some other delaying task?
-            try {
-                Thread.sleep(1);
-            }
-            catch (InterruptedException e){
-
-            }
-        }
-    }
-
 
 }

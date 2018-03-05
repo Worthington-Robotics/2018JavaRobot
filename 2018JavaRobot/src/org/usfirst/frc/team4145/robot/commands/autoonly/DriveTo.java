@@ -22,6 +22,7 @@ public class DriveTo extends Command implements PIDOutput, PIDSource {
 	private double REVERSE_AUTHORITY = 0.60; //nominal 0.6
 
 	// constructor to initialize stuff
+	@Deprecated
 	public DriveTo(int count) {
 		length = count;
 		driveTo = new PIDController(kP, kI, kD, this, this::pidWrite);
@@ -36,8 +37,8 @@ public class DriveTo extends Command implements PIDOutput, PIDSource {
 	// Set Setpoint to length
 	protected void initialize() {
 		//RobotMap.drive.setDynamicBrakeMode(new boolean[] {true, false, true, false});
-		RobotMap.drive.enableTo(RobotMap.drive.getGyro(), true);
-		RobotMap.driveEncoder.reset();
+		//RobotMap.drive.enableTo(RobotMap.drive.getGyro(), true);
+		RobotMap.rightWheelEncoder.reset();
 		SmartDashboard.putNumber("Wheel Encoder Target", length);
 		driveTo.setSetpoint(length);
 		driveTo.setEnabled(true);
@@ -55,7 +56,7 @@ public class DriveTo extends Command implements PIDOutput, PIDSource {
 
 	@Override
 	public double pidGet() {
-		return RobotMap.driveEncoder.get();
+		return RobotMap.rightWheelEncoder.get();
 	}
 
 	@Override
@@ -63,7 +64,7 @@ public class DriveTo extends Command implements PIDOutput, PIDSource {
 		//System.out.println("Pid Written to: " + output);
 		//System.out.println("Encoder Value at call: " + pidGet());
 		toSet[0] = -output;
-		RobotMap.drive.setInput(toSet);
+		//RobotMap.drive.setInput(toSet);
 		
 	}
 
@@ -75,7 +76,7 @@ public class DriveTo extends Command implements PIDOutput, PIDSource {
 	// Called once after isFinished returns true and disable driveTo
 	protected void end() {
 		//RobotMap.drive.enableTo(0, false);
-		RobotMap.driveEncoder.reset();
+		RobotMap.rightWheelEncoder.reset();
 		driveTo.disable();
 	}
 

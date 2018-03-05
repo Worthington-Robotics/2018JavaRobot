@@ -25,6 +25,14 @@ public class RobotDriveV3 extends Subsystem {
         m_AutoDriveInstance = new AutoDrive();
     }
 
+    public TeleopDrive getTeleopDriveInstance() {
+        return m_TeleopDriveInstance;
+    }
+
+    public AutoDrive getAutoDriveInstance() {
+        return m_AutoDriveInstance;
+    }
+
     public void periodic() {
         if (DriverStation.getInstance().isAutonomous()) {
             lastAutoOutput = m_AutoDriveInstance.update();
@@ -71,7 +79,7 @@ public class RobotDriveV3 extends Subsystem {
     }
 
     private void smartDashboardUpdates() {
-        SmartDashboard.putNumber("Wheel Encoder", RobotMap.driveEncoder.get());
+        SmartDashboard.putNumber("Wheel Encoder", RobotMap.rightWheelEncoder.get());
         SmartDashboard.putNumber("FPGA Time", Timer.getFPGATimestamp());
     }
 

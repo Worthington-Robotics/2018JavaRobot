@@ -18,6 +18,7 @@ public class GyroToAngle extends Command {
     private int multiplier = 5;
     private int timeout;
 
+    @Deprecated
     public GyroToAngle(double addtlRot) {
     	this.addtlRot = addtlRot;
         timeout = (int)Math.abs(addtlRot) * multiplier;
@@ -26,7 +27,7 @@ public class GyroToAngle extends Command {
     public void initialize() {
         target = Math.abs((RobotMap.drive.getGyro() + 360 + addtlRot) % 360);
         //System.out.println("Gyro target = " + target);
-        RobotMap.drive.enableTo(target, true);
+        //RobotMap.drive.enableTo(target, true);
     }
 
     public boolean isFinished() {

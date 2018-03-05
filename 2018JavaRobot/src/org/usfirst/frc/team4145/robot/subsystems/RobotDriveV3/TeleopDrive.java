@@ -61,11 +61,16 @@ public class TeleopDrive extends RobotDriveMode{
         return lastInputSet;
     }
 
+    public void enableTo(double rot, boolean en) {
+        this.setTarget(rot);
+        this.enableLock(en);
+    }
+
     private void setTarget(double target) {
         gyroLock.setSetpoint(target);
     }
 
-    public void enableLock(boolean en) {
+    private void enableLock(boolean en) {
         enLock = en;
         if (enLock) gyroLock.enable();
         else gyroLock.disable();

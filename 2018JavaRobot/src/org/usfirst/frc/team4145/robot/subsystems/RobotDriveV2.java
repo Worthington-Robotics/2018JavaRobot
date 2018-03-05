@@ -80,7 +80,7 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
             lastInputSet[0] *= Y_CUT_PERCENTAGE;
             lastInputSet[1] *= X_CUT_PERCENTAGE;
         }
-        SmartDashboard.putNumber("Wheel Encoder", RobotMap.driveEncoder.get());
+        SmartDashboard.putNumber("Wheel Encoder", RobotMap.rightWheelEncoder.get());
         SmartDashboard.putNumberArray("compensated stick values", lastInputSet);
         SmartDashboard.putNumber("Gyro Target", gyroLock.getSetpoint());
         SmartDashboard.putNumber("Gyro Angle", getGyro());
@@ -219,7 +219,7 @@ public class RobotDriveV2 extends CustomPIDSubsystem {
 
     //private methods here
     private void setCartesianDrive(double x, double y, double z) {
-        RobotMap.robotdrive.driveCartesian(y, -x, z);
+        //RobotMap.robotdrive.driveCartesian(y, -x, z);
     }
 
     private void evalLowGear() {

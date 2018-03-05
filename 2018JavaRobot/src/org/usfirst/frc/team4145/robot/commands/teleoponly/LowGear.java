@@ -11,7 +11,7 @@ public class LowGear extends Command {
 
     @Override
     protected void initialize() {
-        RobotMap.drive.setLowGear(true);
+        RobotMap.drive.getTeleopDriveInstance().setLowGear(true);
     }
 
     @Override
@@ -26,7 +26,7 @@ public class LowGear extends Command {
     }
 
     protected void end(){
-        RobotMap.drive.setLowGear(false);
+        RobotMap.drive.getTeleopDriveInstance().setLowGear(false);
     }
 
     @Override

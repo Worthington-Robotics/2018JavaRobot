@@ -51,7 +51,7 @@ public class Robot extends TimedRobot {
     @Override
     public void disabledInit() {
         SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray()); // publishes the auto list to the dashboard "Auto Selector"
-        RobotMap.drive.enableTo(0, false);
+        RobotMap.drive.getTeleopDriveInstance().enableTo(0, false);
         SmartDashboard.putNumber("In Auto", 0);
         SmartDashboard.putNumber("Auto State", -1);
         SmartDashboard.putString("Auto State Machine Status", "State machine not yet started");
@@ -79,10 +79,10 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousInit() {
-        RobotMap.drive.setDynamicBrakeMode(new boolean[] {false, false, false,false});
+        RobotMap.drive.setDynamicBrakeMode(false, false, false,false);
         //RobotMap.drive.setDynamicBrakeMode(new boolean[] {true, true, true, true});
         RobotMap.ahrs.reset();
-        RobotMap.driveEncoder.reset();
+        RobotMap.rightWheelEncoder.reset();
         SmartDashboard.putNumber("In Auto", 1);
 
         String[] autoList = AutoSelector.buildArray();
@@ -114,8 +114,8 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("In Auto", 0);
         SmartDashboard.putNumber("Auto State", -1);
         RobotMap.ahrs.reset();
-        RobotMap.drive.enableTo(0, false);
-        RobotMap.drive.setDynamicBrakeMode(new boolean[] {true, true, true, true});
+        RobotMap.drive.getTeleopDriveInstance().enableTo(0, false);
+        RobotMap.drive.setDynamicBrakeMode(true, true, true, true);
     }
 
     /**

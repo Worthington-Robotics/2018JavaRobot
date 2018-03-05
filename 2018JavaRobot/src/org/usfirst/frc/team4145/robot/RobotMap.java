@@ -12,6 +12,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import org.usfirst.frc.team4145.robot.subsystems.*;
+import org.usfirst.frc.team4145.robot.subsystems.RobotDriveV3.RobotDriveV3;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -37,8 +38,7 @@ public class RobotMap {
 
     // actuators
     public static WPI_TalonSRX driveFrontLeft, driveRearLeft, driveFrontRight, driveRearRight; // need to use WPI_talonSRX for drivetrain use
-    public static MecanumDrive robotdrive; // meccanum drive object
-    public static Encoder driveEncoder;
+    //public static MecanumDrive robotdrive; // meccanum drive object
     public static WPI_TalonSRX liftMotorL;
     public static Spark liftMotorH, liftBotMotor;
     public static Spark clampL, clampR, dropper;
@@ -48,12 +48,13 @@ public class RobotMap {
     // sensors
     public static AHRS ahrs; // AHRS system on navx
     public static Encoder liftEnc;
+    public static Encoder rightWheelEncoder, leftWheelEncoder;
     public static DigitalInput switchHBase, switchHTop;
     public static DigitalInput botHighSw, botLowSw;
 
     // subsystems public static
     public static ExampleSubsystem exampleSystem;
-    public static RobotDriveV2 drive;
+    public static RobotDriveV3 drive;
     public static RobotVision vision;
     public static Lift lift;
     public static Liftbot liftBot;
@@ -68,7 +69,7 @@ public class RobotMap {
         driveRearLeft = new WPI_TalonSRX(2);
         driveFrontRight = new WPI_TalonSRX(3);
         driveRearRight = new WPI_TalonSRX(4);
-        robotdrive = new MecanumDrive(driveFrontLeft, driveRearLeft, driveFrontRight, driveRearRight); // create meccanum drive
+        //robotdrive = new MecanumDrive(driveFrontLeft, driveRearLeft, driveFrontRight, driveRearRight); // create meccanum drive
         liftMotorH = new Spark(0);
         liftMotorL = new WPI_TalonSRX(6);
         clampL = new Spark(2);
@@ -85,14 +86,15 @@ public class RobotMap {
         // all sensor objects here
         ahrs = new AHRS(SPI.Port.kMXP); // finish declaring AHRS to MXP SPI bus
         ahrs.reset();
-        driveEncoder = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
+        rightWheelEncoder = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
+        leftWheelEncoder = new Encoder(2,3,true, CounterBase.EncodingType.k4X);
         liftEnc = new Encoder(4, 5, true, Encoder.EncodingType.k4X);
         switchHTop = new DigitalInput(6);
         switchHBase = new DigitalInput(7);
 
         // all subsystem objects here
         exampleSystem = new ExampleSubsystem();
-        drive = new RobotDriveV2();
+        drive = new RobotDriveV3();
         //vision = new RobotVision();
         liftBot = new Liftbot();
         lift = new Lift();

@@ -1,46 +1,48 @@
 package org.usfirst.frc.team4145.robot.subsystems.RobotDriveV3;
 
-import edu.wpi.first.wpilibj.PIDController;
+import org.usfirst.frc.team4145.robot.RobotMap;
+import org.usfirst.frc.team4145.robot.shared.MixedDrive;
+import org.usfirst.frc.team4145.robot.shared.PidStuff.CustomVelocityPid;
+import org.usfirst.frc.team4145.robot.shared.PidStuff.VelocitySetpoint;
 
 public class AutoDrive {
 
     //data objects / fields
-    private PIDController leftVelocity; //may be unnecessary
-    private PIDController rightVelocity; //may be unnecessary
-    private double[] outputArray = {0,0};
+    private CustomVelocityPid leftFrontVelocity;
+    private CustomVelocityPid leftRearVelocity;
+    private CustomVelocityPid rightFrontVelocity;
+    private CustomVelocityPid rightRearVelocity;
+    private MixedDrive m_MixedDriveInstance;
 
     //Shared PID Constants
-    private double VELOCITY_PROPORTIONAL   = 0.0000; //proportional scalar between motor power level and velocity output
-    private double MAX_VELOCITY            = 4.0000; //counts per second
-    private double MAX_ACELLERATION        = 2.0000; //counts per second per second
+    private double kV = 0.0000; //proportional scalar between motor power level and velocity output
+    private double kA = 0.0000; //proportional scalar between motor power level and acceleration output
 
     //Left PID constants
-    private double LEFT_PROPORTIONAL_GAIN  = 0.0000;
-    private double LEFT_INTEGRAL_GAIN      = 0.0000;
-    private double LEFT_DERIVATIVE_GAIN    = 0.0000;
-    private double LEFT_FEEDFORWARD        = 0.0000; //may be unnecessary
+    private double LEFT_kP = 0.0000;
+    private double LEFT_kI = 0.0000;
+    private double LEFT_kD = 0.0000;
 
     //Right PID constants
-    private double RIGHT_PROPORTIONAL_GAIN = 0.0000;
-    private double RIGHT_INTEGRAL_GAIN     = 0.0000;
-    private double RIGHT_DERIVATIVE_GAIN   = 0.0000;
-    private double RIGHT_FEEDFORWARD       = 0.0000; //may be unnecessary
+    private double RIGHT_kP = 0.0000;
+    private double RIGHT_kI = 0.0000;
+    private double RIGHT_kD = 0.0000;
 
-    AutoDrive(){
-        //TODO finish class declaration
+
+    AutoDrive(MixedDrive mixedDriveInstance){
+        m_MixedDriveInstance = mixedDriveInstance;
     }
 
-    public void pidWriteLeft(double output){
-        outputArray[0] = output * VELOCITY_PROPORTIONAL;
-    }
-
-    public void pidWriteRight(double output){
-        outputArray[1] = output * VELOCITY_PROPORTIONAL;
+    public void setProfile(VelocitySetpoint[] rightTrajectory, VelocitySetpoint[] leftTrajectory){
+        leftFrontVelocity = new CustomVelocityPid(LEFT_kP, LEFT_kI, LEFT_kD, kV, kA, RobotMap.leftWheelEncoder, RobotMap.driveFrontLeft, leftTrajectory);
+        leftRearVelocity = new CustomVelocityPid(LEFT_kP, LEFT_kI, LEFT_kD, kV, kA, RobotMap.leftWheelEncoder, RobotMap.driveRearLeft, leftTrajectory);
+        rightFrontVelocity = new CustomVelocityPid(RIGHT_kP, RIGHT_kI, RIGHT_kD, kV, kA, RobotMap.rightWheelEncoder, RobotMap.driveFrontRight, rightTrajectory);
+        rightRearVelocity = new CustomVelocityPid(RIGHT_kP, RIGHT_kI, RIGHT_kD, kV, kA, RobotMap.rightWheelEncoder, RobotMap.driveRearRight, rightTrajectory);
     }
 
     public double[] update(){
-        //TODO implement update method for tank drive from pathing algorithm
-        return outputArray;
+
+        return null;
     }
 
 }

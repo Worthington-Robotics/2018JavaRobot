@@ -16,13 +16,13 @@ public class RobotDriveV3 extends Subsystem {
     private AutoDrive m_AutoDriveInstance;
 
     private double[] lastTeleopOutput = {0,0,0};
-    private double[] lastAutoOutput = {0,0};
+    //private double[] lastAutoOutput = {0,0};
 
 
     public RobotDriveV3() {
         m_MixedDriveInstance = new MixedDrive(RobotMap.driveFrontLeft, RobotMap.driveRearLeft, RobotMap.driveFrontRight, RobotMap.driveRearRight);
         m_TeleopDriveInstance = new TeleopDrive();
-        m_AutoDriveInstance = new AutoDrive();
+        m_AutoDriveInstance = new AutoDrive(m_MixedDriveInstance);
     }
 
     public TeleopDrive getTeleopDriveInstance() {
@@ -36,7 +36,7 @@ public class RobotDriveV3 extends Subsystem {
     public void periodic() {
         if (DriverStation.getInstance().isAutonomous()) {
             lastAutoOutput = m_AutoDriveInstance.update();
-            driveTank(lastAutoOutput[0], lastAutoOutput[1]);
+            //driveTank(lastAutoOutput[0], lastAutoOutput[1]);
         } else {
             lastTeleopOutput = m_TeleopDriveInstance.update();
             driveCartesian(lastTeleopOutput[0], lastTeleopOutput[1], lastTeleopOutput[2]);

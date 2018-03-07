@@ -40,8 +40,16 @@ public class AutoDrive {
         rightRearVelocity = new CustomVelocityPid(RIGHT_kP, RIGHT_kI, RIGHT_kD, kV, kA, RobotMap.rightWheelEncoder, RobotMap.driveRearRight, rightTrajectory);
     }
 
-    public double[] update(){
+    public void enableToProfile(VelocitySetpoint[] rightTrajectory, VelocitySetpoint[] leftTrajectory, boolean enable){
+        setProfile(rightTrajectory, leftTrajectory);
+        leftFrontVelocity.enable(enable);
+        leftRearVelocity.enable(enable);
+        rightFrontVelocity.enable(enable);
+        rightRearVelocity.enable(enable);
 
+    }
+
+    public double[] update(){
         return null;
     }
 

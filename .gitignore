@@ -3,3 +3,8 @@
 *.class
 *.classpath
 /.recommenders/
+*.iml
+2018JavaRobot/.idea/workspace.xml
+2018JavaRobot/.idea/modules.xml
+2018JavaRobot/.idea/misc.xml
+2018JavaRobot/.idea/ant.xml

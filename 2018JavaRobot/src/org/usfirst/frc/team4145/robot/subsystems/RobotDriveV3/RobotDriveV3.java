@@ -35,7 +35,7 @@ public class RobotDriveV3 extends Subsystem {
 
     public void periodic() {
         if (DriverStation.getInstance().isAutonomous()) {
-            lastAutoOutput = m_AutoDriveInstance.update();
+            //lastAutoOutput = m_AutoDriveInstance.update();
             //driveTank(lastAutoOutput[0], lastAutoOutput[1]);
         } else {
             lastTeleopOutput = m_TeleopDriveInstance.update();

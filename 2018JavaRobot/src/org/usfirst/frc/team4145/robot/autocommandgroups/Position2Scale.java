@@ -9,31 +9,13 @@ public class Position2Scale extends QueueGroup {
 	public Position2Scale(int autonumber) {
 		if (autonumber == 0) {
 			//Forward then rotate
-			addSequential(new DriveTo(19 * 20), 500);
-			addSequential(new GyroToAngle(90), 100);
-			
-			//Forward then rotate
-			addSequential(new DriveTo(19 * 90), 500);
-			addSequential(new GyroToAngle(-90), 100);
-			
-			//Forward then rotate and drop
-			addSequential(new DriveTo(19 * 240), 500);
-			addSequential(new GyroToAngle(45), 100);
+			addDrive("Position2Scale0_left.csv", "Position2Scale0_right.csv");
 			addParallel(new Command[] {new HighLiftUp(), new LiftToPosition(500), new DropForks()}, 500);
 			addSequential(new DropCube(true), 100);
 		}
 		if (autonumber == 1) {
 			//Forward then rotate
-			addSequential(new DriveTo(19 * 60), 300);
-			addSequential(new GyroToAngle(-90), 100);
-			
-			//Forward then rotate
-			addSequential(new DriveTo(19 * 120), 500);
-			addSequential(new GyroToAngle(90), 100);
-			
-			//Forward Toward Scale and Drop
-			addSequential(new DriveTo(19 * 210), 500);
-			addSequential(new GyroToAngle(45), 100);
+			addDrive("Position2Scale1_left.csv", "Position2Scale1_right.csv");
 			addParallel(new Command[] {new HighLiftUp(), new LiftToPosition(500), new DropForks()},  500);
 			addSequential(new DropCube(true), 100);
 		}

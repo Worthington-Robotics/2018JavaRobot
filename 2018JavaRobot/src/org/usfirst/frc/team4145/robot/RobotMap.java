@@ -39,8 +39,8 @@ public class RobotMap {
     public static WPI_TalonSRX driveMotor1, driveMotor2, driveMotor3, driveMotor4; // need to use WPI_talonSRX for drivetrain use
     public static MecanumDrive robotdrive; // meccanum drive object
     public static Encoder driveEncoder;
-    public static WPI_TalonSRX liftMotorL;
-    public static Spark liftMotorH, liftBotMotor;
+    public static WPI_TalonSRX liftMotorL, liftMotorH;
+    public static Spark  liftBotMotor;
     public static Spark clampL, clampR, dropper;
     public static DoubleSolenoid liftLock;
     public static Compressor liftlockC;
@@ -69,7 +69,7 @@ public class RobotMap {
         driveMotor3 = new WPI_TalonSRX(3);
         driveMotor4 = new WPI_TalonSRX(4);
         robotdrive = new MecanumDrive(driveMotor1, driveMotor2, driveMotor3, driveMotor4); // create meccanum drive
-        liftMotorH = new Spark(0);
+        liftMotorH = new WPI_TalonSRX(7);
         liftMotorL = new WPI_TalonSRX(6);
         clampL = new Spark(2);
         clampR = new Spark(3);

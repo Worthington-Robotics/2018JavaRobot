@@ -33,7 +33,7 @@ public class QueueGroup {
         queuedStates.add(new CommandQueueGroup(commands, timeOutMs));
     }
     
-    protected void addDrive(String leftDrive, String rightDrive, long timeOutMs) {
+    protected void addDrive(String leftDrive, String rightDrive) {
         requireNonNull(leftDrive, "left file path cannot be null");
         requireNonNull(rightDrive, "right file path cannot be null");
         LeftDrive = VelocitySetpoint.pointArray(leftDrive);

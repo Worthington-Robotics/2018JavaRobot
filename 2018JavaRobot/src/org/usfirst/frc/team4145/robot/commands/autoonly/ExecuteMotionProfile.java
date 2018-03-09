@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4145.robot.commands.autoonly;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import jaci.pathfinder.Trajectory;
 import org.usfirst.frc.team4145.robot.RobotMap;
@@ -18,8 +19,8 @@ public class ExecuteMotionProfile extends Command {
 
     @Override
     protected boolean isFinished() {
-        return false;
-    }
+        return !DriverStation.getInstance().isAutonomous();
+    } //has to finish at end of auto routine
 
     public void end(){
         RobotMap.drive.getAutoDriveInstance().enableToProfile(leftInstance, rightInstance, false);

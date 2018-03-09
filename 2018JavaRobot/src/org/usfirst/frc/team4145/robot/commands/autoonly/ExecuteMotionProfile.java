@@ -1,15 +1,19 @@
 package org.usfirst.frc.team4145.robot.commands.autoonly;
 
 import edu.wpi.first.wpilibj.command.Command;
+import jaci.pathfinder.Trajectory;
+import org.usfirst.frc.team4145.robot.RobotMap;
 
 public class ExecuteMotionProfile extends Command {
 
-    public ExecuteMotionProfile(){
+    private Trajectory leftInstance, rightInstance;
 
+    public ExecuteMotionProfile(Trajectory left, Trajectory right){
+        leftInstance = left; rightInstance = right;
     }
 
     public void initialize(){
-
+        RobotMap.drive.getAutoDriveInstance().enableToProfile(leftInstance, rightInstance, true);
     }
 
     @Override
@@ -18,7 +22,7 @@ public class ExecuteMotionProfile extends Command {
     }
 
     public void end(){
-
+        RobotMap.drive.getAutoDriveInstance().enableToProfile(leftInstance, rightInstance, false);
     }
 
     public void interrupted(){

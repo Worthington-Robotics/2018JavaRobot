@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4145.robot.shared.AutoStateMachine;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team4145.robot.commands.autoonly.ExecuteMotionProfile;
 import org.usfirst.frc.team4145.robot.shared.HardwareTimer;
 
 import java.util.concurrent.LinkedBlockingQueue;
@@ -22,6 +23,10 @@ public class AutoStateMachine {
                 SmartDashboard.putNumber("Auto State", autoState);
                 try {
                     inspectedElement = blockingQueue.take();
+                    if(!(inspectedElement.getQueueGroup().peek() instanceof ExecuteMotionProfile) && autoState == 0){
+                        SmartDashboard.putString("Auto State Machine Status", "No motion profile fed in state zero");
+                        System.out.println("State zero did not contain a motion profile");
+                    }
                     inspectedElement.startQueueGroup(); //starts queue group running
                     while (!inspectedElement.checkQueueGroup()) { //checks status of state and whether it is or should be dead
                         //System.out.println("Waiting for previous task to die");

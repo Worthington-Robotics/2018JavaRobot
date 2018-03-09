@@ -11,6 +11,7 @@ public class CommandQueueGroup {
     private LinkedList<Command> queueGroup;
     private double FPGA_TIME_AT_START;
     private double TIME_OUT;
+    private boolean isKillable;
 
     /**
      * Data structure for storing a series of commands with a timeout
@@ -18,7 +19,8 @@ public class CommandQueueGroup {
      * @param timeOutMs timeout in milliseconds for the group
      */
 
-    CommandQueueGroup(Command[] commands, long timeOutMs){
+    CommandQueueGroup(Command[] commands, long timeOutMs, boolean isKillable){
+        this.isKillable = isKillable;
         TIME_OUT = timeOutMs / 1000;
         queueGroup = new LinkedList<>();
         for (Command command : commands) {
@@ -63,8 +65,10 @@ public class CommandQueueGroup {
      * this method kills the running queue group.
      */
     void killQueueGroup() {
-        for (Command command : queueGroup) {
-            command.cancel();
+        if(isKillable) {
+            for (Command command : queueGroup) {
+                command.cancel();
+            }
         }
     }
 

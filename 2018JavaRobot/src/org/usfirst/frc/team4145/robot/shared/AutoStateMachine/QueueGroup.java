@@ -1,8 +1,11 @@
 package org.usfirst.frc.team4145.robot.shared.AutoStateMachine;
 
 import edu.wpi.first.wpilibj.command.Command;
-import src.org.usfirst.frc.team4145.robot.shared.PidStuff.VelocitySetpoint;
+import jaci.pathfinder.Pathfinder;
+import jaci.pathfinder.Trajectory;
+import org.usfirst.frc.team4145.robot.shared.PidStuff.VelocitySetpoint;
 
+import java.io.File;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -16,7 +19,7 @@ import static java.util.Objects.requireNonNull;
 public class QueueGroup {
 
     private Queue<CommandQueueGroup> queuedStates;
-    private VelocitySetpoint [] RightDrive, LeftDrive;
+    private Trajectory RightDrive, LeftDrive;
 
     public QueueGroup() {
         queuedStates = new LinkedBlockingQueue<>();
@@ -36,17 +39,17 @@ public class QueueGroup {
     protected void addDrive(String leftDrive, String rightDrive) {
         requireNonNull(leftDrive, "left file path cannot be null");
         requireNonNull(rightDrive, "right file path cannot be null");
-        LeftDrive = VelocitySetpoint.pointArray(leftDrive);
-        RightDrive = VelocitySetpoint.pointArray(rightDrive);
-        
-        
+        LeftDrive = Pathfinder.readFromCSV(new File(leftDrive));
+        RightDrive = Pathfinder.readFromCSV(new File(rightDrive));
     }
     
-    public VelocitySetpoint[] getRightDrive()
-    {return RightDrive;}
+    public Trajectory getRightDrive() {
+        return RightDrive;
+    }
     
-    public VelocitySetpoint[] getRightDrive()
-    {return LeftDrive;}
+    public Trajectory getLeftDrive() {
+        return LeftDrive;
+    }
     
 
 

@@ -1,27 +1,23 @@
 package org.usfirst.frc.team4145.robot.subsystems.RobotDriveV3;
 
-import org.usfirst.frc.team4145.robot.Robot;
-import org.usfirst.frc.team4145.robot.RobotMap;
-import org.usfirst.frc.team4145.robot.shared.MixedDrive;
-import org.usfirst.frc.team4145.robot.shared.PidStuff.CustomVelocityPid;
-import org.usfirst.frc.team4145.robot.shared.PidStuff.VelocitySetpoint;
+import jaci.pathfinder.Trajectory;
+import org.usfirst.frc.team4145.robot.*;
+import org.usfirst.frc.team4145.robot.shared.PidStuff.*;
 
 public class AutoDrive {
 
     //data objects / fields
-    private CustomVelocityPid leftFrontVelocity;
-    private CustomVelocityPid leftRearVelocity;
-    private CustomVelocityPid rightFrontVelocity;
-    private CustomVelocityPid rightRearVelocity;
-    private MixedDrive m_MixedDriveInstance;
+    private CustomVelocityPid m_LeftVelocityPID;
+    private CustomVelocityPid m_RightVelocityPID;
 
-    //general use variables
+    /*general use variables
     private double DEADBAND_VALUE = 0.15; //nominal deadband 0.15 percent of stick
     private double Y_PERCENTAGE = 0.75; // decrease xy output to percent of full Nominal: 0.75
     private double Y_CUT_PERCENTAGE = 0.5; //fine adjust Y Nominal: 0.5
     private double X_PERCENTAGE = 1.0; //decrease X to percent of full Nominal: 1.0
     private double X_CUT_PERCENTAGE = 1.0; //fine adjust X Nominal: 1.0
     private double Z_PERCENTAGE = 0.50; // z percentage of full stick deflection Nominal: 0.50
+    */
 
     //Shared PID Constants
     private double kV = 0.0000; //proportional scalar between motor power level and velocity output
@@ -38,29 +34,25 @@ public class AutoDrive {
     private double RIGHT_kD = 0.0000;
 
 
-    AutoDrive(MixedDrive mixedDriveInstance){
-        m_MixedDriveInstance = mixedDriveInstance;
+    AutoDrive() {
+
     }
 
-    public void setProfile(VelocitySetpoint[] rightTrajectory, VelocitySetpoint[] leftTrajectory) {
-        leftFrontVelocity = new CustomVelocityPid(LEFT_kP, LEFT_kI, LEFT_kD, kV, kA, RobotMap.leftWheelEncoder, RobotMap.driveFrontLeft, leftTrajectory);
-        rightFrontVelocity = new CustomVelocityPid(RIGHT_kP, RIGHT_kI, RIGHT_kD, kV, kA, RobotMap.rightWheelEncoder, RobotMap.driveFrontRight, rightTrajectory);
+    public double[] update() {
+        return new double[] {m_LeftVelocityPID.getResult(), m_RightVelocityPID.getResult()};
     }
 
-    public void enableToProfile(VelocitySetpoint[] rightTrajectory, VelocitySetpoint[] leftTrajectory, boolean enable){
+    public void enableToProfile(Trajectory rightTrajectory, Trajectory leftTrajectory, boolean enable) {
         setProfile(rightTrajectory, leftTrajectory);
-        leftFrontVelocity.enable(enable);
-        leftRearVelocity.enable(enable);
-        rightFrontVelocity.enable(enable);
-        rightRearVelocity.enable(enable);
-
+        m_LeftVelocityPID.enable(enable);
+        m_RightVelocityPID.enable(enable);
+    }
+    private void setProfile(Trajectory rightTrajectory, Trajectory leftTrajectory) {
+        m_LeftVelocityPID = new CustomVelocityPid(LEFT_kP, LEFT_kI, LEFT_kD, kV, kA, RobotMap.leftWheelEncoder, leftTrajectory, Constants.DRIVETRAIN_UPDATE_RATE);
+        m_RightVelocityPID = new CustomVelocityPid(RIGHT_kP, RIGHT_kI, RIGHT_kD, kV, kA, RobotMap.rightWheelEncoder, rightTrajectory, Constants.DRIVETRAIN_UPDATE_RATE);
     }
 
-    public double[] update(){
-        //return getAdjStick();
-        return null;
-    }
-
+    /*
     private double[] getAdjStick() {
         double[] out = new double[3];
         out[0] = evalDeadBand(Robot.oi.getMasterStick().getY(), DEADBAND_VALUE) * Y_PERCENTAGE;
@@ -81,5 +73,6 @@ public class AutoDrive {
             }
         }
     }
+    */
 
 }

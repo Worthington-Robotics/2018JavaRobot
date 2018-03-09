@@ -1,6 +1,9 @@
 package org.usfirst.frc.team4145.robot.shared.PidStuff;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
-import java.io.file;
+
+@Deprecated
 public class VelocitySetpoint {
 
     private double dist, velo, acc;
@@ -21,39 +24,38 @@ public class VelocitySetpoint {
         return velo;
     }
     
-    public static VelocitySetpoint[] pointArray(String x)
+    public static VelocitySetpoint[] pointArray(String FilePath)
     {
     	try {
-    	File CSV = new File(x);}
-    	catch(IOExeption error)
-    	{}
-    	int i = 0;
-    	int a = 0;
-    	int v = 0;
-    	int d = 0;
-    	Scanner in = new Scanner(CSV);
-    	in.setDelimiter(',');
-    	VelocitySetpoint [] pointArray = new VelocitySetpoint [3000];
-    	while(in.hasNext())
-    	{
-    		if(i%3 == 0)
-    		{
-    	VelocitySetpoint point = new VelocitySetpoint(d,v,a);
-    	pointArray[i/3] = point;
-    	d = in.nextInt();
-    	i++;
-    		}
-    		if(i%3 == 1)
-    		{
-    	v = in.nextInt();
-    	i++;
-    		}
-    		if(i%3 == 2)
-    		{
-    	a = in.nextInt();
-    	i++;
-    		}
+    		File CSV = new File(FilePath);
+			int i = 0;
+			double a = 0, v = 0, d = 0;
+			Scanner in = new Scanner(CSV);
+			in.useDelimiter(",");
+			VelocitySetpoint [] pointArray = new VelocitySetpoint [3000];
+			while(in.hasNext())
+			{
+				if(i%3 == 0)
+				{
+					d = in.nextDouble();
+				}
+				if(i%3 == 1)
+				{
+					v = in.nextDouble();
+				}
+				if(i%3 == 2)
+				{
+					in.nextDouble();
+					VelocitySetpoint point = new VelocitySetpoint(d,v,a);
+					pointArray[i/3] = point;
+				}
+				i++;
+			}
     	}
-    		
+    	catch(FileNotFoundException error)
+    	{
+
+		}
+		return null;
     }
 }

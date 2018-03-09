@@ -2,9 +2,11 @@ package org.usfirst.frc.team4145.robot.subsystems.RobotDriveV3;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team4145.robot.Constants;
 import org.usfirst.frc.team4145.robot.RobotMap;
 import org.usfirst.frc.team4145.robot.shared.MixedDrive;
 
@@ -14,6 +16,7 @@ public class RobotDriveV3 extends Subsystem {
     private MixedDrive m_MixedDriveInstance;
     private TeleopDrive m_TeleopDriveInstance;
     private AutoDrive m_AutoDriveInstance;
+    private Notifier m_NotifierInstance;
 
     private double[] lastTeleopOutput = {0,0,0};
     private double[] lastAutoOutput = {0,0};
@@ -22,7 +25,9 @@ public class RobotDriveV3 extends Subsystem {
     public RobotDriveV3() {
         m_MixedDriveInstance = new MixedDrive(RobotMap.driveFrontLeft, RobotMap.driveRearLeft, RobotMap.driveFrontRight, RobotMap.driveRearRight);
         m_TeleopDriveInstance = new TeleopDrive();
-        m_AutoDriveInstance = new AutoDrive(m_MixedDriveInstance);
+        m_AutoDriveInstance = new AutoDrive();
+        m_NotifierInstance = new Notifier(periodic);
+        m_NotifierInstance.startPeriodic(Constants.DRIVETRAIN_UPDATE_RATE);
     }
 
     public TeleopDrive getTeleopDriveInstance() {
@@ -33,7 +38,7 @@ public class RobotDriveV3 extends Subsystem {
         return m_AutoDriveInstance;
     }
 
-    public void periodic() {
+    private Runnable periodic = () -> {
         if (DriverStation.getInstance().isAutonomous()) {
             lastAutoOutput = m_AutoDriveInstance.update();
             driveTank(lastAutoOutput[0], lastAutoOutput[1]);
@@ -41,7 +46,7 @@ public class RobotDriveV3 extends Subsystem {
             lastTeleopOutput = m_TeleopDriveInstance.update();
             driveCartesian(lastTeleopOutput[1], -lastTeleopOutput[0], lastTeleopOutput[2]);
         }
-    }
+    };
 
     public double getGyro() {
         return ((RobotMap.ahrs.getYaw() + 360) % 360); //add 360 to make all positive then mod by 360 to get remainder

@@ -41,6 +41,8 @@ public class RobotDriveV3 extends Subsystem {
     private Runnable periodic = () -> {
         if (DriverStation.getInstance().isAutonomous()) {
             lastAutoOutput = m_AutoDriveInstance.update();
+            System.out.println("Tank drive motor values: " + lastAutoOutput[0] + " " + lastAutoOutput[1]);
+            SmartDashboard.putNumberArray("Tank Drive Values", lastAutoOutput);
             driveTank(lastAutoOutput[0], lastAutoOutput[1]);
         } else {
             lastTeleopOutput = m_TeleopDriveInstance.update();

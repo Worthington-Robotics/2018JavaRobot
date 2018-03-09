@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 
-public abstract class RobotDriveMode implements PIDOutput, PIDSource {
+public abstract class RobotDriveMode implements PIDOutput, PIDSource, DriveUpdater {
 
     private PIDSourceType type = PIDSourceType.kDisplacement;
 
@@ -17,7 +17,5 @@ public abstract class RobotDriveMode implements PIDOutput, PIDSource {
     public PIDSourceType getPIDSourceType() {
         return type;
     }
-
-    protected abstract double[] update();
 
 }

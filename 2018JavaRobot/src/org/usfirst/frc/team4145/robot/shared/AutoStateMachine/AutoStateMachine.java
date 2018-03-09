@@ -23,7 +23,7 @@ public class AutoStateMachine {
                 SmartDashboard.putNumber("Auto State", autoState);
                 try {
                     inspectedElement = blockingQueue.take();
-                    if(!(inspectedElement.getQueueGroup().peek() instanceof ExecuteMotionProfile) && autoState == 0){
+                    if(!(inspectedElement.getQueueGroup().peek() instanceof ExecuteMotionProfile) && autoState == 0){ //check to see if first command is motion profile
                         SmartDashboard.putString("Auto State Machine Status", "No motion profile fed in state zero");
                         System.out.println("State zero did not contain a motion profile");
                     }
@@ -51,13 +51,6 @@ public class AutoStateMachine {
             SmartDashboard.putNumber("Auto State", -2);
             SmartDashboard.putString("Auto State Machine Status", "List was NULL!");
         }
-    };
-
-
-    private int drivePoint = 0;
-
-    private static Runnable driveRunnable = () -> {
-
     };
 
     public static void runMachine(LinkedBlockingQueue<CommandQueueGroup> queueGroups) {

@@ -4,6 +4,10 @@ import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import jaci.pathfinder.Trajectory;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 public class CustomVelocityPid {
 
     private Encoder m_EncoderInstance;
@@ -18,12 +22,13 @@ public class CustomVelocityPid {
     private int index = 0;
     private static int instances = 0;
     private int instanceNum;
+    private double offset;
 
     private Runnable runnable = () -> calculate();
 
-    public CustomVelocityPid(double kP, double kI, double kD, double kV, double kA, Encoder encoder, Trajectory trajectory, double timing){
+    public CustomVelocityPid(double kP, double kI, double kD, double kV, double kA, Encoder encoder, Trajectory trajectory, double timing, double offset){
         m_EncoderInstance = encoder; //m_PIDOutputInstance = pidOutput;
-        this.kP = kP; this.kI = kI; this.kD = kD; this.kV = kV; this.kA = kA;
+        this.kP = kP; this.kI = kI; this.kD = kD; this.kV = kV; this.kA = kA; this.offset = offset;
         nominalDt = (int)(timing * 1000);
         m_Trajectory = trajectory;
         m_Notifier = new Notifier(runnable);
@@ -63,7 +68,7 @@ public class CustomVelocityPid {
                     setpoint = m_Trajectory.get(index);
 
                     //Calculate feed forward part of output
-                    feedForward = setpoint.velocity * kV + setpoint.acceleration * kA;
+                    feedForward = setpoint.velocity * kV + setpoint.acceleration * kA + offset;
                     toWrite = feedForward;
 
                     //Calculate feed back part of output

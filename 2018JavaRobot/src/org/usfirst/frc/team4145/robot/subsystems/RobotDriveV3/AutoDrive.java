@@ -11,9 +11,9 @@ public class AutoDrive implements DriveUpdater{
     private CustomVelocityPid m_RightVelocityPID;
 
     //Shared PID Constants
-    private double LEFT_kV = 0.0769; //proportional scalar between motor power level and velocity output Nominal: 1 / 13ft/s
-    private double RIGHT_kV = 0.0740; //proportional scalar between motor power level and velocity output Nominal: 1 / 13.5ft/s
-    private double kA = 0.0000; //proportional scalar between motor power level and acceleration output Nominal: 1 / 13ft/s/s
+    private double kV = 0.0402; //proportional scalar between motor power level and velocity output Nominal: 1 / 13.5ft/s
+    private double kA = 0.0500; //proportional scalar between motor power level and acceleration output Nominal: 1 / 13ft/s/s
+    private double offset = 0.2000;
 
     //Left PID constants
     private double LEFT_kP = 0.2500;
@@ -27,8 +27,8 @@ public class AutoDrive implements DriveUpdater{
 
 
     AutoDrive() {
-        m_LeftVelocityPID = new CustomVelocityPid(LEFT_kP, LEFT_kI, LEFT_kD, LEFT_kV, kA, RobotMap.leftWheelEncoder, null, Constants.DRIVETRAIN_UPDATE_RATE);
-        m_RightVelocityPID = new CustomVelocityPid(RIGHT_kP, RIGHT_kI, RIGHT_kD, RIGHT_kV, kA, RobotMap.rightWheelEncoder, null, Constants.DRIVETRAIN_UPDATE_RATE);
+        m_LeftVelocityPID = new CustomVelocityPid(LEFT_kP, LEFT_kI, LEFT_kD, kV, kA, RobotMap.leftWheelEncoder, null, Constants.DRIVETRAIN_UPDATE_RATE, offset);
+        m_RightVelocityPID = new CustomVelocityPid(RIGHT_kP, RIGHT_kI, RIGHT_kD, kV, kA, RobotMap.rightWheelEncoder, null, Constants.DRIVETRAIN_UPDATE_RATE, offset);
 
     }
 

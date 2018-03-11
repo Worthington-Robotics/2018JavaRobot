@@ -93,6 +93,10 @@ public class RobotDriveV3 extends Subsystem {
         SmartDashboard.putNumber("Right Wheel Encoder", RobotMap.rightWheelEncoder.get());
         SmartDashboard.putNumber("Left Wheel Encoder", RobotMap.leftWheelEncoder.get());
         SmartDashboard.putNumber("FPGA Time", Timer.getFPGATimestamp());
+        SmartDashboard.putNumber("Left Motor", RobotMap.driveFrontLeft.getMotorOutputVoltage());
+        SmartDashboard.putNumber("Right Motor", RobotMap.driveFrontRight.getMotorOutputVoltage());
+        //SmartDashboard.putNumber("", RobotMap.driveRearLeft.getMotorOutputVoltage());
+        //SmartDashboard.putNumber("", RobotMap.driveRearRight.getMotorOutputVoltage());
     }
 
     /**

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4145.robot.subsystems.RobotDriveV3;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4145.robot.Robot;
@@ -30,6 +31,8 @@ public class TeleopDrive extends RobotDriveMode{
     private double ABSOLUTE_TOLERANCE = 1.0; //tolerance on PID control Nominal: 0.5
     private double PID_LIMIT = 0.65; //limits pid output Nominal: 0.6
 
+    private double index = 0;
+
     TeleopDrive(){
         gyroLock = new PIDController(PROPORTIONAL_GAIN, INTEGRAL_GAIN, DERIVATIVE_GAIN, this, this);
         gyroLock.setAbsoluteTolerance(ABSOLUTE_TOLERANCE);
@@ -38,7 +41,7 @@ public class TeleopDrive extends RobotDriveMode{
         gyroLock.setContinuous();
     }
 
-    public double[] update(){
+    public double[] update() {
         lastInputSet = getAdjStick();
         if (isReversed) {
             lastInputSet[0] *= -1;
@@ -51,14 +54,20 @@ public class TeleopDrive extends RobotDriveMode{
         }
         if (enLock) {
             // Periodically updates while gyro locked
-           lastInputSet[2] = pidOutput;
+            lastInputSet[2] = pidOutput;
 
         } else {
             // periodically updates drive
             setTarget(getGyro()); // Safety feature in case PID gets enabled
         }
+        lastInputSet[0] = -0.000104 * index;
+        lastInputSet[1] = 0;
+        lastInputSet[2] = 0; //FOR TESTING PURPOSES
         smartDashboardUpdates();
-        //lastInputSet[0] = -0.6; lastInputSet[1] = 0; lastInputSet[2] = 0; //FOR TESTING PURPOSES
+        /*if (DriverStation.getInstance().isOperatorControl() && DriverStation.getInstance().isEnabled())
+            index++;
+        else
+            index = 0; */
         return lastInputSet;
     }
 

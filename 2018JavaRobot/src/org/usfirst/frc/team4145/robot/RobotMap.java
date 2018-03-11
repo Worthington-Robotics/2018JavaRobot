@@ -23,8 +23,8 @@ public class RobotMap {
 
     // actuators
     public static WPI_TalonSRX driveFrontLeft, driveRearLeft, driveFrontRight, driveRearRight; // need to use WPI_talonSRX for drivetrain use
-    public static WPI_TalonSRX liftMotorL;
-    public static Spark liftMotorH, liftBotMotor, clampL, clampR, dropper;
+    public static WPI_TalonSRX liftMotorL, liftMotorH;
+    public static Spark liftBotMotor, clampL, clampR, dropper;
     public static DoubleSolenoid liftLock;
     public static Compressor compressor;
 
@@ -49,7 +49,7 @@ public class RobotMap {
         driveRearLeft = new WPI_TalonSRX(2);
         driveFrontRight = new WPI_TalonSRX(3);
         driveRearRight = new WPI_TalonSRX(4);
-        liftMotorH = new Spark(0);
+        liftMotorH = new WPI_TalonSRX(7);
         liftMotorL = new WPI_TalonSRX(6);
         clampL = new Spark(2);
         clampR = new Spark(3);

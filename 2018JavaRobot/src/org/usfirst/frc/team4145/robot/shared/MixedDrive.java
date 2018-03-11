@@ -36,8 +36,8 @@ public class MixedDrive extends MecanumDrive{
 
         kRearLeft.set(leftSpeed * m_maxOutput);
         kFrontLeft.set(leftSpeed * m_maxOutput);
-        kRearRight.set(rightSpeed * m_maxOutput);
-        kRearRight.set(rightSpeed * m_maxOutput);
+        kFrontRight.set(-rightSpeed * m_maxOutput);
+        kRearRight.set(-rightSpeed * m_maxOutput);
 
         m_safetyHelper.feed();
     }

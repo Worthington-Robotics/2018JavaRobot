@@ -27,6 +27,9 @@ public class RobotDriveV3 extends Subsystem {
         m_TeleopDriveInstance = new TeleopDrive();
         m_AutoDriveInstance = new AutoDrive();
         m_NotifierInstance = new Notifier(periodic);
+    }
+
+    public void startPeriodic(){
         m_NotifierInstance.startPeriodic(Constants.DRIVETRAIN_UPDATE_RATE);
     }
 
@@ -48,6 +51,7 @@ public class RobotDriveV3 extends Subsystem {
             lastTeleopOutput = m_TeleopDriveInstance.update();
             driveCartesian(lastTeleopOutput[1], -lastTeleopOutput[0], lastTeleopOutput[2]);
         }
+        smartDashboardUpdates();
     };
 
     public double getGyro() {

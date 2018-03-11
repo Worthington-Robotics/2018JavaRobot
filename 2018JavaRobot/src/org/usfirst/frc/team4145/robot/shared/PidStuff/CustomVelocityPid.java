@@ -36,6 +36,10 @@ public class CustomVelocityPid {
         isEnabled = enable;
     }
 
+    public void setProfile(Trajectory trajectory){
+        m_Trajectory = trajectory;
+    }
+
     public void free(){
         m_Notifier.stop();
     }
@@ -55,26 +59,30 @@ public class CustomVelocityPid {
     private void calculate(){
         if(m_Trajectory != null){
             if(isEnabled) {
-                setpoint = m_Trajectory.get(index);
+                if(index < m_Trajectory.length()) {
+                    setpoint = m_Trajectory.get(index);
 
-                //Calculate feed forward part of output
-                feedForward = setpoint.velocity * kV + setpoint.acceleration * kA;
-                toWrite = feedForward;
+                    //Calculate feed forward part of output
+                    feedForward = setpoint.velocity * kV + setpoint.acceleration * kA;
+                    toWrite = feedForward;
 
-                //Calculate feed back part of output
-                error = setpoint.position - m_EncoderInstance.getDistance();
-                errorDeriv = ((error - errorLast) / nominalDt) - setpoint.velocity;
-                feedBack = kP * error + kD * errorDeriv;
-                toWrite += feedBack;
+                    //Calculate feed back part of output
+                    error = setpoint.position - (m_EncoderInstance.getDistance() / 228); //228 counts per foot
+                    errorDeriv = ((error - errorLast) / nominalDt) - setpoint.velocity;
+                    feedBack = kP * error + kD * errorDeriv;
+                    //toWrite += feedBack;
 
-                SmartDashboard.putNumber("feed forward" + instanceNum,feedForward);
-                SmartDashboard.putNumber("feed back" + instanceNum,feedBack);
-                SmartDashboard.putNumber("Velocity" + instanceNum,feedBack);
-                SmartDashboard.putNumber("feed back" + instanceNum,feedBack);
+                    SmartDashboard.putNumber("feed forward" + instanceNum, feedForward);
+                    SmartDashboard.putNumber("feed back" + instanceNum, feedBack);
+                    SmartDashboard.putNumber("Velocity" + instanceNum, toWrite);
 
-                //General cleanup for next iteration
-                errorLast = error;
-                index++;
+                    //General cleanup for next iteration
+                    errorLast = error;
+                    index++;
+                }
+                else{
+                    toWrite = 0;
+                }
             }
             else{
                 index = 0;

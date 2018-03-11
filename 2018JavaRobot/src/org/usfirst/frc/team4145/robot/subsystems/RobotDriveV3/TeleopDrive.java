@@ -58,6 +58,7 @@ public class TeleopDrive extends RobotDriveMode{
             setTarget(getGyro()); // Safety feature in case PID gets enabled
         }
         smartDashboardUpdates();
+        //lastInputSet[0] = -0.6; lastInputSet[1] = 0; lastInputSet[2] = 0; //FOR TESTING PURPOSES
         return lastInputSet;
     }
 

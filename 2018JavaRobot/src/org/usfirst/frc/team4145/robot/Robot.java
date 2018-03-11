@@ -37,6 +37,7 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         RobotMap.init();
         oi = new OI();
+        RobotMap.drive.startPeriodic();
         SmartDashboard.putNumber("Auto State", -1);
         CameraServer.getInstance().startAutomaticCapture();
         SmartDashboard.putNumber("Code Revision", 109);

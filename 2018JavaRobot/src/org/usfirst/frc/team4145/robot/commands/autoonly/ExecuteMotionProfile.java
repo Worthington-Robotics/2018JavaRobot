@@ -14,6 +14,8 @@ public class ExecuteMotionProfile extends Command {
     }
 
     public void initialize(){
+        RobotMap.leftWheelEncoder.reset();
+        RobotMap.rightWheelEncoder.reset();
         RobotMap.drive.getAutoDriveInstance().enableToProfile(leftInstance, rightInstance, true);
     }
 

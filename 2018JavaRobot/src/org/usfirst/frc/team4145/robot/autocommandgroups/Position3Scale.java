@@ -11,7 +11,7 @@ public class Position3Scale extends QueueGroup {
     public Position3Scale(int autonumber) {
         //Right
         if (autonumber == 0) {
-        	addDrive("Position3Scale0_left.csv", "Position3Scale1_right.csv");
+        	addDrive("/home/lvuser/MotionProfile/Position3Scale0_left_detailed.csv", "/home/lvuser/MotionProfile/Position3Scale1_right_detailed.csv");
             addParallel(new Command[]{new LiftToPosition(Constants.LIFT_MOVE_TO_TOP)},4500);
             addParallel(new Command[] {new HighLiftUp(), new LiftToPosition(Constants.LIFT_MOVE_TO_TOP)}, 1500);
             addParallel(new Command[]{new HighLiftUp(), new LiftToPosition(Constants.LIFT_MOVE_TO_TOP), new DropForks()},1500);
@@ -19,7 +19,7 @@ public class Position3Scale extends QueueGroup {
         }
         //Left
         if (autonumber == 1) {
-        	addDrive("Position3Scale1_left.csv", "Position3Scale1_right.csv");
+        	addDrive("/home/lvuser/MotionProfile/Position3Scale1_left_detailed.csv", "/home/lvuser/MotionProfile/Position3Scale1_right_detailed.csv");
             addParallel(new Command[]{new HighLiftUp(), new LiftToPosition(Constants.LIFT_MOVE_TO_TOP)},4000);
             addParallel(new Command[] {new HighLiftUp(), new LiftToPosition(Constants.LIFT_MOVE_TO_TOP)}, 1000);
             addParallel(new Command[] {new HighLiftUp(), new LiftToPosition(Constants.LIFT_MOVE_TO_TOP)}, 2000);

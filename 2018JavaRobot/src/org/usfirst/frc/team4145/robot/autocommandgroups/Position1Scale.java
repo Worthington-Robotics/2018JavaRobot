@@ -12,7 +12,7 @@ public class Position1Scale extends QueueGroup {
     	//Left
     	if (autonumber == 0) {
     		addDrive("Position1Scale0_left.csv", "Position1Switch0_right.csv");
-			addParallel(new Command[]{new LiftToPosition(Constants.LIFT_MOVE_TO_TOP)},4500);
+		addParallel(new Command[]{new LiftToPosition(Constants.LIFT_MOVE_TO_TOP)},4500);
     		addParallel(new Command[] { new HighLiftUp(), new LiftToPosition(Constants.LIFT_MOVE_TO_TOP)}, 1500);
     		addParallel(new Command[]{new HighLiftUp(), new LiftToPosition(Constants.LIFT_MOVE_TO_TOP), new DropForks()},1500);
     		addSequential(new DropCube(true), 1000);

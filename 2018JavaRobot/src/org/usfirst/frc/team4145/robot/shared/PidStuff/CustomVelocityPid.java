@@ -71,7 +71,10 @@ public class CustomVelocityPid {
                     {
                     	//Calculate feed forward part of output
                     	setpoint = m_Trajectory.get(index/2);
-                    feedForward = setpoint.velocity * kV + setpoint.acceleration * kA + offset;
+                    	if(setpoint.velocity * kV + setpoint.acceleration * kA >= 0)
+                    {feedForward = setpoint.velocity * kV + setpoint.acceleration * kA + offset;}
+                    	if(setpoint.velocity * kV + setpoint.acceleration * kA < 0)
+                     {feedForward = setpoint.velocity * kV + setpoint.acceleration * kA - offset;}
                     toWrite = feedForward;
                     }
                     

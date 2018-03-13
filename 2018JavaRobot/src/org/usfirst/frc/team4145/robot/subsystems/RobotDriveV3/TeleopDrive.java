@@ -60,11 +60,11 @@ public class TeleopDrive extends RobotDriveMode{
             // periodically updates drive
             setTarget(getGyro()); // Safety feature in case PID gets enabled
         }
-        lastInputSet[0] = -0.000104 * index;
+        smartDashboardUpdates();
+        /*lastInputSet[0] = -0.000104 * index;
         lastInputSet[1] = 0;
         lastInputSet[2] = 0; //FOR TESTING PURPOSES
-        smartDashboardUpdates();
-        /*if (DriverStation.getInstance().isOperatorControl() && DriverStation.getInstance().isEnabled())
+        if (DriverStation.getInstance().isOperatorControl() && DriverStation.getInstance().isEnabled())
             index++;
         else
             index = 0; */

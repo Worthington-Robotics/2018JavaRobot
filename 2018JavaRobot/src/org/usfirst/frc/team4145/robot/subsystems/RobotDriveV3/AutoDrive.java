@@ -16,12 +16,12 @@ public class AutoDrive implements DriveUpdater{
     private double offset = 0.2000;
 
     //Left PID constants
-    private double LEFT_kP = 0.2500;
+    private double LEFT_kP = 0.9900;
     private double LEFT_kI = 0.0000;
     private double LEFT_kD = 0.0000;
 
     //Right PID constants
-    private double RIGHT_kP = 0.2500;
+    private double RIGHT_kP = 0.9900;
     private double RIGHT_kI = 0.0000;
     private double RIGHT_kD = 0.0000;
 

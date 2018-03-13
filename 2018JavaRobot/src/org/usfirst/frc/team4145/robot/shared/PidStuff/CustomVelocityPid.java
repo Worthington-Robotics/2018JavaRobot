@@ -75,7 +75,7 @@ public class CustomVelocityPid {
                     error = setpoint.position - (m_EncoderInstance.getDistance() / 228); //228 counts per foot
                     errorDeriv = ((error - errorLast) / nominalDt) - setpoint.velocity;
                     feedBack = kP * error + kD * errorDeriv;
-                    //toWrite += feedBack;
+                    toWrite += feedBack;
 
                     SmartDashboard.putNumber("feed forward" + instanceNum, feedForward);
                     SmartDashboard.putNumber("feed back" + instanceNum, feedBack);

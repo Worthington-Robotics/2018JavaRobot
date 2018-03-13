@@ -28,7 +28,7 @@ public class Position2Switch extends QueueGroup {
         if(autoNum == 0) {
             //LEFT CODE
             //Drive Forward and lift lift
-        	addDrive("Position2Switch0_left.csv", "Position2Switch0_right.csv");
+        	addDrive("/home/lvuser/MotionProfile/Position2Switch0_left_detailed.csv", "/home/lvuser/MotionProfile/Position2Switch0_right_detailed.csv");
             addParallel(new Command[]{new LiftToPosition(LIFT_TO)}, 1500);
 
             //Turn Right and go forward
@@ -43,7 +43,7 @@ public class Position2Switch extends QueueGroup {
         else{
             //RIGHT CODE
             //Go forward and do fork stuff
-        	addDrive("Position2Switch1_left.csv", "Position2Switch1_right.csv");
+        	addDrive("/home/lvuser/MotionProfile/Position2Switch1_left_detailed.csv", "/home/lvuser/MotionProfile/Position2Switch1_right_detailed.csv");
             addParallel(new Command[]{new LiftToPosition(LIFT_TO)}, 1500);
 
             //Turn Right and go forward

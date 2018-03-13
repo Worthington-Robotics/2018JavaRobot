@@ -23,6 +23,7 @@ public class CustomVelocityPid {
     private static int instances = 0;
     private int instanceNum;
     private double offset;
+    private int CalcNums = 0;
 
     private Runnable runnable = () -> calculate();
 
@@ -68,15 +69,20 @@ public class CustomVelocityPid {
                     setpoint = m_Trajectory.get(index);
 
                     //Calculate feed forward part of output
+                    //Every other iteration the feedForward runs
+                    if(index % 2 == 0)
+                    {
                     feedForward = setpoint.velocity * kV + setpoint.acceleration * kA + offset;
                     toWrite = feedForward;
-
+                    }
+                    
                     //Calculate feed back part of output
                     error = setpoint.position - (m_EncoderInstance.getDistance() / 228); //228 counts per foot
                     errorDeriv = ((error - errorLast) / nominalDt) - setpoint.velocity;
                     feedBack = kP * error + kD * errorDeriv;
                     toWrite += feedBack;
-
+                    
+                    
                     SmartDashboard.putNumber("feed forward" + instanceNum, feedForward);
                     SmartDashboard.putNumber("feed back" + instanceNum, feedBack);
                     SmartDashboard.putNumber("Velocity" + instanceNum, toWrite);
@@ -84,6 +90,7 @@ public class CustomVelocityPid {
                     //General cleanup for next iteration
                     errorLast = error;
                     index++;
+                    
                 }
                 else{
                     toWrite = 0;

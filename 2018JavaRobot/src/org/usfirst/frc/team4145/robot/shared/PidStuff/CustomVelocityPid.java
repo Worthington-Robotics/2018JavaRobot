@@ -19,7 +19,7 @@ public class CustomVelocityPid {
     private int instanceNum;
     private double offset;
 
-    private Runnable runnable = () -> calculate();
+    //private Runnable runnable = () -> calculate();
 
     public CustomVelocityPid(double kP, double kI, double kD, double kV, double kA, Encoder encoder, Trajectory trajectory, double timing, double offset){
         m_EncoderInstance = encoder;
@@ -31,14 +31,14 @@ public class CustomVelocityPid {
         instanceNum = instances;
     }
 
-    public void enable(boolean enable){
+    /*public void enable(boolean enable){
         isEnabled = enable;
         if(isEnabled){
             m_Notifier.startPeriodic(nominalDt);
             return;
         }
         m_Notifier.stop();
-    }
+    }*/
 
     public void setProfile(Trajectory trajectory){
         m_Trajectory = trajectory;
@@ -60,7 +60,7 @@ public class CustomVelocityPid {
         return instances;
     }
 
-    private void calculate(){
+    private double calculate(){
         if(m_Trajectory != null){
             if(isEnabled) {
                 if((index / 2) < m_Trajectory.length()) {
@@ -105,7 +105,10 @@ public class CustomVelocityPid {
                 index = 0;
                 toWrite = 0;
             }
+        
+        
         }
+    return toWrite;
     }
 }
 /*

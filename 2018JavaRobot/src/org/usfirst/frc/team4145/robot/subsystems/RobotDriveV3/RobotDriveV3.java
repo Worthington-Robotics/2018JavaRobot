@@ -1,12 +1,14 @@
 package org.usfirst.frc.team4145.robot.subsystems.RobotDriveV3;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4145.robot.Constants;
+import org.usfirst.frc.team4145.robot.Robot;
 import org.usfirst.frc.team4145.robot.RobotMap;
 import org.usfirst.frc.team4145.robot.shared.MixedDrive;
 
@@ -23,10 +25,20 @@ public class RobotDriveV3 extends Subsystem {
 
 
     public RobotDriveV3() {
+        enableVcomp(RobotMap.driveRearRight);
+        enableVcomp(RobotMap.driveRearLeft);
+        enableVcomp(RobotMap.driveFrontRight);
+        enableVcomp(RobotMap.driveFrontLeft);
         m_MixedDriveInstance = new MixedDrive(RobotMap.driveFrontLeft, RobotMap.driveRearLeft, RobotMap.driveFrontRight, RobotMap.driveRearRight);
         m_TeleopDriveInstance = new TeleopDrive();
         m_AutoDriveInstance = new AutoDrive();
         m_NotifierInstance = new Notifier(periodic);
+    }
+
+    public static void enableVcomp(TalonSRX srx){
+        srx.configVoltageCompSaturation(11.0, 10);
+        srx.enableVoltageCompensation(true);
+        srx.configVoltageMeasurementFilter(32,10);
     }
 
     public void startPeriodic(){
@@ -44,7 +56,7 @@ public class RobotDriveV3 extends Subsystem {
     private Runnable periodic = () -> {
         if (DriverStation.getInstance().isAutonomous()) {
             lastAutoOutput = m_AutoDriveInstance.update();
-            System.out.println("Tank drive motor values: " + lastAutoOutput[0] + " " + lastAutoOutput[1]);
+            //System.out.println("Tank drive motor values: " + lastAutoOutput[0] + " " + lastAutoOutput[1]);
             SmartDashboard.putNumberArray("Tank Drive Values", lastAutoOutput);
             driveTank(lastAutoOutput[0], lastAutoOutput[1]);
         } else {

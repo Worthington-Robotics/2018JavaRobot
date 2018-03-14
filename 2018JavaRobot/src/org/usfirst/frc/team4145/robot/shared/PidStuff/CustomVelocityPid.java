@@ -23,7 +23,6 @@ public class CustomVelocityPid {
     private static int instances = 0;
     private int instanceNum;
     private double offset;
-    private int CalcNums = 0;
 
     private Runnable runnable = () -> calculate();
 
@@ -65,16 +64,24 @@ public class CustomVelocityPid {
     private void calculate(){
         if(m_Trajectory != null){
             if(isEnabled) {
-                if(index/2 < m_Trajectory.length()) {   
+                if((index / 2) < m_Trajectory.length()) {
+                    //System.out.println("FPGA TIME AT CALC" + instanceNum + ": " + RobotController.getFPGATime());
                     //Every other iteration the feedForward runs
+
                     if(index % 2 == 0)
                     {
                     	//Calculate feed forward part of output
-                    	setpoint = m_Trajectory.get(index/2);
-                    feedForward = setpoint.velocity * kV + setpoint.acceleration * kA + offset;
-                    toWrite = feedForward;
+                    	setpoint = m_Trajectory.get(index / 2);
+                        feedForward = setpoint.velocity * kV + setpoint.acceleration * kA;
+                        if(feedForward > 0) {
+                            feedForward += offset;
+                        }
+                        if(feedForward < 0 ){
+                            feedForward -= offset;
+                        }
                     }
-                    
+                    toWrite = feedForward;
+
                     //Calculate feed back part of output
                     error = setpoint.position - (m_EncoderInstance.getDistance() / 228); //228 counts per foot
                     errorDeriv = ((error - errorLast) / nominalDt) - setpoint.velocity;

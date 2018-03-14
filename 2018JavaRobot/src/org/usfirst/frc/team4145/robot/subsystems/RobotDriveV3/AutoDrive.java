@@ -11,17 +11,17 @@ public class AutoDrive implements DriveUpdater{
     private CustomVelocityPid m_RightVelocityPID;
 
     //Shared PID Constants
-    private double kV = 0.0402; //proportional scalar between motor power level and velocity output Nominal: 1 / 13.5ft/s
-    private double kA = 0.0500; //proportional scalar between motor power level and acceleration output Nominal: 1 / 13ft/s/s
-    private double offset = 0.2000;
+    private double kV = 0.0402; //proportional scalar between motor power level and velocity output Nominal: 0.0402
+    private double kA = 0.0300; //proportional scalar between motor power level and acceleration output Nominal:  0.0500
+    private double offset = 0.2350; //account for deadband
 
     //Left PID constants
-    private double LEFT_kP = 0.9900;
+    private double LEFT_kP = 0.0000; //0.9900
     private double LEFT_kI = 0.0000;
     private double LEFT_kD = 0.0000;
 
     //Right PID constants
-    private double RIGHT_kP = 0.9900;
+    private double RIGHT_kP = 0.0000; //0.9900
     private double RIGHT_kI = 0.0000;
     private double RIGHT_kD = 0.0000;
 

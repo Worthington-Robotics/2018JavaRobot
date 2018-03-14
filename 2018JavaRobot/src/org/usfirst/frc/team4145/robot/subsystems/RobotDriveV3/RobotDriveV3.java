@@ -25,10 +25,10 @@ public class RobotDriveV3 extends Subsystem {
 
 
     public RobotDriveV3() {
-        enableVcomp(RobotMap.driveRearRight);
-        enableVcomp(RobotMap.driveRearLeft);
-        enableVcomp(RobotMap.driveFrontRight);
-        enableVcomp(RobotMap.driveFrontLeft);
+        //enableVcomp(RobotMap.driveRearRight);
+        //enableVcomp(RobotMap.driveRearLeft);
+        //enableVcomp(RobotMap.driveFrontRight);
+        //enableVcomp(RobotMap.driveFrontLeft);
         m_MixedDriveInstance = new MixedDrive(RobotMap.driveFrontLeft, RobotMap.driveRearLeft, RobotMap.driveFrontRight, RobotMap.driveRearRight);
         m_TeleopDriveInstance = new TeleopDrive();
         m_AutoDriveInstance = new AutoDrive();

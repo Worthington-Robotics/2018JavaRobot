@@ -60,7 +60,7 @@ public class CustomVelocityPid {
         return instances;
     }
 
-    private double calculate(){
+    public double calculate(){
         if(m_Trajectory != null){
             if(isEnabled) {
                 if((index / 2) < m_Trajectory.length()) {

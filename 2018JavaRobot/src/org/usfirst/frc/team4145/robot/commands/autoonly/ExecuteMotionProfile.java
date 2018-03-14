@@ -21,7 +21,7 @@ public class ExecuteMotionProfile extends Command {
 
     @Override
     protected boolean isFinished() {
-        return !DriverStation.getInstance().isAutonomous();
+        return !DriverStation.getInstance().isAutonomous() && DriverStation.getInstance().isEnabled();
     } //has to finish at end of auto routine
 
     public void end(){

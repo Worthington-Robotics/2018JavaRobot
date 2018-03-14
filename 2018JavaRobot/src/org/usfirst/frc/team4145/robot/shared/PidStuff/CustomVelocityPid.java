@@ -4,14 +4,9 @@ import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import jaci.pathfinder.Trajectory;
 
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
-
 public class CustomVelocityPid {
 
     private Encoder m_EncoderInstance;
-    //private PIDOutput m_PIDOutputInstance;
     private Trajectory m_Trajectory;
     private Notifier m_Notifier;
     private double kP, kI, kD, kV, kA;
@@ -27,18 +22,22 @@ public class CustomVelocityPid {
     private Runnable runnable = () -> calculate();
 
     public CustomVelocityPid(double kP, double kI, double kD, double kV, double kA, Encoder encoder, Trajectory trajectory, double timing, double offset){
-        m_EncoderInstance = encoder; //m_PIDOutputInstance = pidOutput;
+        m_EncoderInstance = encoder;
         this.kP = kP; this.kI = kI; this.kD = kD; this.kV = kV; this.kA = kA; this.offset = offset;
         nominalDt = (int)(timing * 1000);
         m_Trajectory = trajectory;
         m_Notifier = new Notifier(runnable);
-        m_Notifier.startPeriodic(timing);
         instances++;
         instanceNum = instances;
     }
 
     public void enable(boolean enable){
         isEnabled = enable;
+        if(isEnabled){
+            m_Notifier.startPeriodic(nominalDt);
+            return;
+        }
+        m_Notifier.stop();
     }
 
     public void setProfile(Trajectory trajectory){
@@ -109,3 +108,35 @@ public class CustomVelocityPid {
         }
     }
 }
+/*
+public synchronized double update(MotionState latest_state, double t) {
+        mLatestActualState = latest_state;
+        MotionState prev_state = latest_state;
+        if (mLatestSetpoint != null) {
+            prev_state = mLatestSetpoint.motion_state;
+        } else {
+            mInitialState = prev_state;
+        }
+        final double dt = Math.max(0.0, t - prev_state.t());
+        mLatestSetpoint = mSetpointGenerator.getSetpoint(mConstraints, mGoal, prev_state, t);
+
+        // Update error.
+        mLatestPosError = mLatestSetpoint.motion_state.pos() - latest_state.pos();
+        mLatestVelError = mLatestSetpoint.motion_state.vel() - latest_state.vel();
+
+        // Calculate the feedforward and proportional terms.
+        double output = mKp * mLatestPosError + mKv * mLatestVelError + mKffv * mLatestSetpoint.motion_state.vel() + (Double.isNaN(mLatestSetpoint.motion_state.acc()) ? 0.0 : mKffa * mLatestSetpoint.motion_state.acc());
+        if (output >= mMinOutput && output <= mMaxOutput) {
+            // Update integral.
+            mTotalError += mLatestPosError * dt;
+            output += mKi * mTotalError;
+        } else {
+            // Reset integral windup.
+            mTotalError = 0.0;
+        }
+        // Clamp to limits.
+        output = Math.max(mMinOutput, Math.min(mMaxOutput, output));
+
+        return output;
+    }
+ */

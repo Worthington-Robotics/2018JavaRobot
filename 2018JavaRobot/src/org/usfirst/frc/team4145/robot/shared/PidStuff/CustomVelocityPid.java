@@ -42,7 +42,6 @@ public class CustomVelocityPid {
         return instances;
     }
 
-    public void enable(boolean enable) {
     public void enable(boolean enable){
 
         isEnabled = enable;

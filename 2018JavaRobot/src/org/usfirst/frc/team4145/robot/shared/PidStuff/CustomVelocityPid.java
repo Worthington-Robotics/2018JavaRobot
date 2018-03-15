@@ -1,81 +1,87 @@
 package org.usfirst.frc.team4145.robot.shared.PidStuff;
 
-import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Notifier;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import jaci.pathfinder.Trajectory;
 
 public class CustomVelocityPid {
 
+    private static int instances = 0;
     private Encoder m_EncoderInstance;
     private Trajectory m_Trajectory;
     private Notifier m_Notifier;
-    private double kP, kI, kD, kV, kA;
-    private int nominalDt;
-    private boolean isEnabled = false;
+    private final double kP, kI, kD, kV, kA, nominalDt;
+    private boolean isEnabled = false, isFinished = false;
     private Trajectory.Segment setpoint;
     private double toWrite = 0.0, feedForward = 0.0, feedBack = 0.0, error = 0.0, errorDeriv = 0.0, errorLast = 0.0;
     private int index = 0;
-    private static int instances = 0;
     private int instanceNum;
     private double offset;
 
     private Runnable runnable = () -> calculate();
 
-    public CustomVelocityPid(double kP, double kI, double kD, double kV, double kA, Encoder encoder, Trajectory trajectory, double timing, double offset){
+    public CustomVelocityPid(double kP, double kI, double kD, double kV, double kA, Encoder encoder, Trajectory trajectory, double timing, double offset) {
         m_EncoderInstance = encoder;
-        this.kP = kP; this.kI = kI; this.kD = kD; this.kV = kV; this.kA = kA; this.offset = offset;
-        nominalDt = (int)(timing * 1000);
+        this.kP = kP;
+        this.kI = kI;
+        this.kD = kD;
+        this.kV = kV;
+        this.kA = kA;
+        this.offset = offset;
+        nominalDt = timing;
         m_Trajectory = trajectory;
         m_Notifier = new Notifier(runnable);
+        //m_Notifier.startPeriodic(nominalDt);
         instances++;
         instanceNum = instances;
     }
 
-    public void enable(boolean enable){
+    public static int getInstances() {
+        return instances;
+    }
+
+    public void enable(boolean enable) {
         isEnabled = enable;
-        if(isEnabled){
+        if (isEnabled) {
+            index = 0;
             m_Notifier.startPeriodic(nominalDt);
             return;
         }
         m_Notifier.stop();
     }
 
-    public void setProfile(Trajectory trajectory){
+    public void setProfile(Trajectory trajectory) {
         m_Trajectory = trajectory;
     }
 
-    public void free(){
-        m_Notifier.stop();
-    }
-
-    public double getResult(){
+    public double getResult() {
         return toWrite;
     }
 
-    public int getInstanceNum(){
+    public boolean isFinished() {
+        return isFinished;
+    }
+
+    public int getInstanceNum() {
         return instanceNum;
     }
 
-    public static int getInstances(){
-        return instances;
-    }
-
-    private void calculate(){
-        if(m_Trajectory != null){
-            if(isEnabled) {
-                if((index / 2) < m_Trajectory.length()) {
+    private void calculate() {
+        if (m_Trajectory != null) {
+            if (isEnabled) {
+                if ((index / 2) < m_Trajectory.length()) {
                     //System.out.println("FPGA TIME AT CALC" + instanceNum + ": " + RobotController.getFPGATime());
                     //Every other iteration the feedForward runs
-
-                    if(index % 2 == 0)
-                    {
-                    	//Calculate feed forward part of output
-                    	setpoint = m_Trajectory.get(index / 2);
+                    if (index % 2 == 0) {
+                        //Calculate feed forward part of output
+                        setpoint = m_Trajectory.get(index / 2);
                         feedForward = setpoint.velocity * kV + setpoint.acceleration * kA;
-                        if(feedForward > 0) {
+                        if (feedForward > 0) {
                             feedForward += offset;
                         }
-                        if(feedForward < 0 ){
+                        if (feedForward < 0) {
                             feedForward -= offset;
                         }
                     }
@@ -86,8 +92,8 @@ public class CustomVelocityPid {
                     errorDeriv = ((error - errorLast) / nominalDt) - setpoint.velocity;
                     feedBack = kP * error + kD * errorDeriv;
                     toWrite += feedBack;
-                    
-                    
+
+
                     SmartDashboard.putNumber("feed forward" + instanceNum, feedForward);
                     SmartDashboard.putNumber("feed back" + instanceNum, feedBack);
                     SmartDashboard.putNumber("Velocity" + instanceNum, toWrite);
@@ -95,17 +101,19 @@ public class CustomVelocityPid {
                     //General cleanup for next iteration
                     errorLast = error;
                     index++;
-                    
-                }
-                else{
+
+                } else {
                     toWrite = 0;
+                    isFinished = true;
+
                 }
-            }
-            else{
+            } else {
                 index = 0;
                 toWrite = 0;
+                isFinished = false;
             }
         }
+
     }
 }
 /*

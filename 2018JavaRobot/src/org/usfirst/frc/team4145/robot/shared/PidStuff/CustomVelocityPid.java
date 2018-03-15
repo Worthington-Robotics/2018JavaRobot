@@ -43,6 +43,8 @@ public class CustomVelocityPid {
     }
 
     public void enable(boolean enable) {
+    public void enable(boolean enable){
+
         isEnabled = enable;
         if (isEnabled) {
             index = 0;
@@ -112,8 +114,9 @@ public class CustomVelocityPid {
                 toWrite = 0;
                 isFinished = false;
             }
+        
+        
         }
-
     }
 }
 /*

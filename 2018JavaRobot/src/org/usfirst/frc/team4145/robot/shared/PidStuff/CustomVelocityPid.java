@@ -33,7 +33,6 @@ public class CustomVelocityPid {
         nominalDt = timing;
         m_Trajectory = trajectory;
         m_Notifier = new Notifier(runnable);
-        //m_Notifier.startPeriodic(nominalDt);
         instances++;
         instanceNum = instances;
     }
@@ -43,13 +42,13 @@ public class CustomVelocityPid {
     }
 
     public void enable(boolean enable){
-
         isEnabled = enable;
         if (isEnabled) {
             index = 0;
             m_Notifier.startPeriodic(nominalDt);
             return;
         }
+        SmartDashboard.putNumber("File length", m_Trajectory.length());
         m_Notifier.stop();
     }
 
@@ -106,14 +105,12 @@ public class CustomVelocityPid {
                 } else {
                     toWrite = 0;
                     isFinished = true;
-
                 }
             } else {
                 index = 0;
                 toWrite = 0;
                 isFinished = false;
             }
-        
         
         }
     }

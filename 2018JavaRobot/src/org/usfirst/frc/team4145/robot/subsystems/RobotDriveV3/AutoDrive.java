@@ -33,7 +33,7 @@ public class AutoDrive implements DriveUpdater{
     }
 
     public double[] update() {
-        return new double[] {m_LeftVelocityPID.getResult(), m_RightVelocityPID.getResult()};
+        return new double[] {m_LeftVelocityPID.calculate(), m_RightVelocityPID.calclate()};
     }
 
     public void enableToProfile(Trajectory leftTrajectory, Trajectory rightTrajectory, boolean enableOnNextCycle) {

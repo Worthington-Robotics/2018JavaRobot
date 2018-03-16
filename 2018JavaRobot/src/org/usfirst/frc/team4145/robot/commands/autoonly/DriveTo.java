@@ -36,7 +36,7 @@ public class DriveTo extends Command implements PIDOutput, PIDSource {
 	// Set Setpoint to length
 	protected void initialize() {
 		//RobotMap.drive.setDynamicBrakeMode(new boolean[] {true, false, true, false});
-		//RobotMap.drive.enableTo(RobotMap.drive.getGyro(), true);
+		RobotMap.drive.getTeleopDriveInstance().enableTo(RobotMap.drive.getGyro(), true);
 		RobotMap.rightWheelEncoder.reset();
 		SmartDashboard.putNumber("Wheel Encoder Target", length);
 		driveTo.setSetpoint(length);
@@ -62,8 +62,8 @@ public class DriveTo extends Command implements PIDOutput, PIDSource {
 	public void pidWrite(double output) {
 		//System.out.println("Pid Written to: " + output);
 		//System.out.println("Encoder Value at call: " + pidGet());
-		toSet[0] = -output;
-		//RobotMap.drive.setInput(toSet);
+		toSet[0] = output;
+		RobotMap.drive.getTeleopDriveInstance().setDriveSet(toSet);
 		
 	}
 
@@ -74,7 +74,7 @@ public class DriveTo extends Command implements PIDOutput, PIDSource {
 
 	// Called once after isFinished returns true and disable driveTo
 	protected void end() {
-		//RobotMap.drive.enableTo(0, false);
+		RobotMap.drive.getTeleopDriveInstance().enableTo(0, false);
 		RobotMap.rightWheelEncoder.reset();
 		driveTo.disable();
 	}

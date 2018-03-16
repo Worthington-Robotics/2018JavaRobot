@@ -26,7 +26,7 @@ public class GyroToAngle extends Command {
     public void initialize() {
         target = Math.abs((RobotMap.drive.getGyro() + 360 + addtlRot) % 360);
         //System.out.println("Gyro target = " + target);
-        //RobotMap.drive.enableTo(target, true);
+        RobotMap.drive.getTeleopDriveInstance().enableTo(target, true);
     }
 
     public boolean isFinished() {

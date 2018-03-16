@@ -20,8 +20,8 @@ public class RobotDriveV3 extends Subsystem {
     private AutoDrive m_AutoDriveInstance;
     private Notifier m_NotifierInstance;
 
-    private double[] lastTeleopOutput = {0,0,0};
-    private double[] lastAutoOutput = {0,0};
+    private double[] lastTeleopOutput = {0,0}; //y, x, z
+    private double[] lastAutoOutput = {0,0,0}; //left, right, turn (not used by profiling)
 
 
     public RobotDriveV3() {
@@ -54,10 +54,11 @@ public class RobotDriveV3 extends Subsystem {
     }
 
     private Runnable periodic = () -> {
-        if (DriverStation.getInstance().isAutonomous()) {
+        if (DriverStation.getInstance().isAutonomous() && m_AutoDriveInstance.isProfiling()) {
             lastAutoOutput = m_AutoDriveInstance.update();
             //System.out.println("Tank drive motor values: " + lastAutoOutput[0] + " " + lastAutoOutput[1]);
             SmartDashboard.putNumberArray("Tank Drive Values", lastAutoOutput);
+
             driveTank(lastAutoOutput[0], lastAutoOutput[1]);
         } else {
             lastTeleopOutput = m_TeleopDriveInstance.update();
@@ -65,6 +66,10 @@ public class RobotDriveV3 extends Subsystem {
         }
         smartDashboardUpdates();
     };
+
+    public void setAutoDrive(double[] toSet){
+        lastAutoOutput = toSet;
+    }
 
     public double getGyro() {
         return ((RobotMap.ahrs.getYaw() + 360) % 360); //add 360 to make all positive then mod by 360 to get remainder
@@ -105,6 +110,7 @@ public class RobotDriveV3 extends Subsystem {
         SmartDashboard.putNumber("Right Wheel Encoder", RobotMap.rightWheelEncoder.get());
         SmartDashboard.putNumber("Left Wheel Encoder", RobotMap.leftWheelEncoder.get());
         SmartDashboard.putNumber("FPGA Time", Timer.getFPGATimestamp());
+        SmartDashboard.putNumber("Gyro Angle", getGyro());
         SmartDashboard.putNumber("Left Motor", RobotMap.driveFrontLeft.getMotorOutputVoltage());
         SmartDashboard.putNumber("Right Motor", RobotMap.driveFrontRight.getMotorOutputVoltage());
         //SmartDashboard.putNumber("", RobotMap.driveRearLeft.getMotorOutputVoltage());

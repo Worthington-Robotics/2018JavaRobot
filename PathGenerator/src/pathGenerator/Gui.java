@@ -148,7 +148,7 @@ public class Gui {
         trajecPanel.add(lblJerk);
 
         txtTime = new JTextField();
-        txtTime.setText("0.05");
+        txtTime.setText("0.01");
         txtTime.setBounds(140, 55, 86, 20);
         trajecPanel.add(txtTime);
         txtTime.setColumns(10);
@@ -160,7 +160,7 @@ public class Gui {
         txtVelocity.setColumns(10);
 
         txtAcceleration = new JTextField();
-        txtAcceleration.setText("3");
+        txtAcceleration.setText("4");
         txtAcceleration.setBounds(140, 115, 86, 20);
         trajecPanel.add(txtAcceleration);
         txtAcceleration.setColumns(10);
@@ -212,8 +212,8 @@ public class Gui {
         JButton btnBrowse = new JButton("Browse");
         btnBrowse.setToolTipText("Browse");
         btnBrowse.setBounds(334, 522, 89, 24);
-        //trajecPanel.add(btnBrowse);
-        //btnBrowse.addActionListener(evt -> btnBrowseActionPerformed(evt));
+        trajecPanel.add(btnBrowse);
+        btnBrowse.addActionListener(evt -> btnBrowseActionPerformed(evt));
 
         JButton btnSave = new JButton("Save");
         btnSave.setToolTipText("Save");
@@ -240,7 +240,7 @@ public class Gui {
         trajecPanel.add(lblWaypoints);
 
         txtWheelBaseW = new JTextField();
-        txtWheelBaseW.setText("1.464");
+        txtWheelBaseW.setText("2.00");
         txtWheelBaseW.setBounds(140, 175, 86, 20);
         trajecPanel.add(txtWheelBaseW);
         txtWheelBaseW.setColumns(10);
@@ -805,12 +805,44 @@ public class Gui {
         btnAddPoint.setText("Add Point");
     }
 
+    private void btnBrowseActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        if(!txtFileName.getText().equals(""))
+        {
+            fileName = txtFileName.getText();
+
+            fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new java.io.File("."));
+            fileChooser.setDialogTitle("Choose a Directory to Save Files In");
+            fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            fileChooser.setAcceptAllFileFilterUsed(false);
+
+            if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                //directory = fileChooser.getCurrentDirectory();
+                fileName = fileChooser.getSelectedFile() + "\\" + fileName;
+            }
+
+            else
+            {
+                return;
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "The File Name field is empty! \nPlease enter a file name!",
+                    "File Name Empty", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        txtFileName.setText(fileName);
+    }
+
     private void btnMenuSaveActionPerformed(java.awt.event.ActionEvent evt) throws IOException {
         btnSaveActionPerformed(evt);
     }
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) throws IOException {
-        if (txtFileName.getText().equals("") == false) {
+        if (!txtFileName.getText().equals("")) {
             fileName = txtFileName.getText();
             if (left != null || fl != null) {
                 if (rdbtnTankDrive.isSelected()) {
@@ -818,7 +850,9 @@ public class Gui {
                     rFile = new File(fileName + "_right.csv");
 
                     if (lFile.exists() || rFile.exists()) {
-                        int n = JOptionPane.showConfirmDialog(null, "File already exist. Would you like to replace it?", "File Exists", JOptionPane.YES_NO_OPTION);
+                        int n = JOptionPane.showConfirmDialog(null, "File " +
+                                fileName.substring(fileName.lastIndexOf("\\") + 1) + " already exists. Would you like to replace it?"
+                                , "File Exists", JOptionPane.YES_NO_OPTION);
 
                         switch (n) {
                             case JOptionPane.YES_OPTION:
@@ -880,7 +914,8 @@ public class Gui {
                     brFile = new File(fileName + "_BackRight.csv");
 
                     if (flFile.exists() || frFile.exists() || blFile.exists() || brFile.exists()) {
-                        int n = JOptionPane.showConfirmDialog(null, "File already exist. Would you like to replace it?", "File Exists", JOptionPane.YES_NO_OPTION);
+                        int n = JOptionPane.showConfirmDialog(null, "File already exist. Would you like to replace it?",
+                                "File Exists", JOptionPane.YES_NO_OPTION);
 
                         switch (n) {
                             case JOptionPane.YES_OPTION:

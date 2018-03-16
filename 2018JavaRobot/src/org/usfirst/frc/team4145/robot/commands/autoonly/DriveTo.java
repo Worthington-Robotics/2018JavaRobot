@@ -62,8 +62,9 @@ public class DriveTo extends Command implements PIDOutput, PIDSource {
 	public void pidWrite(double output) {
 		//System.out.println("Pid Written to: " + output);
 		//System.out.println("Encoder Value at call: " + pidGet());
-		toSet[0] = -output;
-		//RobotMap.drive.setInput(toSet);
+		toSet[0] = output;
+		toSet[1] = output;
+		RobotMap.drive.setAutoDrive(toSet);
 		
 	}
 

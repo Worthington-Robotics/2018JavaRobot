@@ -66,6 +66,10 @@ public class RobotDriveV3 extends Subsystem {
         smartDashboardUpdates();
     };
 
+    public void setAutoDrive(double[] toSet){
+        lastAutoOutput = toSet;
+    }
+
     public double getGyro() {
         return ((RobotMap.ahrs.getYaw() + 360) % 360); //add 360 to make all positive then mod by 360 to get remainder
     }

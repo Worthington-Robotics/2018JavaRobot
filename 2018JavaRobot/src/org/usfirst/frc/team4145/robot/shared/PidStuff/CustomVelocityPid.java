@@ -48,7 +48,7 @@ public class CustomVelocityPid {
             m_Notifier.startPeriodic(nominalDt);
             return;
         }
-        SmartDashboard.putNumber("File length", m_Trajectory.length());
+        //SmartDashboard.putNumber("File length", m_Trajectory.length());
         m_Notifier.stop();
     }
 
@@ -115,35 +115,3 @@ public class CustomVelocityPid {
         }
     }
 }
-/*
-public synchronized double update(MotionState latest_state, double t) {
-        mLatestActualState = latest_state;
-        MotionState prev_state = latest_state;
-        if (mLatestSetpoint != null) {
-            prev_state = mLatestSetpoint.motion_state;
-        } else {
-            mInitialState = prev_state;
-        }
-        final double dt = Math.max(0.0, t - prev_state.t());
-        mLatestSetpoint = mSetpointGenerator.getSetpoint(mConstraints, mGoal, prev_state, t);
-
-        // Update error.
-        mLatestPosError = mLatestSetpoint.motion_state.pos() - latest_state.pos();
-        mLatestVelError = mLatestSetpoint.motion_state.vel() - latest_state.vel();
-
-        // Calculate the feedforward and proportional terms.
-        double output = mKp * mLatestPosError + mKv * mLatestVelError + mKffv * mLatestSetpoint.motion_state.vel() + (Double.isNaN(mLatestSetpoint.motion_state.acc()) ? 0.0 : mKffa * mLatestSetpoint.motion_state.acc());
-        if (output >= mMinOutput && output <= mMaxOutput) {
-            // Update integral.
-            mTotalError += mLatestPosError * dt;
-            output += mKi * mTotalError;
-        } else {
-            // Reset integral windup.
-            mTotalError = 0.0;
-        }
-        // Clamp to limits.
-        output = Math.max(mMinOutput, Math.min(mMaxOutput, output));
-
-        return output;
-    }
- */

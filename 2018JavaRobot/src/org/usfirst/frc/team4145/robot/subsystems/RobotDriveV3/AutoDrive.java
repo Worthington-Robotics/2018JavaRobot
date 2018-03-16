@@ -10,6 +10,7 @@ public class AutoDrive implements DriveUpdater{
     //data objects / fields
     private CustomVelocityPid m_LeftVelocityPID;
     private CustomVelocityPid m_RightVelocityPID;
+    private boolean isProfiling = false;
 
     //Shared PID Constants
     private double kV = 0.0402; //proportional scalar between motor power level and velocity output Nominal: 0.0402
@@ -38,7 +39,12 @@ public class AutoDrive implements DriveUpdater{
         return new double[] {m_LeftVelocityPID.getResult(), m_RightVelocityPID.getResult()};
     }
 
+    public boolean isProfiling(){
+        return isProfiling;
+    }
+
     public void enableToProfile(Trajectory leftTrajectory, Trajectory rightTrajectory, boolean enableOnNextCycle) {
+        isProfiling = enableOnNextCycle;
         System.out.println("PID called to enable on trajectories: " + leftTrajectory + " " + rightTrajectory);
         setProfile(leftTrajectory, rightTrajectory);
         m_LeftVelocityPID.enable(enableOnNextCycle);

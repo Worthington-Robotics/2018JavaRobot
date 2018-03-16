@@ -42,7 +42,7 @@ public class TeleopDrive extends RobotDriveMode{
     }
 
     public double[] update() {
-        lastInputSet = getAdjStick();
+        if(!DriverStation.getInstance().isAutonomous()) lastInputSet = getAdjStick();
         if (isReversed) {
             lastInputSet[0] *= -1;
             lastInputSet[1] *= -1;
@@ -69,6 +69,10 @@ public class TeleopDrive extends RobotDriveMode{
         else
             index = 0; */
         return lastInputSet;
+    }
+
+    public void setDriveSet(double[] toSet){
+        lastInputSet = toSet;
     }
 
     public void enableTo(double rot, boolean en) {
@@ -139,7 +143,6 @@ public class TeleopDrive extends RobotDriveMode{
     private void smartDashboardUpdates(){
         SmartDashboard.putNumberArray("compensated stick values", lastInputSet);
         SmartDashboard.putNumber("Gyro Target", gyroLock.getSetpoint());
-        SmartDashboard.putNumber("Gyro Angle", getGyro());
         SmartDashboard.putBoolean("Gyro lock enabled", enLock);
     }
 }

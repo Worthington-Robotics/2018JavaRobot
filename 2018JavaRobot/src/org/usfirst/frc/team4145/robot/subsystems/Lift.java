@@ -80,8 +80,8 @@ public class Lift extends Subsystem {
     }
 
     private void updateLimits() {
-        limit1 = !RobotMap.liftMotorH.getSensorCollection().isFwdLimitSwitchClosed(); //normally open
-        limit2 = !RobotMap.liftMotorH.getSensorCollection().isRevLimitSwitchClosed(); //normally open
+        limit1 = RobotMap.liftMotorH.getSensorCollection().isFwdLimitSwitchClosed(); //normally open
+        limit2 = RobotMap.liftMotorH.getSensorCollection().isRevLimitSwitchClosed(); //normally open
         limit3 = RobotMap.liftMotorL.getSensorCollection().isFwdLimitSwitchClosed();
         limit4 = RobotMap.liftMotorL.getSensorCollection().isRevLimitSwitchClosed();
         buttonArray[0] = limit1;

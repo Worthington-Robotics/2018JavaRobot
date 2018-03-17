@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4145.robot.subsystems.RobotDriveV3;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
 import org.usfirst.frc.team4145.robot.*;
 import org.usfirst.frc.team4145.robot.shared.PidStuff.*;
@@ -13,17 +14,17 @@ public class AutoDrive implements DriveUpdater{
     private boolean isProfiling = false;
 
     //Shared PID Constants
-    private double kV = 0.0402; //proportional scalar between motor power level and velocity output Nominal: 0.0402
+    private double kV = 0.0298; //proportional scalar between motor power level and velocity output Nominal: 0.0402
     private double kA = 0.0500; //proportional scalar between motor power level and acceleration output Nominal:  0.0500
     private double offset = 0.2350; //account for deadband nominal: 0.2350
 
     //Left PID constants
-    private double LEFT_kP = 1.0000; //0.9900
+    private double LEFT_kP = 1.5000; //1.0000
     private double LEFT_kI = 0.0000;
     private double LEFT_kD = 0.0100; //0.0100
 
     //Right PID constants
-    private double RIGHT_kP = 1.0000; //0.9900
+    private double RIGHT_kP = 1.5000; //1.0000
     private double RIGHT_kI = 0.0000;
     private double RIGHT_kD = 0.0100; //0.0100
 
@@ -36,11 +37,20 @@ public class AutoDrive implements DriveUpdater{
 
     public double[] update() {
         SmartDashboard.putBooleanArray("Pids finished" , new boolean[]{m_LeftVelocityPID.isFinished(), m_RightVelocityPID.isFinished()});
+        SmartDashboard.putBoolean("isProfiling", isProfiling);
         return new double[] {m_LeftVelocityPID.getResult(), m_RightVelocityPID.getResult()};
     }
 
     public boolean isProfiling(){
-        return isProfiling;
+        return isProfiling && !m_LeftVelocityPID.isFinished() && !m_RightVelocityPID.isFinished();
+    }
+
+    public boolean isFinished(){
+        return m_LeftVelocityPID.isFinished() && m_LeftVelocityPID.isFinished();
+    }
+
+    public double getHeading(){
+        return Pathfinder.r2d(m_LeftVelocityPID.getHeading());
     }
 
     public void enableToProfile(Trajectory leftTrajectory, Trajectory rightTrajectory, boolean enableOnNextCycle) {

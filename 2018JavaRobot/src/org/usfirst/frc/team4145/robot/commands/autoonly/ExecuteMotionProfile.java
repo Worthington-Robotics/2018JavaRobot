@@ -21,12 +21,12 @@ public class ExecuteMotionProfile extends Command {
 
     @Override
     protected boolean isFinished() {
-        return false;
+        return RobotMap.drive.getAutoDriveInstance().isFinished();
         //return !DriverStation.getInstance().isAutonomous() && DriverStation.getInstance().isEnabled();
     } //has to finish at end of auto routine
 
     public void end(){
-        RobotMap.drive.getAutoDriveInstance().enableToProfile(leftInstance, rightInstance, false);
+        RobotMap.drive.getAutoDriveInstance().enableToProfile(null, null, false);
     }
 
     public void interrupted(){

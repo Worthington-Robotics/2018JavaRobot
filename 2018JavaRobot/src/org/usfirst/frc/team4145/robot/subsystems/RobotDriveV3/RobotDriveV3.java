@@ -7,8 +7,8 @@ import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import jaci.pathfinder.Pathfinder;
 import org.usfirst.frc.team4145.robot.Constants;
-import org.usfirst.frc.team4145.robot.Robot;
 import org.usfirst.frc.team4145.robot.RobotMap;
 import org.usfirst.frc.team4145.robot.shared.MixedDrive;
 
@@ -19,10 +19,13 @@ public class RobotDriveV3 extends Subsystem {
     private TeleopDrive m_TeleopDriveInstance;
     private AutoDrive m_AutoDriveInstance;
     private Notifier m_NotifierInstance;
+    private double angleDiff = 0, turnComp = 0, lastError = 0;
 
-    private double[] lastTeleopOutput = {0,0}; //y, x, z
+    private double[] lastTeleopOutput = {0,0}; //y, x
     private double[] lastAutoOutput = {0,0,0}; //left, right, turn (not used by profiling)
 
+    private double kP_Turn = 0.1400; //Nominal: 0.1000
+    private double kD_Turn = 0.0000;
 
     public RobotDriveV3() {
         //enableVcomp(RobotMap.driveRearRight);
@@ -54,13 +57,22 @@ public class RobotDriveV3 extends Subsystem {
     }
 
     private Runnable periodic = () -> {
-        if (DriverStation.getInstance().isAutonomous() && m_AutoDriveInstance.isProfiling()) {
+        if (DriverStation.getInstance().isAutonomous() && m_AutoDriveInstance.isProfiling() ) {
+            System.out.println("Profiling mode");
             lastAutoOutput = m_AutoDriveInstance.update();
-            //System.out.println("Tank drive motor values: " + lastAutoOutput[0] + " " + lastAutoOutput[1]);
+            angleDiff = Pathfinder.boundHalfDegrees(m_AutoDriveInstance.getHeading() - getGyro());
+            turnComp = kP_Turn * (-1.0/80.0) * angleDiff + kD_Turn* ((angleDiff - lastError) / Constants.DRIVETRAIN_UPDATE_RATE);
+            lastAutoOutput[0] += turnComp;
+            lastAutoOutput[1] -= turnComp;
+            lastError = angleDiff;
             SmartDashboard.putNumberArray("Tank Drive Values", lastAutoOutput);
+            SmartDashboard.putNumber("Gyro Target", m_AutoDriveInstance.getHeading());
+            SmartDashboard.putNumber("Turn Compensation", turnComp);
 
-            driveTank(lastAutoOutput[0], lastAutoOutput[1]);
+            driveTank(lastAutoOutput[0], lastAutoOutput[1] - turnComp);
+
         } else {
+            //System.out.println("non-Profiling mode");
             lastTeleopOutput = m_TeleopDriveInstance.update();
             driveCartesian(lastTeleopOutput[1], -lastTeleopOutput[0], lastTeleopOutput[2]);
         }
@@ -111,10 +123,10 @@ public class RobotDriveV3 extends Subsystem {
         SmartDashboard.putNumber("Left Wheel Encoder", RobotMap.leftWheelEncoder.get());
         SmartDashboard.putNumber("FPGA Time", Timer.getFPGATimestamp());
         SmartDashboard.putNumber("Gyro Angle", getGyro());
-        SmartDashboard.putNumber("Left Motor", RobotMap.driveFrontLeft.getMotorOutputVoltage());
-        SmartDashboard.putNumber("Right Motor", RobotMap.driveFrontRight.getMotorOutputVoltage());
-        //SmartDashboard.putNumber("", RobotMap.driveRearLeft.getMotorOutputVoltage());
-        //SmartDashboard.putNumber("", RobotMap.driveRearRight.getMotorOutputVoltage());
+        SmartDashboard.putNumber("Left Motor Voltage", RobotMap.driveFrontLeft.getMotorOutputVoltage());
+        SmartDashboard.putNumber("Right Motor Voltage", RobotMap.driveFrontRight.getMotorOutputVoltage());
+        SmartDashboard.putNumber("Left Talon Voltage", RobotMap.driveRearLeft.getBusVoltage());
+        SmartDashboard.putNumber("Right Talon Voltage", RobotMap.driveRearRight.getBusVoltage());
     }
 
     /**

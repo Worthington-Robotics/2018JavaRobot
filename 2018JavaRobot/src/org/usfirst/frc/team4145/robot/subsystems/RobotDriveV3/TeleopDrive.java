@@ -67,7 +67,7 @@ public class TeleopDrive extends RobotDriveMode{
         if (DriverStation.getInstance().isOperatorControl() && DriverStation.getInstance().isEnabled())
             index++;
         else
-            index = 0; */
+            index = 0;*/
         return lastInputSet;
     }
 

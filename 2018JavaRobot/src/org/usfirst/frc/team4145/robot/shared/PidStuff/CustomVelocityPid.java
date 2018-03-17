@@ -68,6 +68,13 @@ public class CustomVelocityPid {
         return instanceNum;
     }
 
+    public double getHeading(){
+        if(setpoint != null) {
+            return setpoint.heading;
+        }
+        return 0.0;
+    }
+
     private void calculate() {
         if (m_Trajectory != null) {
             if (isEnabled) {
@@ -101,6 +108,7 @@ public class CustomVelocityPid {
                     //General cleanup for next iteration
                     errorLast = error;
                     index++;
+                    isFinished = false;
 
                 } else {
                     toWrite = 0;

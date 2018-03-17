@@ -12,21 +12,26 @@ public class AutoDrive implements DriveUpdater{
     private CustomVelocityPid m_LeftVelocityPID;
     private CustomVelocityPid m_RightVelocityPID;
     private boolean isProfiling = false;
+    private double angleDiff = 0, turnComp = 0, lastError = 0;
+    public double[] toWrite = {0, 0};
 
     //Shared PID Constants
     private double kV = 0.0300; //proportional scalar between motor power level and velocity output Nominal: 0.0402
     private double kA = 0.0300; //proportional scalar between motor power level and acceleration output Nominal:  0.0500
     private double offset = 0.2350; //account for deadband nominal: 0.2350
+    private double kP_Turn = 0.1300; //Nominal: 0.1300
+    private double kD_Turn = 0.0000;
 
     //Left PID constants
-    private double LEFT_kP = 1.5000; //1.0000
+    private double LEFT_kP = 1.7000; //1.7000
     private double LEFT_kI = 0.0000;
-    private double LEFT_kD = 0.0100; //0.0100
+    private double LEFT_kD = 0.0005; //0.0100
 
     //Right PID constants
-    private double RIGHT_kP = 1.5000; //1.0000
+    private double RIGHT_kP = 1.7000; //1.7000
     private double RIGHT_kI = 0.0000;
-    private double RIGHT_kD = 0.0100; //0.0100
+    private double RIGHT_kD = 0.0005; //0.0100
+
 
 
     AutoDrive() {
@@ -36,9 +41,21 @@ public class AutoDrive implements DriveUpdater{
     }
 
     public double[] update() {
+        toWrite[0] = m_LeftVelocityPID.getResult();
+        toWrite[1] = m_RightVelocityPID.getResult();
+        angleDiff = Pathfinder.boundHalfDegrees(getHeading() - getGyro());
+        turnComp = kP_Turn * (-1.0/80.0) * angleDiff + kD_Turn* ((angleDiff - lastError) / Constants.DRIVETRAIN_UPDATE_RATE);
+        toWrite[0] += turnComp;
+        toWrite[1] -= turnComp;
+        lastError = angleDiff;
         SmartDashboard.putBooleanArray("Pids finished" , new boolean[]{m_LeftVelocityPID.isFinished(), m_RightVelocityPID.isFinished()});
         SmartDashboard.putBoolean("isProfiling", isProfiling);
-        return new double[] {m_LeftVelocityPID.getResult(), m_RightVelocityPID.getResult()};
+        SmartDashboard.putNumber("Turn Compensation", turnComp);
+        return toWrite;
+    }
+
+    public double getGyro() {
+        return ((RobotMap.ahrs.getYaw() + 360) % 360); //add 360 to make all positive then mod by 360 to get remainder
     }
 
     public boolean isProfiling(){

@@ -19,13 +19,9 @@ public class RobotDriveV3 extends Subsystem {
     private TeleopDrive m_TeleopDriveInstance;
     private AutoDrive m_AutoDriveInstance;
     private Notifier m_NotifierInstance;
-    private double angleDiff = 0, turnComp = 0, lastError = 0;
 
     private double[] lastTeleopOutput = {0,0}; //y, x
     private double[] lastAutoOutput = {0,0,0}; //left, right, turn (not used by profiling)
-
-    private double kP_Turn = 0.1300; //Nominal: 0.1300
-    private double kD_Turn = 0.0000;
 
     public RobotDriveV3() {
         //enableVcomp(RobotMap.driveRearRight);
@@ -60,16 +56,9 @@ public class RobotDriveV3 extends Subsystem {
         if (DriverStation.getInstance().isAutonomous() && m_AutoDriveInstance.isProfiling() ) {
             System.out.println("Profiling mode");
             lastAutoOutput = m_AutoDriveInstance.update();
-            angleDiff = Pathfinder.boundHalfDegrees(m_AutoDriveInstance.getHeading() - getGyro());
-            turnComp = kP_Turn * (-1.0/80.0) * angleDiff + kD_Turn* ((angleDiff - lastError) / Constants.DRIVETRAIN_UPDATE_RATE);
-            lastAutoOutput[0] += turnComp;
-            lastAutoOutput[1] -= turnComp;
-            lastError = angleDiff;
             SmartDashboard.putNumberArray("Tank Drive Values", lastAutoOutput);
             SmartDashboard.putNumber("Gyro Target", m_AutoDriveInstance.getHeading());
-            SmartDashboard.putNumber("Turn Compensation", turnComp);
-
-            driveTank(lastAutoOutput[0], lastAutoOutput[1] - turnComp);
+            driveTank(lastAutoOutput[0], lastAutoOutput[1]);
 
         } else {
             //System.out.println("non-Profiling mode");

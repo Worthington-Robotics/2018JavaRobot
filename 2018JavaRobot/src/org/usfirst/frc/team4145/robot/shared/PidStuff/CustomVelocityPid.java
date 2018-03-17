@@ -44,6 +44,7 @@ public class CustomVelocityPid {
         isEnabled = enable;
         if (isEnabled) {
             index = 0;
+            isFinished = false;
             m_Notifier.startPeriodic(nominalDt);
             return;
         }
@@ -76,7 +77,7 @@ public class CustomVelocityPid {
 
 
     private void calculate() {
-        if (isEnabled && m_Notifier != null) {
+        if (isEnabled && m_Trajectory != null) {
             if ((index / 2) < m_Trajectory.length()) {
                 //System.out.println("FPGA TIME AT CALC" + instanceNum + ": " + RobotController.getFPGATime());
                 //Every other iteration the feedForward runs

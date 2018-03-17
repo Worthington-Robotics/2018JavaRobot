@@ -14,22 +14,16 @@ public class Position2Switch extends QueueGroup {
 
     //other class variables
     private int LIFT_TO = 0;
-    private boolean HARD_SHOT = false;
+    private boolean HARD_SHOT = true;
 
     public Position2Switch(int autoNum) {
         if(autoNum == 0) {
             //LEFT CODE
             //Drive Forward and lift lift
         	addDrive("/home/lvuser/MotionProfile/Position2Switch0_left_detailed.csv", "/home/lvuser/MotionProfile/Position2Switch0_right_detailed.csv");
-            addParallel(new Command[]{new LiftToPosition(LIFT_TO)}, 1500);
-
-            //Turn Right and go forward
-            addParallel(new Command[]{new LiftToPosition(LIFT_TO)}, 1000);
-            addParallel(new Command[]{new LiftToPosition(LIFT_TO)}, 3000);
-
-            //Go towards switch and	drop cube
-            addParallel(new Command[]{new LiftToPosition(LIFT_TO)}, 1000);
-            addParallel(new Command[]{new DropForks(), new LiftToPosition(LIFT_TO)}, 2000);
+            addParallel(new Command[]{new LiftToPosition(LIFT_TO)}, 2000);
+            addParallel(new Command[]{new DropForks(), new LiftToPosition(LIFT_TO)}, 1250);
+            addSequential(new LiftToPosition(LIFT_TO), 100);
             addSequential(new DropCube(HARD_SHOT), 1000);
         }
         else{

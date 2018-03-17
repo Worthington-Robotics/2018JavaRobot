@@ -24,7 +24,7 @@ public class RobotDriveV3 extends Subsystem {
     private double[] lastTeleopOutput = {0,0}; //y, x
     private double[] lastAutoOutput = {0,0,0}; //left, right, turn (not used by profiling)
 
-    private double kP_Turn = 0.1300; //Nominal: 0.1000
+    private double kP_Turn = 0.1300; //Nominal: 0.1300
     private double kD_Turn = 0.0000;
 
     public RobotDriveV3() {

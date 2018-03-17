@@ -23,22 +23,15 @@ public class Position2Switch extends QueueGroup {
         	addDrive("/home/lvuser/MotionProfile/Position2Switch0_left_detailed.csv", "/home/lvuser/MotionProfile/Position2Switch0_right_detailed.csv");
             addParallel(new Command[]{new LiftToPosition(LIFT_TO)}, 2000);
             addParallel(new Command[]{new DropForks(), new LiftToPosition(LIFT_TO)}, 1250);
-            addSequential(new LiftToPosition(LIFT_TO), 100);
+            addSequential(new LiftToPosition(LIFT_TO), 400);
             addSequential(new DropCube(HARD_SHOT), 1000);
         }
         else{
             //RIGHT CODE
             //Go forward and do fork stuff
         	addDrive("/home/lvuser/MotionProfile/Position2Switch1_left_detailed.csv", "/home/lvuser/MotionProfile/Position2Switch1_right_detailed.csv");
-            addParallel(new Command[]{new LiftToPosition(LIFT_TO)}, 1500);
-
-            //Turn Right and go forward
-            addParallel(new Command[]{new LiftToPosition(LIFT_TO)}, 1000);
             addParallel(new Command[]{new LiftToPosition(LIFT_TO)}, 2500);
-
-            //Go towards switch and	drop cube
-            addParallel(new Command[]{new LiftToPosition(LIFT_TO)}, 1000);
-            addParallel(new Command[]{new DropForks(), new LiftToPosition(LIFT_TO)}, 3000);
+            addParallel(new Command[]{new DropForks(), new LiftToPosition(LIFT_TO)}, 1250);
             addSequential(new DropCube(HARD_SHOT), 1000);
 
 

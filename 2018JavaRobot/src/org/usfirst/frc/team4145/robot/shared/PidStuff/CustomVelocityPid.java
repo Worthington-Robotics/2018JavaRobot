@@ -103,7 +103,7 @@ public class CustomVelocityPid {
                 SmartDashboard.putNumber("setpoint" + instanceNum, setpoint.position * 228);
                 SmartDashboard.putNumber("feed forward" + instanceNum, feedForward);
                 SmartDashboard.putNumber("feed back" + instanceNum, feedBack);
-                SmartDashboard.putNumber("Velocity" + instanceNum, toWrite);
+                SmartDashboard.putNumber("velocity" + instanceNum, toWrite);
 
                 //General cleanup for next iteration
                 errorLast = error;

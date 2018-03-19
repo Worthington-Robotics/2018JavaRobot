@@ -19,18 +19,21 @@ import java.util.concurrent.LinkedBlockingQueue;
 enum UserSelection {
 
     //Auto1("Position 1 Switch", 1),
-    Auto2("Position 1 Scale", 2),
+    Auto2("Position 1 Scale - Profiled", 2),
     //Auto3("Position 1 Exchange", 3),
-    Auto4("Position 2 Switch", 4),
+    Auto4("Position 2 Switch - Profiled", 4),
     //Auto5("Position 2 Scale", 5),
     //Auto6("Position 2 Exchange", 6),
     //Auto7("Position 3 Switch", 7),
     Auto8("Position 3 Scale", 8),
     //Auto9("Position 3 Exchange", 9),
-    Auto10("Cross The Line", 10),
+    Auto10("Cross The Line - Profiled", 10),
     Auto11("Cross The Line Long", 11),
-    //Auto12("Auto 12", 12),
-    Auto13("Do Nothing", 13)
+
+    Auto12("Old Position 2 Switch", 12),
+    Auto13("Old Cross The Line", 13),
+    Auto14("Old Position 1 Scale", 14),
+    Auto20("Do Nothing", 20)
     ;
 
     private String name;
@@ -170,10 +173,20 @@ public class AutoSelector {
             case 113:
             case 114: return new CrossLineLong().getQueuedStates();
 
-            case 121:
-            case 122:
-            case 123:
-            case 124: return null;
+            case 121: return new Position2SwitchOld(0).getQueuedStates(); //right
+            case 122: return new Position2SwitchOld(0).getQueuedStates();
+            case 123: return new Position2SwitchOld(1).getQueuedStates(); //left
+            case 124: return new Position2SwitchOld(1).getQueuedStates();
+
+            case 131:
+            case 132:
+            case 133:
+            case 134: return new CrossTheLineOld().getQueuedStates();
+
+            case 141: return new Position1ScaleOld(0).getQueuedStates();
+            case 142: return new Position1ScaleOld(1).getQueuedStates();
+            case 143: return new Position1ScaleOld(0).getQueuedStates();
+            case 144: return new Position1ScaleOld(1).getQueuedStates();
 
             default: return null;
          	

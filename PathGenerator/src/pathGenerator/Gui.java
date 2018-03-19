@@ -875,8 +875,8 @@ public class Gui {
                         Pathfinder.writeToCSV(rightFile, left);
                         Pathfinder.writeToCSV(leftFile, right);
 
-                        // CSV with position and velocity. To be used with Talon SRX Motion
-                        // save left path to CSV
+                        /* CSV with position and velocity. To be used with Talon SRX Motion
+                         save left path to CSV
                         for (int i = 0; i < left.length(); i++) {
                             Segment seg = right.get(i);
                             lpw.printf("%f, %f, %d\n", seg.position, seg.velocity, (int) (seg.dt * 1000));
@@ -886,12 +886,12 @@ public class Gui {
                         for (int i = 0; i < right.length(); i++) {
                             Segment seg = left.get(i);
                             rpw.printf("%f, %f, %d\n", seg.position, seg.velocity, (int) (seg.dt * 1000));
-                        }
+                        }*/
                     } else {
                         Pathfinder.writeToCSV(rightFile, right);
                         Pathfinder.writeToCSV(leftFile, left);
 
-                        // CSV with position and velocity. To be used with Talon SRX Motion
+                        /* CSV with position and velocity. To be used with Talon SRX Motion
                         // save left path to CSV
                         for (int i = 0; i < left.length(); i++) {
                             Segment seg = left.get(i);
@@ -902,7 +902,7 @@ public class Gui {
                         for (int i = 0; i < right.length(); i++) {
                             Segment seg = right.get(i);
                             rpw.printf("%f, %f, %d\n", seg.position, seg.velocity, (int) (seg.dt * 1000));
-                        }
+                        }*/
                     }
 
                     lpw.close();

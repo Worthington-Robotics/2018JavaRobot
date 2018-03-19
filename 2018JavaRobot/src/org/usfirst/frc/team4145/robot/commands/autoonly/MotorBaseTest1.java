@@ -8,10 +8,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class MotorBaseTest1 extends Command {
 	private boolean Test1pt1;
 	private boolean Test1pt2;
+	private double power = .5;
 	private int iterations = 0;
 
 	public void initialize() {
-		RobotMap.driveFrontLeft.set(.254);
+		RobotMap.driveFrontLeft.set(power);
 	}
 
 	@Override
@@ -23,20 +24,20 @@ public class MotorBaseTest1 extends Command {
 		iterations++;
 		if (iterations > 50) {
 			RobotMap.driveFrontLeft.set(0);
-			RobotMap.driveFrontRight.set(.254);
+			RobotMap.driveFrontRight.set(power);
 		}
 		if (iterations < 100 && iterations > 50) {
 			RobotMap.driveFrontRight.set(0);
-			RobotMap.driveRearRight.set(.254);
+			RobotMap.driveRearRight.set(power);
 		}
 		if (iterations < 150 && iterations > 50) {
 			RobotMap.driveRearRight.set(0);
-			RobotMap.driveRearLeft.set(.254);}
+			RobotMap.driveRearLeft.set(power);}
 		if(iterations < 175 && iterations > 150)
 		{RobotMap.driveRearLeft.set(0);}
 		if(iterations > 175 && iterations < 702)
-		{RobotMap.driveFrontRight.set(.5);
-		RobotMap.driveFrontLeft.set(.5);
+		{RobotMap.driveFrontRight.set(power);
+		RobotMap.driveFrontLeft.set(power);
 		}
 	}
 

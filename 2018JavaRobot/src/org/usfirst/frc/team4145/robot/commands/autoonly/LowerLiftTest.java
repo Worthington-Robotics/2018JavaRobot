@@ -8,30 +8,31 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class LowerLiftTest extends Command {
 	private boolean Test1pt1;
 	private boolean Test1pt2;
+	private double power = .5;
 	private int iterations = 0;
 
 	
 
 	public void initialize() {
-		RobotMap.liftMotorL.set(.254);
+		RobotMap.liftMotorL.set(power);
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return iterations == 15000;
+		return iterations == 1500;
 	} // has to finish at end of auto routine
 
 	public void execute() {
 		iterations ++;
-		if(iterations <= 7500 && !RobotMap.liftMotorL.getSensorCollection().isRevLimitSwitchClosed())
+		if(iterations <= 750 && !RobotMap.liftMotorL.getSensorCollection().isRevLimitSwitchClosed())
 		{
 			if(RobotMap.liftMotorL.getSensorCollection().isFwdLimitSwitchClosed())
 			{
 				Test1pt1 = true;
-				RobotMap.liftMotorL.set(-.254);
+				RobotMap.liftMotorL.set(-power);
 			}
 		}
-		if(iterations <= 7500 && !RobotMap.liftMotorL.getSensorCollection().isRevLimitSwitchClosed())
+		if(iterations <= 750 && !RobotMap.liftMotorL.getSensorCollection().isRevLimitSwitchClosed())
 		{
 			if(RobotMap.liftMotorL.getSensorCollection().isRevLimitSwitchClosed())
 			{

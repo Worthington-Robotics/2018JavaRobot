@@ -33,6 +33,7 @@ enum UserSelection {
     Auto12("Old Position 2 Switch", 12),
     Auto13("Old Cross The Line", 13),
     Auto14("Old Position 1 Scale", 14),
+    Auto15("Robot Test", 15),
     Auto20("Do Nothing", 20)
     ;
 
@@ -187,6 +188,11 @@ public class AutoSelector {
             case 142: return new Position1ScaleOld(1).getQueuedStates();
             case 143: return new Position1ScaleOld(0).getQueuedStates();
             case 144: return new Position1ScaleOld(1).getQueuedStates();
+            
+            case 151:
+            case 152:
+            case 153:
+            case 154: return new AutoTestProct().getQueuedStates();
 
             default: return null;
          	

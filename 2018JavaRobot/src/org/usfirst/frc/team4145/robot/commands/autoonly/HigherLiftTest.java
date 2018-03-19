@@ -42,7 +42,10 @@ public class HigherLiftTest extends Command {
 		}
 	}
 
+
 	public void end() {
+
+		RobotMap.liftMotorH.set(0);
 		SmartDashboard.putBoolean("Higher Lift Test", Test2pt1 && Test2pt2);
 	}
 

@@ -43,6 +43,7 @@ public class LowerLiftTest extends Command {
 	}
 
 	public void end() {
+		RobotMap.liftMotorL.set(0);
 		SmartDashboard.putBoolean("Lower Lift Test", Test1pt1 && Test1pt2);
 	}
 

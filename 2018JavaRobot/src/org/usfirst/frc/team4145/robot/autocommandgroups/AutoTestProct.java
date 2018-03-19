@@ -10,11 +10,9 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class AutoTestProct extends QueueGroup {
 
-	private boolean lift, forks, leftMotor, rightMotor;
-
 	public AutoTestProct() {
-		addParallel(new Command[] {new LowerLiftTest(), new MotorBaseTest1()}, 7500);
-		addSequential(new HigherLiftTest(), 7500);
+		addSequential(new MotorBaseTest1(), 7500);
+		//addSequential(new HigherLiftTest(), 7500);
 	}
 	
 

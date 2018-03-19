@@ -6,44 +6,54 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MotorBaseTest1 extends Command {
-	private boolean Test1pt1;
-	private boolean Test1pt2;
 	private double power = .5;
 	private int iterations = 0;
 
+	public MotorBaseTest1(){
+
+	}
+
 	public void initialize() {
 		RobotMap.driveFrontLeft.set(power);
+		System.out.println("setting front left");
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return iterations > 705;
+		return iterations > 2000;
 	} // has to finish at end of auto routine
 
 	public void execute() {
 		iterations++;
-		if (iterations > 50) {
+		if (iterations == 500) {
+			System.out.println("setting front right");
 			RobotMap.driveFrontLeft.set(0);
 			RobotMap.driveFrontRight.set(power);
 		}
-		if (iterations < 100 && iterations > 50) {
+		if (iterations == 1000) {
+			System.out.println("Setting rear right");
 			RobotMap.driveFrontRight.set(0);
 			RobotMap.driveRearRight.set(power);
 		}
-		if (iterations < 150 && iterations > 50) {
+		if (iterations == 1500) {
+			System.out.println("setting rear left");
 			RobotMap.driveRearRight.set(0);
-			RobotMap.driveRearLeft.set(power);}
-		if(iterations < 175 && iterations > 150)
-		{RobotMap.driveRearLeft.set(0);}
-		if(iterations > 175 && iterations < 702)
-		{RobotMap.driveFrontRight.set(power);
-		RobotMap.driveFrontLeft.set(power);
+			RobotMap.driveRearLeft.set(power);
+		}
+		if(iterations == 1750) {
+			RobotMap.driveRearLeft.set(0);
+		}
+		if(iterations == 2000) {
+			System.out.println("driving forward");
+			RobotMap.driveFrontRight.set(power);
+			RobotMap.driveFrontLeft.set(-power);
 		}
 	}
 
 	public void end() {
-		
-		SmartDashboard.putBoolean("Motor Check Test", RobotMap.rightWheelEncoder.getDistance() / 10 == 10 && RobotMap.leftWheelEncoder.getDistance() / 10 == 10);
+		RobotMap.driveFrontRight.set(0);
+		RobotMap.driveFrontLeft.set(0);
+		SmartDashboard.putBoolean("Motor Check Test", (int)(RobotMap.rightWheelEncoder.getDistance()) / 10 == 10 && (int)(RobotMap.leftWheelEncoder.getDistance()) / 10 == 10);
 	}
 
 	public void interrupted() {

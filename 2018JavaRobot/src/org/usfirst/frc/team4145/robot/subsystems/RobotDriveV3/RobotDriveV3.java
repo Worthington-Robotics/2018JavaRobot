@@ -54,17 +54,19 @@ public class RobotDriveV3 extends Subsystem {
 
     private Runnable periodic = () -> {
         if (DriverStation.getInstance().isAutonomous() && m_AutoDriveInstance.isProfiling() ) {
-            System.out.println("Profiling mode");
+            //System.out.println("Profiling mode");
             lastAutoOutput = m_AutoDriveInstance.update();
             SmartDashboard.putNumberArray("Tank Drive Values", lastAutoOutput);
             SmartDashboard.putNumber("Gyro Target", m_AutoDriveInstance.getHeading());
             driveTank(lastAutoOutput[0], lastAutoOutput[1]);
 
-        } else {
-            //System.out.println("non-Profiling mode");
-            lastTeleopOutput = m_TeleopDriveInstance.update();
-            driveCartesian(lastTeleopOutput[1], -lastTeleopOutput[0], lastTeleopOutput[2]);
         }
+        else if(!DriverStation.getInstance().isTest()){
+            //System.out.println("mecanum mode");
+            lastTeleopOutput = m_TeleopDriveInstance.update();
+            //driveCartesian(lastTeleopOutput[1], -lastTeleopOutput[0], lastTeleopOutput[2]);
+        }
+
         smartDashboardUpdates();
     };
 

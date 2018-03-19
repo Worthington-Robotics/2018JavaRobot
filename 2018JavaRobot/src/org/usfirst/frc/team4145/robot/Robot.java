@@ -127,10 +127,34 @@ public class Robot extends TimedRobot {
         Scheduler.getInstance().run();
     }
 
+    public void testInit(){
+        RobotMap.drive.setDynamicBrakeMode(false, false, false,false);
+        //RobotMap.drive.setDynamicBrakeMode(new boolean[] {true, true, true, true});
+        RobotMap.ahrs.reset();
+        RobotMap.rightWheelEncoder.reset();
+        SmartDashboard.putNumber("In Auto", 1);
+
+        String[] autoList = AutoSelector.buildArray();
+
+        //pulls auto selector from labview DB
+        String autoSelected = SmartDashboard.getString("Auto Selector", autoList[autoList.length - 1]);
+
+        // this block builds the game data when auto starts
+        String GameData = DriverStation.getInstance().getGameSpecificMessage();
+
+        //choose auto command based on lists
+        SmartDashboard.putStringArray("Auto selected and game data", new String[]{autoSelected, GameData});
+        AutoStateQueue = AutoSelector.autoSelect(GameData, autoSelected);
+
+        //run state machine
+        AutoStateMachine.runMachine(AutoStateQueue);
+    }
+
     /**
      * This function is called periodically during test mode.
      */
     @Override
     public void testPeriodic() {
+        Scheduler.getInstance().run();
     }
 }

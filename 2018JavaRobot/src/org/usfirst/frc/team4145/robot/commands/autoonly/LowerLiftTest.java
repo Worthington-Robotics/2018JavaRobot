@@ -18,7 +18,7 @@ public class LowerLiftTest extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return Test1;
+		return iterations == 15000;
 	} // has to finish at end of auto routine
 
 	public void execute() {

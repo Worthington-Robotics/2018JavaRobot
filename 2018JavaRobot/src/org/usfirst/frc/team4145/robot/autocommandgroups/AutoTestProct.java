@@ -8,8 +8,9 @@ import org.usfirst.frc.team4145.robot.shared.AutoStateMachine.QueueGroup;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-private boolean lift, forks, leftMotor, rightMotor;
 public class AutoTestProct extends QueueGroup {
+
+	private boolean lift, forks, leftMotor, rightMotor;
 
 	public AutoTestProct() {
 		addParallel(new Command[] {new LowerLiftTest(), new MotorBaseTest1()}, 7500);

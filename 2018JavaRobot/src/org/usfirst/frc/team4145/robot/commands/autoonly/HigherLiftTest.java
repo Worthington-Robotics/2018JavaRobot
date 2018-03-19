@@ -14,7 +14,7 @@ public class HigherLiftTest extends Command {
 	
 
 	public void initialize() {
-		RobotMap.liftMotorH.setSpeed(powerUp);
+		RobotMap.liftMotorH.set(powerUp);
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class HigherLiftTest extends Command {
 			if(RobotMap.liftMotorH.getSensorCollection().isFwdLimitSwitchClosed())
 			{
 				Test2pt1 = true;
-				RobotMap.liftMotorH.setSpeed(-1*powerUp);
+				RobotMap.liftMotorH.set(-1*powerUp);
 			}
 		}
 		else if(iterations >= 7500 && !RobotMap.liftMotorH.getSensorCollection().isRevLimitSwitchClosed())
@@ -37,7 +37,7 @@ public class HigherLiftTest extends Command {
 			if(RobotMap.liftMotorH.getSensorCollection().isRevLimitSwitchClosed())
 			{
 				Test2pt2 = true;
-				RobotMap.liftMotorH.setSpeed(0);
+				RobotMap.liftMotorH.set(0);
 			}
 		}
 	}

@@ -19,7 +19,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 enum UserSelection {
 
     //Auto1("Position 1 Switch", 1),
-    Auto2("Position 1 Scale - Profiled", 2),
+    Auto2("Position 1 Scale", 2),
     //Auto3("Position 1 Exchange", 3),
     Auto4("Position 2 Switch - Profiled", 4),
     //Auto5("Position 2 Scale", 5),
@@ -27,12 +27,11 @@ enum UserSelection {
     //Auto7("Position 3 Switch", 7),
     Auto8("Position 3 Scale", 8),
     //Auto9("Position 3 Exchange", 9),
-    Auto10("Cross The Line - Profiled", 10),
+    Auto10("Cross The Line", 10),
     Auto11("Cross The Line Long", 11),
-
     Auto12("Old Position 2 Switch", 12),
-    Auto13("Old Cross The Line", 13),
-    Auto14("Old Position 1 Scale", 14),
+    //Auto13("Old Cross The Line", 13),
+    //Auto14("Position 1 Scale", 14),
     Auto15("Robot Test", 15),
     Auto20("Do Nothing", 20)
     ;
@@ -124,10 +123,10 @@ public class AutoSelector {
             case 13: return null; //new Position1Switch(1).getQueuedStates();
             case 14: return null; //new Position1Switch(1).getQueuedStates();
 
-            case 21: return new Position1Scale(0).getQueuedStates();
-            case 22: return new Position1Scale(1).getQueuedStates();
-            case 23: return new Position1Scale(0).getQueuedStates();
-            case 24: return new Position1Scale(1).getQueuedStates();
+            case 21: return new Position1ScaleOld(0).getQueuedStates();
+            case 22: return new Position1ScaleOld(1).getQueuedStates();
+            case 23: return new Position1ScaleOld(0).getQueuedStates();
+            case 24: return new Position1ScaleOld(1).getQueuedStates();
 
             case 31:
             case 32:
@@ -167,7 +166,7 @@ public class AutoSelector {
             case 101:
             case 102:
             case 103:
-            case 104: return new CrossTheLine().getQueuedStates();
+            case 104: return new CrossTheLineOld().getQueuedStates();
 
             case 111:
             case 112:
@@ -184,10 +183,10 @@ public class AutoSelector {
             case 133:
             case 134: return new CrossTheLineOld().getQueuedStates();
 
-            case 141: return new Position1ScaleOld(0).getQueuedStates();
-            case 142: return new Position1ScaleOld(1).getQueuedStates();
-            case 143: return new Position1ScaleOld(0).getQueuedStates();
-            case 144: return new Position1ScaleOld(1).getQueuedStates();
+            case 141: return new Position1Scale(0).getQueuedStates();
+            case 142: return new Position1Scale(1).getQueuedStates();
+            case 143: return new Position1Scale(0).getQueuedStates();
+            case 144: return new Position1Scale(1).getQueuedStates();
             
             case 151:
             case 152:

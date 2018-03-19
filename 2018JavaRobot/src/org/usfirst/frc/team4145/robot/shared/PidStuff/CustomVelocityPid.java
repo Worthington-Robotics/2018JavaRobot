@@ -100,7 +100,7 @@ public class CustomVelocityPid {
                 feedBack = kP * error + kD * errorDeriv;
                 toWrite += feedBack;
 
-
+                SmartDashboard.putNumber("setpoint" + instanceNum, setpoint.position * 228);
                 SmartDashboard.putNumber("feed forward" + instanceNum, feedForward);
                 SmartDashboard.putNumber("feed back" + instanceNum, feedBack);
                 SmartDashboard.putNumber("Velocity" + instanceNum, toWrite);

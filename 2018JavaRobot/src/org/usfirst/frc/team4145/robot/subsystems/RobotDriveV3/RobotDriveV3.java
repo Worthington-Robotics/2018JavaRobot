@@ -64,7 +64,7 @@ public class RobotDriveV3 extends Subsystem {
         else if(!DriverStation.getInstance().isTest()){
             //System.out.println("mecanum mode");
             lastTeleopOutput = m_TeleopDriveInstance.update();
-            //driveCartesian(lastTeleopOutput[1], -lastTeleopOutput[0], lastTeleopOutput[2]);
+            driveCartesian(lastTeleopOutput[1], -lastTeleopOutput[0], lastTeleopOutput[2]);
         }
 
         smartDashboardUpdates();

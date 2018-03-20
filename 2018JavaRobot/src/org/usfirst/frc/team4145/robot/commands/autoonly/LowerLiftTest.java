@@ -19,7 +19,7 @@ public class LowerLiftTest extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return iterations == 1500;
+		return iterations == 1560;
 	} // has to finish at end of auto routine
 
 	public void execute() {
@@ -37,7 +37,8 @@ public class LowerLiftTest extends Command {
 			if(RobotMap.liftMotorL.getSensorCollection().isRevLimitSwitchClosed())
 			{
 				Test1pt2 = true;
-				RobotMap.liftMotorL.set(0);
+				RobotMap.liftMotorL.set(.526);
+				
 			}
 		}
 	}

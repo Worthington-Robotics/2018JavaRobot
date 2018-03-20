@@ -12,7 +12,6 @@ public class AutoTestProct extends QueueGroup {
 
 	public AutoTestProct() {
 		addSequential(new MotorBaseTest1(), 7500);
-		//addSequential(new HigherLiftTest(), 7500);
 	}
 	
 

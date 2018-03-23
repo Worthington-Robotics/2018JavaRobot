@@ -80,8 +80,8 @@ public class RobotMap {
         ahrs = new AHRS(SPI.Port.kMXP); // finish declaring AHRS to MXP SPI bus
         ahrs.reset();
         rightWheelEncoder = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
-        leftWheelEncoder = new Encoder(4,5,false, Encoder.EncodingType.k4X);
-        liftEnc = new Encoder(2, 3, true, Encoder.EncodingType.k4X);
+        leftWheelEncoder = new Encoder(2,3,false, Encoder.EncodingType.k4X);
+        liftEnc = new Encoder(4, 5, true, Encoder.EncodingType.k4X);
         switchHTop = new DigitalInput(6);
         switchHBase = new DigitalInput(7);
 

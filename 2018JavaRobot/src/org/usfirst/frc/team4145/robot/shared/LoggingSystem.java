@@ -24,14 +24,17 @@ public class LoggingSystem {
     private List<String> smartDashKeys;
     private String toWrite;
     private Notifier loggerThread;
+    private boolean initSuccess;
     private Runnable runnable = () -> logLine();
 
     public LoggingSystem(){
+        initSuccess = false;
         smartDashKeys = new ArrayList<>();
         loggerThread = new Notifier(runnable);
         try {
             base = getMount();
             printWriter = new PrintWriter(new BufferedWriter(new FileWriter(base)));
+            initSuccess = true;
         } catch (IOException e) {
             DriverStation.reportError("Failed to initialize log on file!", false);
             //e.printStackTrace();
@@ -43,11 +46,15 @@ public class LoggingSystem {
     }
 
     public void enablePrint(boolean enable){
-        if(enable){
-            loggerThread.startPeriodic(Constants.LOGGING_UPDATE_RATE);
+        if(initSuccess) {
+            if (enable) {
+                loggerThread.startPeriodic(Constants.LOGGING_UPDATE_RATE);
+            } else {
+                loggerThread.stop();
+            }
         }
-        else {
-            loggerThread.stop();
+        else{
+            DriverStation.reportWarning("logger called to init on Null file stream", false);
         }
     }
 
@@ -92,19 +99,30 @@ public class LoggingSystem {
         return buildMsg;
     }
 
-    private File getMount(){
-        File mountPoint = null;
+    private File getMount() {
+        File mountPoint;
         // find the mount point
-        mountPoint = new File()
-        mountPoint = new File(mountPoint, "/logging");
-        SimpleDateFormat outputFormatter = new SimpleDateFormat("yyyyMMdd_HHmmss_SSS");
-        outputFormatter.setTimeZone(TimeZone.getTimeZone("US/Eastern"));
-        String newDateString = outputFormatter.format(new Date());
-
-        // build the new filename
-        String fileName = newDateString + "_LOG.tsv";
-        // build the full file path name
-        return new File(mountPoint.getAbsolutePath() + File.separator + fileName);
+        mountPoint = new File(Constants.DRIVE_PATH_1);
+        if (mountPoint.isDirectory()) { //drive exists on sda
+            mountPoint = new File(mountPoint, "/logging");
+        } else {
+            mountPoint = new File(Constants.DRIVE_PATH_2);
+            if (mountPoint.isDirectory()) {//drive exists on sdb
+                mountPoint = new File(mountPoint, "/logging");
+            } else {
+                mountPoint = null;
+            }
+        }
+        if (mountPoint != null){
+            SimpleDateFormat outputFormatter = new SimpleDateFormat("yyyyMMdd_HHmmss_SSS");
+            outputFormatter.setTimeZone(TimeZone.getTimeZone("US/Eastern"));
+            String newDateString = outputFormatter.format(new Date());
+            // build the new filename
+            String fileName = newDateString + "_LOG.tsv";
+            // build the full file path name
+            return new File(mountPoint.getAbsolutePath() + File.separator + fileName);
+        }
+        return null;
     }
 
 }

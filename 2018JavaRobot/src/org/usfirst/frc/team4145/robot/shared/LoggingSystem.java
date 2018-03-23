@@ -3,6 +3,7 @@ package org.usfirst.frc.team4145.robot.shared;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.RobotController;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4145.robot.Constants;
 import org.usfirst.frc.team4145.robot.Robot;
@@ -26,11 +27,11 @@ public class LoggingSystem {
     private Runnable runnable = () -> logLine();
 
     public LoggingSystem(){
-        base = getMount();
         smartDashKeys = new ArrayList<>();
+        loggerThread = new Notifier(runnable);
         try {
+            base = getMount();
             printWriter = new PrintWriter(new BufferedWriter(new FileWriter(base)));
-            loggerThread = new Notifier(runnable);
         } catch (IOException e) {
             DriverStation.reportError("Failed to initialize log on file!", false);
             //e.printStackTrace();
@@ -51,7 +52,8 @@ public class LoggingSystem {
     }
 
     private void logLine(){
-        toWrite = "" + RobotController.getFPGATime() + "\t";
+        if(printWriter != null)
+        toWrite = "" + Timer.getFPGATimestamp() + "\t";
         for(String key : smartDashKeys){
             toWrite += "" + SmartDashboard.getNumber(key, 0.0) + "\t";
         }
@@ -93,15 +95,7 @@ public class LoggingSystem {
     private File getMount(){
         File mountPoint = null;
         // find the mount point
-        char mount = 'u';
-        while (mountPoint == null && mount <= 'z') {
-            File f = new File("/" + mount);
-            if (f.isDirectory()) {
-                mountPoint = f;
-                break;
-            }
-            ++mount;
-        }
+        mountPoint = new File()
         mountPoint = new File(mountPoint, "/logging");
         SimpleDateFormat outputFormatter = new SimpleDateFormat("yyyyMMdd_HHmmss_SSS");
         outputFormatter.setTimeZone(TimeZone.getTimeZone("US/Eastern"));

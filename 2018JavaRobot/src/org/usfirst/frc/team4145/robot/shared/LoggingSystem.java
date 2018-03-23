@@ -35,7 +35,7 @@ public class LoggingSystem {
             base = getMount();
             printWriter = new PrintWriter(new BufferedWriter(new FileWriter(base)));
             initSuccess = true;
-        } catch (IOException e) {
+        } catch (Exception e) {
             DriverStation.reportError("Failed to initialize log on file!", false);
             //e.printStackTrace();
         }
@@ -59,14 +59,15 @@ public class LoggingSystem {
     }
 
     private void logLine(){
-        if(printWriter != null)
-        toWrite = "" + Timer.getFPGATimestamp() + "\t";
-        for(String key : smartDashKeys){
-            toWrite += "" + SmartDashboard.getNumber(key, 0.0) + "\t";
+        if(printWriter != null) {
+            toWrite = "" + Timer.getFPGATimestamp() + "\t";
+            for (String key : smartDashKeys) {
+                toWrite += "" + SmartDashboard.getNumber(key, 0.0) + "\t";
+            }
+            toWrite += "\r\n";
+            printWriter.write(toWrite);
+            printWriter.flush();
         }
-        toWrite += "\r\n";
-        printWriter.write(toWrite);
-        printWriter.flush();
     }
 
     public static String WriteBuildInfoToDashboard(String robotName) {

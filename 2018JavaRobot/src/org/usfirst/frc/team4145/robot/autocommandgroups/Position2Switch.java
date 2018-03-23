@@ -23,7 +23,7 @@ public class Position2Switch extends QueueGroup {
                     "/home/lvuser/MotionProfile/Position2Switch0_right_detailed.csv");
             addSequential(new LiftToPosition(LIFT_TO), 2000);
             addParallel(new Command[]{new DropForks(), new LiftToPosition(LIFT_TO)}, 1250);
-            addSequential(new LiftToPosition(LIFT_TO), 400);
+            addSequential(new LiftToPosition(LIFT_TO), 500);
             //addSequential(new LiftToPosition(LIFT_TO), 100);
             addSequential(new DropCube(HARD_SHOT), 1000);
         }
@@ -33,7 +33,7 @@ public class Position2Switch extends QueueGroup {
                     "/home/lvuser/MotionProfile/Position2Switch1_right_detailed.csv");
             addParallel(new Command[]{new LiftToPosition(LIFT_TO)}, 2500);
             addParallel(new Command[]{new DropForks(), new LiftToPosition(LIFT_TO)}, 1250);
-            //addSequential(new LiftToPosition(LIFT_TO), 100);
+            addSequential(new LiftToPosition(LIFT_TO), 100);
             addSequential(new DropCube(HARD_SHOT), 1000);
 
 

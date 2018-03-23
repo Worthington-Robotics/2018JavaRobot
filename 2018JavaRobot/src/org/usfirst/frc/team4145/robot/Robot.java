@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4145.robot.shared.AutoStateMachine.AutoStateMachine;
 import org.usfirst.frc.team4145.robot.shared.AutoStateMachine.CommandQueueGroup;
+import org.usfirst.frc.team4145.robot.shared.LoggingSystem;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -41,6 +42,7 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("Auto State", -1);
         CameraServer.getInstance().startAutomaticCapture();
         SmartDashboard.putNumber("Code Revision", 109);
+        LoggingSystem.WriteBuildInfoToDashboard("Cube Crusher");
 
     }
 

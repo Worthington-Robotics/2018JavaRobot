@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.*;
+import org.usfirst.frc.team4145.robot.shared.LoggingSystem;
 import org.usfirst.frc.team4145.robot.subsystems.*;
 import org.usfirst.frc.team4145.robot.subsystems.RobotDriveV3.RobotDriveV3;
 
@@ -35,6 +36,9 @@ public class RobotMap {
     public static double FAR_SCALE_TURN_2 = -107;
     public static int FAR_SCALE_DISTANCE_3 = 19*40; //was 75
 
+    //logging system
+    public static LoggingSystem loggingSystem;
+
     // actuators
     public static WPI_TalonSRX driveFrontLeft, driveRearLeft, driveFrontRight, driveRearRight; // need to use WPI_talonSRX for drivetrain use
     public static WPI_TalonSRX liftMotorL, liftMotorH;
@@ -56,7 +60,7 @@ public class RobotMap {
 
     public static void init() {
         // all general objects instantated here
-
+        loggingSystem = new LoggingSystem();
 
         // all Motor controller objects
         driveFrontLeft = new WPI_TalonSRX(1);

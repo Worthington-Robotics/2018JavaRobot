@@ -41,9 +41,27 @@ public class Robot extends TimedRobot {
         RobotMap.drive.startPeriodic();
         SmartDashboard.putNumber("Auto State", -1);
         CameraServer.getInstance().startAutomaticCapture();
-        SmartDashboard.putNumber("Code Revision", 109);
+        //SmartDashboard.putNumber("Code Revision", 109);
         LoggingSystem.WriteBuildInfoToDashboard("Cube Crusher");
-
+        RobotMap.loggingSystem.addWatchKey("Auto State");
+        RobotMap.loggingSystem.addWatchKey("Left Wheel Encoder");
+        RobotMap.loggingSystem.addWatchKey("Right Wheel Encoder");
+        RobotMap.loggingSystem.addWatchKey("Gyro Angle");
+        RobotMap.loggingSystem.addWatchKey("Gyro Target");
+        RobotMap.loggingSystem.addWatchKey("Lift Encoder");
+        RobotMap.loggingSystem.addWatchKey("Lift Encoder Target");
+        RobotMap.loggingSystem.addWatchKey("In Auto");
+        RobotMap.loggingSystem.addWatchKey("Left Motor Voltage");
+        RobotMap.loggingSystem.addWatchKey("Right Motor Voltage");
+        RobotMap.loggingSystem.addWatchKey("Left Talon Voltage");
+        RobotMap.loggingSystem.addWatchKey("setpoint1");
+        RobotMap.loggingSystem.addWatchKey("feed forward1");
+        RobotMap.loggingSystem.addWatchKey("feed back1");
+        RobotMap.loggingSystem.addWatchKey("velocity1");
+        RobotMap.loggingSystem.addWatchKey("setpoint2");
+        RobotMap.loggingSystem.addWatchKey("feed forward2");
+        RobotMap.loggingSystem.addWatchKey("feed back2");
+        RobotMap.loggingSystem.addWatchKey("velocity2");
     }
 
     /**
@@ -82,6 +100,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousInit() {
+        RobotMap.loggingSystem.enablePrint(true);
         RobotMap.drive.setDynamicBrakeMode(false, false, false,false);
         //RobotMap.drive.setDynamicBrakeMode(new boolean[] {true, true, true, true});
         RobotMap.ahrs.reset();
@@ -114,6 +133,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
+        RobotMap.loggingSystem.enablePrint(false);
         SmartDashboard.putNumber("In Auto", 0);
         SmartDashboard.putNumber("Auto State", -1);
         RobotMap.ahrs.reset();

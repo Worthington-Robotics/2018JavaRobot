@@ -51,9 +51,9 @@ public class LoggingSystem {
     }
 
     private void logLine(){
-        toWrite = "" + RobotController.getFPGATime() + '\t';
+        toWrite = "" + RobotController.getFPGATime() + "\t";
         for(String key : smartDashKeys){
-            toWrite += SmartDashboard.getNumber(key, 0.000000) + '\t';
+            toWrite += "" + SmartDashboard.getNumber(key, 0.0) + "\t";
         }
         toWrite += "\r\n";
         printWriter.write(toWrite);

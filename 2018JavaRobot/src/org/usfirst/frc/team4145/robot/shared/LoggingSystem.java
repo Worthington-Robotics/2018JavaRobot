@@ -102,13 +102,13 @@ public class LoggingSystem {
     private File getMount() {
         File mountPoint;
         // find the mount point
-        mountPoint = new File(Constants.DRIVE_PATH_1);
-        if (mountPoint.isDirectory()) { //drive exists on sda
-            mountPoint = new File(mountPoint, "/logging");
+        File testPoint = new File(Constants.DRIVE_PATH_1 + "/logging");
+        if (testPoint.isDirectory()) { //drive exists on sda
+            mountPoint = testPoint;
         } else {
-            mountPoint = new File(Constants.DRIVE_PATH_2);
-            if (mountPoint.isDirectory()) {//drive exists on sdb
-                mountPoint = new File(mountPoint, "/logging");
+            testPoint = new File(Constants.DRIVE_PATH_2 + "/logging");
+            if (testPoint.isDirectory()) {//drive exists on sdb
+                mountPoint = testPoint;
             } else {
                 mountPoint = null;
             }

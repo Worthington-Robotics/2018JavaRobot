@@ -8,6 +8,7 @@
 package org.usfirst.frc.team4145.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4145.robot.Robot;
@@ -43,6 +44,12 @@ public class Liftbot extends Subsystem {
 
 	@Override
 	public void periodic() {
+		if(RobotMap.liftLock.get() == DoubleSolenoid.Value.kReverse){
+			SmartDashboard.putBoolean("Lift Lock", true);
+		}
+		else{
+			SmartDashboard.putBoolean("Lift Lock", false);
+		}
 		//updateLimits();
 		//watchDog();
 		//armLock();

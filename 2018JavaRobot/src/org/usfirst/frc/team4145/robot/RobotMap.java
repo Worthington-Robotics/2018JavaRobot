@@ -23,19 +23,6 @@ import org.usfirst.frc.team4145.robot.subsystems.RobotDriveV3.RobotDriveV3;
  */
 public class RobotMap {
 
-    //close scale variables
-    public static int CLOSE_SCALE_DISTANCE = 19 * 265;
-    public static double CLOSE_SCALE_TURN = -50;
-    public static int CLOSE_SCALE_ROLL = 19*0;
-    public static int LIFT_TO_SCALE = 200;
-
-    //far scale variables
-    public static int FAR_SCALE_DISTANCE_1 = 19 * 220;
-    public static double FAR_SCALE_TURN_1 = 85;
-    public static int FAR_SCALE_DISTANCE_2 = 19*225;
-    public static double FAR_SCALE_TURN_2 = -107;
-    public static int FAR_SCALE_DISTANCE_3 = 19*40; //was 75
-
     //logging system
     public static LoggingSystem loggingSystem;
 

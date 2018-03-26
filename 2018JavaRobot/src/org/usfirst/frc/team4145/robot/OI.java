@@ -11,7 +11,7 @@ package org.usfirst.frc.team4145.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import org.usfirst.frc.team4145.robot.commands.autoonly.DropCube;
+import org.usfirst.frc.team4145.robot.commands.autoonly.CubeMovement;
 import org.usfirst.frc.team4145.robot.commands.teleoponly.*;
 
 /**
@@ -54,13 +54,13 @@ public class OI {
 		secondStick = new Joystick(1);
 		
 		Button secondStickTwo = new JoystickButton(secondStick, 2);
-		secondStickTwo.whileHeld(new Pickup());
+		secondStickTwo.whileHeld(new CubeMovement(CubeMovement.CubeState.Pickup));
 		
 		Button secondStickThree = new JoystickButton(secondStick, 3);
-		secondStickThree.whileHeld(new Release());
+		secondStickThree.whileHeld(new CubeMovement(CubeMovement.CubeState.Shoot));
 
 		Button secondStickFour = new JoystickButton(secondStick, 4);
-		secondStickFour.whileHeld(new LowShot());
+		secondStickFour.whileHeld(new CubeMovement(CubeMovement.CubeState.Drop));
 
 		Button secondStickSix = new JoystickButton(secondStick, 6);
 		secondStickSix.whileHeld(new LiftButtonDown());

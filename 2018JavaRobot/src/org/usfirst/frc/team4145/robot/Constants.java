@@ -2,12 +2,10 @@ package org.usfirst.frc.team4145.robot;
 
 public class Constants {
 
-
-
     /*
-     * ---------------------
+     * ----------------------
      * || Shared Constants ||
-     * ---------------------
+     * ----------------------
      */
 
     private static boolean isCompBot = false; //change this to use competition or non-competition constants
@@ -20,13 +18,39 @@ public class Constants {
 
     public static String DRIVE_PATH_1 = "/media/sda1";
     public static String DRIVE_PATH_2 = "/media/sda2";
+    public static String MOTION_PROFILE_PATH = "/home/lvuser/MotionProfile/";
 
-    public static int LIFT_MOVE_TO_TOP = 200;
+    public static double CUBEMANIP_SHOOT = 1.0000;
+    public static double CUBEMANIP_DROP = 0.6500;
+    public static double CUBEMANIP_FAST_DROP = 0.8000;
+    public static double CUBEMANIP_PICKUP = -0.7500;
+
+    public static int LIFT_MOVE_TO_TOP = 0;
+    public static int POS2SWITCH_WALL_BREAK = 19*20;
+    public static int POS2SWITCH_TURN_ONE = 45;
+    public static int POS2SWITCH_LEFT_DISTANCE = 19*100;
+    public static int POS2SWITCH_RIGHT_DISTANCE = 19*80;
+    public static int POS2SWITCH_TURN_TWO = 45;
+    public static int POS2SWITCH_LEFT_SWITCH_ROLL = 19*28;
+    public static int POS2SWITCH_RIGHT_SWITCH_ROLL = 19*50;
+
+    //close scale variables
+    public static int CLOSE_SCALE_DISTANCE = 19 * 265;
+    public static double CLOSE_SCALE_TURN = -50;
+    public static int CLOSE_SCALE_ROLL = 19*0;
+    public static int LIFT_TO_SCALE = 200;
+
+    //far scale variables
+    public static int FAR_SCALE_DISTANCE_1 = 19 * 220;
+    public static double FAR_SCALE_TURN_1 = 85;
+    public static int FAR_SCALE_DISTANCE_2 = 19*225;
+    public static double FAR_SCALE_TURN_2 = -107;
+    public static int FAR_SCALE_DISTANCE_3 = 19*40; //was 75
 
     /*
-     * ---------------------
-     * || Non-Split yet Constants ||
-     * ---------------------
+     * ----------------------------
+     * || Can be Split Constants ||
+     * ----------------------------
      */
 
     private static double DRIVETO_KP = 0.0040; //nominal 0.0040

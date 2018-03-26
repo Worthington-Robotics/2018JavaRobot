@@ -1,42 +1,31 @@
 package org.usfirst.frc.team4145.robot.autocommandgroups;
 
-import org.usfirst.frc.team4145.robot.commands.autoonly.DriveTo;
-import org.usfirst.frc.team4145.robot.commands.autoonly.DropForks;
-import org.usfirst.frc.team4145.robot.commands.autoonly.GyroToAngle;
-import org.usfirst.frc.team4145.robot.commands.autoonly.LiftToPosition;
-import org.usfirst.frc.team4145.robot.commands.autoonly.DropCube;
+import org.usfirst.frc.team4145.robot.Constants;
+import org.usfirst.frc.team4145.robot.commands.autoonly.*;
 import org.usfirst.frc.team4145.robot.shared.AutoStateMachine.QueueGroup;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 public class Position2Switch extends QueueGroup {
 
-
-    //other class variables
-    private int LIFT_TO = 0;
-    private boolean HARD_SHOT = true;
-
     public Position2Switch(int autoNum) {
         if(autoNum == 0) {
             //LEFT CODE
-        	addDrive("/home/lvuser/MotionProfile/Position2Switch0_left_detailed.csv",
-                    "/home/lvuser/MotionProfile/Position2Switch0_right_detailed.csv");
-            addSequential(new LiftToPosition(LIFT_TO), 2000);
-            addParallel(new Command[]{new DropForks(), new LiftToPosition(LIFT_TO)}, 1250);
-            addSequential(new LiftToPosition(LIFT_TO), 500);
-            //addSequential(new LiftToPosition(LIFT_TO), 100);
-            addSequential(new DropCube(HARD_SHOT), 1000);
+        	addDrive(Constants.MOTION_PROFILE_PATH + "Position2Switch0_left_detailed.csv",
+                    Constants.MOTION_PROFILE_PATH + "Position2Switch0_right_detailed.csv");
+            addSequential(new LiftToPosition(Constants.LIFT_MOVE_TO_TOP), 2000);
+            addParallel(new Command[]{new DropForks(), new LiftToPosition(Constants.LIFT_MOVE_TO_TOP)}, 1250);
+            addSequential(new LiftToPosition(Constants.LIFT_MOVE_TO_TOP), 500);
+            addSequential(new CubeMovement(CubeMovement.CubeState.RollOut), 1000);
         }
         else{
             //RIGHT CODE
-        	addDrive("/home/lvuser/MotionProfile/Position2Switch1_left_detailed.csv",
-                    "/home/lvuser/MotionProfile/Position2Switch1_right_detailed.csv");
-            addParallel(new Command[]{new LiftToPosition(LIFT_TO)}, 2500);
-            addParallel(new Command[]{new DropForks(), new LiftToPosition(LIFT_TO)}, 1250);
-            addSequential(new LiftToPosition(LIFT_TO), 100);
-            addSequential(new DropCube(HARD_SHOT), 1000);
-
-
+        	addDrive(Constants.MOTION_PROFILE_PATH + "Position2Switch1_left_detailed.csv",
+                    Constants.MOTION_PROFILE_PATH + "Position2Switch1_right_detailed.csv");
+            addSequential(new LiftToPosition(Constants.LIFT_MOVE_TO_TOP), 2500);
+            addParallel(new Command[]{new DropForks(), new LiftToPosition(Constants.LIFT_MOVE_TO_TOP)}, 1250);
+            addSequential(new LiftToPosition(Constants.LIFT_MOVE_TO_TOP), 100);
+            addSequential(new CubeMovement(CubeMovement.CubeState.RollOut), 1000);
         }
     }
 }

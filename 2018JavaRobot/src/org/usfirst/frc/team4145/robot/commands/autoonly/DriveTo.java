@@ -3,6 +3,7 @@ package org.usfirst.frc.team4145.robot.commands.autoonly;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
+import org.usfirst.frc.team4145.robot.Constants;
 import org.usfirst.frc.team4145.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.PIDController;
@@ -15,11 +16,11 @@ public class DriveTo extends Command implements PIDOutput, PIDSource {
 	private PIDController driveTo;
 	private double[] toSet = { 0.0, 0.0, 0.0 };
 	
-	private double kP = 0.0040; //nominal 0.0040
-	private double kI = 0.0000; //nominal 0.0000
-	private double kD = 0.0250; //nominal 0.0250
-	private double FORWARD_AUTHORITY = 0.60; //nominal 0.4
-	private double REVERSE_AUTHORITY = 0.60; //nominal 0.6
+	private double kP = Constants.getDrivetoKp(); //nominal 0.0040
+	private double kI = Constants.getDrivetoKi(); //nominal 0.0000
+	private double kD = Constants.getDrivetoKd(); //nominal 0.0250
+	private double FORWARD_AUTHORITY = Constants.getDrivetoLim(); //nominal 0.4
+	private double REVERSE_AUTHORITY = Constants.getDrivetoLim(); //nominal 0.6
 
 	// constructor to initialize stuff
 	public DriveTo(int count) {

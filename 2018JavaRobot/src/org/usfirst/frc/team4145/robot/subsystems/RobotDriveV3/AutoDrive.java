@@ -16,27 +16,30 @@ public class AutoDrive implements DriveUpdater{
     public double[] toWrite = {0, 0};
 
     //Shared PID Constants
-    private double kV = 0.0360; //proportional scalar between motor power level and velocity output Nominal: 0.0402
-    private double kA = 0.0300; //proportional scalar between motor power level and acceleration output Nominal:  0.0500
-    private double offset = 0.1400; //account for deadband nominal: 0.2350
-    private double kP_Turn = 0.3800; //Nominal: 0.1300  0.3800
+
+    private double offset = Constants.getOffset(); //account for deadband
+    private double kP_Turn = Constants.getGyroKp(); //gyro correction strength
     private double kD_Turn = 0.0000;
 
     //Left PID constants
-    private double LEFT_kP = 2.1000; //1.7000   2.100
+    private double LEFT_kV = Constants.getLeftKV(); //proportional scalar between motor power level and velocity output
+    private double LEFT_kA = Constants.getLeftKA(); //proportional scalar between motor power level and acceleration output
+    private double LEFT_kP = Constants.getLeftKP();
     private double LEFT_kI = 0.0000;
-    private double LEFT_kD = 0.0005; //0.0005   0.0005
+    private double LEFT_kD = Constants.getLeftKD();
 
     //Right PID constants
-    private double RIGHT_kP = 2.1000; //1.7000  2.100
+    private double RIGHT_kV = Constants.getRightKV(); //proportional scalar between motor power level and velocity output
+    private double RIGHT_kA = Constants.getRightKA(); //proportional scalar between motor power level and acceleration output
+    private double RIGHT_kP = Constants.getRightKP();
     private double RIGHT_kI = 0.0000;
-    private double RIGHT_kD = 0.0005; //0.0005  0.0005
+    private double RIGHT_kD = Constants.getRightKD();
 
 
 
     AutoDrive() {
-        m_LeftVelocityPID = new CustomVelocityPid(LEFT_kP, LEFT_kI, LEFT_kD, kV, kA, RobotMap.leftWheelEncoder, null, Constants.DRIVETRAIN_UPDATE_RATE, offset);
-        m_RightVelocityPID = new CustomVelocityPid(RIGHT_kP, RIGHT_kI, RIGHT_kD, kV, kA, RobotMap.rightWheelEncoder, null, Constants.DRIVETRAIN_UPDATE_RATE, offset);
+        m_LeftVelocityPID = new CustomVelocityPid(LEFT_kP, LEFT_kI, LEFT_kD, LEFT_kV, LEFT_kA, RobotMap.leftWheelEncoder, null, Constants.DRIVETRAIN_UPDATE_RATE, offset);
+        m_RightVelocityPID = new CustomVelocityPid(RIGHT_kP, RIGHT_kI, RIGHT_kD, RIGHT_kV, RIGHT_kA, RobotMap.rightWheelEncoder, null, Constants.DRIVETRAIN_UPDATE_RATE, offset);
 
     }
 

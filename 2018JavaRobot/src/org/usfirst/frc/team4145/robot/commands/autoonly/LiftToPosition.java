@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4145.robot.commands.autoonly;
 
 import edu.wpi.first.wpilibj.PIDOutput;
+import org.usfirst.frc.team4145.robot.Constants;
 import org.usfirst.frc.team4145.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.PIDController;
@@ -14,18 +15,18 @@ public class LiftToPosition extends Command implements PIDSource, PIDOutput {
 	private int newCount;
 	private PIDController liftPid;
 
-	private int TOLERANCE = 1;
-	private int AUTHORITY = 1;
-	private double kP = 0.020;
-	private double kI = 0.000;
-	private double kD = 0.000;
+	private double TOLERANCE = Constants.getLifttoTol();
+	private double LIMIT = Constants.getLifttoLim();
+	private double kP = Constants.getLifttoKp();
+	private double kI = Constants.getLifttoKi();
+	private double kD = Constants.getLifttoKd();
 
 	public LiftToPosition(int count) { //
 		requires(RobotMap.lift);
 		newCount = count;
 		RobotMap.liftEnc.reset();
 		liftPid = new PIDController(kP, kI, kD, this, this::pidWrite); // create pid object with parameters
-		liftPid.setOutputRange(-AUTHORITY, AUTHORITY);
+		liftPid.setOutputRange(-LIMIT, LIMIT);
 		liftPid.setAbsoluteTolerance(TOLERANCE); // set tolerance of pid
 	}
 

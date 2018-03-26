@@ -70,8 +70,15 @@ public class LoggingSystem {
         }
     }
 
-    public static String WriteBuildInfoToDashboard(String robotName) {
-        String buildMsg = "?";
+    public static String WriteBuildInfoToDashboard() {
+        String COMP_MSG = "________________________________________________________________\n" +
+                          "THIS IS THE COMPETITION SOFTWARE CONFIG! CHECK IF ROBOT MATCHES!\n" +
+                          "________________________________________________________________\n";
+
+        String PRAC_MSG = "_____________________________________________________________\n" +
+                          "THIS IS THE PRACTICE SOFTWARE CONFIG! CHECK IF ROBOT MATCHES!\n" +
+                          "_____________________________________________________________\n";
+        String buildMsg = Constants.isCompBot()? COMP_MSG: PRAC_MSG ;
         try {
             //get the path of the currently executing jar file
             String currentJarFilePath = Robot.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
@@ -87,7 +94,7 @@ public class LoggingSystem {
             String newDateString = outputFormatter.format(utcFileDate);
 
             // write the build date & time to the operator's console log window
-            buildMsg = "== Robot Name == " + robotName + "| Build Date and Time: " + newDateString + "|";
+            buildMsg += "== Robot Name == " + Constants.ROBOT_NAME + "| Build Date and Time: " + newDateString + "|";
             DriverStation.reportWarning(buildMsg, false);
         } catch (URISyntaxException e) {
             DriverStation.reportWarning("Error determining filename of current JAR file", true);

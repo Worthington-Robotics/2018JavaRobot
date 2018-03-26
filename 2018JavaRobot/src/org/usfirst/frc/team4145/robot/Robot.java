@@ -42,7 +42,11 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("Auto State", -1);
         CameraServer.getInstance().startAutomaticCapture();
         //SmartDashboard.putNumber("Code Revision", 109);
-        LoggingSystem.WriteBuildInfoToDashboard("Cube Crusher");
+        LoggingSystem.WriteBuildInfoToDashboard();
+        addLoggingKeys();
+    }
+
+    private void addLoggingKeys(){
         RobotMap.loggingSystem.addWatchKey("Auto State");
         RobotMap.loggingSystem.addWatchKey("Left Wheel Encoder");
         RobotMap.loggingSystem.addWatchKey("Right Wheel Encoder");

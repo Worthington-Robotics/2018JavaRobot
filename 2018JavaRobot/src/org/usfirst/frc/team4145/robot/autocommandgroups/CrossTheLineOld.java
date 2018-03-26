@@ -5,7 +5,7 @@ import org.usfirst.frc.team4145.robot.shared.AutoStateMachine.QueueGroup;
 
 public class CrossTheLineOld extends QueueGroup {
     public CrossTheLineOld(){
-        addSequential(new DriveTo(19 * 102), 1500);
-    }
+        addSequential(new DriveTo(1938), 1500);
+    } // 102 * 19
 
 }

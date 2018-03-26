@@ -3,6 +3,7 @@ package org.usfirst.frc.team4145.robot.subsystems.RobotDriveV3;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team4145.robot.Constants;
 import org.usfirst.frc.team4145.robot.Robot;
 import org.usfirst.frc.team4145.robot.RobotMap;
 
@@ -17,19 +18,19 @@ public class TeleopDrive extends RobotDriveMode{
     private double[] lastInputSet = {0, 0, 0}; //last input set from joystick update
 
     //general use variables
-    private double DEADBAND_VALUE = 0.15; //nominal deadband 0.15 percent of stick
-    private double Y_PERCENTAGE = 0.75; // decrease xy output to percent of full Nominal: 0.75
-    private double Y_CUT_PERCENTAGE = 0.5; //fine adjust Y Nominal: 0.5
-    private double X_PERCENTAGE = 1.0; //decrease X to percent of full Nominal: 1.0
-    private double X_CUT_PERCENTAGE = 1.0; //fine adjust X Nominal: 1.0
-    private double Z_PERCENTAGE = 0.50; // z percentage of full stick deflection Nominal: 0.50
+    private double DEADBAND_VALUE = Constants.getTeleopDeadband();
+    private double Y_PERCENTAGE = Constants.getTeleopYPercentage();
+    private double Y_CUT_PERCENTAGE = Constants.getTeleopYCutPercentage();
+    private double X_PERCENTAGE = Constants.getTeleopXPercentage();
+    private double X_CUT_PERCENTAGE = Constants.getTeleopXCutPercentage();
+    private double Z_PERCENTAGE = Constants.getTeleopZPercentage();
 
     //PID variables
-    private double PROPORTIONAL_GAIN = 0.033; //stable at 0.033
-    private double INTEGRAL_GAIN = 0.0; //dont generally use Integral as it makes things unstable over time
-    private double DERIVATIVE_GAIN = 0.055; //stable at 0.045
-    private double ABSOLUTE_TOLERANCE = 1.0; //tolerance on PID control Nominal: 0.5
-    private double PID_LIMIT = 0.65; //limits pid output Nominal: 0.6
+    private double PROPORTIONAL_GAIN = Constants.getGyrolockKp();
+    private double INTEGRAL_GAIN = Constants.getGyrolockKi();
+    private double DERIVATIVE_GAIN = Constants.getGyrolockKd();
+    private double ABSOLUTE_TOLERANCE = Constants.getGyrolockTol();
+    private double PID_LIMIT = Constants.getGyrolockLim();
 
     private double index = 0;
 
@@ -52,23 +53,20 @@ public class TeleopDrive extends RobotDriveMode{
             lastInputSet[0] *= Y_CUT_PERCENTAGE;
             lastInputSet[1] *= X_CUT_PERCENTAGE;
         }
-        if (enLock) {
-            // Periodically updates while gyro locked
-            lastInputSet[2] = pidOutput;
+        if (enLock) lastInputSet[2] = pidOutput;
+        else setTarget(getGyro()); // Safety feature in case PID gets enabled
 
-        } else {
-            // periodically updates drive
-            setTarget(getGyro()); // Safety feature in case PID gets enabled
-        }
         smartDashboardUpdates();
-        /*lastInputSet[0] = -0.000104 * index;
-        lastInputSet[1] = 0;
-        lastInputSet[2] = 0; //FOR TESTING PURPOSES
-        if (DriverStation.getInstance().isOperatorControl() && DriverStation.getInstance().isEnabled())
-            index++;
-        else
-            index = 0;*/
+        if(Constants.ENABLE_MP_TEST_MODE) lastInputSet = motionProfileTestMode();
         return lastInputSet;
+    }
+
+    private double[] motionProfileTestMode(){
+        double[] test = {0.0, 0.0, 0.0};
+        test[0] = -0.000104 * index;
+        if (DriverStation.getInstance().isOperatorControl() && DriverStation.getInstance().isEnabled()) index++;
+        else index = 0;
+        return test;
     }
 
     public void setDriveSet(double[] toSet){

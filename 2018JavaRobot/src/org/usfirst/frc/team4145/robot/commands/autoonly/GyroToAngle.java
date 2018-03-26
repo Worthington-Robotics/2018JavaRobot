@@ -35,9 +35,6 @@ public class GyroToAngle extends Command {
     	return false;
     }
 
-    public void execute() {
-        cycles++;
-    }
 
     public void interrupted() {
         end();

@@ -27,7 +27,6 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class Robot extends TimedRobot {
     public static OI oi;
-
     LinkedBlockingQueue<CommandQueueGroup> AutoStateQueue;
 
     /**
@@ -96,11 +95,11 @@ public class Robot extends TimedRobot {
         String autoSelected = SmartDashboard.getString("Auto Selector", autoList[autoList.length - 1]);
 
         // this block builds the game data when auto starts
-        String GameData = DriverStation.getInstance().getGameSpecificMessage();
+        RobotMap.gameDataAtStart = DriverStation.getInstance().getGameSpecificMessage();
 
         //choose auto command based on lists
-        SmartDashboard.putStringArray("Auto selected and game data", new String[]{autoSelected, GameData});
-        AutoStateQueue = AutoSelector.autoSelect(GameData, autoSelected);
+        SmartDashboard.putStringArray("Auto selected and game data", new String[]{autoSelected, RobotMap.gameDataAtStart});
+        AutoStateQueue = AutoSelector.autoSelect(RobotMap.gameDataAtStart, autoSelected);
 
         //run state machine
         AutoStateMachine.runMachine(AutoStateQueue);

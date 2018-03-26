@@ -25,6 +25,7 @@ public class RobotMap {
 
     //logging system
     public static LoggingSystem loggingSystem;
+    public static String gameDataAtStart;
 
     // actuators
     public static WPI_TalonSRX driveFrontLeft, driveRearLeft, driveFrontRight, driveRearRight; // need to use WPI_talonSRX for drivetrain use

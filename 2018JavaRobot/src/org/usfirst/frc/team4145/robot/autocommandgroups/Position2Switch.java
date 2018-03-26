@@ -16,6 +16,7 @@ public class Position2Switch extends QueueGroup {
             addSequential(new LiftToPosition(Constants.LIFT_MOVE_TO_TOP), 2000);
             addParallel(new Command[]{new DropForks(), new LiftToPosition(Constants.LIFT_MOVE_TO_TOP)}, 1250);
             addSequential(new LiftToPosition(Constants.LIFT_MOVE_TO_TOP), 500);
+            addSequential(new ContingentWait(ContingentWait.Target.Switch), 20000);
             addSequential(new CubeMovement(CubeMovement.CubeState.RollOut), 1000);
         }
         else{
@@ -25,6 +26,7 @@ public class Position2Switch extends QueueGroup {
             addSequential(new LiftToPosition(Constants.LIFT_MOVE_TO_TOP), 2500);
             addParallel(new Command[]{new DropForks(), new LiftToPosition(Constants.LIFT_MOVE_TO_TOP)}, 1250);
             addSequential(new LiftToPosition(Constants.LIFT_MOVE_TO_TOP), 100);
+            addSequential(new ContingentWait(ContingentWait.Target.Switch), 20000);
             addSequential(new CubeMovement(CubeMovement.CubeState.RollOut), 1000);
         }
     }

@@ -62,7 +62,7 @@ public class AutoDrive implements DriveUpdater{
     }
 
     public boolean isProfiling(){
-        return isProfiling && !m_LeftVelocityPID.isFinished() && !m_RightVelocityPID.isFinished();
+        return isProfiling && (!m_LeftVelocityPID.isFinished() || !m_RightVelocityPID.isFinished());
     }
 
     public boolean isFinished(){

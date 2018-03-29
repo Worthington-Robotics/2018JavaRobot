@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4145.robot.shared.AutoStateMachine;
 
+import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4145.robot.commands.autoonly.ExecuteMotionProfile;
@@ -56,11 +57,10 @@ public class AutoStateMachine {
 
     public static void runMachine(LinkedBlockingQueue<CommandQueueGroup> queueGroups) {
         blockingQueue = queueGroups;
-        Thread monitor = new Thread(taskRunnable);
-        monitor.setDaemon(true);
+        Notifier monitor = new Notifier(taskRunnable);
         //monitor.setPriority(8);
         System.out.println("Starting Machine thread now! at time " + RobotController.getFPGATime());
-        monitor.start();
+        monitor.startSingle(0.000);
     }
 
 }

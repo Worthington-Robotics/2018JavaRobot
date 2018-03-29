@@ -8,7 +8,7 @@ public class Constants {
      * ----------------------
      */
 
-    private static boolean isCompBot = false; //change this to use competition or non-competition constants
+    private static boolean isCompBot = true; //change this to use competition or non-competition constants
     public static String ROBOT_NAME = "Cube Crusher";
 
     public static boolean ENABLE_MP_TEST_MODE = false; //enables Teleop Motion profiling test mode code in teleop drive

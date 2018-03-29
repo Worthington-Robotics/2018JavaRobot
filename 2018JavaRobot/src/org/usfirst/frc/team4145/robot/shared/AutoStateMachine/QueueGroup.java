@@ -45,6 +45,6 @@ public class QueueGroup {
     }
 
     public LinkedBlockingQueue<CommandQueueGroup> getQueuedStates() {
-        return (LinkedBlockingQueue<CommandQueueGroup>) queuedStates;
+        return new LinkedBlockingQueue(queuedStates);
     }
 }

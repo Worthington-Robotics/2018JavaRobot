@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4145.robot.shared.AutoStateMachine;
 
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4145.robot.commands.autoonly.ExecuteMotionProfile;
 import org.usfirst.frc.team4145.robot.shared.HardwareTimer;
@@ -19,7 +20,7 @@ public class AutoStateMachine {
             SmartDashboard.putString("Auto State Machine Status", "State machine preparing to start!");
             //System.out.println("blocking queue elements:" + blockingQueue.toArray());
             while (blockingQueue.iterator().hasNext()) {
-                System.out.println("Entering state " + autoState);
+                System.out.println("Entering state " + autoState + " At time " + RobotController.getFPGATime());
                 SmartDashboard.putNumber("Auto State", autoState);
                 try {
                     inspectedElement = blockingQueue.take();
@@ -57,8 +58,8 @@ public class AutoStateMachine {
         blockingQueue = queueGroups;
         Thread monitor = new Thread(taskRunnable);
         monitor.setDaemon(true);
-        monitor.setPriority(8);
-        System.out.println("Starting Machine thread now!");
+        //monitor.setPriority(8);
+        System.out.println("Starting Machine thread now! at time " + RobotController.getFPGATime());
         monitor.start();
     }
 

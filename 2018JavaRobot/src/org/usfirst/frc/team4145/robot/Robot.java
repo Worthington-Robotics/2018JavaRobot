@@ -9,6 +9,7 @@ package org.usfirst.frc.team4145.robot;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -87,6 +88,7 @@ public class Robot extends TimedRobot {
         //RobotMap.drive.setDynamicBrakeMode(new boolean[] {true, true, true, true});
         RobotMap.ahrs.reset();
         RobotMap.rightWheelEncoder.reset();
+        RobotMap.leftWheelEncoder.reset();
         SmartDashboard.putNumber("In Auto", 1);
 
         String[] autoList = AutoSelector.buildArray();

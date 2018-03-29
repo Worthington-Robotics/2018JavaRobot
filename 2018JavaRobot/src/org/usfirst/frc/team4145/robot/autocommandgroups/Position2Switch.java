@@ -14,8 +14,8 @@ public class Position2Switch extends QueueGroup {
         	addDrive(Constants.MOTION_PROFILE_PATH + "Position2Switch0_left_detailed.csv",
                     Constants.MOTION_PROFILE_PATH + "Position2Switch0_right_detailed.csv");
             addSequential(new LiftToPosition(Constants.LIFT_MOVE_TO_TOP), 2000);
-            addParallel(new Command[]{new DropForks(), new LiftToPosition(Constants.LIFT_MOVE_TO_TOP)}, 1250);
-            addSequential(new LiftToPosition(Constants.LIFT_MOVE_TO_TOP), 500);
+            addSequential(new DropForks(), 1250);
+            addSequential(new LiftToPosition(Constants.LIFT_MOVE_TO_TOP), 100);
             addSequential(new ContingentWait(ContingentWait.Target.Switch), 20000);
             addSequential(new CubeMovement(CubeMovement.CubeState.RollOut), 1000);
         }
@@ -23,8 +23,8 @@ public class Position2Switch extends QueueGroup {
             //RIGHT CODE
         	addDrive(Constants.MOTION_PROFILE_PATH + "Position2Switch1_left_detailed.csv",
                     Constants.MOTION_PROFILE_PATH + "Position2Switch1_right_detailed.csv");
-            addSequential(new LiftToPosition(Constants.LIFT_MOVE_TO_TOP), 2500);
-            addParallel(new Command[]{new DropForks(), new LiftToPosition(Constants.LIFT_MOVE_TO_TOP)}, 1250);
+            addSequential(new LiftToPosition(Constants.LIFT_MOVE_TO_TOP), 2000);
+            addSequential(new DropForks(), 1250);
             addSequential(new LiftToPosition(Constants.LIFT_MOVE_TO_TOP), 100);
             addSequential(new ContingentWait(ContingentWait.Target.Switch), 20000);
             addSequential(new CubeMovement(CubeMovement.CubeState.RollOut), 1000);

@@ -36,7 +36,7 @@ public class ContingentWait extends Command {
 
     protected boolean isFinished() {
         String currentdata = DriverStation.getInstance().getGameSpecificMessage();
-        DriverStation.reportWarning(currentdata, false);
+        DriverStation.reportWarning("current data: " + currentdata + " past data: " + dataAtStart, false);
         return dataAtStart.charAt(objective.getPos()) == currentdata.charAt(objective.getPos());
     }
 

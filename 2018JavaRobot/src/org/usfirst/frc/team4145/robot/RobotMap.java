@@ -72,8 +72,10 @@ public class RobotMap {
         ahrs = new AHRS(SPI.Port.kMXP); // finish declaring AHRS to MXP SPI bus
         ahrs.reset();
         rightWheelEncoder = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
-        leftWheelEncoder = new Encoder(2,3,false, Encoder.EncodingType.k4X);
-        liftEnc = new Encoder(4, 5, true, Encoder.EncodingType.k4X);
+        leftWheelEncoder = Constants.isCompBot()? new Encoder(2,3,false, Encoder.EncodingType.k4X):
+                new Encoder(4, 5, false, Encoder.EncodingType.k4X);
+        liftEnc = Constants.isCompBot()? new Encoder(4, 5, true, Encoder.EncodingType.k4X):
+                new Encoder(2,3,false, Encoder.EncodingType.k4X) ;
         switchHTop = new DigitalInput(6);
         switchHBase = new DigitalInput(7);
 
@@ -107,5 +109,9 @@ public class RobotMap {
         RobotMap.loggingSystem.addWatchKey("feed forward2");
         RobotMap.loggingSystem.addWatchKey("feed back2");
         RobotMap.loggingSystem.addWatchKey("velocity2");
+        RobotMap.loggingSystem.addWatchKey("error deriv1");
+        RobotMap.loggingSystem.addWatchKey("error deriv2");
+        RobotMap.loggingSystem.addWatchKey("velocity setpoint1");
+        RobotMap.loggingSystem.addWatchKey("velocity setpoint1");
     }
 }

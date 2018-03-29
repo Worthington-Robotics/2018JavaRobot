@@ -57,18 +57,6 @@ enum UserSelection {
 
 public class AutoSelector {
 
-    private static QueueGroup pos1Scale0old = new Position1ScaleOld(0);
-    private static QueueGroup pos1Scale1old = new Position1ScaleOld(1);
-    private static QueueGroup pos2Switch0 = new Position2Switch(0);
-    private static QueueGroup pos2Switch1 = new Position2Switch(1);
-    private static QueueGroup pos3Scale0old = new Position3Scale(0);
-    private static QueueGroup pos3Scale1old = new Position3Scale(0);
-    private static QueueGroup crossTheLineOld = new CrossTheLineOld();
-    private static QueueGroup crossTheLineLong = new CrossLineLong();
-    private static QueueGroup pos2Switch0Old = new Position2SwitchOld(0);
-    private static QueueGroup pos2Switch1Old = new Position2SwitchOld(1);
-    private static QueueGroup autoTestProcedure = new AutoTestProct();
-
     /**
      * Method to get an array of names for all selections
      *
@@ -129,26 +117,26 @@ public class AutoSelector {
         int fieldPos = getFieldPos(GameData);
         SmartDashboard.putNumber("Final Auto Choice", (usrAuto * 10 + fieldPos));
         switch (usrAuto * 10 + fieldPos) {
-            
+
             case 11: return null; //new Position1Switch(1).getQueuedStates();
             case 12: return null; //new Position1Switch(1).getQueuedStates();
             case 13: return null; //new Position1Switch(1).getQueuedStates();
             case 14: return null; //new Position1Switch(1).getQueuedStates();
 
-            case 21: return pos1Scale0old.getQueuedStates();
-            case 22: return pos1Scale1old.getQueuedStates();
-            case 23: return pos1Scale0old.getQueuedStates();
-            case 24: return pos1Scale1old.getQueuedStates();
+            case 21: return new Position1ScaleOld(0).getQueuedStates();
+            case 22: return new Position1ScaleOld(1).getQueuedStates();
+            case 23: return new Position1ScaleOld(0).getQueuedStates();
+            case 24: return new Position1ScaleOld(1).getQueuedStates();
 
             case 31:
             case 32:
             case 33:
             case 34: return null; //new ExchangeAll(1).getQueuedStates();
 
-            case 41: return pos2Switch0.getQueuedStates(); //Switch Left
-            case 42: return pos2Switch0.getQueuedStates();
-            case 43: return pos2Switch1.getQueuedStates(); //Switch Right
-            case 44: return pos2Switch1.getQueuedStates();
+            case 41: return new Position2Switch(0).getQueuedStates(); //Switch Right
+            case 42: return new Position2Switch(0).getQueuedStates();
+            case 43: return new Position2Switch(1).getQueuedStates(); //Switch Left
+            case 44: return new Position2Switch(1).getQueuedStates();
 
             case 51: return null; //new Position2Scale(1).getQueuedStates();
             case 52: return null; //new Position2Scale(0).getQueuedStates();
@@ -165,10 +153,10 @@ public class AutoSelector {
             case 73: return null; //new Position3Switch(1).getQueuedStates();
             case 74: return null; //new Position3Switch(1).getQueuedStates();
 
-            case 81: return pos3Scale1old.getQueuedStates();
-            case 82: return pos3Scale0old.getQueuedStates();
-            case 83: return pos3Scale1old.getQueuedStates();
-            case 84: return pos3Scale0old.getQueuedStates();
+            case 81: return new Position3Scale(1).getQueuedStates();
+            case 82: return new Position3Scale(0).getQueuedStates();
+            case 83: return new Position3Scale(1).getQueuedStates();
+            case 84: return new Position3Scale(0).getQueuedStates();
 
             case 91:
             case 92:
@@ -178,32 +166,32 @@ public class AutoSelector {
             case 101:
             case 102:
             case 103:
-            case 104: return crossTheLineOld.getQueuedStates();
+            case 104: return new CrossTheLineOld().getQueuedStates();
 
             case 111:
             case 112:
             case 113:
-            case 114: return crossTheLineLong.getQueuedStates();
+            case 114: return new CrossLineLong().getQueuedStates();
 
-            case 121: return pos2Switch0Old.getQueuedStates(); //right
-            case 122: return pos2Switch0Old.getQueuedStates();
-            case 123: return pos2Switch1Old.getQueuedStates(); //left
-            case 124: return pos2Switch0Old.getQueuedStates();
+            case 121: return new Position2SwitchOld(0).getQueuedStates(); //right
+            case 122: return new Position2SwitchOld(0).getQueuedStates();
+            case 123: return new Position2SwitchOld(1).getQueuedStates(); //left
+            case 124: return new Position2SwitchOld(1).getQueuedStates();
 
             case 131:
             case 132:
             case 133:
-            case 134: return null; //crossTheLineOld().getQueuedStates();
+            case 134: return new CrossTheLineOld().getQueuedStates();
 
-            case 141: return null; //new Position1Scale(0).getQueuedStates();
-            case 142: return null; //new Position1Scale(1).getQueuedStates();
-            case 143: return null; //new Position1Scale(0).getQueuedStates();
-            case 144: return null; //new Position1Scale(1).getQueuedStates();
-            
+            case 141: return new Position1Scale(0).getQueuedStates();
+            case 142: return new Position1Scale(1).getQueuedStates();
+            case 143: return new Position1Scale(0).getQueuedStates();
+            case 144: return new Position1Scale(1).getQueuedStates();
+
             case 151:
             case 152:
             case 153:
-            case 154: return autoTestProcedure.getQueuedStates();
+            case 154: return new AutoTestProct().getQueuedStates();
 
             default: return null;
          	

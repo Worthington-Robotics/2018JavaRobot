@@ -14,30 +14,25 @@ public class RoboLiftTest extends Command {
 	
 
 	public void initialize() {
-		RobotMap.clampL.set(power);
+		RobotMap.liftBot.lock();
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return iterations == 1500;
+		return iterations == 200;
 	} // has to finish at end of auto routine
 
 	public void execute() {
 		iterations ++;
 		if(iterations == 100)
 		{
-			RobotMap.clampL.set(0);
-			RobotMap.clampR.set(power);
+			RobotMap.liftBot.unlock();
 		}
-		if(iterations == 200)
-		{
-			RobotMap.clampR.set(0);
-		}
+
 	}
 
 	public void end() {
-		RobotMap.clampR.set(0);
-		RobotMap.clampL.set(0);
+		RobotMap.liftBot.unlock();
 	}
 
 	public void interrupted() {

@@ -58,10 +58,10 @@ public class AutoStateMachine {
 
     public static void runMachine(LinkedBlockingQueue<CommandQueueGroup> queueGroups) {
         blockingQueue = queueGroups;
-        Notifier monitor = new Notifier(taskRunnable);
+        Thread monitor = new Thread(taskRunnable);
         //monitor.setPriority(8);
         System.out.println("Starting Machine thread at time " + RobotController.getFPGATime());
-        monitor.startSingle(0.000);
+        monitor.start();
     }
 
 }

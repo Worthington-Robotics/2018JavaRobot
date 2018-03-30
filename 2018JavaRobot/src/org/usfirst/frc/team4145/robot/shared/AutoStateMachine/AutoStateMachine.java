@@ -20,7 +20,7 @@ public class AutoStateMachine {
             //System.out.println("State machine size:" + stateQueue.size());
             SmartDashboard.putString("Auto State Machine Status", "State machine preparing to start!");
             //System.out.println("blocking queue elements:" + stateQueue.toArray());
-            while (stateQueue.iterator().hasNext()) {
+            while (!stateQueue.isEmpty()) {
                 //System.out.println("Entering state " + autoState + " At time " + RobotController.getFPGATime());
                 SmartDashboard.putNumber("Auto State", autoState);
                 try {

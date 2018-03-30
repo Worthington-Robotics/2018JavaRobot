@@ -7,6 +7,7 @@ import org.usfirst.frc.team4145.robot.commands.autoonly.ExecuteMotionProfile;
 
 import java.io.File;
 import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import static java.util.Objects.requireNonNull;
@@ -22,7 +23,7 @@ public class QueueGroup {
     private Trajectory m_RightDrive, m_LeftDrive;
 
     public QueueGroup() {
-        queuedStates = new LinkedBlockingQueue<>();
+        queuedStates = new ConcurrentLinkedQueue<>();
     }
 
 
@@ -44,7 +45,7 @@ public class QueueGroup {
         queuedStates.add(new CommandQueueGroup(new Command[] {new ExecuteMotionProfile(m_LeftDrive, m_RightDrive)}, 50, false));
     }
 
-    public LinkedBlockingQueue<CommandQueueGroup> getQueuedStates() {
-        return new LinkedBlockingQueue(queuedStates);
+    public ConcurrentLinkedQueue<CommandQueueGroup> getQueuedStates() {
+        return (ConcurrentLinkedQueue<CommandQueueGroup>) queuedStates;
     }
 }

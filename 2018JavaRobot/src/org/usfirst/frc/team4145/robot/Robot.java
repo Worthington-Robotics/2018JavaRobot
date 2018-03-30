@@ -17,6 +17,7 @@ import org.usfirst.frc.team4145.robot.shared.AutoStateMachine.AutoStateMachine;
 import org.usfirst.frc.team4145.robot.shared.AutoStateMachine.CommandQueueGroup;
 import org.usfirst.frc.team4145.robot.shared.LoggingSystem;
 
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
@@ -28,7 +29,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class Robot extends TimedRobot {
     public static OI oi;
-    LinkedBlockingQueue<CommandQueueGroup> AutoStateQueue;
+    ConcurrentLinkedQueue<CommandQueueGroup> AutoStateQueue;
 
     /**
      * This function is run when the robot is first started up and should be

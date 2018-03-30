@@ -6,6 +6,7 @@ import org.usfirst.frc.team4145.robot.shared.AutoStateMachine.CommandQueueGroup;
 import org.usfirst.frc.team4145.robot.shared.AutoStateMachine.QueueGroup;
 
 
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
@@ -112,7 +113,7 @@ public class AutoSelector {
      * @return the proper auto command to run. It should include all movements in
      * one command
      */
-    public static LinkedBlockingQueue<CommandQueueGroup> autoSelect(String GameData, String selection) {
+    public static ConcurrentLinkedQueue<CommandQueueGroup> autoSelect(String GameData, String selection) {
         int usrAuto = getSelFromStr(selection).getNum();
         int fieldPos = getFieldPos(GameData);
         SmartDashboard.putNumber("Final Auto Choice", (usrAuto * 10 + fieldPos));

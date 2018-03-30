@@ -6,15 +6,14 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RoboLiftTest extends Command {
-	private boolean Test1pt1;
-	private boolean Test1pt2;
-	private double power = .5;
+
 	private int iterations = 0;
 
 	
 
 	public void initialize() {
 		RobotMap.liftBot.lock();
+		iterations = 0;
 	}
 
 	@Override

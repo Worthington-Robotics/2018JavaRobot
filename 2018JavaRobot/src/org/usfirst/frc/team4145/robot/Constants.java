@@ -22,7 +22,7 @@ public class Constants {
 
     public static double CUBEMANIP_SHOOT = 1.0000;
     public static double CUBEMANIP_DROP = 0.6500;
-    public static double CUBEMANIP_FAST_DROP = 0.8000;
+    public static double CUBEMANIP_FAST_DROP = 0.9000;
     public static double CUBEMANIP_PICKUP = -0.7500;
 
     public static int LIFT_MOVE_TO_TOP = 0;

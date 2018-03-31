@@ -9,7 +9,7 @@ import org.usfirst.frc.team4145.robot.RobotMap;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-@Deprecated
+
 public class DriveTo extends Command implements PIDOutput, PIDSource {
 
 	private int length = 0;

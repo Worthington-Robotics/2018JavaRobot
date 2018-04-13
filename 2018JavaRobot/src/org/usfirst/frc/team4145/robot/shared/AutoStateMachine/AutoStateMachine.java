@@ -1,8 +1,10 @@
 package org.usfirst.frc.team4145.robot.shared.AutoStateMachine;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team4145.robot.commands.autoonly.FollowPath;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -23,6 +25,8 @@ public class AutoStateMachine {
                 SmartDashboard.putNumber("Auto State", autoState);
                 try {
                     inspectedElement = stateQueue.poll();
+                    if(!(inspectedElement.getQueueGroup().peek() instanceof FollowPath) && autoState == 0)
+                        DriverStation.reportWarning("No motion path in state 1", false);
                     inspectedElement.startQueueGroup(); //starts queue group running
                     while (!inspectedElement.checkQueueGroup()) { //checks status of state and whether it is or should be dead
                         //System.out.println("Waiting for previous task to die");

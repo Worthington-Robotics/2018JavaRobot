@@ -55,11 +55,6 @@ public class Liftbot extends Subsystem {
 		//armLock();
 	}
 
-	private void updateLimits(){
-		LowLimit = RobotMap.botLowSw.get();
-		highLimit = RobotMap.botHighSw.get();
-	}
-
 	private void watchDog() {
 		if (RobotMap.liftBotMotor.get() > 0 && LowLimit) stop();
 		if (RobotMap.liftBotMotor.get() < 0 && highLimit) stop();

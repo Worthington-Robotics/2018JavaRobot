@@ -11,8 +11,7 @@ public class Position2Switch extends QueueGroup {
     public Position2Switch(int autoNum) {
         if(autoNum == 0) {
             //LEFT CODE
-        	addDrive(Constants.MOTION_PROFILE_PATH + "Position2Switch0_left_detailed.csv",
-                    Constants.MOTION_PROFILE_PATH + "Position2Switch0_right_detailed.csv");
+
             addSequential(new LiftToPosition(Constants.LIFT_MOVE_TO_TOP), 2000);
             addSequential(new DropForks(), 1250);
             addSequential(new LiftToPosition(Constants.LIFT_MOVE_TO_TOP), 100);
@@ -21,8 +20,7 @@ public class Position2Switch extends QueueGroup {
         }
         else{
             //RIGHT CODE
-        	addDrive(Constants.MOTION_PROFILE_PATH + "Position2Switch1_left_detailed.csv",
-                    Constants.MOTION_PROFILE_PATH + "Position2Switch1_right_detailed.csv");
+
             addSequential(new LiftToPosition(Constants.LIFT_MOVE_TO_TOP), 2000);
             addSequential(new DropForks(), 1250);
             addSequential(new LiftToPosition(Constants.LIFT_MOVE_TO_TOP), 100);

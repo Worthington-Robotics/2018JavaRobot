@@ -14,10 +14,9 @@ public class MotorBaseTest1 extends Command {
 	}
 
 	public void initialize() {
-		RobotMap.drive.getTeleopDriveInstance().setDriveSet(power);
+		RobotMap.robotDriveV4.setOperatorInput(power);
 		iterations = 0;
-		RobotMap.leftWheelEncoder.reset();
-		RobotMap.rightWheelEncoder.reset();
+		RobotMap.robotDriveV4.reset();
 	}
 
 	@Override
@@ -30,9 +29,9 @@ public class MotorBaseTest1 extends Command {
 	}
 
 	public void end() {
-		RobotMap.drive.getTeleopDriveInstance().setDriveSet(noPower);
-		SmartDashboard.putBoolean("Motor Check Test",(RobotMap.rightWheelEncoder.getDistance() > 10000 && RobotMap.leftWheelEncoder.getDistance() < 13000)
-				&& (RobotMap.leftWheelEncoder.getDistance() > 10000 && RobotMap.leftWheelEncoder.getDistance() < 13000));
+		RobotMap.robotDriveV4.setOperatorInput(noPower);
+		SmartDashboard.putBoolean("Motor Check Test",(RobotMap.robotDriveV4.getRightEncoder() > 10000 && RobotMap.robotDriveV4.getRightEncoder() < 13000)
+				&& (RobotMap.robotDriveV4.getLeftEncoder() > 10000 && RobotMap.robotDriveV4.getLeftEncoder() < 13000));
 	}
 
 	public void interrupted() {

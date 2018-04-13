@@ -9,16 +9,16 @@ package org.usfirst.frc.team4145.robot;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4145.robot.shared.AutoStateMachine.AutoStateMachine;
 import org.usfirst.frc.team4145.robot.shared.AutoStateMachine.CommandQueueGroup;
+import org.usfirst.frc.team4145.robot.shared.AutoTrajectory.RigidTransform2d;
 import org.usfirst.frc.team4145.robot.shared.LoggingSystem;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -39,7 +39,6 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         RobotMap.init();
         oi = new OI();
-        RobotMap.drive.startPeriodic();
         SmartDashboard.putNumber("Auto State", -1);
         CameraServer.getInstance().startAutomaticCapture();
         //SmartDashboard.putNumber("Code Revision", 109);
@@ -55,8 +54,9 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void disabledInit() {
+        RobotMap.loggingSystem.enablePrint(false);
         SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray()); // publishes the auto list to the dashboard "Auto Selector"
-        RobotMap.drive.getTeleopDriveInstance().enableTo(0, false);
+        RobotMap.robotDriveV4.enableTo(0, false);
         SmartDashboard.putNumber("In Auto", 0);
         SmartDashboard.putNumber("Auto State", -1);
         SmartDashboard.putString("Auto State Machine Status", "State machine not yet started");
@@ -85,11 +85,8 @@ public class Robot extends TimedRobot {
     @Override
     public void autonomousInit() {
         RobotMap.loggingSystem.enablePrint(true);
-        RobotMap.drive.setDynamicBrakeMode(false, false, false,false);
-        //RobotMap.drive.setDynamicBrakeMode(new boolean[] {true, true, true, true});
-        RobotMap.ahrs.reset();
-        RobotMap.rightWheelEncoder.reset();
-        RobotMap.leftWheelEncoder.reset();
+        RobotMap.robotDriveV4.configAuto();
+        RobotMap.robotPose.reset(Timer.getFPGATimestamp(), new RigidTransform2d());
         SmartDashboard.putNumber("In Auto", 1);
 
         String[] autoList = AutoSelector.buildArray();
@@ -119,11 +116,12 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopInit() {
         RobotMap.loggingSystem.enablePrint(false);
+        RobotMap.robotDriveV4.configTeleop();
         SmartDashboard.putNumber("In Auto", 0);
         SmartDashboard.putNumber("Auto State", -1);
-        RobotMap.ahrs.reset();
-        RobotMap.drive.getTeleopDriveInstance().enableTo(0, false);
-        RobotMap.drive.setDynamicBrakeMode(true, true, true, true);
+        RobotMap.robotDriveV4.reset();
+        RobotMap.robotDriveV4.enableTo(0, false);
+        RobotMap.robotDriveV4.setDynamicBrakeMode(true, true, true, true);
     }
 
     /**
@@ -135,26 +133,7 @@ public class Robot extends TimedRobot {
     }
 
     public void testInit(){
-        RobotMap.drive.setDynamicBrakeMode(false, false, false,false);
-        //RobotMap.drive.setDynamicBrakeMode(new boolean[] {true, true, true, true});
-        RobotMap.ahrs.reset();
-        RobotMap.rightWheelEncoder.reset();
-        SmartDashboard.putNumber("In Auto", 1);
 
-        String[] autoList = AutoSelector.buildArray();
-
-        //pulls auto selector from labview DB
-        String autoSelected = SmartDashboard.getString("Auto Selector", autoList[autoList.length - 1]);
-
-        // this block builds the game data when auto starts
-        String GameData = DriverStation.getInstance().getGameSpecificMessage();
-
-        //choose auto command based on lists
-        SmartDashboard.putStringArray("Auto selected and game data", new String[]{autoSelected, GameData});
-        AutoStateQueue = AutoSelector.autoSelect(GameData, autoSelected);
-
-        //run state machine
-        AutoStateMachine.runMachine(AutoStateQueue);
     }
 
     /**

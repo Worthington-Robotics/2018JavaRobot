@@ -13,7 +13,7 @@ public class Position1Scale extends QueueGroup {
         //Left
 
         if (autonumber == 0) {
-            addDrive("/home/lvuser/MotionProfile/Position1Scale0_left_detailed.csv","/home/lvuser/MotionProfile/Position1Scale0_right_detailed.csv");
+            //addDrive("/home/lvuser/MotionProfile/Position1Scale0_left_detailed.csv","/home/lvuser/MotionProfile/Position1Scale0_right_detailed.csv");
             //addParallel(new Command[]{new DriveTo(RobotMap.CLOSE_SCALE_DISTANCE), new LiftToPosition(RobotMap.LIFT_TO_SCALE)}, 4500);
             //addParallel(new Command[]{new GyroToAngle(-RobotMap.CLOSE_SCALE_TURN), new HighLiftUp(), new LiftToPosition(RobotMap.LIFT_TO_SCALE)}, 1500);
             //addParallel(new Command[]{new DriveTo(RobotMap.CLOSE_SCALE_ROLL), new HighLiftUp(), new LiftToPosition(RobotMap.LIFT_TO_SCALE), new DropForks()}, 1500); ;

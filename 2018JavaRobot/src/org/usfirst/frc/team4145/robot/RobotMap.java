@@ -7,13 +7,13 @@
 
 package org.usfirst.frc.team4145.robot;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.*;
 import org.usfirst.frc.team4145.robot.shared.LoggingSystem;
 import org.usfirst.frc.team4145.robot.subsystems.*;
-import org.usfirst.frc.team4145.robot.subsystems.RobotDriveV3.RobotDriveV3;
+import org.usfirst.frc.team4145.robot.subsystems.RobotDriveV4.PoseEstimator;
+import org.usfirst.frc.team4145.robot.subsystems.RobotDriveV4.RobotDriveV4;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -36,12 +36,13 @@ public class RobotMap {
 
     // sensors
     public static AHRS ahrs; // AHRS system on navx
-    public static Encoder rightWheelEncoder, leftWheelEncoder, liftEnc;
-    public static DigitalInput switchHBase, switchHTop, botHighSw, botLowSw;
+    public static Encoder liftEnc;
+
 
     // subsystems public static
     public static ExampleSubsystem exampleSystem;
-    public static RobotDriveV3 drive;
+    public static RobotDriveV4 robotDriveV4;
+    public static PoseEstimator robotPose;
     public static Lift lift;
     public static Liftbot liftBot;
     public static CubeManipulation cubeManipulator;
@@ -70,19 +71,12 @@ public class RobotMap {
 
         // all sensor objects here
         ahrs = new AHRS(SPI.Port.kMXP); // finish declaring AHRS to MXP SPI bus
-        ahrs.reset();
-        rightWheelEncoder = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
-        leftWheelEncoder = Constants.isCompBot()? new Encoder(2,3,false, Encoder.EncodingType.k4X):
-                new Encoder(4, 5, false, Encoder.EncodingType.k4X);
-        liftEnc = Constants.isCompBot()? new Encoder(4, 5, true, Encoder.EncodingType.k4X):
-                new Encoder(2,3,false, Encoder.EncodingType.k4X) ;
-        switchHTop = new DigitalInput(6);
-        switchHBase = new DigitalInput(7);
 
         // all subsystem objects here
         exampleSystem = new ExampleSubsystem();
-        drive = new RobotDriveV3();
-        //vision = new RobotVision();
+        robotDriveV4 = new RobotDriveV4();
+        robotDriveV4.reset();
+        robotPose = new PoseEstimator();
         liftBot = new Liftbot();
         lift = new Lift();
         cubeManipulator = new CubeManipulation();
@@ -90,28 +84,18 @@ public class RobotMap {
     }
 
     private static void addLoggingKeys(){
-        RobotMap.loggingSystem.addWatchKey("Auto State");
-        RobotMap.loggingSystem.addWatchKey("Left Wheel Encoder");
-        RobotMap.loggingSystem.addWatchKey("Right Wheel Encoder");
-        RobotMap.loggingSystem.addWatchKey("Gyro Angle");
-        RobotMap.loggingSystem.addWatchKey("Gyro Target");
-        RobotMap.loggingSystem.addWatchKey("Lift Encoder");
-        RobotMap.loggingSystem.addWatchKey("Lift Encoder Target");
-        RobotMap.loggingSystem.addWatchKey("In Auto");
-        RobotMap.loggingSystem.addWatchKey("Left Motor Voltage");
-        RobotMap.loggingSystem.addWatchKey("Right Motor Voltage");
-        RobotMap.loggingSystem.addWatchKey("Left Talon Voltage");
-        RobotMap.loggingSystem.addWatchKey("setpoint1");
-        RobotMap.loggingSystem.addWatchKey("feed forward1");
-        RobotMap.loggingSystem.addWatchKey("feed back1");
-        RobotMap.loggingSystem.addWatchKey("velocity1");
-        RobotMap.loggingSystem.addWatchKey("setpoint2");
-        RobotMap.loggingSystem.addWatchKey("feed forward2");
-        RobotMap.loggingSystem.addWatchKey("feed back2");
-        RobotMap.loggingSystem.addWatchKey("velocity2");
-        RobotMap.loggingSystem.addWatchKey("error deriv1");
-        RobotMap.loggingSystem.addWatchKey("error deriv2");
-        RobotMap.loggingSystem.addWatchKey("velocity setpoint1");
-        RobotMap.loggingSystem.addWatchKey("velocity setpoint1");
+        loggingSystem.addWatchKey("Auto State");
+        loggingSystem.addWatchKey("Left Wheel Encoder");
+        loggingSystem.addWatchKey("Right Wheel Encoder");
+        loggingSystem.addWatchKey("Gyro Angle");
+        loggingSystem.addWatchKey("Gyro Target");
+        loggingSystem.addWatchKey("Lift Encoder");
+        loggingSystem.addWatchKey("Lift Encoder Target");
+        loggingSystem.addWatchKey("In Auto");
+        loggingSystem.addWatchKey("Left Motor Voltage");
+        loggingSystem.addWatchKey("Right Motor Voltage");
+        loggingSystem.addWatchKey("Left Talon Voltage");
+        loggingSystem.addWatchKey("Right Wheel Velocity");
+        loggingSystem.addWatchKey("Left Wheel Velocity");
     }
 }

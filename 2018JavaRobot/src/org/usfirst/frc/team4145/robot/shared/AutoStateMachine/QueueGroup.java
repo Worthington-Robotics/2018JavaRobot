@@ -1,14 +1,13 @@
 package org.usfirst.frc.team4145.robot.shared.AutoStateMachine;
 
 import edu.wpi.first.wpilibj.command.Command;
-import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
-import org.usfirst.frc.team4145.robot.commands.autoonly.ExecuteMotionProfile;
+import org.usfirst.frc.team4145.robot.commands.autoonly.FollowPath;
+import org.usfirst.frc.team4145.robot.shared.AutoTrajectory.Path;
 
-import java.io.File;
+import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 import static java.util.Objects.requireNonNull;
 
@@ -26,6 +25,10 @@ public class QueueGroup {
         queuedStates = new ConcurrentLinkedQueue<>();
     }
 
+    protected void addDrive(List<Path.Waypoint> path, boolean isReversed){
+        requireNonNull(path, "Command cannot be null");
+        queuedStates.add(new CommandQueueGroup(new Command[]{new FollowPath(new Path(path), isReversed)}, 50, false));
+    }
 
     protected void addSequential(Command command, long timeOutMs) {
         requireNonNull(command, "Command cannot be null");
@@ -35,14 +38,6 @@ public class QueueGroup {
     protected void addParallel(Command[] commands, long timeOutMs) {
         requireNonNull(commands, "Command cannot be null");
         queuedStates.add(new CommandQueueGroup(commands, timeOutMs, true));
-    }
-    
-    protected void addDrive(String leftDrive, String rightDrive) {
-        requireNonNull(leftDrive, "left file path cannot be null");
-        requireNonNull(rightDrive, "right file path cannot be null");
-        m_LeftDrive = Pathfinder.readFromCSV(new File(leftDrive));
-        m_RightDrive = Pathfinder.readFromCSV(new File(rightDrive));
-        queuedStates.add(new CommandQueueGroup(new Command[] {new ExecuteMotionProfile(m_LeftDrive, m_RightDrive)}, 50, false));
     }
 
     public ConcurrentLinkedQueue<CommandQueueGroup> getQueuedStates() {

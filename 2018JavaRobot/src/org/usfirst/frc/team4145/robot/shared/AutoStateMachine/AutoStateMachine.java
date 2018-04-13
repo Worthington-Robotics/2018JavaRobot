@@ -3,10 +3,8 @@ package org.usfirst.frc.team4145.robot.shared.AutoStateMachine;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team4145.robot.commands.autoonly.ExecuteMotionProfile;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 public class AutoStateMachine {
 
@@ -25,10 +23,6 @@ public class AutoStateMachine {
                 SmartDashboard.putNumber("Auto State", autoState);
                 try {
                     inspectedElement = stateQueue.poll();
-                    if(!(inspectedElement.getQueueGroup().peek() instanceof ExecuteMotionProfile) && autoState == 0){ //check to see if first command is motion profile
-                        SmartDashboard.putString("Auto State Machine Status", "No motion profile fed in state zero");
-                        //System.out.println("State zero did not contain a motion profile");
-                    }
                     inspectedElement.startQueueGroup(); //starts queue group running
                     while (!inspectedElement.checkQueueGroup()) { //checks status of state and whether it is or should be dead
                         //System.out.println("Waiting for previous task to die");

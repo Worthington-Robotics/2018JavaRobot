@@ -11,10 +11,17 @@ public class Constants {
     private static boolean isCompBot = true; //change this to use competition or non-competition constants
     public static String ROBOT_NAME = "Cube Crusher";
 
-    public static boolean ENABLE_MP_TEST_MODE = false; //enables Teleop Motion profiling test mode code in teleop drive
-
-    public static double DRIVETRAIN_UPDATE_RATE = 0.005;
+    public static boolean ENABLE_MP_TEST_MODE = false; //enables motion profiling test across all modes
+    public static double DRIVETRAIN_UPDATE_RATE = 0.01;
     public static double LOGGING_UPDATE_RATE = 0.020;
+    public static int OBSERVATION_BUFFER_SIZE = 10;
+    public static double TRACK_WIDTH_INCHES = 23.5;
+    public static double TRACK_SCRUB_FACTOR = 0.5;
+    public static double WHEEL_DIAMETER = 6.0;
+    public static double COUNTS_PER_REV = 4096;
+    public static double PATH_FOLLOWING_LOOKAHEAD = 24.0; // inches
+    public static double PATH_FOLLOWING_MAX_VELOCITY = 60.0; // inches/sec
+    public static double PATH_FOLLOWING_MAX_ACCELERATION = 36.0; // inches/sec^2
 
     public static String DRIVE_PATH_1 = "/media/sda1";
     public static String DRIVE_PATH_2 = "/media/sda2";
@@ -162,77 +169,68 @@ public class Constants {
      * || Spilt Constants ||
      * ---------------------
      */
+    public static double MP_TESTSPEED = 152; //100 rpm ~ 31 in/s ~ 3ft/s
 
-    private static double PRACTICE_OFFSET = 0.2350; //nominal 0.2350
-    private static double PRACTICE_GYRO_KP = 0.1300; //nominal 0.1300
+    private static double PRACTICE_RIGHT_KF = 0.3200; //nominal: 0.3200
+    private static double PRACTICE_RIGHT_KP = 1.0000; //nominal: 0.1500
+    private static double PRACTICE_RIGHT_KI = 0.0000;
+    private static double PRACTICE_RIGHT_KD = 6.0000;
 
-    private static double PRACTICE_LEFT_KV = 0.0300; //nominal 0.0300
-    private static double PRACTICE_LEFT_KA = 0.0300; //nominal 0.0300
-    private static double PRACTICE_LEFT_KP = 1.7000; //nominal 1.7000
-    private static double PRACTICE_LEFT_KD = 0.0005; //nominal 0.0005
-
-    private static double PRACTICE_RIGHT_KV = 0.0300; //nominal 0.0300
-    private static double PRACTICE_RIGHT_KA = 0.0300; //nominal 0.0300
-    private static double PRACTICE_RIGHT_KP = 1.7000; //nominal 1.7000
-    private static double PRACTICE_RIGHT_KD = 0.0005; //nominal 0.0005
+    private static double PRACTICE_LEFT_KF = 0.3200; //nominal: 0.3200
+    private static double PRACTICE_LEFT_KP = 1.0000; //nominal: 0.1500
+    private static double PRACTICE_LEFT_KI = 0.0000;
+    private static double PRACTICE_LEFT_KD = 6.0000;
 
 
 
-    private static double COMPETION_OFFSET = 0.1400; //nominal 0.1400
-    private static double COMPETITION_GYRO_KP = 0.3800; //nominal 0.3800
+    private static double COMPETITION_RIGHT_KF = 0.3900;
+    private static double COMPETITION_RIGHT_KP = 0.4000;
+    private static double COMPETITION_RIGHT_KI = 0.0000;
+    private static double COMPETITION_RIGHT_KD = 0.0000;
 
-    private static double COMPETITION_LEFT_KV = 0.0360;
-    private static double COMPETITION_LEFT_KA = 0.0300;
-    private static double COMPETITION_LEFT_KP = 2.1000;
-    private static double COMPETITION_LEFT_KD = 0.0005;
+    private static double COMPETITION_LEFT_KF = 0.3900;
+    private static double COMPETITION_LEFT_KP = 0.4000; //test bench motor
+    private static double COMPETITION_LEFT_KI = 0.0000;
+    private static double COMPETITION_LEFT_KD = 0.0000;
 
-    private static double COMPETITION_RIGHT_KV = 0.0360;
-    private static double COMPETITION_RIGHT_KA = 0.0300;
-    private static double COMPETITION_RIGHT_KP = 2.1000;
-    private static double COMPETITION_RIGHT_KD = 0.0005;
+
 
     public static boolean isCompBot() {
         return isCompBot;
     }
 
-    public static double getOffset(){
-        return isCompBot? COMPETION_OFFSET: PRACTICE_OFFSET;
-    }
-
-    public static double getGyroKp(){
-        return isCompBot? COMPETITION_GYRO_KP: PRACTICE_GYRO_KP;
-    }
-
-    public static double getLeftKV(){
-        return isCompBot? COMPETITION_LEFT_KV: PRACTICE_LEFT_KV;
-    }
-
-    public static double getLeftKA(){
-        return isCompBot? COMPETITION_LEFT_KA: PRACTICE_LEFT_KA;
-    }
-
-    public static double getLeftKP(){
-        return isCompBot? COMPETITION_LEFT_KP: PRACTICE_LEFT_KP;
-    }
-
-    public static double getLeftKD(){
-        return isCompBot? COMPETITION_LEFT_KD: PRACTICE_LEFT_KD;
-    }
-
-    public static double getRightKV(){
-        return isCompBot? COMPETITION_RIGHT_KV: PRACTICE_RIGHT_KV;
-    }
-
-    public static double getRightKA(){
-        return isCompBot? COMPETITION_RIGHT_KA: PRACTICE_RIGHT_KA;
+    public static double getRightKF(){
+        return isCompBot? COMPETITION_RIGHT_KF : PRACTICE_RIGHT_KF;
     }
 
     public static double getRightKP(){
-        return isCompBot? COMPETITION_RIGHT_KP: PRACTICE_RIGHT_KP;
+        return isCompBot? COMPETITION_RIGHT_KP : PRACTICE_RIGHT_KP;
+    }
+
+    public static double getRightKI(){
+        return isCompBot? COMPETITION_RIGHT_KI : PRACTICE_RIGHT_KI;
     }
 
     public static double getRightKD(){
-        return isCompBot? COMPETITION_RIGHT_KD: PRACTICE_RIGHT_KD;
+        return isCompBot? COMPETITION_RIGHT_KD : PRACTICE_RIGHT_KD;
     }
+
+    public static double getLeftKF(){
+        return isCompBot? COMPETITION_LEFT_KF : PRACTICE_LEFT_KF;
+    }
+
+    public static double getLeftKP(){
+        return isCompBot? COMPETITION_LEFT_KP : PRACTICE_LEFT_KP;
+    }
+
+    public static double getLeftKI(){
+        return isCompBot? COMPETITION_LEFT_KI : PRACTICE_LEFT_KI;
+    }
+
+    public static double getLeftKD(){
+        return isCompBot? COMPETITION_LEFT_KD : PRACTICE_LEFT_KD;
+    }
+
+
 
 }

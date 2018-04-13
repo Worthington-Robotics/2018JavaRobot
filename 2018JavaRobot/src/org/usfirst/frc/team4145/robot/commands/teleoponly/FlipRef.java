@@ -16,7 +16,7 @@ public class FlipRef extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	RobotMap.drive.getTeleopDriveInstance().flipRefrence(true);
+    	RobotMap.robotDriveV4.setIsReversed(true);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -30,7 +30,7 @@ public class FlipRef extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	RobotMap.drive.getTeleopDriveInstance().flipRefrence(false);
+    	RobotMap.robotDriveV4.setIsReversed(false);
     }
 
     // Called when another command which requires one or more of the same

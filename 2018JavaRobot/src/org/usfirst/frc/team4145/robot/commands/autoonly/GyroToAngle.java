@@ -1,7 +1,6 @@
 package org.usfirst.frc.team4145.robot.commands.autoonly;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4145.robot.RobotMap;
 
@@ -23,9 +22,9 @@ public class GyroToAngle extends Command {
     }
 
     public void initialize() {
-        target = Math.abs((RobotMap.drive.getGyro() + 360 + addtlRot) % 360);
+        target = Math.abs((RobotMap.robotDriveV4.getGyro() + 360 + addtlRot) % 360);
         //System.out.println("Gyro target = " + target);
-        RobotMap.drive.getTeleopDriveInstance().enableTo(target, true);
+        RobotMap.robotDriveV4.enableTo(target, true);
     }
 
     public boolean isFinished() {

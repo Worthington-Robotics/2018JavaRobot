@@ -8,6 +8,8 @@ import org.usfirst.frc.team4145.robot.*;
 import org.usfirst.frc.team4145.robot.shared.AutoTrajectory.*;
 import org.usfirst.frc.team4145.robot.shared.MixedDrive;
 
+import java.util.Set;
+
 public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
 
     enum DriveControlState {
@@ -111,6 +113,14 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
                 Constants.PATH_FOLLOWING_MAX_ACCELERATION, Constants.DRIVETRAIN_UPDATE_RATE, path, reversed, .25);
         driveControlState = DriveControlState.PATH_FOLLOWING_CONTROL;
         updatePathFollower();
+    }
+
+    public synchronized Set<String> getPathMarkersCrossed() {
+        if (driveControlState != DriveControlState.PATH_FOLLOWING_CONTROL) {
+            return null;
+        } else {
+            return pathFollowingController.getMarkersCrossed();
+        }
     }
 
     public void stop(){

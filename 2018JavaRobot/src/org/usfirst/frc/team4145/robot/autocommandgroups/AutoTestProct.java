@@ -1,7 +1,9 @@
 package org.usfirst.frc.team4145.robot.autocommandgroups;
 
-import org.usfirst.frc.team4145.robot.RobotMap;
 import org.usfirst.frc.team4145.robot.commands.autoonly.*;
+import org.usfirst.frc.team4145.robot.commands.testonly.LowerLiftTest;
+import org.usfirst.frc.team4145.robot.commands.testonly.MotorBaseTest1;
+import org.usfirst.frc.team4145.robot.commands.testonly.RoboLiftTest;
 import org.usfirst.frc.team4145.robot.shared.AutoStateMachine.QueueGroup;
 
 import edu.wpi.first.wpilibj.command.Command;

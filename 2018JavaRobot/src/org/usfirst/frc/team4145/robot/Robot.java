@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team4145.robot.autocommandgroups.testAuto;
 import org.usfirst.frc.team4145.robot.shared.AutoStateMachine.AutoStateMachine;
 import org.usfirst.frc.team4145.robot.shared.AutoStateMachine.CommandQueueGroup;
 import org.usfirst.frc.team4145.robot.shared.AutoTrajectory.RigidTransform2d;
@@ -62,6 +63,7 @@ public class Robot extends TimedRobot {
         SmartDashboard.putString("Auto State Machine Status", "State machine not yet started");
         SmartDashboard.putNumber("Lift Encoder Target", 0);
         SmartDashboard.putNumber("Wheel Encoder Target", 0);
+        RobotMap.robotDriveV4.setDynamicBrakeMode(true, true, true, true);
         Scheduler.getInstance().removeAll();
 
     }
@@ -99,7 +101,8 @@ public class Robot extends TimedRobot {
 
         //choose auto command based on lists
         SmartDashboard.putStringArray("Auto selected and game data", new String[]{autoSelected, RobotMap.gameDataAtStart});
-        AutoStateQueue = AutoSelector.autoSelect(RobotMap.gameDataAtStart, autoSelected);
+        //AutoStateQueue = AutoSelector.autoSelect(RobotMap.gameDataAtStart, autoSelected);
+        AutoStateQueue = new testAuto(0).getQueuedStates();
 
         //run state machine
         AutoStateMachine.runMachine(AutoStateQueue);
@@ -121,7 +124,7 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("Auto State", -1);
         RobotMap.robotDriveV4.reset();
         RobotMap.robotDriveV4.enableTo(0, false);
-        RobotMap.robotDriveV4.setDynamicBrakeMode(true, true, true, true);
+
     }
 
     /**

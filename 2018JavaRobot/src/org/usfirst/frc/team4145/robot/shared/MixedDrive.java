@@ -143,7 +143,7 @@ public class MixedDrive extends MecanumDrive{
      * @param rightSpeed ticks per 100ms
      */
     public void tankDrive(double leftSpeed, double rightSpeed) {
-        SmartDashboard.putNumberArray("Internal tank values",new double[] {leftSpeed, rightSpeed});
+        //SmartDashboard.putNumberArray("Internal tank values",new double[] {leftSpeed, rightSpeed});
         kFrontLeft.set(ControlMode.Velocity, leftSpeed);
         kFrontRight.set(ControlMode.Velocity, -rightSpeed);
         kRearLeft.set(ControlMode.Follower, kFrontLeft.getDeviceID());

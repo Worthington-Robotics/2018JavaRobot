@@ -50,35 +50,37 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
     }
 
     private Runnable periodic = () -> {
-        if(Constants.ENABLE_MP_TEST_MODE) driveControlState = DriveControlState.PROFILING_TEST;
-        if(DriverStation.getInstance().isEnabled()){
-            switch (driveControlState){
-                case PATH_FOLLOWING_CONTROL:
-                    updatePathFollower();
-                    if (isFinishedPath()) stop();
-                    break;
+        synchronized (RobotDriveV4.this){
+            if(Constants.ENABLE_MP_TEST_MODE) driveControlState = DriveControlState.PROFILING_TEST;
+            if(DriverStation.getInstance().isEnabled()){
+                switch (driveControlState){
+                    case PATH_FOLLOWING_CONTROL:
+                        updatePathFollower();
+                        if (isFinishedPath()) stop();
+                        break;
 
-                case PROFILING_TEST:
-                    driveTank(Constants.MP_TESTSPEED, Constants.MP_TESTSPEED);
-                    break;
+                    case PROFILING_TEST:
+                        driveTank(Constants.MP_TESTSPEED, Constants.MP_TESTSPEED);
+                        break;
 
-                default: //open loop
-                    if(DriverStation.getInstance().isOperatorControl())operatorInput = getAdjStick();
-                    if (isReversed) {
-                        operatorInput[0] *= -1;
-                        operatorInput[1] *= -1;
-                    }
-                    if (Robot.oi.getMasterStick().getPOV() >= 0) {
-                        operatorInput[0] *= Constants.getTeleopYCutPercentage();
-                        operatorInput[1] *= Constants.getTeleopXCutPercentage();
-                    }
-                    if (enLock) operatorInput[2] = pidOutput;
-                    else setTarget(getGyro()); // Safety feature in case PID gets enabled
-                    driveCartesian(operatorInput[1], -operatorInput[0], operatorInput[2]);
-                    break;
+                    default: //open loop
+                        if(DriverStation.getInstance().isOperatorControl())operatorInput = getAdjStick();
+                        if (isReversed) {
+                            operatorInput[0] *= -1;
+                            operatorInput[1] *= -1;
+                        }
+                        if (Robot.oi.getMasterStick().getPOV() >= 0) {
+                            operatorInput[0] *= Constants.getTeleopYCutPercentage();
+                            operatorInput[1] *= Constants.getTeleopXCutPercentage();
+                        }
+                        if (enLock) operatorInput[2] = pidOutput;
+                        else setTarget(getGyro()); // Safety feature in case PID gets enabled
+                        driveCartesian(operatorInput[1], -operatorInput[0], operatorInput[2]);
+                        break;
+                }
             }
+            smartDashboardUpdates();
         }
-        smartDashboardUpdates();
     };
 
     public double getGyro() {
@@ -106,17 +108,14 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
     }
 
     public synchronized void followPath(Path path, boolean reversed) {
-        if (driveControlState != DriveControlState.PATH_FOLLOWING_CONTROL) {
-            configAuto();
-        }
         pathFollowingController = new AdaptivePurePursuitController(Constants.PATH_FOLLOWING_LOOKAHEAD,
-                Constants.PATH_FOLLOWING_MAX_ACCELERATION, Constants.DRIVETRAIN_UPDATE_RATE, path, reversed, .25);
+                Constants.PATH_FOLLOWING_MAX_ACCELERATION, Constants.DRIVETRAIN_UPDATE_RATE, path, reversed, 1);
         driveControlState = DriveControlState.PATH_FOLLOWING_CONTROL;
         updatePathFollower();
     }
 
     public synchronized Set<String> getPathMarkersCrossed() {
-        if (driveControlState != DriveControlState.PATH_FOLLOWING_CONTROL) {
+        if (pathFollowingController == null) {
             return null;
         } else {
             return pathFollowingController.getMarkersCrossed();
@@ -204,6 +203,7 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
         SmartDashboard.putString("Drive Control Mode", driveControlState.toString());
         SmartDashboard.putBoolean("Path Finished", isFinishedPath());
         SmartDashboard.putNumber("Continuous gyro heading", getGyroContinuous());
+        if(pathFollowingController != null) SmartDashboard.putString("Markers passed", pathFollowingController.getMarkersCrossed().toString());
     }
 
     private static double inchesToRotations(double inches) {
@@ -222,7 +222,7 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
         return (RPM * 512) / 75.0;
     }
 
-    private void updatePathFollower() {
+    private synchronized void updatePathFollower() {
         RigidTransform2d robot_pose = RobotMap.robotPose.getLatestFieldToVehicle().getValue();
         RigidTransform2d.Delta command = pathFollowingController.update(robot_pose, Timer.getFPGATimestamp());
         Kinematics.DriveVelocity setpoint = Kinematics.inverseKinematics(command);
@@ -263,7 +263,7 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
      * @param rightSpeed right speed in RPM
      */
     private void driveTank(double leftSpeed, double rightSpeed) {
-        SmartDashboard.putNumberArray("Tank RPMS", new double[]{leftSpeed, rightSpeed});
+        //SmartDashboard.putNumberArray("Tank RPMS", new double[]{leftSpeed, rightSpeed});
         m_MixedDriveInstance.tankDrive(RPMToUnitsPer100Ms(leftSpeed) , RPMToUnitsPer100Ms(rightSpeed));
     }
 

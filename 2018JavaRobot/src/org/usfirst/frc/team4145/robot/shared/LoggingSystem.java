@@ -61,7 +61,7 @@ public class LoggingSystem {
                 toWrite += "" + SmartDashboard.getNumber(key, 0.0) + "\t";
             }
             toWrite += "\r\n";
-            System.out.println(toWrite);
+            //System.out.println(toWrite);
             printWriter.write(toWrite);
             printWriter.flush();
         }

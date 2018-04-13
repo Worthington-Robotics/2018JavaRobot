@@ -8,7 +8,7 @@ public class Constants {
      * ----------------------
      */
 
-    private static boolean isCompBot = true; //change this to use competition or non-competition constants
+    private static boolean isCompBot = false; //change this to use competition or non-competition constants
     public static String ROBOT_NAME = "Cube Crusher";
 
     public static boolean ENABLE_MP_TEST_MODE = false; //enables motion profiling test across all modes
@@ -20,12 +20,11 @@ public class Constants {
     public static double WHEEL_DIAMETER = 6.0;
     public static double COUNTS_PER_REV = 4096;
     public static double PATH_FOLLOWING_LOOKAHEAD = 24.0; // inches
-    public static double PATH_FOLLOWING_MAX_VELOCITY = 60.0; // inches/sec
-    public static double PATH_FOLLOWING_MAX_ACCELERATION = 36.0; // inches/sec^2
+    public static double PATH_FOLLOWING_MAX_VELOCITY = 84.0; // inches/sec
+    public static double PATH_FOLLOWING_MAX_ACCELERATION = 42.0; // inches/sec^2
 
-    public static String DRIVE_PATH_1 = "/media/sda1";
-    public static String DRIVE_PATH_2 = "/media/sda2";
-    public static String MOTION_PROFILE_PATH = "/home/lvuser/MotionProfile/";
+    public static String DRIVE_PATH_1 = "/media/sda";
+    public static String DRIVE_PATH_2 = "/media/sdb";
 
     public static double CUBEMANIP_SHOOT = 1.0000;
     public static double CUBEMANIP_DROP = 0.6500;
@@ -172,12 +171,12 @@ public class Constants {
     public static double MP_TESTSPEED = 152; //100 rpm ~ 31 in/s ~ 3ft/s
 
     private static double PRACTICE_RIGHT_KF = 0.3200; //nominal: 0.3200
-    private static double PRACTICE_RIGHT_KP = 1.0000; //nominal: 0.1500
+    private static double PRACTICE_RIGHT_KP = 0.8000; //nominal: 0.1500
     private static double PRACTICE_RIGHT_KI = 0.0000;
     private static double PRACTICE_RIGHT_KD = 6.0000;
 
     private static double PRACTICE_LEFT_KF = 0.3200; //nominal: 0.3200
-    private static double PRACTICE_LEFT_KP = 1.0000; //nominal: 0.1500
+    private static double PRACTICE_LEFT_KP = 0.8000; //nominal: 0.1500
     private static double PRACTICE_LEFT_KI = 0.0000;
     private static double PRACTICE_LEFT_KD = 6.0000;
 

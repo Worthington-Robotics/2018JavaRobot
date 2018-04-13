@@ -19,7 +19,6 @@ import static java.util.Objects.requireNonNull;
 public class QueueGroup {
 
     private Queue<CommandQueueGroup> queuedStates;
-    private Trajectory m_RightDrive, m_LeftDrive;
 
     public QueueGroup() {
         queuedStates = new ConcurrentLinkedQueue<>();

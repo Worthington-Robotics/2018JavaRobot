@@ -1,4 +1,4 @@
-package org.usfirst.frc.team4145.robot.commands.autoonly;
+package org.usfirst.frc.team4145.robot.commands.testonly;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

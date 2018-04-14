@@ -10,7 +10,6 @@ import org.usfirst.frc.team4145.robot.RobotMap;
 
 public class Lift extends Subsystem implements PIDSource, PIDOutput{
 
-    private boolean limit1 = false, limit2 = false, limit3 = false, limit4 = false;
     private boolean triggerLastCycle = false;
     private double liftVal = 0.0, stage2Speed = 1.0;
     private boolean[] buttonArray = new boolean[4];
@@ -42,6 +41,10 @@ public class Lift extends Subsystem implements PIDSource, PIDOutput{
         return buttonArray;
     }
 
+    /**
+     * method used to override values sent to the lift
+     * @param speed of lower lift stage
+     */
     public void setSpeed(double speed) {
         liftVal = speed;
     }
@@ -50,22 +53,19 @@ public class Lift extends Subsystem implements PIDSource, PIDOutput{
         RobotMap.liftMotorH.set(0);
     }
 
-    public void liftspeedH(double n) {
-        RobotMap.liftMotorH.set(n);
-    }
-
-    public void liftspeedL(double n) {
-        RobotMap.liftMotorL.set(n);
-    }
-
     public void stage2Up() {
-        RobotMap.liftMotorH.set(-stage2Speed);
+        RobotMap.liftMotorH.set(-Constants.getStage2ButtonSpeed());
     }
 
     public void stage2Down() {
-        RobotMap.liftMotorH.set(stage2Speed);
+        RobotMap.liftMotorH.set(Constants.getStage2ButtonSpeed());
     }
 
+    /**
+     * enables lift PID controller
+     * @param target encoder value - if disabling value is ignored
+     * @param enable whether to enable or disable the controller
+     */
     public void enableTo(int target, boolean enable){
         if(enable){
             newCount = target;
@@ -83,21 +83,17 @@ public class Lift extends Subsystem implements PIDSource, PIDOutput{
     private void runPrints() {
     	SmartDashboard.putNumber("Lift Encoder", RobotMap.liftEnc.get());
         SmartDashboard.putNumber("Lift Encoder Target", newCount);
-    	SmartDashboard.putBoolean("Stage 1 Low", limit4);
-    	SmartDashboard.putBoolean("Stage 1 High", limit3);
-    	SmartDashboard.putBoolean("Stage 2 Low", limit1);
-    	SmartDashboard.putBoolean("Stage 2 High", limit2);
+    	SmartDashboard.putBoolean("Stage 1 Low", buttonArray[3]);
+    	SmartDashboard.putBoolean("Stage 1 High", buttonArray[2]);
+    	SmartDashboard.putBoolean("Stage 2 Low", buttonArray[0]);
+    	SmartDashboard.putBoolean("Stage 2 High", buttonArray[1]);
     }
 
     private void updateLimits() {
-        limit1 = RobotMap.liftMotorH.getSensorCollection().isFwdLimitSwitchClosed(); //normally open
-        limit2 = RobotMap.liftMotorH.getSensorCollection().isRevLimitSwitchClosed(); //normally open
-        limit3 = RobotMap.liftMotorL.getSensorCollection().isFwdLimitSwitchClosed();
-        limit4 = RobotMap.liftMotorL.getSensorCollection().isRevLimitSwitchClosed();
-        buttonArray[0] = limit1;
-        buttonArray[1] = limit2;
-        buttonArray[2] = limit3;
-        buttonArray[3] = limit4;
+        buttonArray[0] = RobotMap.liftMotorH.getSensorCollection().isFwdLimitSwitchClosed();
+        buttonArray[1] = RobotMap.liftMotorH.getSensorCollection().isRevLimitSwitchClosed();
+        buttonArray[2] = RobotMap.liftMotorL.getSensorCollection().isFwdLimitSwitchClosed();
+        buttonArray[3] = RobotMap.liftMotorL.getSensorCollection().isRevLimitSwitchClosed();
     }
 
 
@@ -106,14 +102,14 @@ public class Lift extends Subsystem implements PIDSource, PIDOutput{
         if (!DriverStation.getInstance().isAutonomous()) {
             liftVal = evalDeadBand(Robot.oi.getSecondStick().getY(), 0.15);
             if (Robot.oi.getSecondStick().getRawButton(1)) { //get trigger status
-                liftspeedH(-liftVal * 2); //if pressed run lift directly
+                RobotMap.liftMotorH.set(-liftVal * Constants.getStage2Multiplier()); //if pressed run lift directly
                 triggerLastCycle = true;
             } else if (triggerLastCycle) {
-                liftspeedH(0);
+                RobotMap.liftMotorH.set(0);
                 triggerLastCycle = false;
             }
         }
-        liftspeedL(liftVal);
+        RobotMap.liftMotorL.set(liftVal);
 
     }
 
@@ -138,8 +134,6 @@ public class Lift extends Subsystem implements PIDSource, PIDOutput{
     public PIDSourceType getPIDSourceType() {
         return PIDSourceType.kDisplacement;
     }
-
-
 
     @Override
     public void initDefaultCommand() {

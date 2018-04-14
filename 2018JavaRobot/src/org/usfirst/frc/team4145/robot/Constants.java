@@ -94,6 +94,10 @@ public class Constants {
     private static double LIFTTO_TOL = 1.0000;
     private static double LIFTTO_LIM = 1.0000;
 
+    //Lift constants
+    private static double STAGE_2_BUTTON_SPEED = 1.0;
+    private static double STAGE_2_MULTIPLIER = 2.0;
+
     public static double getDrivetoKp() {
         return DRIVETO_KP;
     }
@@ -172,6 +176,14 @@ public class Constants {
 
     public static double getLifttoLim() {
         return LIFTTO_LIM;
+    }
+
+    public static double getStage2ButtonSpeed(){
+        return STAGE_2_BUTTON_SPEED;
+    }
+
+    public static double getStage2Multiplier(){
+        return STAGE_2_MULTIPLIER;
     }
 
     /*

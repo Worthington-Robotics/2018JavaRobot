@@ -15,7 +15,7 @@ public class Constants {
     public static double DRIVETRAIN_UPDATE_RATE = 0.010;
     public static double LOGGING_UPDATE_RATE = 0.020;
     public static double STATE_MACHINE_UPDATE_RATE = 0.010;
-    public static double DRIVING_WAIT_CYCLES = 100.0;
+    public static double DRIVING_WAIT_CYCLES = 50.0;
 
     //Pure pursuit related values
     public static boolean ENABLE_MP_TEST_MODE = false; //enables motion profiling test across all modes

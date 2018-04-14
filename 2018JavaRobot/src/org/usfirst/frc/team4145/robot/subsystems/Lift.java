@@ -11,7 +11,7 @@ import org.usfirst.frc.team4145.robot.RobotMap;
 public class Lift extends Subsystem implements PIDSource, PIDOutput{
 
     private boolean triggerLastCycle = false;
-    private double liftVal = 0.0, stage2Speed = 1.0;
+    private double liftVal = 0.0;
     private boolean[] buttonArray = new boolean[4];
     private int newCount;
     private PIDController liftPid;
@@ -28,7 +28,8 @@ public class Lift extends Subsystem implements PIDSource, PIDOutput{
     }
 
     public void pidWrite(double set) {
-        RobotMap.liftMotorL.set(set);
+        System.out.println("Liftpid set to: " + set);
+        liftVal = set;
     }
 
 
@@ -70,6 +71,7 @@ public class Lift extends Subsystem implements PIDSource, PIDOutput{
         if(enable){
             newCount = target;
             liftPid.setSetpoint(newCount);
+            liftPid.enable();
         }
         else liftPid.disable();
     }
@@ -110,7 +112,6 @@ public class Lift extends Subsystem implements PIDSource, PIDOutput{
             }
         }
         RobotMap.liftMotorL.set(liftVal);
-
     }
 
     private double evalDeadBand(double stickInpt, double deadBand) {

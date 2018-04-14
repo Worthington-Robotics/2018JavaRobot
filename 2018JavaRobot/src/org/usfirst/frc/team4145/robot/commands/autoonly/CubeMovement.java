@@ -14,7 +14,8 @@ public class CubeMovement extends Command{
         Shoot(Constants.CUBEMANIP_SHOOT),
         RollOut(Constants.CUBEMANIP_FAST_DROP),
         Drop(Constants.CUBEMANIP_DROP),
-        Pickup(Constants.CUBEMANIP_PICKUP);
+        Pickup(Constants.CUBEMANIP_PICKUP),
+        Stop(0);
 
         private double shotPower;
 

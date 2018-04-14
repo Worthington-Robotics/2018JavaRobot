@@ -72,7 +72,7 @@ public class RobotMap {
         // all sensor objects here
         ahrs = new AHRS(SPI.Port.kMXP); // finish declaring AHRS to MXP SPI bus
         liftEnc = Constants.isCompBot()? new Encoder(4, 5, true, Encoder.EncodingType.k4X):
-                new Encoder(2,3,false, Encoder.EncodingType.k4X) ;
+                new Encoder(2,3,true, Encoder.EncodingType.k4X) ;
 
         // all subsystem objects here
         exampleSystem = new ExampleSubsystem();

@@ -10,67 +10,32 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class LiftToPosition extends Command implements PIDSource, PIDOutput {
+public class LiftToPosition extends Command{
 
 	private int newCount;
-	private PIDController liftPid;
-
-	private double TOLERANCE = Constants.getLifttoTol();
-	private double LIMIT = Constants.getLifttoLim();
-	private double kP = Constants.getLifttoKp();
-	private double kI = Constants.getLifttoKi();
-	private double kD = Constants.getLifttoKd();
 
 	public LiftToPosition(int count) { //
 		requires(RobotMap.lift);
 		newCount = count;
-		RobotMap.liftEnc.reset();
-		liftPid = new PIDController(kP, kI, kD, this, this::pidWrite); // create pid object with parameters
-		liftPid.setOutputRange(-LIMIT, LIMIT);
-		liftPid.setAbsoluteTolerance(TOLERANCE); // set tolerance of pid
 	}
 
-	public double pidGet() {
-		return RobotMap.liftEnc.get();
-	}
 
-	public void pidWrite(double set) {
-		RobotMap.lift.setSpeed(set);
-	}
 
 	public void initialize() {
-		//System.out.println("Starting LiftPID");
-        SmartDashboard.putNumber("Lift Encoder Target", newCount);
-		liftPid.setSetpoint(newCount); // set target of pid
-		liftPid.enable(); // start pid
-
+		RobotMap.lift.enableTo(newCount, true);
 	}
 
-	public void execute() {
-	}
 
 	public boolean isFinished() {
 		return false; // If pid is at tolerance
-
 	}
 
 	public void end() {
-		liftPid.disable();// Stop Pid
-		liftPid.free(); // Frees sensor and actuator
-		// If pid is at tolerance
+		RobotMap.lift.enableTo(0, false);
 	}
 
 	public void interrupted() { //
 		end();
 	}
 
-	@Override
-	public void setPIDSourceType(PIDSourceType pidSource) {
-
-	}
-
-	@Override
-	public PIDSourceType getPIDSourceType() {
-		return PIDSourceType.kDisplacement;
-	}
 }

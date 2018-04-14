@@ -11,26 +11,33 @@ public class Constants {
     private static boolean isCompBot = false; //change this to use competition or non-competition constants
     public static String ROBOT_NAME = "Cube Crusher";
 
-    public static boolean ENABLE_MP_TEST_MODE = false; //enables motion profiling test across all modes
-    public static double DRIVETRAIN_UPDATE_RATE = 0.01;
+    //update times / rates
+    public static double DRIVETRAIN_UPDATE_RATE = 0.010;
     public static double LOGGING_UPDATE_RATE = 0.020;
-    public static int OBSERVATION_BUFFER_SIZE = 10;
+    public static double STATE_MACHINE_UPDATE_RATE = 0.010;
+
+    //Pure pursuit related values
+    public static boolean ENABLE_MP_TEST_MODE = false; //enables motion profiling test across all modes
+    public static int OBSERVATION_BUFFER_SIZE = 10; //size of pose observation buffer
     public static double TRACK_WIDTH_INCHES = 23.5;
     public static double TRACK_SCRUB_FACTOR = 0.5;
     public static double WHEEL_DIAMETER = 6.0;
-    public static double COUNTS_PER_REV = 4096;
-    public static double PATH_FOLLOWING_LOOKAHEAD = 24.0; // inches
-    public static double PATH_FOLLOWING_MAX_VELOCITY = 84.0; // inches/sec
-    public static double PATH_FOLLOWING_MAX_ACCELERATION = 42.0; // inches/sec^2
+    public static double COUNTS_PER_REV = 4096; //encoder counts per revolution
+    public static double PATH_FOLLOWING_LOOKAHEAD = 24.0; // lookahead in inches
+    public static double PATH_FOLLOWING_MAX_VELOCITY = 84.0; //overall max velocity - includes turns - in inches/sec
+    public static double PATH_FOLLOWING_MAX_ACCELERATION = 42.0; // overall max acceleration - includes turns - in inches/sec^2
 
-    public static String DRIVE_PATH_1 = "/media/sda";
-    public static String DRIVE_PATH_2 = "/media/sdb";
+    //logging directories
+    public static String DRIVE_PATH_1 = "/media/sda"; // top usb port
+    public static String DRIVE_PATH_2 = "/media/sdb"; // bottom usb port
 
+    //cube manipulator power settings
     public static double CUBEMANIP_SHOOT = 1.0000;
     public static double CUBEMANIP_DROP = 0.6500;
     public static double CUBEMANIP_FAST_DROP = 0.9000;
     public static double CUBEMANIP_PICKUP = -0.7500;
 
+    //position 2 switch values
     public static int LIFT_MOVE_TO_TOP = 0;
     public static int POS2SWITCH_WALL_BREAK = 19*20;
     public static int POS2SWITCH_TURN_ONE = 45;
@@ -59,11 +66,13 @@ public class Constants {
      * ----------------------------
      */
 
+    //DriveTo PID values
     private static double DRIVETO_KP = 0.0040; //nominal 0.0040
     private static double DRIVETO_KI = 0.0000; //nominal 0.0000
     private static double DRIVETO_KD = 0.0250; //nominal 0.0250
     private static double DRIVETO_LIM = 0.6000; //nominal 0.6
 
+    //Drivetrain constants for teleop
     private static double TELEOP_DEADBAND = 0.1500; //nominal deadband 0.1500
     private static double TELEOP_Y_PERCENTAGE = 0.7500; //nominal decrease to y ouput percentage 0.7500
     private static double TELEOP_Y_CUT_PERCENTAGE = 0.5000; //nominal fine adjust y cut 0.5000
@@ -71,12 +80,14 @@ public class Constants {
     private static double TELEOP_X_CUT_PERCENTAGE = 1.0000; //nominal fine adjust x cut percentage
     private static double TELEOP_Z_PERCENTAGE = 0.5000; //nominal decrease to z output percentage
 
+    //Gyrolock constants
     private static double GYROLOCK_KP = 0.0330; //nominal 0.0330
     private static double GYROLOCK_KI = 0.0000; //nominal 0.0000
     private static double GYROLOCK_KD = 0.0550; //nominal 0.0550
     private static double GYROLOCK_TOL = 1.0000; //nominal 1.0000
     private static double GYROLOCK_LIM = 0.6500; //nominal 0.6500
 
+    //Lift PID constants
     private static double LIFTTO_KP = 0.0200;
     private static double LIFTTO_KI = 0.0000;
     private static double LIFTTO_KD = 0.0000;

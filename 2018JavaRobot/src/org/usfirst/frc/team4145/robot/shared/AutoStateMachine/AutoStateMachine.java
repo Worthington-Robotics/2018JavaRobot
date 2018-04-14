@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team4145.robot.Constants;
 import org.usfirst.frc.team4145.robot.RobotMap;
 import org.usfirst.frc.team4145.robot.commands.autoonly.FollowPath;
 
@@ -19,23 +20,18 @@ public class AutoStateMachine {
     	autoState = 0;
         if (stateQueue != null) {
             SmartDashboard.putString("Auto State Machine Status", "State machine preparing to start!");
-
             while (!stateQueue.isEmpty()) {
                 SmartDashboard.putNumber("Auto State", autoState);
                 inspectedElement = stateQueue.poll();
-
                 while (inspectedElement.getQueueGroup().peek() instanceof FollowPath && !RobotMap.robotDriveV4.isFinishedPath()) {
                     SmartDashboard.putString("Auto State Machine Status", "Waiting for previous driving task to die");
-                    Timer.delay(0.010);
+                    Timer.delay(Constants.STATE_MACHINE_UPDATE_RATE);
                 }
-
                 inspectedElement.startQueueGroup(); //starts queue group running
-
                 while (!inspectedElement.checkQueueGroup()) { //checks status of state and whether it is or should be dead
-                    SmartDashboard.putString("Auto State Machine Status", "Waiting for previous task to die");
-                    Timer.delay(0.010);
+                    SmartDashboard.putString("Auto State Machine Status", "Running state " + autoState);
+                    Timer.delay(Constants.STATE_MACHINE_UPDATE_RATE);
                 }
-
                 inspectedElement.killQueueGroup(); //forcefully kills group (just in case)
                 autoState++; //increment auto state
             }

@@ -21,12 +21,4 @@ public class WaitForPathMarker extends Command {
         return ((markers != null) && markers.contains(marker));
     }
 
-    protected void end() {
-
-    }
-
-    protected void interrupted() {
-        end();
-    }
-
 }

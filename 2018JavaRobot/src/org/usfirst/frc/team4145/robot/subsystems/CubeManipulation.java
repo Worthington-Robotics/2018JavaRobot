@@ -1,16 +1,11 @@
 package org.usfirst.frc.team4145.robot.subsystems;
 
-import org.usfirst.frc.team4145.robot.Constants;
 import org.usfirst.frc.team4145.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class CubeManipulation extends Subsystem {
 
-
-	public CubeManipulation() {
-
-	}
 
 	@Override
 	public void initDefaultCommand() {

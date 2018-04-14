@@ -94,10 +94,10 @@ public class RobotMap {
         loggingSystem.addWatchKey("Lift Encoder");
         loggingSystem.addWatchKey("Lift Encoder Target");
         loggingSystem.addWatchKey("In Auto");
-        loggingSystem.addWatchKey("Left Motor Voltage");
-        loggingSystem.addWatchKey("Right Motor Voltage");
-        loggingSystem.addWatchKey("Left Talon Voltage");
         loggingSystem.addWatchKey("Right Wheel Velocity");
         loggingSystem.addWatchKey("Left Wheel Velocity");
+        loggingSystem.addWatchKey("Robot Pose X");
+        loggingSystem.addWatchKey("Robot Pose Y");
+        loggingSystem.addWatchKey("Robot Pose Theta");
     }
 }

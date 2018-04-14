@@ -15,6 +15,7 @@ public class Constants {
     public static double DRIVETRAIN_UPDATE_RATE = 0.010;
     public static double LOGGING_UPDATE_RATE = 0.020;
     public static double STATE_MACHINE_UPDATE_RATE = 0.010;
+    public static double DRIVING_WAIT_CYCLES = 100.0;
 
     //Pure pursuit related values
     public static boolean ENABLE_MP_TEST_MODE = false; //enables motion profiling test across all modes
@@ -26,6 +27,7 @@ public class Constants {
     public static double PATH_FOLLOWING_LOOKAHEAD = 24.0; // lookahead in inches
     public static double PATH_FOLLOWING_MAX_VELOCITY = 84.0; //overall max velocity - includes turns - in inches/sec
     public static double PATH_FOLLOWING_MAX_ACCELERATION = 42.0; // overall max acceleration - includes turns - in inches/sec^2
+    public static double BRAKE_RPM = 0.0; //power applied to brake robot nominal: 20
 
     //logging directories
     public static String DRIVE_PATH_1 = "/media/sda"; // top usb port
@@ -194,14 +196,14 @@ public class Constants {
     public static double MP_TESTSPEED = 152; //100 rpm ~ 31 in/s ~ 3ft/s
 
     private static double PRACTICE_RIGHT_KF = 0.3200; //nominal: 0.3200
-    private static double PRACTICE_RIGHT_KP = 0.8000; //nominal: 0.1500
+    private static double PRACTICE_RIGHT_KP = 0.6000; //nominal: 0.8000
     private static double PRACTICE_RIGHT_KI = 0.0000;
-    private static double PRACTICE_RIGHT_KD = 6.0000;
+    private static double PRACTICE_RIGHT_KD = 3.0000; //3.0000
 
     private static double PRACTICE_LEFT_KF = 0.3200; //nominal: 0.3200
-    private static double PRACTICE_LEFT_KP = 0.8000; //nominal: 0.1500
+    private static double PRACTICE_LEFT_KP = 0.6000; //nominal: 0.8000
     private static double PRACTICE_LEFT_KI = 0.0000;
-    private static double PRACTICE_LEFT_KD = 6.0000;
+    private static double PRACTICE_LEFT_KD = 3.0000; //3.0000
 
 
 

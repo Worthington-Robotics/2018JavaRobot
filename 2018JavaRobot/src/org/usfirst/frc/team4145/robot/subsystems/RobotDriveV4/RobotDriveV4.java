@@ -30,7 +30,7 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
     private MixedDrive m_MixedDriveInstance;
     private Notifier m_NotifierInstance;
     private PIDController gyroLock;
-    private double pidOutput = 0; //DO NOT MODIFY
+    private double pidOutput = 0, lastval = 0; //DO NOT MODIFY
     private boolean enLock = false, isReversed = false;
     private double[] operatorInput = {0, 0, 0}; //last input set from joystick update
     private PIDSourceType type = PIDSourceType.kDisplacement;
@@ -124,11 +124,16 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
 
     public void stop(){
         driveControlState = DriveControlState.OPEN_LOOP;
+        driveTank(-Math.signum(lastval) * Constants.BRAKE_RPM, -Math.signum(lastval) * Constants.BRAKE_RPM);
     }
 
     public synchronized boolean isFinishedPath() {
         return (driveControlState == DriveControlState.PATH_FOLLOWING_CONTROL && pathFollowingController.isDone())
                 || driveControlState != DriveControlState.PATH_FOLLOWING_CONTROL;
+    }
+
+    public boolean isOpenLoop(){
+        return driveControlState == DriveControlState.OPEN_LOOP;
     }
 
 
@@ -190,10 +195,6 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
         SmartDashboard.putNumber("FPGA Time", Timer.getFPGATimestamp());
         SmartDashboard.putNumber("Gyro Angle", getGyro());
         SmartDashboard.putNumber("Gyro Target", gyroLock.getSetpoint());
-        SmartDashboard.putNumber("Left Motor Voltage", RobotMap.driveFrontLeft.getMotorOutputVoltage());
-        SmartDashboard.putNumber("Right Motor Voltage", RobotMap.driveFrontRight.getMotorOutputVoltage());
-        SmartDashboard.putNumber("Left Talon Voltage", RobotMap.driveRearLeft.getBusVoltage());
-        SmartDashboard.putNumber("Right Talon Voltage", RobotMap.driveRearRight.getBusVoltage());
         SmartDashboard.putNumber("Right Wheel Encoder", getRightEncoder());
         SmartDashboard.putNumber("Left Wheel Encoder", getLeftEncoder());
         SmartDashboard.putNumber("Right Wheel Distance", getRightEncoder() * ((Constants.WHEEL_DIAMETER * Math.PI) / Constants.COUNTS_PER_REV));
@@ -264,6 +265,7 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
      */
     private void driveTank(double leftSpeed, double rightSpeed) {
         //SmartDashboard.putNumberArray("Tank RPMS", new double[]{leftSpeed, rightSpeed});
+        lastval = leftSpeed;
         m_MixedDriveInstance.tankDrive(RPMToUnitsPer100Ms(leftSpeed) , RPMToUnitsPer100Ms(rightSpeed));
     }
 

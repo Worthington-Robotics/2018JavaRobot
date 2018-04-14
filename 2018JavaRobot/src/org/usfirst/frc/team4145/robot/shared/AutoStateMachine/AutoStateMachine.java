@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class AutoStateMachine {
 
     private static ConcurrentLinkedQueue<CommandQueueGroup> stateQueue;
-    private static CommandQueueGroup inspectedElement;
+    private static CommandQueueGroup inspectedElement, lastDrivingCommand;
     private static int autoState = 0;
 
     private static Runnable taskRunnable = () -> {
@@ -23,9 +23,15 @@ public class AutoStateMachine {
             while (!stateQueue.isEmpty()) {
                 SmartDashboard.putNumber("Auto State", autoState);
                 inspectedElement = stateQueue.poll();
-                while (inspectedElement.getQueueGroup().peek() instanceof FollowPath && !RobotMap.robotDriveV4.isFinishedPath()) {
+                while (inspectedElement.getQueueGroup().peek() instanceof FollowPath && (lastDrivingCommand != null && !lastDrivingCommand.checkNoTimeout())) {
                     SmartDashboard.putString("Auto State Machine Status", "Waiting for previous driving task to die");
                     Timer.delay(Constants.STATE_MACHINE_UPDATE_RATE);
+                }
+                if(inspectedElement.getQueueGroup().peek() instanceof FollowPath){
+                    if(lastDrivingCommand != null){
+                        Timer.delay(Constants.STATE_MACHINE_UPDATE_RATE * Constants.DRIVING_WAIT_CYCLES);
+                    }
+                    lastDrivingCommand = inspectedElement;
                 }
                 inspectedElement.startQueueGroup(); //starts queue group running
                 while (!inspectedElement.checkQueueGroup()) { //checks status of state and whether it is or should be dead

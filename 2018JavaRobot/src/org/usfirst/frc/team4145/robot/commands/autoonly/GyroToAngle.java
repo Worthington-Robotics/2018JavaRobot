@@ -39,6 +39,6 @@ public class GyroToAngle extends Command {
     }
 
     public void end() {
-
+        RobotMap.robotDriveV4.enableTo(0, false);
     }
 }

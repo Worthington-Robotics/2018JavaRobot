@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team4145.robot.RobotMap;
 import org.usfirst.frc.team4145.robot.commands.autoonly.FollowPath;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -17,37 +18,32 @@ public class AutoStateMachine {
     private static Runnable taskRunnable = () -> {
     	autoState = 0;
         if (stateQueue != null) {
-            //System.out.println("State machine size:" + stateQueue.size());
             SmartDashboard.putString("Auto State Machine Status", "State machine preparing to start!");
-            //System.out.println("blocking queue elements:" + stateQueue.toArray());
-            while (!stateQueue.isEmpty()) {
-                //System.out.println("Entering state " + autoState + " At time " + RobotController.getFPGATime());
-                SmartDashboard.putNumber("Auto State", autoState);
-                try {
-                    inspectedElement = stateQueue.poll();
-                    if(!(inspectedElement.getQueueGroup().peek() instanceof FollowPath) && autoState == 0)
-                        DriverStation.reportWarning("No motion path in state 1", false);
-                    inspectedElement.startQueueGroup(); //starts queue group running
-                    while (!inspectedElement.checkQueueGroup()) { //checks status of state and whether it is or should be dead
-                        //System.out.println("Waiting for previous task to die");
-                        SmartDashboard.putString("Auto State Machine Status", "Waiting for previous task to die");
-                        Timer.delay(0.010);
-                    }
-                    //SmartDashboard.putNumber("State Advance Flag",1);
-                    inspectedElement.killQueueGroup(); //forcefully kills group (just in case)
 
-                    //System.out.println("killing group " + autoState);
-                } catch (Exception e) {
-                    System.out.println("Failed to sleep or retrieve element");
+            while (!stateQueue.isEmpty()) {
+                SmartDashboard.putNumber("Auto State", autoState);
+                inspectedElement = stateQueue.poll();
+
+                while (inspectedElement.getQueueGroup().peek() instanceof FollowPath && !RobotMap.robotDriveV4.isFinishedPath()) {
+                    SmartDashboard.putString("Auto State Machine Status", "Waiting for previous driving task to die");
+                    Timer.delay(0.010);
                 }
-                //System.out.println("Incrementing state");
+
+                inspectedElement.startQueueGroup(); //starts queue group running
+
+                while (!inspectedElement.checkQueueGroup()) { //checks status of state and whether it is or should be dead
+                    SmartDashboard.putString("Auto State Machine Status", "Waiting for previous task to die");
+                    Timer.delay(0.010);
+                }
+
+                inspectedElement.killQueueGroup(); //forcefully kills group (just in case)
                 autoState++; //increment auto state
             }
 
             //System.out.println("Finished queue");
             SmartDashboard.putString("Auto State Machine Status", "State machine finished Queue");
         } else {
-            //System.out.println("State machine list was null!");
+            DriverStation.reportWarning("State Machine list was NULL", false);
             SmartDashboard.putNumber("Auto State", -2);
             SmartDashboard.putString("Auto State Machine Status", "List was NULL!");
         }

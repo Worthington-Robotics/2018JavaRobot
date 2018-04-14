@@ -33,19 +33,18 @@ public class CommandQueueGroup {
      * @return whether or not the commands have all finished or the timeout was exceeded
      */
     boolean checkQueueGroup() {
-        //System.out.println("Time at queue group start:" + FPGA_TIME_AT_START);
-        //System.out.println("Time at check call:"+ Timer.getFPGATimestamp());
         if((FPGA_TIME_AT_START + TIME_OUT) <= Timer.getFPGATimestamp()){
             System.out.println("Queue group timed out");
             return true;
         }
+        return checkNoTimeout();
+    }
+
+    boolean checkNoTimeout(){
         boolean isDead = true;
         for (Command command : queueGroup) {
             isDead &= command.isCompleted();
-            //System.out.println("Command dead?" + command.isRunning());
-            
         }
-        //System.out.println("Queue group is dead?" + isDead);
         return isDead;
     }
 

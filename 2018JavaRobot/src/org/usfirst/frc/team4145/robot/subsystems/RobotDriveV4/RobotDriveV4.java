@@ -65,6 +65,7 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
 
                     default: //open loop
                         if(DriverStation.getInstance().isOperatorControl())operatorInput = getAdjStick();
+                        else operatorInput = new double[] {0,0,0};
                         if (isReversed) {
                             operatorInput[0] *= -1;
                             operatorInput[1] *= -1;
@@ -204,6 +205,7 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
         SmartDashboard.putString("Drive Control Mode", driveControlState.toString());
         SmartDashboard.putBoolean("Path Finished", isFinishedPath());
         SmartDashboard.putNumber("Continuous gyro heading", getGyroContinuous());
+        SmartDashboard.putNumberArray("operator input", operatorInput);
         if(pathFollowingController != null) SmartDashboard.putString("Markers passed", pathFollowingController.getMarkersCrossed().toString());
     }
 

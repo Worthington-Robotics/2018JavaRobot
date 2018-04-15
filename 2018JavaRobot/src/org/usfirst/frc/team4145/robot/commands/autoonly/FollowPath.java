@@ -7,13 +7,22 @@ import org.usfirst.frc.team4145.robot.shared.AutoTrajectory.Path;
 public class FollowPath extends Command {
 
     private Path mPath;
-    private boolean mReversed;
-    private boolean mHasStarted;
+    private boolean mReversed, mHasStarted;
+    private int completionWait;
 
     public FollowPath(Path path, boolean reversed) {
+        this(path, reversed, 0);
+    }
+
+    public FollowPath(Path path, boolean reversed, int completionWaitMs){
         mPath = path;
         mReversed = reversed;
+        completionWait = completionWaitMs;
         mHasStarted = false;
+    }
+
+    public int getCompletionWait() {
+        return completionWait;
     }
 
     @Override

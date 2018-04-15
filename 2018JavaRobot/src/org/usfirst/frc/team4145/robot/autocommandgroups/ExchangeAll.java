@@ -1,7 +1,6 @@
 package org.usfirst.frc.team4145.robot.autocommandgroups;
 
 import edu.wpi.first.wpilibj.command.Command;
-import jaci.pathfinder.Pathfinder;
 import org.usfirst.frc.team4145.robot.commands.autoonly.*;
 import org.usfirst.frc.team4145.robot.shared.AutoStateMachine.QueueGroup;
 

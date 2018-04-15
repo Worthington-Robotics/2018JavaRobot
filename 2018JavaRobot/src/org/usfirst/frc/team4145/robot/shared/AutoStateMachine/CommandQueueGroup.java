@@ -3,6 +3,7 @@ package org.usfirst.frc.team4145.robot.shared.AutoStateMachine;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team4145.robot.commands.autoonly.FollowPath;
 
 import java.util.LinkedList;
 
@@ -26,6 +27,13 @@ public class CommandQueueGroup {
         for (Command command : commands) {
             queueGroup.add(command);
         }
+    }
+
+    public int getCompletionWait(){
+        if(queueGroup.peek() instanceof FollowPath){
+            return ((FollowPath) queueGroup.peek()).getCompletionWait();
+        }
+        return 0;
     }
 
     /**

@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4145.robot.Constants;
-import org.usfirst.frc.team4145.robot.RobotMap;
 import org.usfirst.frc.team4145.robot.commands.autoonly.FollowPath;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -13,7 +12,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class AutoStateMachine {
 
     private static ConcurrentLinkedQueue<CommandQueueGroup> stateQueue;
-    private static CommandQueueGroup inspectedElement, lastDrivingCommand;
+    private static CommandQueueGroup inspectedElement, lastFollowPath;
     private static int autoState = 0;
 
     private static Runnable taskRunnable = () -> {
@@ -23,15 +22,15 @@ public class AutoStateMachine {
             while (!stateQueue.isEmpty()) {
                 SmartDashboard.putNumber("Auto State", autoState);
                 inspectedElement = stateQueue.poll();
-                while (inspectedElement.getQueueGroup().peek() instanceof FollowPath && (lastDrivingCommand != null && !lastDrivingCommand.checkNoTimeout())) {
+                while (inspectedElement.getQueueGroup().peek() instanceof FollowPath && (lastFollowPath != null && !lastFollowPath.checkNoTimeout())) {
                     SmartDashboard.putString("Auto State Machine Status", "Waiting for previous driving task to die");
                     Timer.delay(Constants.STATE_MACHINE_UPDATE_RATE);
                 }
                 if(inspectedElement.getQueueGroup().peek() instanceof FollowPath){
-                    if(lastDrivingCommand != null){
-                        Timer.delay(Constants.STATE_MACHINE_UPDATE_RATE * Constants.DRIVING_WAIT_CYCLES);
+                    if(lastFollowPath != null){
+                        Timer.delay(lastFollowPath.getCompletionWait());
                     }
-                    lastDrivingCommand = inspectedElement;
+                    lastFollowPath = inspectedElement;
                 }
                 inspectedElement.startQueueGroup(); //starts queue group running
                 while (!inspectedElement.checkQueueGroup()) { //checks status of state and whether it is or should be dead

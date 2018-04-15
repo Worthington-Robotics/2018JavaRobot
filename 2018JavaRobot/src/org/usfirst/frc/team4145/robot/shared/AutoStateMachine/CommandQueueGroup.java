@@ -18,6 +18,7 @@ public class CommandQueueGroup {
      * Data structure for storing a series of commands with a timeout
      * @param commands an array of commands
      * @param timeOutMs timeout in milliseconds for the group
+     * @param isKillable set if the group can be killed
      */
 
     CommandQueueGroup(Command[] commands, long timeOutMs, boolean isKillable){
@@ -48,6 +49,10 @@ public class CommandQueueGroup {
         return checkNoTimeout();
     }
 
+    /**
+     * method for checking the status of a queue group
+     * @return whether the commands in the state have finished ignoring timeout
+     */
     boolean checkNoTimeout(){
         boolean isDead = true;
         for (Command command : queueGroup) {
@@ -69,7 +74,8 @@ public class CommandQueueGroup {
 
     /**
      * Does what it says on the tin
-     * this method kills the running queue group.
+     * this method kills the running queue group
+     * (if possible to kill)
      */
     void killQueueGroup() {
         if(isKillable) {

@@ -10,8 +10,7 @@ import java.util.LinkedList;
 public class CommandQueueGroup {
 
     private LinkedList<Command> queueGroup;
-    private double FPGA_TIME_AT_START;
-    private double TIME_OUT;
+    private double fpgaStartTime, timeOut;
     private boolean isKillable;
 
     /**
@@ -23,16 +22,28 @@ public class CommandQueueGroup {
 
     CommandQueueGroup(Command[] commands, long timeOutMs, boolean isKillable){
         this.isKillable = isKillable;
-        TIME_OUT = timeOutMs / 1000;
+        timeOut = timeOutMs / 1000;
         queueGroup = new LinkedList<>();
         for (Command command : commands) {
             queueGroup.add(command);
         }
     }
 
+    /**
+     * gets the completion wait of the first command in the state
+     * @return wait time in MS before starting next state
+     */
     public int getCompletionWait(){
+        return this.getCompletionWait(0);
+    }
+
+    /**
+     * gets the completion wait of the index command in the state
+     * @return wait time in MS before starting next state
+     */
+    public int getCompletionWait(int index){
         if(queueGroup.peek() instanceof FollowPath){
-            return ((FollowPath) queueGroup.peek()).getCompletionWait();
+            return ((FollowPath) queueGroup.get(index)).getCompletionWait();
         }
         return 0;
     }
@@ -42,7 +53,7 @@ public class CommandQueueGroup {
      * @return whether or not the commands have all finished or the timeout was exceeded
      */
     boolean checkQueueGroup() {
-        if((FPGA_TIME_AT_START + TIME_OUT) <= Timer.getFPGATimestamp()){
+        if((fpgaStartTime + timeOut) <= Timer.getFPGATimestamp()){
             System.out.println("Queue group timed out");
             return true;
         }
@@ -66,7 +77,7 @@ public class CommandQueueGroup {
      * also records FPGA timestamp for timeout purposes.
      */
     void startQueueGroup() {
-        FPGA_TIME_AT_START = Timer.getFPGATimestamp();
+        fpgaStartTime = Timer.getFPGATimestamp();
         for (Command command: queueGroup) {
             command.start();
         }

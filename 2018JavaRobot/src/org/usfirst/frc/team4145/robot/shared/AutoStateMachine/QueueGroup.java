@@ -5,7 +5,6 @@ import org.usfirst.frc.team4145.robot.commands.autoonly.FollowPath;
 import org.usfirst.frc.team4145.robot.shared.AutoTrajectory.Path;
 
 import java.util.List;
-import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import static java.util.Objects.requireNonNull;
@@ -17,7 +16,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class QueueGroup {
 
-    private Queue<CommandQueueGroup> queuedStates;
+    private ConcurrentLinkedQueue<CommandQueueGroup> queuedStates;
 
     public QueueGroup() {
         queuedStates = new ConcurrentLinkedQueue<>();
@@ -44,6 +43,6 @@ public class QueueGroup {
     }
 
     public ConcurrentLinkedQueue<CommandQueueGroup> getQueuedStates() {
-        return (ConcurrentLinkedQueue<CommandQueueGroup>) queuedStates;
+        return queuedStates;
     }
 }

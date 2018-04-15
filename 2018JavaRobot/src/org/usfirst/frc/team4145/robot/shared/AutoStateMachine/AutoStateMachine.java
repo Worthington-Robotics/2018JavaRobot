@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4145.robot.shared.AutoStateMachine;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -11,8 +12,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class AutoStateMachine {
 
-    private static ConcurrentLinkedQueue<CommandQueueGroup> stateQueue;
-    private static CommandQueueGroup inspectedElement, lastFollowPath;
+    private volatile static ConcurrentLinkedQueue<CommandQueueGroup> stateQueue;
+    private volatile static CommandQueueGroup inspectedElement, lastFollowPath;
     private static int autoState = 0;
 
     private static Runnable taskRunnable = () -> {
@@ -28,7 +29,9 @@ public class AutoStateMachine {
                 }
                 if(inspectedElement.getQueueGroup().peek() instanceof FollowPath){
                     if(lastFollowPath != null){
+                        System.out.println("entering completion wait");
                         Timer.delay(lastFollowPath.getCompletionWait());
+                        System.out.println("exiting completion wait");
                     }
                     lastFollowPath = inspectedElement;
                 }

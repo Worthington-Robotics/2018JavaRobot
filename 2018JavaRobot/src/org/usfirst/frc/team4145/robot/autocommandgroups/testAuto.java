@@ -42,21 +42,21 @@ public class testAuto extends QueueGroup {
         addSequential(new CubeMovement(CubeMovement.CubeState.Shoot), 500);
 
         addDrive(second_path, true);
-        addParallel(new Command[]{new LiftToPosition(-850), new CubeMovement(CubeMovement.CubeState.Stop)}, 3000);
-        addSequential(new DriveStateWait(), 2000);
-        addSequential(new GyroToAngle(48), 1000);
-
+        addParallel(new Command[]{new LiftToPosition(-850)}, 3000);
+        addSequential(new DriveStateWait(), 3000);
+        addSequential(new GyroToAngle(48), 500);
+        /*
         addDrive(third_path, false);
-        addSequential(new CubeMovement(CubeMovement.CubeState.Pickup), 3000);
+        addSequential(new CubeMovement(CubeMovement.CubeState.Pickup), 2500);
 
-        addDrive(fourth_path, true);
+        addDrive(fourth_path, true,500);
         addSequential(new LiftToPosition(700), 2000);
 
         addDrive(fifth_path, false);
         addSequential(new LiftToPosition(150), 1000);
         addSequential(new WaitForPathMarker("end 2"), 10000);
         addSequential(new ContingentWait(ContingentWait.Target.Switch), 20000);
-        addSequential(new CubeMovement(CubeMovement.CubeState.Shoot), 1000);
+        addSequential(new CubeMovement(CubeMovement.CubeState.Shoot), 1000);*/
     }
 
 }

@@ -43,10 +43,12 @@ public class CubeMovement extends Command{
     public void initialize() {
         // starts motors y'all
         RobotMap.cubeManipulator.setPower(manipState.getShotPower());
+        System.out.println("Cube Movement Init");
     }
 
     public void end() {
         RobotMap.cubeManipulator.stall();
+        System.out.println("Cube Movement End");
     }
 
     public void interrupted() {

@@ -33,7 +33,7 @@ public class CommandQueueGroup {
      * gets the completion wait of the first command in the state
      * @return wait time in MS before starting next state
      */
-    public int getCompletionWait(){
+    synchronized public int getCompletionWait(){
         return this.getCompletionWait(0);
     }
 
@@ -41,8 +41,8 @@ public class CommandQueueGroup {
      * gets the completion wait of the index command in the state
      * @return wait time in MS before starting next state
      */
-    public int getCompletionWait(int index){
-        if(queueGroup.peek() instanceof FollowPath){
+    synchronized public int getCompletionWait(int index){
+        if(queueGroup.get(index) instanceof FollowPath){
             return ((FollowPath) queueGroup.get(index)).getCompletionWait();
         }
         return 0;
@@ -52,9 +52,9 @@ public class CommandQueueGroup {
      * method for checking the status of a queue group
      * @return whether or not the commands have all finished or the timeout was exceeded
      */
-    boolean checkQueueGroup() {
+    synchronized boolean checkQueueGroup() {
         if((fpgaStartTime + timeOut) <= Timer.getFPGATimestamp()){
-            System.out.println("Queue group timed out");
+            //System.out.println("Queue group timed out");
             return true;
         }
         return checkNoTimeout();
@@ -64,7 +64,7 @@ public class CommandQueueGroup {
      * method for checking the status of a queue group
      * @return whether the commands in the state have finished ignoring timeout
      */
-    boolean checkNoTimeout(){
+    synchronized boolean checkNoTimeout(){
         boolean isDead = true;
         for (Command command : queueGroup) {
             isDead &= command.isCompleted();
@@ -76,7 +76,7 @@ public class CommandQueueGroup {
      * begins running the entire queued group
      * also records FPGA timestamp for timeout purposes.
      */
-    void startQueueGroup() {
+    synchronized void startQueueGroup() {
         fpgaStartTime = Timer.getFPGATimestamp();
         for (Command command: queueGroup) {
             command.start();
@@ -88,7 +88,7 @@ public class CommandQueueGroup {
      * this method kills the running queue group
      * (if possible to kill)
      */
-    void killQueueGroup() {
+    synchronized void killQueueGroup() {
         if(isKillable) {
             for (Command command : queueGroup) {
                 command.cancel();
@@ -100,7 +100,7 @@ public class CommandQueueGroup {
      * gets the Linked list for the state machine to run
      * @return a Linked List of all queued groups.
      */
-    LinkedList getQueueGroup(){
+    synchronized LinkedList getQueueGroup(){
         return queueGroup;
     }
 

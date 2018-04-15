@@ -28,7 +28,7 @@ public class Lift extends Subsystem implements PIDSource, PIDOutput{
     }
 
     public void pidWrite(double set) {
-        System.out.println("Liftpid set to: " + set);
+        //System.out.println("Liftpid set to: " + set);
         liftVal = set;
     }
 

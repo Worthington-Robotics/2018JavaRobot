@@ -1,17 +1,19 @@
 package org.usfirst.frc.team4145.robot.autocommandgroups;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
+import org.usfirst.frc.team4145.robot.shared.AutoStateMachine.FollowPath;
+
 import org.usfirst.frc.team4145.robot.commands.autoonly.*;
-import org.usfirst.frc.team4145.robot.shared.AutoStateMachine.QueueGroup;
 import org.usfirst.frc.team4145.robot.shared.AutoTrajectory.Path;
 import org.usfirst.frc.team4145.robot.shared.AutoTrajectory.Translation2d;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class testAuto extends QueueGroup {
+public class testAuto extends CommandGroup {
 
-    public testAuto(int variant){
+    public testAuto(){
         List<Path.Waypoint> first_path = new ArrayList<>();
         first_path.add(new Path.Waypoint(new Translation2d(0, 0), 50.0));
         first_path.add(new Path.Waypoint(new Translation2d(18, 0),  50.0));
@@ -35,14 +37,14 @@ public class testAuto extends QueueGroup {
         fifth_path.add(new Path.Waypoint(new Translation2d(50,-60),50.0));
         fifth_path.add(new Path.Waypoint(new Translation2d(100,-60),50.0, "end 2"));
         fifth_path.add(new Path.Waypoint(new Translation2d(102,-60),50.0));
-
-        addDrive(first_path, false);
+        
+        addSequential(new FollowPath(new Path(first_path), false), 20000);
         addSequential(new WaitForPathMarker("end"), 10000);
-        addSequential(new ContingentWait(ContingentWait.Target.Switch), 20000);
+        //addSequential(new ContingentWait(ContingentWait.Target.Switch), 20000);
         addSequential(new CubeMovement(CubeMovement.CubeState.Shoot), 500);
 
-        addDrive(second_path, true);
-        addParallel(new Command[]{new LiftToPosition(-850)}, 3000);
+        addParallel(new LiftToPosition(-850), 3000);
+        addSequential(new FollowPath(new Path(seccond), true), 20000);
         addSequential(new DriveStateWait(), 3000);
         addSequential(new GyroToAngle(48), 500);
         /*

@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team4145.robot.autocommandgroups.TestAutoRight;
 import org.usfirst.frc.team4145.robot.autocommandgroups.testAuto;
 import org.usfirst.frc.team4145.robot.shared.AutoStateMachine.AutoStateMachine;
 import org.usfirst.frc.team4145.robot.shared.AutoStateMachine.CommandQueueGroup;
@@ -108,7 +109,7 @@ public class Robot extends TimedRobot {
         //run state machine
         //AutoStateMachine.runMachine(AutoStateQueue);
         
-        CommandGroup testAuto = new testAuto();
+        CommandGroup testAuto = new TestAutoRight();
         testAuto.start();
     }
 

@@ -16,7 +16,8 @@ public class WaitForPathMarker extends Command {
 
     public boolean isFinished(){
         Set<String> markers = RobotMap.robotDriveV4.getPathMarkersCrossed();
-        //System.out.println("path markers crossed: " + markers.toString());
+        if(((markers != null) && markers.contains(marker)))
+            System.out.println("path to " + marker + " is finished");
         SmartDashboard.putString("Marker completion","path to " + marker + " is " + ((markers != null && markers.contains(marker))? "finished": "not finished"));
         return ((markers != null) && markers.contains(marker));
     }

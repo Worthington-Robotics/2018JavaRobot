@@ -39,7 +39,7 @@ public class Position2Switch extends CommandGroupV2 {
 
             addParallel(new FollowPath(new Path(first_path), false), 20.000);
             addSequential(new WaitForPathMarker("end"), 10.000);
-            //addSequential(new ContingentWait(ContingentWait.Target.Switch), 20.000);
+            addSequential(new ContingentWait(ContingentWait.Target.Switch), 20.000);
             addSequential(new CubeMovement(CubeMovement.CubeState.Shoot), 0.500);
 
             addParallel(new LiftToPosition(-850), 3.000);
@@ -64,7 +64,7 @@ public class Position2Switch extends CommandGroupV2 {
             addParallel(new FollowPath(new Path(fifth_path), false), 20.000);
 
             addSequential(new WaitForPathMarker("end 2"), 10.000);
-            //addSequential(new ContingentWait(ContingentWait.Target.Switch), 20.000);
+            addSequential(new ContingentWait(ContingentWait.Target.Switch), 20.000);
             addSequential(new CubeMovement(CubeMovement.CubeState.Shoot), 1.000);
         }
         else{
@@ -95,7 +95,7 @@ public class Position2Switch extends CommandGroupV2 {
 
             addParallel(new FollowPath(new Path(first_path), false), 20.000);
             addSequential(new WaitForPathMarker("end"), 10.000);
-            //addSequential(new ContingentWait(ContingentWait.Target.Switch), 20.000);
+            addSequential(new ContingentWait(ContingentWait.Target.Switch), 20.000);
             addSequential(new CubeMovement(CubeMovement.CubeState.Shoot), 0.500);
 
             addParallel(new LiftToPosition(-850), 3.000);
@@ -118,7 +118,7 @@ public class Position2Switch extends CommandGroupV2 {
             addParallel(new FollowPath(new Path(fifth_path), false), 20.000);
 
             addSequential(new WaitForPathMarker("end 2"), 10.000);
-            //addSequential(new ContingentWait(ContingentWait.Target.Switch), 20.000);
+            addSequential(new ContingentWait(ContingentWait.Target.Switch), 20.000);
             addSequential(new CubeMovement(CubeMovement.CubeState.Shoot), 1.000);
         }
     }

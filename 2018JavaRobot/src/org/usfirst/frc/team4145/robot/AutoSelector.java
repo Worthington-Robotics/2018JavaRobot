@@ -22,8 +22,7 @@ enum UserSelection {
     Auto4("Cross The Line", 4),
     Auto5("Cross The Line Long", 5),
     Auto6("Robot Test", 6),
-    Auto20("Do Nothing", 20)
-    ;
+    Auto20("Do Nothing", 20);
 
     private String name;
     private int num;

@@ -13,10 +13,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team4145.robot.autocommandgroups.TestAutoRight;
-import org.usfirst.frc.team4145.robot.autocommandgroups.testAuto;
-import org.usfirst.frc.team4145.robot.shared.AutoStateMachine.AutoStateMachine;
-import org.usfirst.frc.team4145.robot.shared.AutoStateMachine.CommandQueueGroup;
 import org.usfirst.frc.team4145.robot.shared.AutoTrajectory.RigidTransform2d;
 import org.usfirst.frc.team4145.robot.shared.LoggingSystem;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -33,7 +29,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  */
 public class Robot extends TimedRobot {
     public static OI oi;
-    ConcurrentLinkedQueue<CommandQueueGroup> AutoStateQueue;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -103,14 +98,9 @@ public class Robot extends TimedRobot {
 
         //choose auto command based on lists
         SmartDashboard.putStringArray("Auto selected and game data", new String[]{autoSelected, RobotMap.gameDataAtStart});
-        //AutoStateQueue = AutoSelector.autoSelect(RobotMap.gameDataAtStart, autoSelected);
-        //AutoStateQueue = new testAuto(0).getQueuedStates();
+        CommandGroup selectedAuto = AutoSelector.autoSelect(RobotMap.gameDataAtStart, autoSelected);
 
-        //run state machine
-        //AutoStateMachine.runMachine(AutoStateQueue);
-        
-        CommandGroup testAuto = new TestAutoRight();
-        testAuto.start();
+        selectedAuto.start();
     }
 
     /**

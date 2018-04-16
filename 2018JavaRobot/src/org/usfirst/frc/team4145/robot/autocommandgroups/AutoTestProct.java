@@ -4,11 +4,12 @@ import org.usfirst.frc.team4145.robot.commands.autoonly.*;
 import org.usfirst.frc.team4145.robot.commands.testonly.LowerLiftTest;
 import org.usfirst.frc.team4145.robot.commands.testonly.MotorBaseTest1;
 import org.usfirst.frc.team4145.robot.commands.testonly.RoboLiftTest;
-import org.usfirst.frc.team4145.robot.shared.AutoStateMachine.QueueGroup;
+
 
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team4145.robot.shared.StateMachineV2.CommandGroupV2;
 
-public class AutoTestProct extends QueueGroup {
+public class AutoTestProct extends CommandGroupV2 {
 
 	public AutoTestProct() {
 		//addSequential(new MotorBaseTest1(), 4020);

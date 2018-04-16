@@ -8,21 +8,11 @@ public class FollowPath extends Command {
 
     private Path mPath;
     private boolean mReversed, mHasStarted;
-    private int completionWait;
 
-    public FollowPath(Path path, boolean reversed) {
-        this(path, reversed, 0);
-    }
-
-    public FollowPath(Path path, boolean reversed, int completionWaitMs){
+    public FollowPath(Path path, boolean reversed){
         mPath = path;
         mReversed = reversed;
-        completionWait = completionWaitMs;
         mHasStarted = false;
-    }
-
-    public int getCompletionWait() {
-        return completionWait;
     }
 
     @Override

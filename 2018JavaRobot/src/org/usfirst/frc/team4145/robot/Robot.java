@@ -86,6 +86,7 @@ public class Robot extends TimedRobot {
         RobotMap.loggingSystem.enablePrint(true);
         RobotMap.robotDriveV4.configAuto();
         RobotMap.robotPose.reset(Timer.getFPGATimestamp(), new RigidTransform2d());
+        RobotMap.liftEnc.reset();
         SmartDashboard.putNumber("In Auto", 1);
 
         String[] autoList = AutoSelector.buildArray();

@@ -99,8 +99,7 @@ public class Robot extends TimedRobot {
         //choose auto command based on lists
         SmartDashboard.putStringArray("Auto selected and game data", new String[]{autoSelected, RobotMap.gameDataAtStart});
         CommandGroup selectedAuto = AutoSelector.autoSelect(RobotMap.gameDataAtStart, autoSelected);
-
-        selectedAuto.start();
+        if(selectedAuto != null) selectedAuto.start();
     }
 
     /**

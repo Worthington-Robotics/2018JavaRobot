@@ -29,7 +29,7 @@ public class Constants {
     public static double BRAKE_RPM = 0.0; //power applied to brake robot nominal: 20
 
     //encoder to vehicle frame
-    public static double ENCODER_X_OFFSET = 15.5;
+    public static double ENCODER_X_OFFSET = 11.0;
     public static double ENCODER_Y_OFFSET = 0.0;
     public static double ENCODER_ROTATION_OFFSET = 0.0;
 

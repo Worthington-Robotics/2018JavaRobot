@@ -13,9 +13,11 @@ import java.util.Map;
 public class PoseEstimator {
 
     private Notifier m_NotifierInstance;
-    protected InterpolatingTreeMap<InterpolatingDouble, RigidTransform2d> field_to_vehicle_;
+    protected InterpolatingTreeMap<InterpolatingDouble, RigidTransform2d> fieldToVehicle;
     protected double leftPrevEncCount = 0;
     protected double rightPrevEncCount = 0;
+    protected static final RigidTransform2d encodersToVehicle = new RigidTransform2d(new Translation2d(Constants.ENCODER_X_OFFSET, Constants.ENCODER_Y_OFFSET),
+            Rotation2d.fromDegrees(Constants.ENCODER_ROTATION_OFFSET));
 
 
     public PoseEstimator(){
@@ -25,14 +27,14 @@ public class PoseEstimator {
     }
 
     public void reset(double start_time, RigidTransform2d initial_field_to_vehicle){
-        field_to_vehicle_ = new InterpolatingTreeMap<>(Constants.OBSERVATION_BUFFER_SIZE);
-        field_to_vehicle_.put(new InterpolatingDouble(start_time), initial_field_to_vehicle);
+        fieldToVehicle = new InterpolatingTreeMap<>(Constants.OBSERVATION_BUFFER_SIZE);
+        fieldToVehicle.put(new InterpolatingDouble(start_time), initial_field_to_vehicle);
         leftPrevEncCount = 0;
         rightPrevEncCount = 0;
     }
 
     public synchronized Map.Entry<InterpolatingDouble, RigidTransform2d> getLatestFieldToVehicle() {
-        return field_to_vehicle_.lastEntry();
+        return fieldToVehicle.lastEntry();
     }
 
     private Runnable loop = () -> {
@@ -41,6 +43,7 @@ public class PoseEstimator {
         double currentRightEncoder = RobotMap.robotDriveV4.getRightEncoder() * ((Constants.WHEEL_DIAMETER * 3.14159) / Constants.COUNTS_PER_REV);
         Rotation2d gyro = Rotation2d.fromDegrees(RobotMap.robotDriveV4.getGyroContinuous());
         RigidTransform2d odometry = generateOdometryFromSensors((currentLeftEncoder - leftPrevEncCount), (currentRightEncoder - rightPrevEncCount), gyro);
+        //odometry = odometry.transformBy(encodersToVehicle); //transforms to encoder frame of refrence
         addObservations(currentTime, odometry);
         outputToSmartDashboard();
         leftPrevEncCount = currentLeftEncoder;
@@ -53,7 +56,7 @@ public class PoseEstimator {
     }
 
     public synchronized void addObservations(double timestamp, RigidTransform2d observation) {
-        field_to_vehicle_.put(new InterpolatingDouble(timestamp), observation);
+        fieldToVehicle.put(new InterpolatingDouble(timestamp), observation);
     }
 
     public void outputToSmartDashboard() {

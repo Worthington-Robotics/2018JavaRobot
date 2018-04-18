@@ -46,6 +46,9 @@ public class PoseEstimator {
         RigidTransform2d odometry = generateOdometryFromSensors((currentLeftEncoder - leftPrevEncCount), (currentRightEncoder - rightPrevEncCount), gyro);
         SmartDashboard.putString("Odometry", odometry.toString());
         SmartDashboard.putString("Inverse Odometry", odometry.inverse().toString());
+        RigidTransform2d inverseTransOdometry = odometry.transformBy(encodersToVehicle.inverse());
+        SmartDashboard.putString("Trans Odometry Inverse", inverseTransOdometry.toString());
+        SmartDashboard.putString("Inverse Trans Odometry Inverse", inverseTransOdometry.inverse().toString());
         RigidTransform2d transOdometry = odometry.transformBy(encodersToVehicle); //transforms to encoder frame of refrence - may need inverse
         SmartDashboard.putString("Trans Odometry", transOdometry.toString());
         SmartDashboard.putString("Inverse Trans Odometry", transOdometry.inverse().toString());

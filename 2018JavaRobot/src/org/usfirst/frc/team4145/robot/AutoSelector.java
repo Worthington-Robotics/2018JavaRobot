@@ -22,6 +22,7 @@ enum UserSelection {
     Auto4("Cross The Line", 4),
     Auto5("Cross The Line Long", 5),
     Auto6("Robot Test", 6),
+    Auto7("Auto Test - 10ft by 10ft", 7),
     Auto20("Do Nothing", 20);
 
     private String name;
@@ -135,6 +136,11 @@ public class AutoSelector {
             case 62:
             case 63:
             case 64: return new AutoTestProct();
+
+            case 71:
+            case 72:
+            case 73:
+            case 74: return new test();
 
             default: return null;
          	

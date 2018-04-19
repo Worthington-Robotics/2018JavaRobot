@@ -69,6 +69,13 @@ public class RigidTransform2d implements Interpolable<RigidTransform2d> {
                 new Rotation2d(cos_theta, sin_theta, false));
     }
 
+    public static RigidTransform2d fromVelocity2(Delta delta){
+        double s = Math.sin(delta.dtheta);
+        double c = Math.cos(delta.dtheta);
+        return new RigidTransform2d(new Translation2d(delta.dx * s - delta.dy * c, delta.dx * c + delta.dy * s),
+                new Rotation2d(c, s, false));
+    }
+
     public Translation2d getTranslation() {
         return translation_;
     }

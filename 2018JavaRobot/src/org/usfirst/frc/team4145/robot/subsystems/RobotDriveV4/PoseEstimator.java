@@ -53,6 +53,7 @@ public class PoseEstimator {
         SmartDashboard.putString("Trans Odometry", transOdometry.toString());
         SmartDashboard.putString("Inverse Trans Odometry", transOdometry.inverse().toString());
         addObservations(currentTime, odometry);
+
         outputToSmartDashboard();
         leftPrevEncCount = currentLeftEncoder;
         rightPrevEncCount = currentRightEncoder;

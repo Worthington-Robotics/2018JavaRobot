@@ -16,8 +16,6 @@ public class PoseEstimator {
     protected InterpolatingTreeMap<InterpolatingDouble, RigidTransform2d> fieldToVehicle;
     protected double leftPrevEncCount = 0;
     protected double rightPrevEncCount = 0;
-    protected static final RigidTransform2d encodersToVehicle = new RigidTransform2d(new Translation2d(Constants.ENCODER_X_OFFSET, Constants.ENCODER_Y_OFFSET),
-            Rotation2d.fromDegrees(Constants.ENCODER_ROTATION_OFFSET));
 
 
     public PoseEstimator(){
@@ -44,14 +42,6 @@ public class PoseEstimator {
         double currentRightEncoder = RobotMap.robotDriveV4.getRightEncoder() * ((Constants.WHEEL_DIAMETER * 3.14159) / Constants.COUNTS_PER_REV);
         Rotation2d gyro = Rotation2d.fromDegrees(RobotMap.robotDriveV4.getGyroContinuous());
         RigidTransform2d odometry = generateOdometryFromSensors((currentLeftEncoder - leftPrevEncCount), (currentRightEncoder - rightPrevEncCount), gyro);
-        SmartDashboard.putString("Odometry", odometry.toString());
-        SmartDashboard.putString("Inverse Odometry", odometry.inverse().toString());
-        RigidTransform2d inverseTransOdometry = odometry.transformBy(encodersToVehicle.inverse());
-        SmartDashboard.putString("Trans Odometry Inverse", inverseTransOdometry.toString());
-        SmartDashboard.putString("Inverse Trans Odometry Inverse", inverseTransOdometry.inverse().toString());
-        RigidTransform2d transOdometry = odometry.transformBy(encodersToVehicle); //transforms to encoder frame of refrence - may need inverse
-        SmartDashboard.putString("Trans Odometry", transOdometry.toString());
-        SmartDashboard.putString("Inverse Trans Odometry", transOdometry.inverse().toString());
         addObservations(currentTime, odometry);
 
         outputToSmartDashboard();

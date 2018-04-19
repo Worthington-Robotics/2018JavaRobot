@@ -12,11 +12,11 @@ public class test extends CommandGroupV2 {
 
     public test() {
         List<Path.Waypoint> first_path = new ArrayList<>();
-        first_path.add(new Path.Waypoint(new Translation2d(0, 0), 30.0));
-        first_path.add(new Path.Waypoint(new Translation2d(60, 0), 15.0));
-        first_path.add(new Path.Waypoint(new Translation2d(60, 120), 15.0));
+        first_path.add(new Path.Waypoint(new Translation2d(0, 0), 50.0));
+        first_path.add(new Path.Waypoint(new Translation2d(60, 0), 50.0));
+        first_path.add(new Path.Waypoint(new Translation2d(60, -400), 50.0));
 
-        addParallel(new FollowPath(new Path(first_path), false), 20.000);
+        addParallel(new FollowPath(new Path(first_path), false), 200.000);
     }
 
 }

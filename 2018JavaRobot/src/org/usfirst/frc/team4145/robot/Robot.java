@@ -57,8 +57,6 @@ public class Robot extends TimedRobot {
         SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray()); // publishes the auto list to the dashboard "Auto Selector"
         RobotMap.robotDriveV4.enableTo(0, false);
         SmartDashboard.putNumber("In Auto", 0);
-        SmartDashboard.putNumber("Auto State", -1);
-        SmartDashboard.putString("Auto State Machine Status", "State machine not yet started");
         SmartDashboard.putNumber("Lift Encoder Target", 0);
         SmartDashboard.putNumber("Wheel Encoder Target", 0);
         RobotMap.robotDriveV4.setDynamicBrakeMode(true, true, true, true);
@@ -84,8 +82,8 @@ public class Robot extends TimedRobot {
     @Override
     public void autonomousInit() {
         RobotMap.loggingSystem.enablePrint(true);
-        RobotMap.robotDriveV4.configAuto();
         RobotMap.robotPose.reset(Timer.getFPGATimestamp(), new RigidTransform2d());
+        RobotMap.robotDriveV4.configAuto();
         RobotMap.liftEnc.reset();
         SmartDashboard.putNumber("In Auto", 1);
 

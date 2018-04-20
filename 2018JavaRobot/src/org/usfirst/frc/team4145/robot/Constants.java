@@ -24,7 +24,7 @@ public class Constants {
     public static double WHEEL_DIAMETER = 6.0;
     public static double COUNTS_PER_REV = 4096; //encoder counts per revolution
     public static double PATH_FOLLOWING_LOOKAHEAD = 24.0; // lookahead in inches
-    public static double PATH_FOLLOWING_MAX_VELOCITY = 84.0; //overall max velocity - includes turns - in inches/sec
+    public static double PATH_FOLLOWING_MAX_VELOCITY = 200.0; //overall max velocity - includes turns - in inches/sec
     public static double PATH_FOLLOWING_MAX_ACCELERATION = 42.0; // overall max acceleration - includes turns - in inches/sec^2
     public static double BRAKE_RPM = 0.0; //power applied to brake robot nominal: 20
 

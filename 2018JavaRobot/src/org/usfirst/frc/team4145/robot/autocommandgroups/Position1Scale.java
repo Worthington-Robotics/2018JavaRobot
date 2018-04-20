@@ -41,7 +41,7 @@ public class Position1Scale extends CommandGroupV2 {
             addSequential(new HighLiftUp(), 3.000);
 
             addSequential(new WaitForPathMarker("end"), 10.000);
-            //addSequential(new ContingentWait(ContingentWait.Target.Scale), 20.000);
+            addSequential(new ContingentWait(ContingentWait.Target.Scale), 20.000);
             addSequential(new CubeMovement(CubeMovement.CubeState.RollOut), 0.500);
 
             addParallel(new LiftToPosition(-800), 1.000);
@@ -70,46 +70,9 @@ public class Position1Scale extends CommandGroupV2 {
 
             addSequential(new GyroToAngle(-85), 1.000);
 
-            //addSequential(new ContingentWait(ContingentWait.Target.Scale), 20.000);
+            addSequential(new ContingentWait(ContingentWait.Target.Scale), 20.000);
 
             addSequential(new CubeMovement(CubeMovement.CubeState.RollOut), 1.000);
-
-
-            /*addParallel(new LiftToPosition(-800), 3.000);
-            addParallel(new HighLiftDown(), 3.000);
-            addSequential(new DriveStateWait(), 3.000);
-
-            addParallel(new LiftToPosition(-800), 1.000);
-            addParallel(new HighLiftDown(), 1.000);
-            addSequential(new Wait(), 1.000);
-
-            addParallel(new LiftToPosition(-800), 1.000);
-            addParallel(new HighLiftDown(), 1.000);
-            addSequential(new GyroToAngle(80), 1.500);
-
-            addParallel(new LiftToPosition(-800), 1.000);
-            addParallel(new HighLiftDown(), 1.000);
-            addParallel(new CubeMovement(CubeMovement.CubeState.Pickup), 3.000);
-            addSequential(new FollowPath(new Path(third_path), false), 20.000);
-
-            addSequential(new Wait(), 1.000);
-
-            addParallel(new CubeMovement(CubeMovement.CubeState.Pickup), 0.500);
-            addSequential(new FollowPath(new Path(fourth_path), true), 20.000);
-
-            addParallel(new CubeMovement(CubeMovement.CubeState.Pickup), 0.500);
-            addSequential(new Wait(), 1.000);
-
-            addParallel(new LiftToPosition(800), 1.500);
-            addParallel(new HighLiftUp(), 1.500);
-            addSequential(new GyroToAngle(-90), 1.500);
-
-            addParallel(new LiftToPosition(800), 4.000);
-            addParallel(new HighLiftUp(), 4.000);
-            addParallel(new FollowPath(new Path(fifth_path), false), 20.000);
-            addSequential(new WaitForPathMarker("end 2"), 10.000);
-            //addSequential(new ContingentWait(ContingentWait.Target.Switch), 20.000);
-            addSequential(new CubeMovement(CubeMovement.CubeState.Shoot), 1.000);*/
         }
 
         //Right

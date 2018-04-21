@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Position1Scale extends CommandGroupV2 {
+
+    public boolean shift = true;
+
     public Position1Scale(int autonumber) {
         //Left
         if (autonumber == 0) {
@@ -77,7 +80,13 @@ public class Position1Scale extends CommandGroupV2 {
 
         //Right
         if (autonumber == 1) {
+            List<Path.Waypoint> first_path = new ArrayList<>();
+            first_path.add(new Path.Waypoint(new Translation2d(0, 0), 40.0));
+            first_path.add(new Path.Waypoint(new Translation2d(shift? 191 :209,0), 40.0, "lift"));
+            first_path.add(new Path.Waypoint(new Translation2d(shift? 191 :209, 100), 40.0));
 
+            addParallel(new LiftToPosition(600), 1.000);
+            addSequential(new FollowPath(new Path(first_path), false), 20.000);
         }
     }
 

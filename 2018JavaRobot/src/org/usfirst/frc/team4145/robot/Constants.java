@@ -16,8 +16,11 @@ public class Constants {
     public static double LOGGING_UPDATE_RATE = 0.020;
     public static double STATE_MACHINE_UPDATE_RATE = 0.010;
 
-    //Pure pursuit related values
+    //MP Test mode values
     public static boolean ENABLE_MP_TEST_MODE = false; //enables motion profiling test across all modes
+    public static double MP_TEST_SPEED = 152;
+
+    //Pure pursuit related values
     public static int OBSERVATION_BUFFER_SIZE = 10; //size of pose observation buffer
     public static double TRACK_WIDTH_INCHES = 23.5;
     public static double TRACK_SCRUB_FACTOR = 0.5;
@@ -27,11 +30,6 @@ public class Constants {
     public static double PATH_FOLLOWING_MAX_VELOCITY = 200.0; //overall max velocity - includes turns - in inches/sec
     public static double PATH_FOLLOWING_MAX_ACCELERATION = 42.0; // overall max acceleration - includes turns - in inches/sec^2
     public static double BRAKE_RPM = 0.0; //power applied to brake robot nominal: 20
-
-    //encoder to vehicle frame
-    public static double ENCODER_X_OFFSET = 11.0;
-    public static double ENCODER_Y_OFFSET = 0.0;
-    public static double ENCODER_ROTATION_OFFSET = 0.0;
 
     //logging directories
     public static String DRIVE_PATH_1 = "/media/sda"; // top usb port
@@ -43,28 +41,8 @@ public class Constants {
     public static double CUBEMANIP_FAST_DROP = 0.9000;
     public static double CUBEMANIP_PICKUP = -0.7500;
 
-    //position 2 switch values
-    public static int LIFT_MOVE_TO_TOP = 0;
-    public static int POS2SWITCH_WALL_BREAK = 19*20;
-    public static int POS2SWITCH_TURN_ONE = 45;
-    public static int POS2SWITCH_LEFT_DISTANCE = 19*100;
-    public static int POS2SWITCH_RIGHT_DISTANCE = 19*80;
-    public static int POS2SWITCH_TURN_TWO = 45;
-    public static int POS2SWITCH_LEFT_SWITCH_ROLL = 19*28;
-    public static int POS2SWITCH_RIGHT_SWITCH_ROLL = 19*50;
-
-    //close scale variables
-    public static int CLOSE_SCALE_DISTANCE = 19 * 265;
-    public static double CLOSE_SCALE_TURN = -50;
-    public static int CLOSE_SCALE_ROLL = 19*0;
-    public static int LIFT_TO_SCALE = 200;
-
-    //far scale variables
-    public static int FAR_SCALE_DISTANCE_1 = 19 * 220;
-    public static double FAR_SCALE_TURN_1 = 85;
-    public static int FAR_SCALE_DISTANCE_2 = 19*225;
-    public static double FAR_SCALE_TURN_2 = -107;
-    public static int FAR_SCALE_DISTANCE_3 = 19*40; //was 75
+    //auto variables
+    public static boolean SHIFT = false;
 
     /*
      * ----------------------------
@@ -197,7 +175,6 @@ public class Constants {
      * || Spilt Constants ||
      * ---------------------
      */
-    public static double MP_TESTSPEED = 152; //100 rpm ~ 31 in/s ~ 3ft/s
 
     private static double PRACTICE_RIGHT_KF = 0.3200; //nominal: 0.3200
     private static double PRACTICE_RIGHT_KP = 0.6000; //nominal: 0.8000
@@ -211,15 +188,15 @@ public class Constants {
 
 
 
-    private static double COMPETITION_RIGHT_KF = 0.3900;
-    private static double COMPETITION_RIGHT_KP = 0.4000;
+    private static double COMPETITION_RIGHT_KF = 0.3200;
+    private static double COMPETITION_RIGHT_KP = 0.6000;
     private static double COMPETITION_RIGHT_KI = 0.0000;
-    private static double COMPETITION_RIGHT_KD = 0.0000;
+    private static double COMPETITION_RIGHT_KD = 3.0000;
 
-    private static double COMPETITION_LEFT_KF = 0.3900;
-    private static double COMPETITION_LEFT_KP = 0.4000; //test bench motor
+    private static double COMPETITION_LEFT_KF = 0.3200;
+    private static double COMPETITION_LEFT_KP = 0.6000; //test bench motor
     private static double COMPETITION_LEFT_KI = 0.0000;
-    private static double COMPETITION_LEFT_KD = 0.0000;
+    private static double COMPETITION_LEFT_KD = 3.0000;
 
 
 

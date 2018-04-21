@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4145.robot.autocommandgroups;
 
+import org.usfirst.frc.team4145.robot.Constants;
 import org.usfirst.frc.team4145.robot.commands.autoonly.*;
 import org.usfirst.frc.team4145.robot.shared.AutoTrajectory.Path;
 import org.usfirst.frc.team4145.robot.shared.AutoTrajectory.Translation2d;
@@ -10,16 +11,14 @@ import java.util.List;
 
 public class Position1Scale extends CommandGroupV2 {
 
-    public boolean shift = true;
-
     public Position1Scale(int autonumber) {
         //Left
         if (autonumber == 0) {
             List<Path.Waypoint> first_path = new ArrayList<>();
-            first_path.add(new Path.Waypoint(new Translation2d(0, 0), 80.0));
-            first_path.add(new Path.Waypoint(new Translation2d(120,0), 70.0, "lift"));
-            first_path.add(new Path.Waypoint(new Translation2d(160, 0), 60.0));
-            first_path.add(new Path.Waypoint(new Translation2d(200, 0), 50.0));
+            first_path.add(new Path.Waypoint(new Translation2d(0, 0), 90.0));
+            first_path.add(new Path.Waypoint(new Translation2d(60,0), 90.0, "lift"));
+            first_path.add(new Path.Waypoint(new Translation2d(150, 0), 70.0));
+            first_path.add(new Path.Waypoint(new Translation2d(200, 0), 40.0));
             first_path.add(new Path.Waypoint(new Translation2d(218, 0), 40.0));
             first_path.add(new Path.Waypoint(new Translation2d(250, 15), 40.0, "end"));
             first_path.add(new Path.Waypoint(new Translation2d(256, 21), 40.0));
@@ -82,11 +81,45 @@ public class Position1Scale extends CommandGroupV2 {
         if (autonumber == 1) {
             List<Path.Waypoint> first_path = new ArrayList<>();
             first_path.add(new Path.Waypoint(new Translation2d(0, 0), 40.0));
-            first_path.add(new Path.Waypoint(new Translation2d(shift? 191 :209,0), 40.0, "lift"));
-            first_path.add(new Path.Waypoint(new Translation2d(shift? 191 :209, 100), 40.0));
+            first_path.add(new Path.Waypoint(new Translation2d(Constants.SHIFT? 191 :209,0), 40.0, "lift"));
+            first_path.add(new Path.Waypoint(new Translation2d(Constants.SHIFT? 191 :209, 100), 40.0));
 
             addParallel(new LiftToPosition(600), 1.000);
             addSequential(new FollowPath(new Path(first_path), false), 20.000);
+        }
+
+        if(autonumber == 2){
+            List<Path.Waypoint> first_path = new ArrayList<>();
+            first_path.add(new Path.Waypoint(new Translation2d(0, 0), 60.0));
+            first_path.add(new Path.Waypoint(new Translation2d(180, 0), 40.0));
+            first_path.add(new Path.Waypoint(new Translation2d(209,0), 40.0));
+            first_path.add(new Path.Waypoint(new Translation2d(209,100), 50.0, "lift"));
+            first_path.add(new Path.Waypoint(new Translation2d(209, 190), 40.0));
+            first_path.add(new Path.Waypoint(new Translation2d(248, 200), 40.0, "end"));
+            first_path.add(new Path.Waypoint(new Translation2d(250, 200), 40.0));
+
+            List<Path.Waypoint> second_path = new ArrayList<>();
+            second_path.add(new Path.Waypoint(new Translation2d(250,200),40.0));
+            second_path.add(new Path.Waypoint(new Translation2d(230,200),40.0));
+
+            addParallel(new LiftToPosition(600), 1.000);
+            addParallel(new FollowPath(new Path(first_path), false), 20.000);
+            addSequential(new WaitForPathMarker("lift"));
+
+            addSequential(new HighLiftUp(), 3.000);
+
+            addSequential(new WaitForPathMarker("end"), 10.000);
+
+            addSequential(new GyroToAngle(20), 1.000);
+
+            addSequential(new CubeMovement(CubeMovement.CubeState.Shoot), 1.000);
+
+            addSequential(new FollowPath(new Path(second_path), true), 20.000);
+
+            addParallel(new LiftToPosition(-800), 5.000);
+            addParallel(new HighLiftDown(), 5.000);
+            addSequential(new GyroToAngle(180), 5.000);
+
         }
     }
 

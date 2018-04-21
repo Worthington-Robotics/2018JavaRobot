@@ -33,6 +33,7 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
     private double pidOutput = 0, lastval = 0; //DO NOT MODIFY
     private boolean enLock = false, isReversed = false;
     private double[] operatorInput = {0, 0, 0}; //last input set from joystick update
+    private int cycles = 0;
     private PIDSourceType type = PIDSourceType.kDisplacement;
     private DriveControlState driveControlState = DriveControlState.OPEN_LOOP;
     private AdaptivePurePursuitController pathFollowingController;
@@ -53,6 +54,7 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
         synchronized (RobotDriveV4.this){
             if(Constants.ENABLE_MP_TEST_MODE) driveControlState = DriveControlState.PROFILING_TEST;
             if(DriverStation.getInstance().isEnabled()){
+                cycles++;
                 switch (driveControlState){
                     case PATH_FOLLOWING_CONTROL:
                         updatePathFollower();
@@ -60,7 +62,9 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
                         break;
 
                     case PROFILING_TEST:
-                        driveTank(Constants.MP_TESTSPEED, Constants.MP_TESTSPEED);
+                        if(DriverStation.getInstance().isAutonomous()) {
+                            driveTank(Constants.MP_TEST_SPEED, Constants.MP_TEST_SPEED);
+                        }
                         break;
 
                     default: //open loop
@@ -79,6 +83,9 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
                         driveCartesian(operatorInput[1], -operatorInput[0], operatorInput[2]);
                         break;
                 }
+            }
+            else{
+                cycles = 0;
             }
             smartDashboardUpdates();
         }
@@ -266,8 +273,9 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
      * @param rightSpeed right speed in RPM
      */
     private void driveTank(double leftSpeed, double rightSpeed) {
-        //SmartDashboard.putNumberArray("Tank RPMS", new double[]{leftSpeed, rightSpeed});
+        SmartDashboard.putNumberArray("Tank/ RPMS", new double[]{leftSpeed, rightSpeed});
         lastval = leftSpeed;
+        SmartDashboard.putNumberArray("Tank/ U MS", new double[]{RPMToUnitsPer100Ms(leftSpeed), RPMToUnitsPer100Ms(rightSpeed)});
         m_MixedDriveInstance.tankDrive(RPMToUnitsPer100Ms(leftSpeed) , RPMToUnitsPer100Ms(rightSpeed));
     }
 

@@ -18,13 +18,15 @@ enum UserSelection {
 
     Auto1("Position 1 Scale Wait", 1),
     Auto2("Position 1 Scale Deliver", 2),
-    Auto3("Position 2 Switch", 3),
-    Auto4("Position 3 Scale Wait", 4),
-    Auto5("Position 3 Scale Deliver", 5),
-    Auto6("Cross The Line",6),
-    Auto7("Cross The Line Long", 7),
-    Auto8("Robot Test", 8),
-    Auto9("Auto Test - 10ft by 10ft", 9),
+    Auto3("Position 1 Scale Backside Switch", 3),
+    Auto4("Position 2 Switch", 4),
+    Auto5("Position 3 Scale Wait", 5),
+    Auto6("Position 3 Scale Deliver",6),
+    Auto7("Position 3 Scale Backside Switch", 7),
+    Auto8("Cross The Line",8),
+    Auto9("Cross The Line Long", 9),
+    Auto10("Robot Test", 10),
+    Auto11("Auto Test - 10ft by 10ft", 11),
     Auto20("Do Nothing", 20);
 
     private String name;
@@ -119,40 +121,50 @@ public class AutoSelector {
             case 23: return new Position1Scale(0); //scale left
             case 24: return new Position1Scale(2); //scale right - deliver
 
-            case 31: return new Position2Switch(0); //Switch Right
-            case 32: return new Position2Switch(0); //Switch Right
-            case 33: return new Position2Switch(1); //Switch Left
-            case 34: return new Position2Switch(1); //Switch Left
+            case 31: return new Position1Scale(0); //scale left
+            case 32: return new Position1Scale(3); //scale right - switch
+            case 33: return new Position1Scale(0); //scale left
+            case 34: return new Position1Scale(1); //scale right - no deliver
 
-            case 41: return new Position3Scale(1); //scale left  - no deliver
-            case 42: return new Position3Scale(0); //scale right
-            case 43: return new Position3Scale(1); //scale left  - no deliver
-            case 44: return new Position3Scale(0); //scale right
+            case 41: return new Position2Switch(0); //Switch Right
+            case 42: return new Position2Switch(0); //Switch Right
+            case 43: return new Position2Switch(1); //Switch Left
+            case 44: return new Position2Switch(1); //Switch Left
 
-            case 51: return new Position3Scale(2); //scale left  - deliver
+            case 51: return new Position3Scale(1); //scale left  - no deliver
             case 52: return new Position3Scale(0); //scale right
-            case 53: return new Position3Scale(2); //scale left  - deliver
+            case 53: return new Position3Scale(1); //scale left  - no deliver
             case 54: return new Position3Scale(0); //scale right
 
-            case 61:
-            case 62:
-            case 63:
-            case 64: return new CrossTheLine();
+            case 61: return new Position3Scale(2); //scale left  - deliver
+            case 62: return new Position3Scale(0); //scale right
+            case 63: return new Position3Scale(2); //scale left  - deliver
+            case 64: return new Position3Scale(0); //scale right
 
-            case 71:
-            case 72:
-            case 73:
-            case 74: return new CrossLineLong();
+            case 71: return new Position3Scale(1); //scale left  - no deliver
+            case 72: return new Position3Scale(0); //scale right
+            case 73: return new Position3Scale(3); //scale left  - switch
+            case 74: return new Position3Scale(0); //scale right
 
             case 81:
             case 82:
             case 83:
-            case 84: return new AutoTestProct();
+            case 84: return new CrossTheLine();
 
             case 91:
             case 92:
             case 93:
-            case 94: return new test();
+            case 94: return new CrossLineLong();
+
+            case 101:
+            case 102:
+            case 103:
+            case 104: return new AutoTestProct();
+
+            case 111:
+            case 112:
+            case 113:
+            case 114: return new test();
 
 
             default: return null;

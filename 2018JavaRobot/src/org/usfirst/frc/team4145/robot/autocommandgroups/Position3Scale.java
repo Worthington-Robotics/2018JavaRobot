@@ -123,8 +123,53 @@ public class Position3Scale extends CommandGroupV2 {
 			addSequential(new GyroToAngle(180), 5.000);
 
 		}
+		if(autonumber == 3){
+			List<Path.Waypoint> first_path = new ArrayList<>();
+			first_path.add(new Path.Waypoint(new Translation2d(0, 0), 100.0));
+			first_path.add(new Path.Waypoint(new Translation2d(108, 0), 70.0));
+			first_path.add(new Path.Waypoint(new Translation2d(180,0), 40.0));
+			first_path.add(new Path.Waypoint(new Translation2d(205,-28), 40.0));
 
+			List<Path.Waypoint> second_path = new ArrayList<>();
+			second_path.add(new Path.Waypoint(new Translation2d(205,-28),40.0));
+			second_path.add(new Path.Waypoint(new Translation2d(177,-56),40.0));
 
+			List<Path.Waypoint> third_path = new ArrayList<>();
+			third_path.add(new Path.Waypoint(new Translation2d(177,-56),40.0));
+			third_path.add(new Path.Waypoint(new Translation2d(190,-45),40.0));
+
+			List<Path.Waypoint> fourth_path = new ArrayList<>();
+			fourth_path.add(new Path.Waypoint(new Translation2d(190,-45),40.0));
+			fourth_path.add(new Path.Waypoint(new Translation2d(174,-56),40.0));
+
+			List<Path.Waypoint> fifth_path = new ArrayList<>();
+			fifth_path.add(new Path.Waypoint(new Translation2d(187,-47),80.0));
+			fifth_path.add(new Path.Waypoint(new Translation2d(187,-100),80.0));
+
+			addParallel(new LiftToPosition(600), 1.000);
+			addSequential(new FollowPath(new Path(first_path), false), 20.000);
+
+			addSequential(new GyroToAngle(-72), 1.000);
+
+			addSequential(new FollowPath(new Path(second_path), false), 2.000);
+
+			addSequential(new CubeMovement(CubeMovement.CubeState.Shoot), 0.500);
+
+			addParallel(new LiftToPosition(-800), 3.000);
+			addParallel(new FollowPath(new Path(third_path), true), 2.000);
+			addSequential(new Wait(), 2.000);
+
+			addParallel(new LiftToPosition(-800), 2.000);
+			addParallel(new CubeMovement(CubeMovement.CubeState.Pickup), 1.500);
+			addSequential(new FollowPath(new Path(fourth_path), false), 2.000);
+
+			addParallel(new LiftToPosition(800), 1.000);
+			addSequential(new GyroToAngle(60), 1.00);
+
+			addParallel(new LiftToPosition(800), 2.000);
+			addSequential(new FollowPath(new Path(fifth_path), false), 4.000);
+
+		}
 	}
 }
 

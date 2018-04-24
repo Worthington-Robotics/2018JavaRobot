@@ -13,8 +13,9 @@ public class test extends CommandGroupV2 {
     public test() {
         List<Path.Waypoint> first_path = new ArrayList<>();
         first_path.add(new Path.Waypoint(new Translation2d(0, 0), 50.0));
-        first_path.add(new Path.Waypoint(new Translation2d(60, 0), 50.0));
-        first_path.add(new Path.Waypoint(new Translation2d(60, -400), 50.0));
+        first_path.add(new Path.Waypoint(new Translation2d(60, 0), 40.0));
+        first_path.add(new Path.Waypoint(new Translation2d(120, 60), 40.0));
+        first_path.add(new Path.Waypoint(new Translation2d(120, 120), 40.0));
 
         addParallel(new FollowPath(new Path(first_path), false), 200.000);
     }

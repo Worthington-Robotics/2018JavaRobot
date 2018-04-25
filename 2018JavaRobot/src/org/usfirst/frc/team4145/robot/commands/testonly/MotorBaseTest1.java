@@ -30,8 +30,8 @@ public class MotorBaseTest1 extends Command {
 
 	public void end() {
 		RobotMap.robotDriveV4.setOperatorInput(noPower);
-		SmartDashboard.putBoolean("Motor Check Test",(RobotMap.robotDriveV4.getRightEncoder() > 10000 && RobotMap.robotDriveV4.getRightEncoder() < 13000)
-				&& (RobotMap.robotDriveV4.getLeftEncoder() > 10000 && RobotMap.robotDriveV4.getLeftEncoder() < 13000));
+		SmartDashboard.putBoolean("Motor Check Test",(RobotMap.robotDriveV4.getRightEncoder() > 113000 && RobotMap.robotDriveV4.getRightEncoder() < 115000)
+				&& (RobotMap.robotDriveV4.getLeftEncoder() > 113000 && RobotMap.robotDriveV4.getLeftEncoder() < 115000));
 	}
 
 	public void interrupted() {

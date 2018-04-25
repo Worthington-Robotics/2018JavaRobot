@@ -17,9 +17,6 @@ import org.usfirst.frc.team4145.robot.shared.AutoTrajectory.RigidTransform2d;
 import org.usfirst.frc.team4145.robot.shared.LoggingSystem;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-
-import java.util.concurrent.ConcurrentLinkedQueue;
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot

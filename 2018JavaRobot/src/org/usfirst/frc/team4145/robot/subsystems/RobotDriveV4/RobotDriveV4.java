@@ -33,7 +33,6 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
     private double pidOutput = 0, lastval = 0; //DO NOT MODIFY
     private boolean enLock = false, isReversed = false;
     private double[] operatorInput = {0, 0, 0}; //last input set from joystick update
-    private int cycles = 0;
     private PIDSourceType type = PIDSourceType.kDisplacement;
     private DriveControlState driveControlState = DriveControlState.OPEN_LOOP;
     private AdaptivePurePursuitController pathFollowingController;
@@ -54,7 +53,6 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
         synchronized (RobotDriveV4.this){
             if(Constants.ENABLE_MP_TEST_MODE) driveControlState = DriveControlState.PROFILING_TEST;
             if(DriverStation.getInstance().isEnabled()){
-                cycles++;
                 switch (driveControlState){
                     case PATH_FOLLOWING_CONTROL:
                         updatePathFollower();
@@ -83,9 +81,6 @@ public class RobotDriveV4 extends Subsystem implements PIDOutput, PIDSource {
                         driveCartesian(operatorInput[1], -operatorInput[0], operatorInput[2]);
                         break;
                 }
-            }
-            else{
-                cycles = 0;
             }
             smartDashboardUpdates();
         }

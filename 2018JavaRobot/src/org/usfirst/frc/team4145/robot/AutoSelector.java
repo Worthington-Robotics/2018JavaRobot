@@ -15,7 +15,6 @@ import org.usfirst.frc.team4145.robot.shared.StateMachineV2.CommandGroupV2;
 
 enum UserSelection {
 
-
     Auto1("Position 1 Scale Wait", 1),
     Auto2("Position 1 Scale Deliver", 2),
     Auto3("Position 1 Scale Backside Switch", 3),
@@ -165,7 +164,6 @@ public class AutoSelector {
             case 112:
             case 113:
             case 114: return new test();
-
 
             default: return null;
          	

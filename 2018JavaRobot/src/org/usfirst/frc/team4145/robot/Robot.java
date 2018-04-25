@@ -87,9 +87,8 @@ public class Robot extends TimedRobot {
         RobotMap.loggingSystem.enablePrint(true);
         RobotMap.drive.setDynamicBrakeMode(false, false, false,false);
         //RobotMap.drive.setDynamicBrakeMode(new boolean[] {true, true, true, true});
-        RobotMap.ahrs.reset();
-        RobotMap.rightWheelEncoder.reset();
-        RobotMap.leftWheelEncoder.reset();
+        RobotMap.drive.reset();
+
         SmartDashboard.putNumber("In Auto", 1);
 
         String[] autoList = AutoSelector.buildArray();
@@ -138,7 +137,7 @@ public class Robot extends TimedRobot {
         RobotMap.drive.setDynamicBrakeMode(false, false, false,false);
         //RobotMap.drive.setDynamicBrakeMode(new boolean[] {true, true, true, true});
         RobotMap.ahrs.reset();
-        RobotMap.rightWheelEncoder.reset();
+        RobotMap.drive.reset();
         SmartDashboard.putNumber("In Auto", 1);
 
         String[] autoList = AutoSelector.buildArray();

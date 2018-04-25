@@ -36,7 +36,7 @@ public class RobotMap {
 
     // sensors
     public static AHRS ahrs; // AHRS system on navx
-    public static Encoder rightWheelEncoder, leftWheelEncoder, liftEnc;
+    public static Encoder liftEnc;
     public static DigitalInput switchHBase, switchHTop, botHighSw, botLowSw;
 
     // subsystems public static
@@ -71,9 +71,6 @@ public class RobotMap {
         // all sensor objects here
         ahrs = new AHRS(SPI.Port.kMXP); // finish declaring AHRS to MXP SPI bus
         ahrs.reset();
-        rightWheelEncoder = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
-        leftWheelEncoder = Constants.isCompBot()? new Encoder(2,3,false, Encoder.EncodingType.k4X):
-                new Encoder(4, 5, false, Encoder.EncodingType.k4X);
         liftEnc = Constants.isCompBot()? new Encoder(4, 5, true, Encoder.EncodingType.k4X):
                 new Encoder(2,3,false, Encoder.EncodingType.k4X) ;
         switchHTop = new DigitalInput(6);

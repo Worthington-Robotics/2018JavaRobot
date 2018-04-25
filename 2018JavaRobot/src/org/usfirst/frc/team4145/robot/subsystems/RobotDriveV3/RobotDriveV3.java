@@ -24,10 +24,6 @@ public class RobotDriveV3 extends Subsystem {
     private double[] lastAutoOutput = {0,0,0}; //left, right, turn (not used by profiling)
 
     public RobotDriveV3() {
-        //enableVcomp(RobotMap.driveRearRight);
-        //enableVcomp(RobotMap.driveRearLeft);
-        //enableVcomp(RobotMap.driveFrontRight);
-        //enableVcomp(RobotMap.driveFrontLeft);
         m_MixedDriveInstance = new MixedDrive(RobotMap.driveFrontLeft, RobotMap.driveRearLeft, RobotMap.driveFrontRight, RobotMap.driveRearRight);
         m_TeleopDriveInstance = new TeleopDrive();
         m_AutoDriveInstance = new AutoDrive();
@@ -78,6 +74,28 @@ public class RobotDriveV3 extends Subsystem {
         return ((RobotMap.ahrs.getYaw() + 360) % 360); //add 360 to make all positive then mod by 360 to get remainder
     }
 
+    public int getLeftEncoder(){
+        return RobotMap.driveFrontLeft.getSensorCollection().getQuadraturePosition();
+    }
+
+    public int getRightEncoder(){
+        return RobotMap.driveFrontRight.getSensorCollection().getQuadraturePosition();
+    }
+
+    public void resetEncoders(){
+        RobotMap.driveFrontLeft.getSensorCollection().setQuadraturePosition(0,0);
+        RobotMap.driveFrontRight.getSensorCollection().setQuadraturePosition(0,0);
+    }
+
+    public void resetGyro(){
+        RobotMap.ahrs.reset();
+    }
+
+    public void reset(){
+        resetEncoders();
+        resetGyro();
+    }
+
     public void setNeutralMode(boolean brake) {
         if (brake) {
             setDynamicBrakeMode(true, true, true, true);
@@ -110,8 +128,8 @@ public class RobotDriveV3 extends Subsystem {
     }
 
     private void smartDashboardUpdates() {
-        SmartDashboard.putNumber("Right Wheel Encoder", RobotMap.rightWheelEncoder.get());
-        SmartDashboard.putNumber("Left Wheel Encoder", RobotMap.leftWheelEncoder.get());
+        SmartDashboard.putNumber("Right Wheel Encoder", getRightEncoder());
+        SmartDashboard.putNumber("Left Wheel Encoder", getLeftEncoder());
         SmartDashboard.putNumber("FPGA Time", Timer.getFPGATimestamp());
         SmartDashboard.putNumber("Gyro Angle", getGyro());
         SmartDashboard.putNumber("Left Motor Voltage", RobotMap.driveFrontLeft.getMotorOutputVoltage());

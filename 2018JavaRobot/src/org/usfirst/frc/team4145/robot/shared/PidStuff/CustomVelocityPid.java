@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4145.robot.shared.PidStuff;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -9,7 +10,7 @@ public class CustomVelocityPid {
 
     private static int instances = 0;
     private final double kP, kI, kD, kV, kA, nominalDt;
-    private Encoder m_EncoderInstance;
+    private WPI_TalonSRX m_SRXInstance;
     private Trajectory m_Trajectory;
     private Notifier m_Notifier;
     private boolean isEnabled = false, isFinished = false;
@@ -21,8 +22,8 @@ public class CustomVelocityPid {
 
     private Runnable runnable = () -> calculate();
 
-    public CustomVelocityPid(double kP, double kI, double kD, double kV, double kA, Encoder encoder, Trajectory trajectory, double timing, double offset) {
-        m_EncoderInstance = encoder;
+    public CustomVelocityPid(double kP, double kI, double kD, double kV, double kA, WPI_TalonSRX srx, Trajectory trajectory, double timing, double offset) {
+        m_SRXInstance = srx;
         this.kP = kP;
         this.kI = kI;
         this.kD = kD;
@@ -95,7 +96,7 @@ public class CustomVelocityPid {
                 toWrite = feedForward;
 
                 //Calculate feed back part of output
-                error = setpoint.position - (m_EncoderInstance.getDistance() / 228); //228 counts per foot
+                error = setpoint.position - (m_SRXInstance.getSensorCollection().getQuadraturePosition() / 2607); //2607 counts per foot
                 errorDeriv = ((error - errorLast) / nominalDt) - setpoint.velocity;
                 feedBack = kP * error + kD * errorDeriv;
                 toWrite += feedBack;

@@ -38,8 +38,8 @@ public class AutoDrive implements DriveUpdater{
 
 
     AutoDrive() {
-        m_LeftVelocityPID = new CustomVelocityPid(LEFT_kP, LEFT_kI, LEFT_kD, LEFT_kV, LEFT_kA, RobotMap.leftWheelEncoder, null, Constants.DRIVETRAIN_UPDATE_RATE, offset);
-        m_RightVelocityPID = new CustomVelocityPid(RIGHT_kP, RIGHT_kI, RIGHT_kD, RIGHT_kV, RIGHT_kA, RobotMap.rightWheelEncoder, null, Constants.DRIVETRAIN_UPDATE_RATE, offset);
+        m_LeftVelocityPID = new CustomVelocityPid(LEFT_kP, LEFT_kI, LEFT_kD, LEFT_kV, LEFT_kA, RobotMap.driveFrontLeft, null, Constants.DRIVETRAIN_UPDATE_RATE, offset);
+        m_RightVelocityPID = new CustomVelocityPid(RIGHT_kP, RIGHT_kI, RIGHT_kD, RIGHT_kV, RIGHT_kA, RobotMap.driveFrontRight, null, Constants.DRIVETRAIN_UPDATE_RATE, offset);
 
     }
 

@@ -13,7 +13,7 @@ public class Constants {
 
     //update times / rates
     public static double DRIVETRAIN_UPDATE_RATE = 0.010;
-    public static double LOGGING_UPDATE_RATE = 0.020;
+    public static double LOGGING_UPDATE_RATE = 0.050;
     public static double STATE_MACHINE_UPDATE_RATE = 0.010;
 
     //MP Test mode values

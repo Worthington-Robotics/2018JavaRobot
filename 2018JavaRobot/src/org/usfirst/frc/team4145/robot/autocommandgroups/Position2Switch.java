@@ -22,20 +22,20 @@ public class Position2Switch extends CommandGroupV2 {
 
             List<Path.Waypoint> second_path = new ArrayList<>();
             second_path.add(new Path.Waypoint(new Translation2d(102,-60),40.0));
-            second_path.add(new Path.Waypoint(new Translation2d(50,-60),40.0));
+            second_path.add(new Path.Waypoint(new Translation2d(60,-60),40.0));
 
             List<Path.Waypoint> third_path = new ArrayList<>();
-            third_path.add(new Path.Waypoint(new Translation2d(50,-60),60.0));
-            third_path.add(new Path.Waypoint(new Translation2d(72,-24),60.0));
+            third_path.add(new Path.Waypoint(new Translation2d(60,-60),60.0));
+            third_path.add(new Path.Waypoint(new Translation2d(86,-16),60.0));
 
             List<Path.Waypoint> fourth_path = new ArrayList<>();
-            fourth_path.add(new Path.Waypoint(new Translation2d(72,-24),60.0));
-            fourth_path.add(new Path.Waypoint(new Translation2d(50,-60),60.0));
+            fourth_path.add(new Path.Waypoint(new Translation2d(86,-16),60.0));
+            fourth_path.add(new Path.Waypoint(new Translation2d(60,-60),60.0));
 
             List<Path.Waypoint> fifth_path = new ArrayList<>();
             fifth_path.add(new Path.Waypoint(new Translation2d(50,-60),50.0));
             fifth_path.add(new Path.Waypoint(new Translation2d(100,-60),50.0, "end 2"));
-            fifth_path.add(new Path.Waypoint(new Translation2d(102,-60),50.0));
+            fifth_path.add(new Path.Waypoint(new Translation2d(108,-60),50.0));
 
             addParallel(new DropForks(), 2.000);
             addParallel(new FollowPath(new Path(first_path), false), 20.000);

@@ -14,7 +14,7 @@ public class CrossTheLine extends CommandGroupV2 {
 
         List<Path.Waypoint> first_path = new ArrayList<>();
         first_path.add(new Path.Waypoint(new Translation2d(0, 0), 40.0));
-        first_path.add(new Path.Waypoint(new Translation2d(156, 0),  40.0));
+        first_path.add(new Path.Waypoint(new Translation2d(120, 0),  40.0));
 
         addSequential(new FollowPath(new Path(first_path), false), 5.000);
 

@@ -14,6 +14,7 @@ public class MotorBaseTest1 extends Command {
 	}
 
 	public void initialize() {
+		RobotMap.robotDriveV4.configTeleop();
 		RobotMap.robotDriveV4.setOperatorInput(power);
 		iterations = 0;
 		RobotMap.robotDriveV4.reset();

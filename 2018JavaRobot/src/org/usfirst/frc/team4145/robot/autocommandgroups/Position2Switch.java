@@ -37,11 +37,13 @@ public class Position2Switch extends CommandGroupV2 {
             fifth_path.add(new Path.Waypoint(new Translation2d(100,-60),50.0, "end 2"));
             fifth_path.add(new Path.Waypoint(new Translation2d(102,-60),50.0));
 
+            addParallel(new DropForks(), 2.000);
             addParallel(new FollowPath(new Path(first_path), false), 20.000);
             addSequential(new WaitForPathMarker("end"), 10.000);
             addSequential(new ContingentWait(ContingentWait.Target.Switch), 20.000);
             addSequential(new CubeMovement(CubeMovement.CubeState.Shoot), 0.500);
 
+            addParallel(new DropForks(), 1.500);
             addParallel(new LiftToPosition(-850), 3.000);
             addSequential(new FollowPath(new Path(second_path), true), 20.000);
 
@@ -91,14 +93,16 @@ public class Position2Switch extends CommandGroupV2 {
             List<Path.Waypoint> fifth_path = new ArrayList<>();
             fifth_path.add(new Path.Waypoint(new Translation2d(60,48),50.0));
             fifth_path.add(new Path.Waypoint(new Translation2d(100,48),50.0, "end 2"));
-            fifth_path.add(new Path.Waypoint(new Translation2d(102,48),50.0));
+            fifth_path.add(new Path.Waypoint(new Translation2d(116,48),50.0));
 
             addParallel(new FollowPath(new Path(first_path), false), 20.000);
+            addParallel(new DropForks(), 2.000);
             addSequential(new WaitForPathMarker("end"), 10.000);
             addSequential(new ContingentWait(ContingentWait.Target.Switch), 20.000);
             addSequential(new CubeMovement(CubeMovement.CubeState.Shoot), 0.500);
 
             addParallel(new LiftToPosition(-850), 3.000);
+            addParallel(new DropForks(), 1.500);
             addSequential(new FollowPath(new Path(second_path), true), 20.000);
 
             //addSequential(new DriveStateWait(), 3.000);

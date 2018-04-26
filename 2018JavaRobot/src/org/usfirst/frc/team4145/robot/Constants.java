@@ -8,7 +8,7 @@ public class Constants {
      * ----------------------
      */
 
-    private static boolean isCompBot = false; //change this to use competition or non-competition constants
+    private static boolean isCompBot = true; //change this to use competition or non-competition constants
     public static String ROBOT_NAME = "Cube Crusher";
 
     //update times / rates
@@ -176,7 +176,7 @@ public class Constants {
      * ---------------------
      */
 
-    private static double PRACTICE_RIGHT_KF = 0.3200; //nominal: 0.3200
+    private static double PRACTICE_RIGHT_KF = 0.3100; //nominal: 0.3200
     private static double PRACTICE_RIGHT_KP = 0.6000; //nominal: 0.8000
     private static double PRACTICE_RIGHT_KI = 0.0000;
     private static double PRACTICE_RIGHT_KD = 3.0000; //3.0000
@@ -188,13 +188,13 @@ public class Constants {
 
 
 
-    private static double COMPETITION_RIGHT_KF = 0.3200;
-    private static double COMPETITION_RIGHT_KP = 0.6000;
+    private static double COMPETITION_RIGHT_KF = 0.2700;
+    private static double COMPETITION_RIGHT_KP = 0.7000;
     private static double COMPETITION_RIGHT_KI = 0.0000;
     private static double COMPETITION_RIGHT_KD = 3.0000;
 
-    private static double COMPETITION_LEFT_KF = 0.3200;
-    private static double COMPETITION_LEFT_KP = 0.6000; //test bench motor
+    private static double COMPETITION_LEFT_KF = 0.2700;
+    private static double COMPETITION_LEFT_KP = 0.7000; //test bench motor
     private static double COMPETITION_LEFT_KI = 0.0000;
     private static double COMPETITION_LEFT_KD = 3.0000;
 

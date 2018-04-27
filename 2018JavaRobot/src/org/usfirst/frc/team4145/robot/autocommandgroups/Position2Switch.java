@@ -26,10 +26,10 @@ public class Position2Switch extends CommandGroupV2 {
 
             List<Path.Waypoint> third_path = new ArrayList<>();
             third_path.add(new Path.Waypoint(new Translation2d(60,-60),60.0));
-            third_path.add(new Path.Waypoint(new Translation2d(86,-16),60.0));
+            third_path.add(new Path.Waypoint(new Translation2d(90,-10),60.0));
 
             List<Path.Waypoint> fourth_path = new ArrayList<>();
-            fourth_path.add(new Path.Waypoint(new Translation2d(86,-16),60.0));
+            fourth_path.add(new Path.Waypoint(new Translation2d(90,-10),60.0));
             fourth_path.add(new Path.Waypoint(new Translation2d(60,-60),60.0));
 
             List<Path.Waypoint> fifth_path = new ArrayList<>();
@@ -53,7 +53,7 @@ public class Position2Switch extends CommandGroupV2 {
             addSequential(new GyroToAngle(48), 0.500);
 
             addParallel(new CubeMovement(CubeMovement.CubeState.Pickup), 2.500);
-            addSequential(new FollowPath(new Path(third_path), false), 20.000);
+            addSequential(new FollowPath(new Path(third_path), false), 3.000);
 
             addSequential(new Wait(), 0.500);
 
@@ -84,10 +84,10 @@ public class Position2Switch extends CommandGroupV2 {
 
             List<Path.Waypoint> third_path = new ArrayList<>();
             third_path.add(new Path.Waypoint(new Translation2d(60,48),60.0));
-            third_path.add(new Path.Waypoint(new Translation2d(80,10),60.0));
+            third_path.add(new Path.Waypoint(new Translation2d(88,0),60.0));
 
             List<Path.Waypoint> fourth_path = new ArrayList<>();
-            fourth_path.add(new Path.Waypoint(new Translation2d(80,10),60.0));
+            fourth_path.add(new Path.Waypoint(new Translation2d(88,0),60.0));
             fourth_path.add(new Path.Waypoint(new Translation2d(60,48),60.0));
 
             List<Path.Waypoint> fifth_path = new ArrayList<>();
@@ -111,7 +111,7 @@ public class Position2Switch extends CommandGroupV2 {
             addSequential(new GyroToAngle(-45), 0.500);
 
             addParallel(new CubeMovement(CubeMovement.CubeState.Pickup), 2.250);
-            addSequential(new FollowPath(new Path(third_path), false), 20.000);
+            addSequential(new FollowPath(new Path(third_path), false), 3.000);
 
             addSequential(new Wait(), 0.500);
 

@@ -58,7 +58,7 @@ public class Constants {
 
     //Drivetrain constants for teleop
     private static double TELEOP_DEADBAND = 0.1500; //nominal deadband 0.1500
-    private static double TELEOP_Y_PERCENTAGE = 0.7500; //nominal decrease to y ouput percentage 0.7500
+    private static double TELEOP_Y_PERCENTAGE = 0.8500; //nominal decrease to y ouput percentage 0.7500
     private static double TELEOP_Y_CUT_PERCENTAGE = 0.5000; //nominal fine adjust y cut 0.5000
     private static double TELEOP_X_PERCENTAGE = 1.000; //nominal decrease to x output percentage 1.0000
     private static double TELEOP_X_CUT_PERCENTAGE = 1.0000; //nominal fine adjust x cut percentage

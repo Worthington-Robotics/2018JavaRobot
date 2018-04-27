@@ -20,8 +20,8 @@ public class Position1Scale extends CommandGroupV2 {
             first_path.add(new Path.Waypoint(new Translation2d(150, 0), 70.0));
             first_path.add(new Path.Waypoint(new Translation2d(200, 0), 40.0));
             first_path.add(new Path.Waypoint(new Translation2d(218, 0), 40.0));
-            first_path.add(new Path.Waypoint(new Translation2d(250, 15), 40.0, "end"));
-            first_path.add(new Path.Waypoint(new Translation2d(256, 21), 40.0));
+            first_path.add(new Path.Waypoint(new Translation2d(250, 13), 40.0, "end"));
+            first_path.add(new Path.Waypoint(new Translation2d(260, 16), 40.0));
 
 
             List<Path.Waypoint> second_path = new ArrayList<>();

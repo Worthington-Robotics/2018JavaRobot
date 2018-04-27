@@ -30,11 +30,11 @@ public class Position1Scale extends CommandGroupV2 {
 
             List<Path.Waypoint> third_path = new ArrayList<>();
             third_path.add(new Path.Waypoint(new Translation2d(250,16),60.0));
-            third_path.add(new Path.Waypoint(new Translation2d(218,36),60.0));
+            third_path.add(new Path.Waypoint(new Translation2d(206,34),60.0));
 
             List<Path.Waypoint> fourth_path = new ArrayList<>();
-            fourth_path.add(new Path.Waypoint(new Translation2d(218,42),80.0));
-            fourth_path.add(new Path.Waypoint(new Translation2d(294,12),80.0));
+            fourth_path.add(new Path.Waypoint(new Translation2d(206,34),80.0));
+            fourth_path.add(new Path.Waypoint(new Translation2d(294,-2),80.0));
 
             addParallel(new LiftToPosition(1200), 1.000);
             addParallel(new DropForks(), 2.000);
@@ -57,7 +57,7 @@ public class Position1Scale extends CommandGroupV2 {
 
             addParallel(new LiftToPosition(-800), 1.000);
             addParallel(new HighLiftDown(), 1.000);
-            addSequential(new GyroToAngle(100), 1.000);
+            addSequential(new GyroToAngle(110), 1.000);
 
             addParallel(new LiftToPosition(-800), 3.000);
             addParallel(new HighLiftDown(), 3.000);

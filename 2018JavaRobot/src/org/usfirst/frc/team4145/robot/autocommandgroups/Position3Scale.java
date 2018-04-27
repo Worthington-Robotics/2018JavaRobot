@@ -74,7 +74,7 @@ public class Position3Scale extends CommandGroupV2 {
 			//addParallel(new CubeMovement(CubeMovement.CubeState.Pickup), 1.000);
 			addSequential(new FollowPath(new Path(fourth_path), true), 20.000);
 
-			addSequential(new GyroToAngle(80), 1.000);
+			addSequential(new GyroToAngle(70), 1.000);
 
 			addSequential(new ContingentWait(ContingentWait.Target.Scale), 20.000);
 

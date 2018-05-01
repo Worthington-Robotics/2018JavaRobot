@@ -11,6 +11,7 @@ package org.usfirst.frc.team4145.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.Trigger;
 import org.usfirst.frc.team4145.robot.commands.autoonly.CubeMovement;
 import org.usfirst.frc.team4145.robot.commands.teleoponly.*;
 
@@ -27,8 +28,11 @@ public class OI {
 
 	private Joystick masterStick;
 	private Joystick secondStick;
+	private Trigger limOverride;
 
 	public OI() {
+
+		limOverride = new LimOverride();
 		//driver stick - Extreme 3d pro
 		masterStick = new Joystick(0);
 

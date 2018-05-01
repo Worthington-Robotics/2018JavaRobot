@@ -17,8 +17,8 @@ public class Position2Switch extends CommandGroupV2 {
             first_path.add(new Path.Waypoint(new Translation2d(0, 0), 50.0));
             first_path.add(new Path.Waypoint(new Translation2d(18, 0),  50.0));
             first_path.add(new Path.Waypoint(new Translation2d(60,-60),50.0));
-            first_path.add(new Path.Waypoint(new Translation2d(106,-60),50.0, "end"));
-            first_path.add(new Path.Waypoint(new Translation2d(112,-60),50.0));
+            first_path.add(new Path.Waypoint(new Translation2d(100,-60),50.0, "end"));
+            first_path.add(new Path.Waypoint(new Translation2d(102,-60),50.0));
 
             List<Path.Waypoint> second_path = new ArrayList<>();
             second_path.add(new Path.Waypoint(new Translation2d(102,-60),40.0));
@@ -75,8 +75,8 @@ public class Position2Switch extends CommandGroupV2 {
             first_path.add(new Path.Waypoint(new Translation2d(0, 0), 50.0));
             first_path.add(new Path.Waypoint(new Translation2d(18, 0), 50.0));
             first_path.add(new Path.Waypoint(new Translation2d(60, 48), 50.0));
-            first_path.add(new Path.Waypoint(new Translation2d(106, 48), 50.0, "end"));
-            first_path.add(new Path.Waypoint(new Translation2d(112, 48), 50.0));
+            first_path.add(new Path.Waypoint(new Translation2d(100, 48), 50.0, "end"));
+            first_path.add(new Path.Waypoint(new Translation2d(102, 48), 50.0));
 
             List<Path.Waypoint> second_path = new ArrayList<>();
             second_path.add(new Path.Waypoint(new Translation2d(102,48),40.0));

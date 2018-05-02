@@ -103,7 +103,7 @@ public class Lift extends Subsystem implements PIDSource, PIDOutput{
         if (!liftPid.isEnabled()) liftPid.setSetpoint(RobotMap.liftEnc.get());
         if (!DriverStation.getInstance().isAutonomous()) {
             liftVal = evalDeadBand(Robot.oi.getSecondStick().getY(), 0.15);
-            if (Robot.oi.getSecondStick().getRawButton(1) || (buttonArray[2] && !buttonArray[1]) || (buttonArray[3] && !buttonArray[0])) { //get trigger status
+            if (Robot.oi.getSecondStick().getRawButton(1) || LiftDisable()) { //get trigger status
                 RobotMap.liftMotorH.set(-liftVal * Constants.getStage2Multiplier()); //if pressed run lift directly
                 triggerLastCycle = true;
             } else if (triggerLastCycle) {
@@ -124,6 +124,11 @@ public class Lift extends Subsystem implements PIDSource, PIDOutput{
                 return Math.pow(stickInpt, 2);
             }
         }
+    }
+    
+    private boolean LiftDisable()
+    {
+    		return ((buttonArray[2] && !buttonArray[1]) || (buttonArray[3] && !buttonArray[0])) && !SmartDashboard.getBoolean("DB/Button 0", false);
     }
 
     @Override

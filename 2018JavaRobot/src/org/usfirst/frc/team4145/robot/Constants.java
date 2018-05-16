@@ -13,7 +13,7 @@ public class Constants {
 
     //update times / rates
     public static double DRIVETRAIN_UPDATE_RATE = 0.010;
-    public static double LOGGING_UPDATE_RATE = 0.050;
+    public static double LOGGING_UPDATE_RATE = 0.010;
     public static double STATE_MACHINE_UPDATE_RATE = 0.010;
 
     //MP Test mode values
@@ -188,15 +188,15 @@ public class Constants {
 
 
 
-    private static double COMPETITION_RIGHT_KF = 0.2700;
-    private static double COMPETITION_RIGHT_KP = 0.7000;
-    private static double COMPETITION_RIGHT_KI = 0.0000;
-    private static double COMPETITION_RIGHT_KD = 3.0000;
+    private static double COMPETITION_RIGHT_KF = 0.2650; //mini 0.2700; cim 0.2800;
+    private static double COMPETITION_RIGHT_KP = 0.3000; //mini 0.7000; cim 0.4000;
+    private static double COMPETITION_RIGHT_KI = 0.0000; //0.0000;
+    private static double COMPETITION_RIGHT_KD = 4.0000; //mini 3.0000; cim 4.0000;
 
-    private static double COMPETITION_LEFT_KF = 0.2700;
-    private static double COMPETITION_LEFT_KP = 0.7000; //test bench motor
-    private static double COMPETITION_LEFT_KI = 0.0000;
-    private static double COMPETITION_LEFT_KD = 3.0000;
+    private static double COMPETITION_LEFT_KF = 0.2800; //mini 0.2700; cim 0.2800;
+    private static double COMPETITION_LEFT_KP = 0.3000; //mini 0.7000; cim 0.4000;
+    private static double COMPETITION_LEFT_KI = 0.0000; //0.0000;
+    private static double COMPETITION_LEFT_KD = 4.0000; //mini 3.0000; cim 4.0000;
 
 
 

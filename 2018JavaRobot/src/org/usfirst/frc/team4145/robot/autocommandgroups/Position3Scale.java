@@ -48,7 +48,7 @@ public class Position3Scale extends CommandGroupV2 {
 			addParallel(new DropForks(), 0.7500);
 			addSequential(new WaitForPathMarker("end"), 10.000);
 			addSequential(new ContingentWait(ContingentWait.Target.Scale), 20.000);
-			addSequential(new CubeMovement(CubeMovement.CubeState.Shoot), 0.500);
+			addSequential(new CubeMovement(CubeMovement.CubeState.RollOut), 0.500);
 
 			addParallel(new LiftToPosition(-800), 1.000);
 			addSequential(new FollowPath(new Path(second_path), true), 20.000);

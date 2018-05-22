@@ -18,10 +18,10 @@ public class Position1Scale extends CommandGroupV2 {
             first_path.add(new Path.Waypoint(new Translation2d(0, 0), 90.0));
             first_path.add(new Path.Waypoint(new Translation2d(60,0), 90.0, "lift"));
             first_path.add(new Path.Waypoint(new Translation2d(150, 0), 70.0));
-            first_path.add(new Path.Waypoint(new Translation2d(200, 0), 40.0));
-            first_path.add(new Path.Waypoint(new Translation2d(218, 0), 40.0));
-            first_path.add(new Path.Waypoint(new Translation2d(250, 13), 40.0, "end"));
-            first_path.add(new Path.Waypoint(new Translation2d(260, 16), 40.0));
+            first_path.add(new Path.Waypoint(new Translation2d(200, 0), 50.0));
+            first_path.add(new Path.Waypoint(new Translation2d(240, 0), 40.0));
+            first_path.add(new Path.Waypoint(new Translation2d(256, 12), 40.0, "end"));
+            first_path.add(new Path.Waypoint(new Translation2d(260, 14), 40.0));
 
 
             List<Path.Waypoint> second_path = new ArrayList<>();
@@ -29,12 +29,12 @@ public class Position1Scale extends CommandGroupV2 {
             second_path.add(new Path.Waypoint(new Translation2d(250,16),40.0));
 
             List<Path.Waypoint> third_path = new ArrayList<>();
-            third_path.add(new Path.Waypoint(new Translation2d(250,16),60.0));
-            third_path.add(new Path.Waypoint(new Translation2d(206,34),60.0));
+            third_path.add(new Path.Waypoint(new Translation2d(240,0),60.0));
+            third_path.add(new Path.Waypoint(new Translation2d(199,39),60.0));
 
             List<Path.Waypoint> fourth_path = new ArrayList<>();
-            fourth_path.add(new Path.Waypoint(new Translation2d(206,34),80.0));
-            fourth_path.add(new Path.Waypoint(new Translation2d(294,-2),80.0));
+            fourth_path.add(new Path.Waypoint(new Translation2d(199,39),80.0));
+            fourth_path.add(new Path.Waypoint(new Translation2d(296,0),80.0));
 
             addParallel(new LiftToPosition(1200), 1.000);
             addParallel(new DropForks(), 2.000);

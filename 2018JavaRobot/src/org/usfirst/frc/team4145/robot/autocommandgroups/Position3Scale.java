@@ -32,10 +32,10 @@ public class Position3Scale extends CommandGroupV2 {
 
 			List<Path.Waypoint> third_path = new ArrayList<>();
 			third_path.add(new Path.Waypoint(new Translation2d(240,0),60.0));
-			third_path.add(new Path.Waypoint(new Translation2d(200,-24),60.0));
+			third_path.add(new Path.Waypoint(new Translation2d(199,-39),60.0));
 
 			List<Path.Waypoint> fourth_path = new ArrayList<>();
-			fourth_path.add(new Path.Waypoint(new Translation2d(200,-24),80.0));
+			fourth_path.add(new Path.Waypoint(new Translation2d(199,-39),80.0));
 			fourth_path.add(new Path.Waypoint(new Translation2d(296,0),80.0));
 
 			addParallel(new LiftToPosition(600), 1.000);

@@ -1,9 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="PathGenerator:jar">
-    <output-path>$PROJECT_DIR$/classes/artifacts/PathGenerator_jar</output-path>
-    <root id="archive" name="PathGenerator.jar">
-      <element id="module-output" name="PathGenerator" />
-      <element id="extracted-dir" path="D:/Frc stuff/pathfinder.jar" path-in-jar="/" />
-    </root>
-  </artifact>
-</component>
